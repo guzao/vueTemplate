@@ -3,6 +3,14 @@
 @tailwind utilities;
 
 
+@import url(./rotVariable.scss);
+
+html {
+    background-color: var(--theme-gray-bg);
+    min-width: 1460px;
+    overflow-x: auto;
+}
+
 #app {
     height: 100vh;
 }

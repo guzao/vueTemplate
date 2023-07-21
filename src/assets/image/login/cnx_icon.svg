@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="116px" height="116px" viewBox="0 0 116 116" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 14</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#E1EBF5" offset="0%"></stop>
+            <stop stop-color="#0EA944" offset="100%"></stop>
+        </linearGradient>
+        <ellipse id="path-2" cx="58.5" cy="21.7676056" rx="46.5" ry="21.5"></ellipse>
+        <linearGradient x1="-41.82933%" y1="21.4910454%" x2="83.7557619%" y2="71.3481203%" id="linearGradient-3">
+            <stop stop-color="#C5EAD2" offset="0%"></stop>
+            <stop stop-color="#0EA944" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="-41.82933%" y1="21.4910454%" x2="83.7557619%" y2="71.3481203%" id="linearGradient-4">
+            <stop stop-color="#96ECB5" offset="0%"></stop>
+            <stop stop-color="#96ECB5" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="46.6683236%" y1="0%" x2="51.2246988%" y2="87.4410787%" id="linearGradient-5">
+            <stop stop-color="#C5EAD2" offset="0%"></stop>
+            <stop stop-color="#0EA944" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="46.6683236%" y1="0%" x2="51.2246988%" y2="87.4410787%" id="linearGradient-6">
+            <stop stop-color="#96ECB5" offset="0%"></stop>
+            <stop stop-color="#96ECB5" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="登陆" transform="translate(-497.000000, -766.000000)">
+            <g id="编组-14" transform="translate(497.000000, 766.000000)">
+                <rect id="矩形" x="0" y="0" width="116" height="116"></rect>
+                <g id="编组-4" transform="translate(0.000000, 53.732394)">
+                    <ellipse id="椭圆形备份-2" fill-opacity="0.399622137" fill="#CEF8DD" cx="58" cy="33.7676056" rx="58" ry="27.5"></ellipse>
+                    <path d="M58.5,7.26760563 C79.0753942,7.26760563 96.5295833,13.4464132 102.656633,22.0098864 L105,22.0104628 L105,29.3818913 L104.981355,29.3823955 C104.277531,40.9722122 83.7365346,50.2676056 58.5,50.2676056 C33.2634654,50.2676056 12.7224693,40.9722122 12.0186451,29.3823955 L12,29.3818913 L12,22.0104628 L14.3433674,22.0098864 C20.4704167,13.4464132 37.9246058,7.26760563 58.5,7.26760563 Z" id="形状结合" fill="#B9F6CF"></path>
+                    <g id="椭圆形">
+                        <use fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+                        <use fill="#CEF8DD" xlink:href="#path-2"></use>
+                    </g>
+                    <ellipse id="椭圆形" fill="#ACEBC3" cx="78" cy="24.7676056" rx="23" ry="2.5"></ellipse>
+                </g>
+                <g id="编组-13" transform="translate(35.000000, 40.000000)" fill-rule="nonzero">
+                    <path d="M47,0 C48.1045695,0 49,0.8954305 49,2 L49,35 C49,36.1045695 48.1045695,37 47,37 L2,37 C0.8954305,37 0,36.1045695 0,35 L0,2 C0,0.8954305 0.8954305,0 2,0 L47,0 Z M45,4 L4,4 L4,33 L45,33 L45,4 Z" id="矩形" fill="url(#linearGradient-4)"></path>
+                    <rect id="矩形" fill="url(#linearGradient-6)" x="9" y="8" width="4" height="21" rx="2"></rect>
+                    <rect id="矩形备份-7" fill="url(#linearGradient-6)" x="18" y="8" width="4" height="21" rx="2"></rect>
+                    <rect id="矩形备份-8" fill="url(#linearGradient-6)" x="27" y="8" width="4" height="21" rx="2"></rect>
+                    <rect id="矩形备份-9" fill="url(#linearGradient-6)" x="36" y="8" width="4" height="21" rx="2"></rect>
+                </g>
+                <g id="编组-13" transform="translate(33.000000, 42.000000)" fill-rule="nonzero">
+                    <path d="M47,0 C48.1045695,0 49,0.8954305 49,2 L49,35 C49,36.1045695 48.1045695,37 47,37 L2,37 C0.8954305,37 0,36.1045695 0,35 L0,2 C0,0.8954305 0.8954305,0 2,0 L47,0 Z M45,4 L4,4 L4,33 L45,33 L45,4 Z" id="矩形" fill="url(#linearGradient-3)"></path>
+                    <rect id="矩形" fill="url(#linearGradient-5)" x="9" y="8" width="4" height="21" rx="2"></rect>
+                    <rect id="矩形备份-7" fill="url(#linearGradient-5)" x="18" y="8" width="4" height="21" rx="2"></rect>
+                    <rect id="矩形备份-8" fill="url(#linearGradient-5)" x="27" y="8" width="4" height="21" rx="2"></rect>
+                    <rect id="矩形备份-9" fill="url(#linearGradient-5)" x="36" y="8" width="4" height="21" rx="2"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

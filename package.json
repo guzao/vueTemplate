@@ -11,15 +11,19 @@
     "testui": "vitest --ui"
   },
   "dependencies": {
+    "@types/js-cookie": "^3.0.3",
     "@vueuse/core": "^10.2.1",
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",
+    "js-cookie": "^3.0.5",
+    "nprogress": "^0.2.0",
     "pinia": "^2.1.4",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"
   },
   "devDependencies": {
     "@types/node": "^20.4.2",
+    "@types/nprogress": "^0.2.0",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitest/ui": "^0.33.0",
     "@vue/test-utils": "2.4.0-alpha.2",

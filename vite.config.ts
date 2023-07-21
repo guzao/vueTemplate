@@ -11,16 +11,24 @@ export default defineConfig({
 })
 
 
-function usePlugins () {
+function usePlugins() {
   return [
     vue()
   ]
 }
 
 
-function useServer () {
+function useServer() {
   return {
-    open: true
+    open: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080/',
+        changeOrigin: true,
+        ws: true,
+        rewrite: (path) => path.replace(/^\/api/, '/api'),
+      },
+    },
   }
 }
 
