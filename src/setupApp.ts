@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from '@/App.vue'
-import { useAsset, useRouter, useDirective, useNprogress } from '@/plugins'
+import { useAsset, useRouter, useDirective, useNprogress, useElementPlus } from '@/plugins'
 import '@/assets/styles/index.scss'
 
 
@@ -13,6 +13,8 @@ export function setupApp () {
     const appInstance = createApp(App)
 
     useDirective(appInstance)
+
+    useElementPlus(appInstance)
     
     useRouter(appInstance)
 

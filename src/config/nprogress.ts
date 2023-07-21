@@ -7,6 +7,4 @@ export const nprogressConfigure = {
     showSpinner: false,
     trickleSpeed: 200,
     minimum: 0.3,
-    parent: 'html',
-    positionUsing: ''
 }

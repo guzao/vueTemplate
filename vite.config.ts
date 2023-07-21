@@ -23,10 +23,12 @@ function useServer() {
     open: true,
     proxy: {
       '/api': {
-        target: 'http://localhost:8080/',
+        target: 'http://124.223.210.24/',
         changeOrigin: true,
         ws: true,
-        rewrite: (path) => path.replace(/^\/api/, '/api'),
+        rewrite: (path) => {
+          return path.replace(/^\/api/, '/prod-api')
+        },
       },
     },
   }

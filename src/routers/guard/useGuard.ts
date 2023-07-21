@@ -11,7 +11,7 @@ export function useGuard (router: Router) {
   })
 
   router.afterEach((to, form, next) => {
-    // nProgress.done()
+    nProgress.done()
   })
 
 }

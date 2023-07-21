@@ -1,16 +1,15 @@
 <script lang="ts" setup>
+import BaseHeader from '@/components/common/BaseHeader.vue'
 </script>
 
 <template>
     <!-- heder -->
-    <div class="flex h-[56px] pl-[16px] pr-[26px]  bg-[var(--theme-white-bg)]">
-        <div class="flex-1 flex items-center">
-            <img src="../../../assets/image/login/img_logo.png" alt="" srcset="" class="w-[262px] h-[36px]">
+    <BaseHeader>
+        <div class="flex justify-end h-full items-center">
+            <div> 中文 </div>
+            <div> 立即注册 </div>
         </div>
-        <div class="flex-1">
-            
-        </div>
-    </div>
+    </BaseHeader>
 </template>
 
 <style lang="scss" scoped></style>
