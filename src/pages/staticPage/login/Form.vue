@@ -3,39 +3,43 @@ import { User, Lock, Discount } from '@element-plus/icons-vue'
 import { useLogin } from './useLogin'
 
 // @ts-ignore
-const { form, handleLogin, getCodeImg, imgSrc, serveConfigData } = useLogin()
+const { form, rules, handleLogin, getCodeImg, imgSrc, serveConfigData, fromInstance } = useLogin()
 </script>
 
 <template>
     <div class="h-[526px] bg-cover bg-no-repeat login_bg">
         <div class="w-[1200px] m-auto h-[526px] flex justify-end items-center">
-            <div class="h-[450px] w-[440px] bg-[var(--theme-white-bg)] p-[40px] box-border">
+            <div class="h-[450px] w-[440px] bg-[var(--theme-white-bg)] p-[40px] box-border flex flex-col">
 
-                <div class="text-[var(--theme-black51)] text-size-[18px] mb-[32px]"> 账户分类 </div>
+                <div class="text-[var(--theme-black51)] text-[18px] mb-[32px]"> 账户分类 </div>
 
-                <el-form :model="form">
+                <div  class="flex flex-col flex-1">
 
-                    <el-form-item>
-                        <el-input v-model="form.username" :prefix-icon="User" />
-                    </el-form-item>
+                    <el-form :model="form" :rules="rules" ref="fromInstance">
+    
+                        <el-form-item prop="username">
+                            <el-input v-model="form.username" placeholder="请输入用户名" class="h-[48px]" :prefix-icon="User" clearable />
+                        </el-form-item>
+    
+                        <el-form-item prop="password">
+                            <el-input v-model="form.password" placeholder="请输入密码" type="password" class="h-[48px]"  :prefix-icon="Lock" clearable />
+                        </el-form-item>
+    
+                        <el-form-item prop="code" v-if="serveConfigData.captchaEnabled">
+                            <el-input v-model="form.code" :prefix-icon="Discount" class="h-[48px]"  clearable   placeholder="请输入验证码">
+                                <template #suffix >
+                                    <img :src="imgSrc" alt="" class="w-[100px] h-[40px] cursor-pointer" @click="getCodeImg">
+                                </template>
+                            </el-input>
+                        </el-form-item>
+    
+                    </el-form>
+    
+                    <div class="flex flex-1 h-full items-end">
+                        <el-button class="flex-1" type="primary" @click="handleLogin">登录</el-button>
+                    </div>
 
-                    <el-form-item>
-                        <el-input v-model="form.password" :prefix-icon="Lock" />
-                    </el-form-item>
-
-                    <el-form-item>
-                        <el-input v-model="form.code" :prefix-icon="Discount">
-                            <template #suffix>
-                                <img :src="imgSrc" alt="" class="w-[80px] h-[36px] cursor-pointer" @click="getCodeImg">
-                            </template>
-                        </el-input>
-                    </el-form-item>
-
-                </el-form>
-                <div class="flex">
-                    <el-button class="flex-1" type="primary">登录</el-button>
                 </div>
-
 
             </div>
         </div>

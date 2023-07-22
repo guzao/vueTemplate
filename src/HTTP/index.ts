@@ -1,8 +1,7 @@
 import axios from 'axios'
-import axiosConfig from '@/config/axios';
+import { axiosConfig } from '@/config/axios';
 import { requestHandle } from './requestHandle'
-import { responseHandle } from './responseHandle'
-
+import { responseHandle, responseErrorHandle } from './responseHandle'
 
 
 export const axiosInstance = axios.create(axiosConfig);
@@ -21,7 +20,10 @@ axiosInstance.interceptors.request.use(function (config) {
 axiosInstance.interceptors.response.use( (response) =>  {
     return responseHandle(response)
 }, function (error) {
+    responseErrorHandle(error)
     return Promise.reject(error);
 });
+
+
 
 export * from './useHttp'

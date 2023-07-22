@@ -13,7 +13,7 @@ import Footer from "../components/Footer.vue"
             <!-- heder -->
             <Header />
 
-            <!-- bady -->
+            <!-- Form -->
             <Form />
 
             <!-- info desc -->
@@ -38,10 +38,6 @@ import Footer from "../components/Footer.vue"
                 </div>
 
             </div>
-
-
-
-
 
             <!-- footer -->
             <Footer />

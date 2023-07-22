@@ -4,7 +4,6 @@
 
 @import url(./rotVariable.scss);
 
-
 html {
     background-color: var(--theme-gray-bg);
     min-width: 1460px;
@@ -12,5 +11,5 @@ html {
 }
 
 #app {
-    height: 100vh;
+    min-height: 100vh;
 }

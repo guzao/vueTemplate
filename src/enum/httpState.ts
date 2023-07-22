@@ -1,6 +1,6 @@
 export const enum HTTPSTATE {
     /** 成功 */
-    SUCCESS = 0,
+    SUCCESS = 200,
 
     /** 未授权 */
     Unauthorized = 401,

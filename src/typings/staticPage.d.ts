@@ -27,3 +27,33 @@ type CaptchaImageData = {
     img: string;
     uuid: string;
 } & ServeConfigData
+
+
+/** 路由参数 */
+type UserRouterMata = {
+    icon: string;
+    link: string;
+    noCache: string;
+    title: string;
+    titleEn: string;
+}
+
+/** 用户菜单 */
+type UserRouter = {
+    
+    /** 是否总是展示 */
+    alwaysShow: boolean;
+    /** 子集 */
+    children: UserRouter[];
+    /** 组件路径 | 组件类型 */
+    component: string;
+    /** 菜单上是否不显示此路由s */
+    hidden: boolean;
+    meta: UserRouterMata;
+    /** 路由名称 */
+    name: string;
+    /** 地址栏路径 */
+    path: string;
+    /** 是否重定向 */
+    redirect: string;
+}

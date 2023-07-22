@@ -1,7 +1,8 @@
 
 /** 接口响应参数 */
-type ResponseData = {
+type ResponseData <T = any> = {
     code: number;
-    data: any;
-    mag: string;
+    data: T;
+    msg: string;
+    [key: string]: any;
 }

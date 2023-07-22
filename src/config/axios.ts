@@ -1,12 +1,13 @@
 import { CreateAxiosDefaults } from "axios"
+import { login } from '@/ApiMap'
 
-
-const axiosConfig: CreateAxiosDefaults = {
+export const axiosConfig: CreateAxiosDefaults = {
     baseURL: '/api',
     timeout: 1000 * 60,
     headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json;charset=utf-8'
     }
 }
 
-export default axiosConfig
+
+export const whiteList = [ login.login, login.captchaImage ]

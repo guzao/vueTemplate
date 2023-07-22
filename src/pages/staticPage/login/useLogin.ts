@@ -1,18 +1,39 @@
 import { ref, onBeforeMount } from 'vue'
-import { getCodeImg as getcode} from '@/API'
+import type { FormInstance } from 'element-plus'
+import { getCodeImg as getcode } from '@/API'
+import { useUser } from '@/store'
+import { useLang } from '@/utils'
 
+
+const { getLang, setLang } = useLang()
 
 export function useLogin() {
 
+
+    const { userLogin } = useUser()
+
     const form = ref({
         code: '',
-        password: '',
-        username: '',
+        password: 'SmartOps@1234',
+        username: 'demo',
         uuid: '',
     })
 
-    const imgSrc= ref('')
+    const imgSrc = ref('')
 
+    const fromInstance = ref<FormInstance>()
+
+    const rules = {
+        username: [
+            { required: true, message: '请输入用户名', trigger: 'blur' },
+        ],
+        password: [
+            { required: true, message: '请输入密码', trigger: 'blur' },
+        ],
+        code: [
+            { required: true, message: '请输入验证码', trigger: 'blur' },
+        ],
+    }
 
     const serveConfigData = ref<ServeConfigData>({
         internationalization: false,
@@ -20,32 +41,41 @@ export function useLogin() {
         register: false,
         language: '',
         resetPassword: false,
-        captchaEnabled: false,
+        captchaEnabled: true,
     })
-
 
     const getCodeImg = () => {
         getcode().then(res => {
             const data = res as any
             setServeConfigData(data)
-            imgSrc.value =  "data:image/gif;base64," +  data.img
+            imgSrc.value = "data:image/gif;base64," + data.img
             form.value.uuid = data.uuid
         })
     }
 
-
     /** 设置配置相 */
     const setServeConfigData = (data: CaptchaImageData) => {
-        serveConfigData.value.internationalization = data.internationalization
-        serveConfigData.value.localization = data.localization
-        serveConfigData.value.register = data.register
-        serveConfigData.value.language = data.language
-        serveConfigData.value.resetPassword = data.resetPassword
-        serveConfigData.value.captchaEnabled = data.captchaEnabled
+
+        const { internationalization, localization, register, language, resetPassword, captchaEnabled } = data
+        serveConfigData.value.internationalization = internationalization
+        serveConfigData.value.localization = localization
+        serveConfigData.value.register = register
+        serveConfigData.value.language = language
+        serveConfigData.value.resetPassword = resetPassword
+        serveConfigData.value.captchaEnabled = captchaEnabled
+
+        if (getLang()) return
+        setLang(language)
+
     }
 
-    const handleLogin = () => {
-        console.log(form)
+    const handleLogin = async () => {
+        try {
+            await fromInstance.value?.validate()
+            userLogin(form.value)
+        } catch (error) {
+        }
+
     }
 
     // onBeforeMount(getCodeImg)
@@ -53,10 +83,12 @@ export function useLogin() {
 
     return {
         form,
+        fromInstance,
+        rules,
+        imgSrc,
         handleLogin,
         getCodeImg,
-        imgSrc,
-        serveConfigData,
+        serveConfigData
     }
 
 }

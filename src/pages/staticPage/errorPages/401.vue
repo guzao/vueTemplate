@@ -2,9 +2,13 @@
 </script>
 
 <template>
-    <el-result icon="success" title="Success Tip" sub-title="Please follow the instructions">
-        <template #extra>
-            <el-button type="primary">Back</el-button>
-        </template>
-    </el-result>
+    <div class="h-full flex items-center justify-center">
+
+        <el-result icon="error" title="Success Tip" sub-title="Please follow the instructions">
+            <template #extra>
+                <el-button type="primary">返回</el-button>
+            </template>
+        </el-result>
+
+    </div>
 </template>
