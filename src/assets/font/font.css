@@ -1,0 +1,48 @@
+
+@font-face {  
+  font-family: 'alipuhuitir'; 
+  src: url('AlibabaPuHuiTiRegular.ttf');  
+  font-weight: normal;  
+  font-style: normal;  
+}
+@font-face {  
+  font-family: 'alipuhuitim'; 
+  src: url('AlibabaPuHuiTiMedium.ttf');  
+  font-weight: normal;  
+  font-style: normal;  
+}
+
+@font-face {  
+  font-family: 'D-DIN-Bold'; 
+  src: url('DINProRegular.otf');  
+  font-weight: normal;  
+  font-style: normal;  
+}
+@font-face {  
+  font-family: 'D-DIN';
+  src: url('DINProRegular.otf');  
+  font-weight: normal;  
+  font-style: normal;  
+}
+
+@font-face {  
+  font-family: 'DINProMedium'; 
+  src: url('DINProMedium.ttf');  
+  font-weight: normal;  
+  font-style: normal;  
+}
+
+@font-face {  
+  font-family: 'pangmenTitle'; 
+  src: url('pangmenTitle.ttf');  
+  font-weight: normal;  
+  font-style: normal;  
+}
+
+@font-face {  
+  font-family: 'DigitalPlaySt'; 
+  src: url('DigitalPlaySt.ttf');  
+  font-weight: normal;  
+  font-style: normal;  
+}
+

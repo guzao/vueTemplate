@@ -1,3 +1,5 @@
 export * from './axios'
 export * from './nprogress'
 export * from './router'
+export * from './slider'
+export * from './layout'

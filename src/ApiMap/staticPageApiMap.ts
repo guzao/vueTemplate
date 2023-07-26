@@ -5,8 +5,5 @@ export const login = {
     getInfo: '/getInfo',
     getRouters: '/getRouters',
     register: '/register',
-}
-
-export const common = {
-    stationList: '/ess/station/list'
+    logout: '/logout',
 }

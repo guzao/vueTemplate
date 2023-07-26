@@ -18,15 +18,15 @@ const { form, rules, handleLogin, getCodeImg, imgSrc, serveConfigData, fromInsta
                     <el-form :model="form" :rules="rules" ref="fromInstance">
     
                         <el-form-item prop="username">
-                            <el-input v-model="form.username" placeholder="请输入用户名" class="h-[48px]" :prefix-icon="User" clearable />
+                            <el-input v-model="form.username" @keyup.enter.native="handleLogin" placeholder="请输入用户名" class="h-[48px]" :prefix-icon="User" clearable />
                         </el-form-item>
     
                         <el-form-item prop="password">
-                            <el-input v-model="form.password" placeholder="请输入密码" type="password" class="h-[48px]"  :prefix-icon="Lock" clearable />
+                            <el-input v-model="form.password" @keyup.enter.native="handleLogin" placeholder="请输入密码" type="password" class="h-[48px]"  :prefix-icon="Lock" clearable />
                         </el-form-item>
     
                         <el-form-item prop="code" v-if="serveConfigData.captchaEnabled">
-                            <el-input v-model="form.code" :prefix-icon="Discount" class="h-[48px]"  clearable   placeholder="请输入验证码">
+                            <el-input v-model="form.code" @keyup.enter.native="handleLogin" :prefix-icon="Discount" class="h-[48px]"  clearable   placeholder="请输入验证码">
                                 <template #suffix >
                                     <img :src="imgSrc" alt="" class="w-[100px] h-[40px] cursor-pointer" @click="getCodeImg">
                                 </template>
@@ -36,7 +36,7 @@ const { form, rules, handleLogin, getCodeImg, imgSrc, serveConfigData, fromInsta
                     </el-form>
     
                     <div class="flex flex-1 h-full items-end">
-                        <el-button class="flex-1" type="primary" @click="handleLogin">登录</el-button>
+                        <el-button class="flex-1" type="primary"  @click="handleLogin">登录</el-button>
                     </div>
 
                 </div>

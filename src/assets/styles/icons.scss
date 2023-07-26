@@ -1,0 +1,68 @@
+
+// state
+.ionc {
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.ionc_cos {
+    background-image: url(../../assets/icons/common/soc.svg);
+}
+.icon_state_charge {
+    background-image: url(../../assets/icons/common/charge_state.svg);
+}
+.icon_state_discharge {
+    background-image: url(../../assets/icons/common/discharge_state.svg);
+}
+.icon_state_standby {
+    background-image: url(../../assets/icons/common/standby_state.svg);
+}
+.icon_state_alarm {
+    background-image: url(../../assets/icons/common/alarm_state.svg);
+}
+.icon_state_weihu {
+    background-image: url(../../assets/icons/common/weihu_state.svg);
+}
+.icon_state_offline {
+    background-image: url(../../assets/icons/common/offline_state.svg);
+}
+
+// 
+.icon_charge_grenn {
+    background-image: url(../../assets/icons/common/charge_blue.svg);
+}
+.icon_discharge_grenn {
+    background-image: url(../../assets/icons/common/discharge_blue.svg);
+}
+.icon_active_power_grenn {
+    background-image: url(../../assets/icons/common/activePower_blue.svg);
+}
+.icon_reactive_power_grenn {
+    background-image: url(../../assets/icons/common/activePower_blue.svg);
+}
+
+// 运行状态
+.icon_runing_chager {
+    background-size: cover;
+    background-image: url(../../assets/icons/common/runing_chager.svg);
+}
+.icon_runing_dischager {
+    background-size: cover;
+    background-image: url(../../assets/icons/common/runing_dischager.svg);
+}
+.icon_runing_alarm {
+    background-size: cover;
+    background-image: url(../../assets/icons/common/runing_alarm.svg);
+}
+.icon_runing_standy {
+    background-size: cover;
+    background-image: url(../../assets/icons/common/runing_standy.svg);
+}
+.icon_runing_weihu {
+    background-size: cover;
+    background-image: url(../../assets/icons/common/runing_weihu.svg);
+}
+.icon_runing_offline {
+    background-size: cover;
+    background-image: url(../../assets/icons/common/runing_offline.svg);
+}

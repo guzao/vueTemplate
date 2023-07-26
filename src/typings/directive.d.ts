@@ -2,7 +2,7 @@
 /** 水印指令配置参数 */
 type Watermark = {
     /** 是否显示水印 */
-    markSatate: boolean,
+    markSatate: number,
     /** 水印文本 */
     text: string,
     /** 背景宽度 */

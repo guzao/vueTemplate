@@ -1,6 +1,7 @@
 import { ref, onBeforeMount } from 'vue'
 import type { FormInstance } from 'element-plus'
 import { getCodeImg as getcode } from '@/API'
+import { useRouter } from 'vue-router'
 import { useUser } from '@/store'
 import { useLang } from '@/utils'
 
@@ -69,17 +70,23 @@ export function useLogin() {
 
     }
 
+    const router = useRouter()
+
     const handleLogin = async () => {
         try {
             await fromInstance.value?.validate()
-            userLogin(form.value)
+            await userLogin(form.value)
+            router.push('/index')
         } catch (error) {
+            form.value.code = ''
+            getCodeImg()
         }
 
     }
 
-    // onBeforeMount(getCodeImg)
+    
 
+    onBeforeMount(getCodeImg)
 
     return {
         form,

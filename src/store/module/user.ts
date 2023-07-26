@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { hasEror, useToken } from '@/utils'
-import { userLogin, getUserInfo, getRouters } from '@/API'
+import { userLogin, userLogout, getUserInfo, getRouters } from '@/API'
 
 const { getToken, setToken, removetToken } = useToken()
 
@@ -48,7 +48,7 @@ export const useUser =  defineStore('useUser', {
 
         /** 用户登录 */
         userLogin(userInfo: UserLogin) {
-            userLogin(userInfo).then(res => {
+            return userLogin(userInfo).then(res => {
                 if (hasEror(res)) return
                 const token = res.token
                 this.token = token
@@ -77,7 +77,11 @@ export const useUser =  defineStore('useUser', {
 
         /** 用户登出 */
         userlogOut() {
-            removetToken
+            return userLogout().then(res => {
+                if (hasEror(res)) return
+                removetToken()
+                location.href = '/login';
+            })
         }
     }
 

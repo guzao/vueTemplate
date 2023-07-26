@@ -21,9 +21,11 @@ defineProps({
             <span>{{ router?.meta.title }}</span>
         </template>
 
-        <el-menu-item v-for="item in router?.children" :key="item.name" :index="item.path">
-            {{ item?.meta.title }}
-        </el-menu-item>
+        <template v-for="item in router?.children" :key="item.name">
+            <el-menu-item v-if="!item.hidden" :index="item.path" >
+                {{ item?.meta.title }}
+            </el-menu-item>
+        </template>
 
     </el-sub-menu>
 

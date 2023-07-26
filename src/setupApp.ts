@@ -12,13 +12,14 @@ export function setupApp () {
 
     const appInstance = createApp(App)
 
-    usePinan(appInstance)
-
     useDirective(appInstance)
+
+    usePinan(appInstance)
 
     useElementPlus(appInstance)
     
     useRouter(appInstance)
+
 
     appInstance.mount("#app")
 

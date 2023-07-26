@@ -1,0 +1,139 @@
+<script lang="ts" setup>
+import { PropType } from 'vue'
+import { useAppData } from '@/store'
+import Icon from '@/components/common/Icon.vue'
+import { conversionUnitKWh, toFixed, conversionUnitKW, conversionUnitKVar, paserTime, getRuningStateInfo } from '@/utils'
+
+const appData = useAppData()
+
+defineProps({
+    /** 电站运行信息 */
+    data: {
+        type: Object as PropType<ParkMonitorInfo>,
+        default: () => {},
+    }
+})
+</script>
+
+<template>
+    <div class="flex">
+
+        <div class="w-[296px]">
+            <ul class="w-full mt-[15px]">
+                <li class="flex items-center mb-4">
+                    <div class="h-[7px] w-[7px] bg-[var(--theme-green-bg)] rounded-full mr-[6px]"></div>
+                    <div class="text-[var(--theme-gray107)] mr-[6px]"> 电站类型 </div>
+                    <div class="text-[var(--theme-black51)] mr-[4px]"> {{  data.typeLabel }} </div>
+                </li>
+                <li class="flex items-center mb-4">
+                    <div class="h-[7px] w-[7px] bg-[var(--theme-green-bg)] rounded-full mr-[6px]"></div>
+                    <div class="text-[var(--theme-gray107)] mr-[6px]"> 最新时间 </div>
+                    <div class="text-[var(--theme-gray107)] mr-[4px] font-medium f-dinb"> {{ paserTime(appData.parkLastTimes[ data.code ], 'YYYY-MM-DD HH:mm:ss') }} </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="flex-1">
+            <ul class="grid grid-cols-6 gap-x-[16px]">
+
+                <li  class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
+
+                    <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 运行状态 </div>
+
+                    <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
+
+                    <div class="flex mt-[10px] items-center">
+                        <Icon :icon="getRuningStateInfo(data.cardList.A_M2).icon" :size="48" class="mr-[4px]" />
+                        <div class="text-[14px] text-[var(--theme-black51)] mr-[4px] f-dinb font-semibold" :class="getRuningStateInfo(data.cardList.A_M2).color"> {{ getRuningStateInfo(data.cardList.A_M2).text }} </div>
+                    </div>
+
+                </li>
+
+                <li  class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
+
+                    <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 剩余电量 </div>
+
+                    <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
+
+                    <div class="flex mt-[10px] items-center">
+                        <Icon icon="ionc_cos" :size="48" class="mr-[4px]" />
+                        <div class="text-[16px] text-[var(--theme-black51)] mr-[4px] f-dinb"> {{ toFixed(data.cardList.A_M3) }} </div>
+                        <div class="text-[12px] text-[var(--theme-gray107)]"> % </div>
+                    </div>
+
+                </li>
+
+                <li  class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
+
+                    <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 日充 </div>
+
+                    <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
+
+                    <div class="flex mt-[10px] items-center">
+                        <Icon icon="icon_charge_grenn" :size="48" class="mr-[4px]" />
+                        <div class="text-[16px] text-[var(--theme-black51)] mr-[4px] f-dinb"> {{ conversionUnitKWh(data.cardList.A_M15).size }} </div>
+                        <div class="text-[12px] text-[var(--theme-gray107)]">  {{ conversionUnitKWh(data.cardList.A_M15).unit }}  </div>
+                    </div>
+
+                </li>
+
+                <li  class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
+
+                    <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 日放 </div>
+
+                    <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
+
+                    <div class="flex mt-[10px] items-center">
+                        <Icon icon="icon_discharge_grenn" :size="48" class="mr-[4px]" />
+                        <div class="text-[16px] text-[var(--theme-black51)] mr-[4px] f-dinb"> {{ conversionUnitKWh(data.cardList.A_M16).size }} </div>
+                        <div class="text-[12px] text-[var(--theme-gray107)]">  {{ conversionUnitKWh(data.cardList.A_M16).unit }}  </div>
+                    </div>
+
+                </li>
+
+                <li  class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
+
+                    <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 有功 </div>
+
+                    <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
+
+                    <div class="flex mt-[10px] items-center">
+                        <Icon icon="icon_active_power_grenn" :size="48" class="mr-[4px]" />
+                        <div class="text-[16px] text-[var(--theme-black51)] mr-[4px] f-dinb"> {{ conversionUnitKW(data.detailList.A_M7).size }} </div>
+                        <div class="text-[12px] text-[var(--theme-gray107)]">  {{ conversionUnitKW(data.detailList.A_M7).unit }}  </div>
+                    </div>
+
+                </li>
+
+                <li  class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
+
+                    <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 无功 </div>
+
+                    <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
+
+                    <div class="flex mt-[10px] items-center">
+                        <Icon icon="icon_reactive_power_grenn" :size="48" class="mr-[4px]" />
+                        <div class="text-[16px] text-[var(--theme-black51)] mr-[4px] f-dinb"> {{ conversionUnitKVar(data.detailList.A_M8).size }} </div>
+                        <div class="text-[12px] text-[var(--theme-gray107)]">  {{ conversionUnitKVar(data.detailList.A_M8).unit }}  </div>
+                    </div>
+
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+</template>
+
+<style lang="scss" scoped>
+.slit_bg {
+    background-image: url(../../assets/icons/common/card_split_bg.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.ionc_cos {
+    background-size: contain;
+}
+
+</style>

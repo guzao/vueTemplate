@@ -3,9 +3,9 @@ export const enum HTTPSTATE {
     SUCCESS = 200,
 
     /** 未授权 */
-    Unauthorized = 401,
+    UNAUTHORIZED = 401,
 
     /** 失败 */
-    ERROR = 500,
+    SERVER_ERROR = 500,
 
 }

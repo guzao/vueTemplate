@@ -2,7 +2,7 @@ import type { Router, NavigationGuardNext, RouteLocationNormalized } from 'vue-r
 import nProgress from '@/plugins/steupNprogress'
 import { routerWhiteLsit } from '@/config'
 import { arrayIsEmpty, arrayIsNotEmpty, useToken } from '@/utils'
-import { useUser } from '@/store'
+import { useUser, useAppData } from '@/store'
 
 const { getToken } = useToken()
 
@@ -25,11 +25,11 @@ export function useGuard (router: Router) {
     if (getToken()) {
 
       const { getRoles, getUserInfo, getRouter } = useUser()
+      const { getParkAuthList, getParkAuthLastTime } = useAppData()
 
       // 登录过的在去登录页无意义
       if (to.path === '/login' && arrayIsNotEmpty(getRoles)) {
-        console.log('should to be home')
-        next()
+        next('/')
         return
       }
 
@@ -39,8 +39,12 @@ export function useGuard (router: Router) {
         try {
           await getUserInfo()
           const routers = await getRouter()
+          await getParkAuthList()
+          await getParkAuthLastTime()
+          next({ ...to, replace: true })
+          return
         } catch (error) {
-          console.log('======')
+          console.log('====== error =======')
         }
 
         next()

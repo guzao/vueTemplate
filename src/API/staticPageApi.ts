@@ -1,11 +1,17 @@
 import { useGet, usePost } from '@/HTTP'
-import { login, common } from '@/ApiMap'
+import { login, monitor } from '@/ApiMap'
 
 
 export function userLogin (data: UserLogin) {
     return usePost({
         url: login.login,
         data: data
+    })
+}
+
+export function userLogout () {
+    return usePost({
+        url: login.logout
     })
 }
 
@@ -30,6 +36,6 @@ export function getRouters () {
 
 export function getStationList () {
     return useGet({
-        url: common.stationList
+        url: monitor.stationList
     })
 }

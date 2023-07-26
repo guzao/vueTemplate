@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="191px" height="12px" viewBox="0 0 191 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>img/电站概览-装饰条</title>
+    <defs>
+        <linearGradient x1="133.401688%" y1="49.9481035%" x2="0%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#F8FCFF" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#F5FAFE" offset="14.039293%"></stop>
+            <stop stop-color="#FFFFFF" offset="25.2360876%"></stop>
+            <stop stop-color="#B7DCF6" offset="87.3388864%"></stop>
+            <stop stop-color="#DFEDFA" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="3实施监控-电站概览-1" transform="translate(-559.000000, -239.000000)">
+            <g id="编组-2" transform="translate(216.000000, 158.000000)">
+                <g id="list/电站概览" transform="translate(324.000000, 58.000000)">
+                    <g id="img/电站概览-装饰条" transform="translate(19.000000, 23.000000)">
+                        <rect id="矩形" x="0" y="0" width="191" height="11"></rect>
+                        <circle id="椭圆形" fill="#C1E0F7" cx="1.5" cy="1.5" r="1.5"></circle>
+                        <polyline id="路径-6" stroke="url(#linearGradient-1)" stroke-width="1.17631792" points="1.79894444 2.70207484 8.83607843 10.4228881 168.707676 10.4228881"></polyline>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

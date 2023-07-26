@@ -1,8 +1,18 @@
 <script lang="ts" setup>
 import { useUser } from '@/store'
 const userInfo = useUser()
-const handleSlect = (command: string) => {
-    console.log(command);
+const handleSlect = (command: 'personCenter' | 'logout') => {
+    switch (command) {
+        case 'personCenter':
+            
+            break;
+        case 'logout':
+            userInfo.userlogOut()
+            break;
+    
+        default:
+            break;
+    }
 }
 </script>
 

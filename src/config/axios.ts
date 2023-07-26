@@ -9,5 +9,5 @@ export const axiosConfig: CreateAxiosDefaults = {
     }
 }
 
-
+/** 接口调用白名单 */
 export const whiteList = [ login.login, login.captchaImage ]

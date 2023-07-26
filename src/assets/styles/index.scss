@@ -4,6 +4,11 @@
 
 @import url(./rotVariable.scss);
 
+* {
+    font-size: 14px;
+    font-family: alipuhuitir;
+}
+
 html {
     background-color: var(--theme-gray-bg);
     min-width: 1460px;
@@ -12,4 +17,37 @@ html {
 
 #app {
     min-height: 100vh;
+}
+
+.f-din {
+    font-family: D-DIN;
+}
+.f-dinb {
+    font-family: D-DIN-Bold;
+}
+.f-pangmenTitle {
+    font-family: pangmenTitle;
+}
+
+
+
+
+// 设备运行状态颜色
+.charge_color {
+    color: var(--charge) !important;
+}
+.discharge_color {
+    color: var(--discharge) !important;
+}
+.standby_color {
+    color: var(--standby) !important;
+}
+.alarm_color {
+    color: var(--alarm) !important;
+}
+.weihu_color {
+    color: var(--weihu) !important;
+}
+.offline_color {
+    color: var(--offline) !important;
 }

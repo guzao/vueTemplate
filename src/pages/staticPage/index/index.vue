@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import { useStationList } from './useStationList'
+import { getArrayLength } from '@/utils'
+import { useStationList, initData } from './useStationList'
 import NavBar from './components/NavBar.vue'
 import StationList from './components/StationList.vue'
-
-const { getData } = useStationList()
-
-getData()
-
+const { loading, stationList } = useStationList()
+initData()
 </script>
 
 <template>
-
     <NavBar />
 
-    <StationList />
+    <div v-loading="loading">
 
+        <StationList v-if="getArrayLength(stationList)" />
+
+        <el-empty v-else description="暂无数据" />
+
+    </div>
 </template>
