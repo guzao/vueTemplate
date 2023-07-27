@@ -17,8 +17,21 @@ type ParkMonitorInfo = {
     type: string;
     /** 电站类型名称 */
     typeLabel: string;
+    
+    A_M2: number;
+    A_M3: number;
+    A_M5: number;
+    A_M6: number;
+    A_M7: number;
+    A_M8: number;
+    A_M15: number;
+    A_M16: number;
+    A_M17: number;
+    A_M18: number;
+    A_M19: number;
+    A_M20: number;
+    type: string;
 }
-
 
 
 /** 用户受权限控制的电站 */

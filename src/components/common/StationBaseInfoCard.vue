@@ -9,8 +9,13 @@ const appData = useAppData()
 defineProps({
     /** 电站运行信息 */
     data: {
-        type: Object as PropType<ParkMonitorInfo>,
+        type: Object as PropType<ParkMonitorInfo | ParkRuningInfo>,
         default: () => {},
+        require: true,
+    },
+    subInfoTop: {
+        type: Number,
+        default: () => 15,
     }
 })
 </script>
@@ -19,16 +24,16 @@ defineProps({
     <div class="flex">
 
         <div class="w-[296px]">
-            <ul class="w-full mt-[15px]">
-                <li class="flex items-center mb-4">
+            <ul class="w-full" :style="`margin-top: ${subInfoTop}px;`">
+                <li class="flex items-center mb-2">
                     <div class="h-[7px] w-[7px] bg-[var(--theme-green-bg)] rounded-full mr-[6px]"></div>
                     <div class="text-[var(--theme-gray107)] mr-[6px]"> 电站类型 </div>
-                    <div class="text-[var(--theme-black51)] mr-[4px]"> {{  data.typeLabel }} </div>
+                    <div class="text-[var(--theme-black51)] mr-[4px]"> {{  data?.typeLabel }} </div>
                 </li>
-                <li class="flex items-center mb-4">
+                <li class="flex items-center mb-2">
                     <div class="h-[7px] w-[7px] bg-[var(--theme-green-bg)] rounded-full mr-[6px]"></div>
                     <div class="text-[var(--theme-gray107)] mr-[6px]"> 最新时间 </div>
-                    <div class="text-[var(--theme-gray107)] mr-[4px] font-medium f-dinb"> {{ paserTime(appData.parkLastTimes[ data.code ], 'YYYY-MM-DD HH:mm:ss') }} </div>
+                    <div class="text-[var(--theme-gray107)] mr-[4px] font-medium f-dinb"> {{ paserTime(appData.parkLastTimes[ data?.code ], 'YYYY-MM-DD HH:mm:ss') }} </div>
                 </li>
             </ul>
         </div>
@@ -43,8 +48,8 @@ defineProps({
                     <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
 
                     <div class="flex mt-[10px] items-center">
-                        <Icon :icon="getRuningStateInfo(data.cardList.A_M2).icon" :size="48" class="mr-[4px]" />
-                        <div class="text-[14px] text-[var(--theme-black51)] mr-[4px] f-dinb font-semibold" :class="getRuningStateInfo(data.cardList.A_M2).color"> {{ getRuningStateInfo(data.cardList.A_M2).text }} </div>
+                        <Icon :icon="getRuningStateInfo(data.A_M2).icon" :size="48" class="mr-[4px]" />
+                        <div class="text-[14px] text-[var(--theme-black51)] mr-[4px] f-dinb font-semibold" :class="getRuningStateInfo(data.A_M2).color"> {{ getRuningStateInfo(data?.A_M2).text }} </div>
                     </div>
 
                 </li>
@@ -57,7 +62,7 @@ defineProps({
 
                     <div class="flex mt-[10px] items-center">
                         <Icon icon="ionc_cos" :size="48" class="mr-[4px]" />
-                        <div class="text-[16px] text-[var(--theme-black51)] mr-[4px] f-dinb"> {{ toFixed(data.cardList.A_M3) }} </div>
+                        <div class="text-[16px] text-[var(--theme-black51)] mr-[4px] f-dinb"> {{ toFixed(data?.A_M3) }} </div>
                         <div class="text-[12px] text-[var(--theme-gray107)]"> % </div>
                     </div>
 
@@ -71,8 +76,8 @@ defineProps({
 
                     <div class="flex mt-[10px] items-center">
                         <Icon icon="icon_charge_grenn" :size="48" class="mr-[4px]" />
-                        <div class="text-[16px] text-[var(--theme-black51)] mr-[4px] f-dinb"> {{ conversionUnitKWh(data.cardList.A_M15).size }} </div>
-                        <div class="text-[12px] text-[var(--theme-gray107)]">  {{ conversionUnitKWh(data.cardList.A_M15).unit }}  </div>
+                        <div class="text-[16px] text-[var(--theme-black51)] mr-[4px] f-dinb"> {{ conversionUnitKWh(data?.A_M15).size }} </div>
+                        <div class="text-[12px] text-[var(--theme-gray107)]">  {{ conversionUnitKWh(data.A_M15).unit }}  </div>
                     </div>
 
                 </li>
@@ -85,8 +90,8 @@ defineProps({
 
                     <div class="flex mt-[10px] items-center">
                         <Icon icon="icon_discharge_grenn" :size="48" class="mr-[4px]" />
-                        <div class="text-[16px] text-[var(--theme-black51)] mr-[4px] f-dinb"> {{ conversionUnitKWh(data.cardList.A_M16).size }} </div>
-                        <div class="text-[12px] text-[var(--theme-gray107)]">  {{ conversionUnitKWh(data.cardList.A_M16).unit }}  </div>
+                        <div class="text-[16px] text-[var(--theme-black51)] mr-[4px] f-dinb"> {{ conversionUnitKWh(data?.A_M16).size }} </div>
+                        <div class="text-[12px] text-[var(--theme-gray107)]">  {{ conversionUnitKWh(data?.A_M16).unit }}  </div>
                     </div>
 
                 </li>
@@ -99,8 +104,8 @@ defineProps({
 
                     <div class="flex mt-[10px] items-center">
                         <Icon icon="icon_active_power_grenn" :size="48" class="mr-[4px]" />
-                        <div class="text-[16px] text-[var(--theme-black51)] mr-[4px] f-dinb"> {{ conversionUnitKW(data.detailList.A_M7).size }} </div>
-                        <div class="text-[12px] text-[var(--theme-gray107)]">  {{ conversionUnitKW(data.detailList.A_M7).unit }}  </div>
+                        <div class="text-[16px] text-[var(--theme-black51)] mr-[4px] f-dinb"> {{ conversionUnitKW(data?.A_M7).size }} </div>
+                        <div class="text-[12px] text-[var(--theme-gray107)]">  {{ conversionUnitKW(data?.A_M7).unit }}  </div>
                     </div>
 
                 </li>
@@ -113,8 +118,8 @@ defineProps({
 
                     <div class="flex mt-[10px] items-center">
                         <Icon icon="icon_reactive_power_grenn" :size="48" class="mr-[4px]" />
-                        <div class="text-[16px] text-[var(--theme-black51)] mr-[4px] f-dinb"> {{ conversionUnitKVar(data.detailList.A_M8).size }} </div>
-                        <div class="text-[12px] text-[var(--theme-gray107)]">  {{ conversionUnitKVar(data.detailList.A_M8).unit }}  </div>
+                        <div class="text-[16px] text-[var(--theme-black51)] mr-[4px] f-dinb"> {{ conversionUnitKVar(data?.A_M8).size }} </div>
+                        <div class="text-[12px] text-[var(--theme-gray107)]">  {{ conversionUnitKVar(data?.A_M8).unit }}  </div>
                     </div>
 
                 </li>

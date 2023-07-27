@@ -25,7 +25,7 @@ export function useGuard (router: Router) {
     if (getToken()) {
 
       const { getRoles, getUserInfo, getRouter } = useUser()
-      const { getParkAuthList, getParkAuthLastTime } = useAppData()
+      const { getParkAuthList, getParkAuthLastTime, getParkSerial } = useAppData()
 
       // 登录过的在去登录页无意义
       if (to.path === '/login' && arrayIsNotEmpty(getRoles)) {
@@ -41,7 +41,8 @@ export function useGuard (router: Router) {
           const routers = await getRouter()
           await getParkAuthList()
           await getParkAuthLastTime()
-          next({ ...to, replace: true })
+          // 地址栏记录当前选中的电站编号
+          next({ ...to, replace: true, query: { ...to.query, stationCode: getParkSerial() } })
           return
         } catch (error) {
           console.log('====== error =======')

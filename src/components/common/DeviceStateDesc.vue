@@ -32,6 +32,7 @@ import Icon from '@/components/common/Icon.vue'
         <li class="flex items-center">
             <Icon class="mr-[8px]" icon="icon_state_offline" />
             <div class="text-[var(--theme-black51)]"> 离线 </div>
+            <div class="mx-[20px] h-[14px] w-[2px] bg-[var(--theme-gray235-bg)]">  </div>
         </li>
     </ul>
 </template>

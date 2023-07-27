@@ -1,11 +1,25 @@
 
 // state
-.ionc {
-    background-size: cover;
+.icon {
+    background-size: contain;
     background-repeat: no-repeat;
 }
 
+.icon_day_charge_green {
+    background-image: url(../../assets/icons/common/day_charge_green.svg);
+}
+.icon_day_discharge_green {
+    background-image: url(../../assets/icons/common/day_discharge_green.svg);
+}
+.icon_active_power_green {
+    background-image: url(../../assets/icons/common/active_power_green.svg);
+}
+.icon_reactactive_power_green {
+    background-image: url(../../assets/icons/common/reactactive_power_green.svg);
+}
+
 .ionc_cos {
+    background-size: contain;
     background-image: url(../../assets/icons/common/soc.svg);
 }
 .icon_state_charge {
@@ -43,26 +57,26 @@
 
 // 运行状态
 .icon_runing_chager {
-    background-size: cover;
+    background-size: contain;
     background-image: url(../../assets/icons/common/runing_chager.svg);
 }
 .icon_runing_dischager {
-    background-size: cover;
-    background-image: url(../../assets/icons/common/runing_dischager.svg);
+    background-size: contain;
+    background-image: url(../../assets/icons/common/runging_discharge.svg);
 }
 .icon_runing_alarm {
-    background-size: cover;
+    background-size: contain;
     background-image: url(../../assets/icons/common/runing_alarm.svg);
 }
 .icon_runing_standy {
-    background-size: cover;
+    background-size: contain;
     background-image: url(../../assets/icons/common/runing_standy.svg);
 }
 .icon_runing_weihu {
-    background-size: cover;
+    background-size: contain;
     background-image: url(../../assets/icons/common/runing_weihu.svg);
 }
 .icon_runing_offline {
-    background-size: cover;
+    background-size: contain;
     background-image: url(../../assets/icons/common/runing_offline.svg);
 }

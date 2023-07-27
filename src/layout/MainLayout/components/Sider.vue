@@ -21,7 +21,7 @@ const handleClose = (key: string, keyPath: string[]) => {
 
 
 <template>
-  <el-menu :default-active="defaultActive" class="el-menu-vertical-demo" :collapse="appData.isCollapse"
+  <el-menu :default-active="defaultActive" class="el-menu-vertical-demo" :collapse="appData.isCollapse" router
     :active-text-color="sliderConfig.activeTextColor" :background-color="sliderConfig.backgroundColor" @open="handleOpen"
     @close="handleClose" style="border-right: none;">
 

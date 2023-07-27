@@ -5,7 +5,7 @@ import { ElScrollbar } from 'element-plus'
 import { Top } from '@element-plus/icons-vue'
 import Header from "./components/Header.vue";
 import Sider from './components/Sider.vue'
-import Footer from '@/pages/staticPage/components/Footer.vue';
+import Footer from './components/Footer.vue';
 
 const layout = useLayout()
 const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>()
@@ -32,7 +32,7 @@ onMounted(() => layout.setScrollbarRefInstance(scrollbarRef.value))
             <el-scrollbar ref="scrollbarRef" height="100vh" class="flex-1 " @scroll="layout.scrollEvent">
                 <div :style="layout.getLayoutMargingTop" style="min-height:calc(100vh - 66px);" class="px-[12px] box-border flex flex-col">
 
-                    <div class="flex-1">
+                    <div class="flex-1 flex flex-col flex-wrap">
                         <router-view></router-view>
                     </div>
 

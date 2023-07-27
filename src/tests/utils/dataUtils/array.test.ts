@@ -1,6 +1,7 @@
 import { expect, it, describe } from 'vitest'
 import { 
-    getArrayLength, arrayIsEmpty, arrayIsNotEmpty, arrayGroupBy, arrayGroupByMap, arrayChunk
+    getArrayLength, arrayIsEmpty, arrayIsNotEmpty, arrayGroupBy, arrayGroupByMap, arrayChunk,
+    getFirstElement, getLastElement, 
 } from '@/utils'
 
 
@@ -74,6 +75,16 @@ describe('test array utils ', () => {
     it('arrayChunk', () => {
         expect(arrayChunk([ 1, 2, 3, 4 ], 2)).toEqual([[1, 2], [3, 4]])
         expect(arrayChunk([ 1, 2, 3, 4 ], 1)).toEqual([[1], [2], [3], [4]])
+    })
+    
+    it('getFirstElement', () => {
+        expect(getFirstElement([ 1, 2, 3, 4 ])).toEqual(1)
+        expect(getFirstElement([ 2, 2, 3, 4 ])).toEqual(2)
+    })
+    
+    it('getLastElement', () => {
+        expect(getLastElement([ 1, 2, 3, 4 ])).toEqual(4)
+        expect(getLastElement([ 2, 2, 3, 9 ])).toEqual(9)
     })
 
 

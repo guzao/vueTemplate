@@ -7,6 +7,7 @@ export const authRouter: RouteRecordRaw[] = [
     {
         path: '/monitor',
         component: MainLayout,
+        redirect: '/monitor/parkOverview',
         children: [
             {
                 path: '/monitor/parkOverview',

@@ -16,7 +16,7 @@ defineProps({
 
             <div class="h-[16px] w-[2px] bg-[var(--theme-green-bg)] mr-[8px]"></div>
 
-            <span :style="`font-size:${size}px`" class="font-medium text-[var(--theme-black51)]">
+            <span :style="`font-size:${size}px`" class="font-medium text-[var(--theme-black51)] font-medium">
                 <slot />
             </span>
 

@@ -22,9 +22,25 @@ export const filteredList = computed(() => {
 const { getResult, loading, result: stationList } = useReactiveHttp({ 
     initData: [] as ParkMonitorInfo[], 
     request: () => getStationList(), 
-    requestCallback: (res) => res.data.stationList,
+    requestCallback: (res) => {
+        stationListAddProps(res.data.stationList)
+        return res.data.stationList
+    },
     Immediately: false
 })
+
+
+function stationListAddProps (stationList: ParkMonitorInfo[]) {
+    stationList.forEach(park => {
+        console.log(park)
+        park.A_M2 = park.cardList.A_M2
+        park.A_M3 = park.cardList.A_M3
+        park.A_M15 = park.cardList.A_M15
+        park.A_M16 = park.cardList.A_M16
+        park.A_M17 = park.detailList.A_M17
+        park.A_M18 = park.detailList.A_M18
+    })
+}
 
 
 const { getResult: getParkType, dictLabel, result: parkType  } = useDict('eos_park_type')

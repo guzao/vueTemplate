@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 defineProps({
-    /** icon class */
+    /** icon 类名 */
     icon: String,
     /** icon 大小 */ 
     size: {

@@ -8,13 +8,11 @@ initData()
 </script>
 
 <template>
-    <NavBar />
-
-    <div v-loading="loading">
+    
+        <NavBar />
 
         <StationList v-if="getArrayLength(stationList)" />
 
         <el-empty v-else description="暂无数据" />
 
-    </div>
 </template>

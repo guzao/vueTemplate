@@ -1,61 +1,102 @@
 import { defineStore } from "pinia";
-import { getFirstElement, hasEror, isFalse, useIsCollapse } from '@/utils'
+import { getFirstElement, hasEror, isFalse, useIsCollapse, urlQueryToObject, replaceUrlQuery, sleep, arrayIsEmpty } from '@/utils'
 import { getUserParkListAll, getUserParkLastTime } from '@/API'
+
 
 const { getIsCollapse, setIsCollapse } = useIsCollapse()
 
-export const useAppData = defineStore('useAppData', {
 
+/** 应用数据 */
+export const useAppData = defineStore('useAppData', {
+    
     state() {
         return {
 
-            /** 侧边栏状态 */ 
+            /** 侧边栏状态 */
             isCollapse: getIsCollapse(),
-            
+
             /** 电站发布状态 */
             parkReleaseStatus: {} as Record<string, number>,
 
             /** 电站数据最新时间 */
             parkLastTimes: {} as Record<string, number>,
 
-            /** 用户受权限控制的电站列表  */
-            parkAuthList: []  as ParkAuth [],
+            /** 电站类型 */
+            parkTypes: {} as Record<string, string>,
 
-            /** 初始化用户默认选中的电站 */ 
-            parkSerial: 'null'
-            
+            /** 用户受权限控制的电站列表  */
+            parkAuthList: [] as ParkAuth[],
+
+            /** 初始化用户默认选中的电站 */
+            parkSerial: 'null',
+
         }
     },
 
     getters: {
-      
+        /** 当前选中电站的最新数据时间 */
+        currentLastTime(state) {
+            return state.parkLastTimes[state.parkSerial]
+        },
+        /** 当前选中电站的状态 */
+        currentRelease(state) {
+            return state.parkReleaseStatus[state.parkSerial]
+        },
+        /** 当前选中电站的类型 */
+        currentParkType(state) {
+            return state.parkTypes[state.parkSerial]
+        },
+        /** 当前选中的电站编号 */
+        currentParkSerial(state) {
+            return state.parkSerial
+        },
     },
 
     actions: {
 
-        /** 侧边栏状态 */ 
-        chnageIsCollapse () {
+        /** 当前选中电站编号 */
+        getParkSerial() {
+            return this.parkSerial
+        },
+
+        /** 侧边栏状态 */
+        chnageIsCollapse() {
             this.isCollapse = !this.isCollapse
             setIsCollapse(this.isCollapse)
         },
 
-        /** 用户受权限控制的电站列表 */ 
-        getParkAuthList () {
+        /** 用户受权限控制的电站列表 */
+        getParkAuthList() {
             return getUserParkListAll().then(res => {
-                if ( hasEror(res) ) return
+                if (hasEror(res)) return
                 const { rows } = res
-                this.parkAuthList = rows 
+                this.parkAuthList = rows
                 this.parkReleaseStatus = createParkReleaseStatusMap(rows)
-                this.parkSerial =  getFirstElement(this.parkAuthList)?.serial
+                this.parkTypes = createParkTypesMap(rows)
+                // 默认取地址栏的场站编码 
+                this.parkSerial = urlQueryToObject().stationCode || getFirstElement(this.parkAuthList)?.serial
             })
         },
 
-        /** 用户受权限控制的电站数据的最新时间 */ 
-        getParkAuthLastTime () {
+        /** 用户受权限控制的电站数据的最新时间 */
+        getParkAuthLastTime() {
             return getUserParkLastTime().then(res => {
-                if ( hasEror(res) ) return
+                if (hasEror(res)) return
                 this.parkLastTimes = res.data
             })
+        },
+
+        /** 定时获取电站最新数据 根据登录状态判断是否获取电站最新数据时间 */
+        loopGetParkAuthLastTime () {
+            if (arrayIsEmpty(this.parkAuthList)) return
+            this.getParkAuthLastTime()
+        },
+
+        /** 用户电站切换 同步地址栏电站编号 */
+        async parkCodeChnage(code: string) {
+            this.parkSerial = code
+            await sleep(200)
+            replaceUrlQuery({ stationCode: code })
         },
 
     },
@@ -65,12 +106,23 @@ export const useAppData = defineStore('useAppData', {
 
 
 /** 生成场站状态对象表 */
-function createParkReleaseStatusMap (rows: ParkAuth[]) {
+function createParkReleaseStatusMap(rows: ParkAuth[]) {
     return rows.reduce((acc, cur) => {
         const { releaseStatus, serial } = cur
         if (isFalse(acc[serial])) {
-            acc[ serial ] = releaseStatus
+            acc[serial] = releaseStatus
         }
         return acc
     }, {} as Record<string, number>)
+}
+
+/** 生成电站类型表 */
+function createParkTypesMap(rows: ParkAuth[]) {
+    return rows.reduce((acc, cur) => {
+        const { type, serial } = cur
+        if (isFalse(acc[serial])) {
+            acc[serial] = type
+        }
+        return acc
+    }, {} as Record<string, string>)
 }

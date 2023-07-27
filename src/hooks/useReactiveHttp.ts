@@ -9,7 +9,7 @@ interface UseReactiveGetParams <T> {
     /** 接口是否立即执行 */
     Immediately?: boolean,
     /** 响应接口手动处理 */
-    requestCallback?: (res: ResponseData) => any
+    requestCallback?: (res: ResponseData) => any,
 }
 
 const defaultRequestCallback =  (res: ResponseData) => res.data

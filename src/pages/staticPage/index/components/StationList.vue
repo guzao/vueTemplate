@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
+import { useAppData } from '@/store'
 import { getRunningDay, conversionUnitKW, conversionUnitKWh } from '@/utils'
 import { useStationList } from '../useStationList'
 import TitleBox from '@/components/common/TitleBox.vue';
@@ -7,9 +9,13 @@ import LabelValueUnit from '@/components/common/LabelValueUnit.vue';
 
 const { releaseStatusDictLabel, filteredList } = useStationList()
 
-const goToOverview = (data: ParkMonitorInfo) => {
-    console.log(data)
+const router = useRouter()
+const appData = useAppData()
+const goToOverview = ({ code: stationCode }: ParkMonitorInfo) => {
+    appData.parkCodeChnage(stationCode)
+    router.push({ path: '/monitor/parkOverview', query: { stationCode: appData.parkSerial } })
 }
+
 </script>
 
 <template>
