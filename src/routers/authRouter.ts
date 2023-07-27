@@ -20,6 +20,14 @@ export const authRouter: RouteRecordRaw[] = [
             {
                 path: '/monitor/deviceOverview',
                 component: () => import('@/pages/authPage/realTimeMonitoring/deviceOverview/index.vue'),
+            },
+            {
+                path: '/monitor/thumbnailModel',
+                component: () => import('@/pages/authPage/realTimeMonitoring/thumbnailModel/index.vue'),
+            },
+            {
+                path: '/monitor/tableModel',
+                component: () => import('@/pages/authPage/realTimeMonitoring/tableModel/index.vue'),
             }
         ]
     },

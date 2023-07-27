@@ -9,10 +9,14 @@ initData()
 
 <template>
     
-        <NavBar />
+    <div v-loading="loading">
 
-        <StationList v-if="getArrayLength(stationList)" />
+            <NavBar />
+    
+            <StationList v-if="getArrayLength(stationList)" />
+    
+            <el-empty v-else description="暂无数据" />
 
-        <el-empty v-else description="暂无数据" />
+    </div>
 
 </template>

@@ -28,42 +28,42 @@ defineProps({
 
                         <div class="flex items-center">
 
-                            <LabelValueUnit class="pl-[20px]">
+                            <LabelValueUnit class="pl-[20px]" :font-size="16">
                                 月充
                                 <template #value> {{ conversionUnitKWh(item.M17).size }} </template>
                                 <template #unit> {{ conversionUnitKWh(item.M17).unit }} </template>
                             </LabelValueUnit>
                             <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
-                            <LabelValueUnit class="pl-[10px]">
+                            <LabelValueUnit class="pl-[10px]" :font-size="16">
                                 月放
                                 <template #value> {{ conversionUnitKWh(item.M18).size }} </template>
                                 <template #unit> {{ conversionUnitKWh(item.M18).unit }} </template>
                             </LabelValueUnit>
                             <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
-                            <LabelValueUnit class="pl-[10px]">
+                            <LabelValueUnit class="pl-[10px]" :font-size="16">
                                 年充
                                 <template #value> {{ conversionUnitKWh(item.M19).size }} </template>
                                 <template #unit> {{ conversionUnitKWh(item.M19).unit }} </template>
                             </LabelValueUnit>
                             <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
-                            <LabelValueUnit class="pl-[10px]">
+                            <LabelValueUnit class="pl-[10px]" :font-size="16">
                                 年充
                                 <template #value> {{ conversionUnitKWh(item.M20).size }} </template>
                                 <template #unit> {{ conversionUnitKWh(item.M20).unit }} </template>
                             </LabelValueUnit>
                             <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
-                            <LabelValueUnit class="pl-[10px]">
+                            <LabelValueUnit class="pl-[10px]" :font-size="16">
                                 累充
                                 <template #value> {{ conversionUnitKWh(item.M5).size }} </template>
                                 <template #unit> {{ conversionUnitKWh(item.M5).unit }} </template>
                             </LabelValueUnit>
                             <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
-                            <LabelValueUnit class="pl-[10px]">
+                            <LabelValueUnit class="pl-[10px]" :font-size="16">
                                 累充
                                 <template #value> {{ conversionUnitKWh(item.M6).size }} </template>
                                 <template #unit> {{ conversionUnitKWh(item.M6).unit }} </template>

@@ -5,10 +5,6 @@ import TitleBox from '@/components/common/TitleBox.vue';
 
 const { renderChart, chartRef } = useEcharts({})
 
-onMounted(() => {
-    renderChart()
-})
-
 </script>
 
 <template>

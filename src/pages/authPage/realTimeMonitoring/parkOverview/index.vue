@@ -5,11 +5,11 @@ import { useParkOverview } from './useParkOverview'
 import SubNavBar from '@/components/common/SubNavBar.vue';
 import RuningInfo from './RuningInfo.vue'
 import Bottom from './Bottom.vue'
+
 const appData = useAppData()
 const { getParkOverview, loading } = useParkOverview()
 
 const { _resetInterval } = useInterval(1000 * 60, getParkOverview)
-
 
 const getParkInfo = () => {
     _resetInterval()

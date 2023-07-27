@@ -38,12 +38,10 @@ const viewModel = [
     { label: '子站列表视图', code: 2, url: '/monitor/subParkOverview' },
     { label: '设备概览视图', code: 3, url: '/monitor/deviceOverview' },
     { label: '设备缩略视图', code: 4, url: '/monitor/thumbnailModel' },
-    { label: '设备列表视图', code: 5, url: '/monitor/listModel' },
+    { label: '设备列表视图', code: 5, url: '/monitor/tableModel' },
 ]
 
-const viewModelChange = (path: string) => {
-    router.push({ query: { stationCode: appData.parkSerial }, path: path })
-}
+const viewModelChange = (path: string) =>  router.push({ query: { stationCode: appData.parkSerial }, path: path })
 
 </script>
 

@@ -1,12 +1,11 @@
 <script lang="ts" setup>
 import { useDeviceOverview } from '../hooks/useDeviceOverview'
-
 import SubNavBar from '@/components/common/SubNavBar.vue';
 import SubParkTitle from '../components/SubParkTitle.vue'
 import ParkOverviewNavBar from '../components/ParkOverviewNavBar.vue';
 
 
-const { appData, loading, getSubParkInfo, parkRuningInfo, deivceGroupList } = useDeviceOverview()
+const { appData, getSubParkInfo, parkRuningInfo, deivceGroupList, loading } = useDeviceOverview()
 
 </script>
 

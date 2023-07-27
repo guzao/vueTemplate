@@ -29,19 +29,18 @@ const { getResult, loading, result: stationList } = useReactiveHttp({
     Immediately: false
 })
 
-
 function stationListAddProps (stationList: ParkMonitorInfo[]) {
     stationList.forEach(park => {
-        console.log(park)
         park.A_M2 = park.cardList.A_M2
         park.A_M3 = park.cardList.A_M3
+        park.A_M7 = park.detailList.A_M7
+        park.A_M8 = park.detailList.A_M8
         park.A_M15 = park.cardList.A_M15
         park.A_M16 = park.cardList.A_M16
         park.A_M17 = park.detailList.A_M17
         park.A_M18 = park.detailList.A_M18
     })
 }
-
 
 const { getResult: getParkType, dictLabel, result: parkType  } = useDict('eos_park_type')
 
@@ -80,7 +79,6 @@ function parkTypeStatistics () {
         item.accLabel =  dictValue == '-1' ? `${dictLabel} (${getArrayLength(unref(stationList))})` :`${dictLabel} (${getArrayLength(types)})`
     })
 }
-
 
 export function useStationList() {
     
