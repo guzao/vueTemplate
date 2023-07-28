@@ -1,3 +1,4 @@
 export const layoutConfig = {
-    dynamicHeader: true
+    /** 是否固定全局 Heder */
+    dynamicHeader: !false
 }

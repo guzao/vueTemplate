@@ -31,6 +31,7 @@ export  function useReactiveHttp <T> (params: UseReactiveGetParams<T>) {
             result.value = requestCallback(res)
         } catch (error) {
             loading.value = false
+            throw new Error(" neetwork error plac check you input ");
         }
     }
 

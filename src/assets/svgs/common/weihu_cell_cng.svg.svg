@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="28px" height="12px" viewBox="0 0 28 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>切片</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="6实时监控-储能箱1.1-无遮盖" transform="translate(-1084.000000, -836.000000)">
+            <g id="list/储能箱信息备份-23" transform="translate(972.000000, 768.000000)">
+                <g id="img/设备状态" transform="translate(79.000000, 48.000000)">
+                    <g id="编组-2" transform="translate(30.000000, 2.000000)">
+                        <g id="50" transform="translate(3.000000, 18.000000)">
+                            <rect id="矩形" x="0" y="0" width="28" height="12"></rect>
+                            <g id="编组" transform="translate(1.000000, 0.000000)">
+                                <polygon id="矩形" fill="#630EA9" points="0 5.47543172 18.844395 10.2798012 18.844395 11.6066639 0 6.8022944"></polygon>
+                                <polygon id="矩形" fill="#E2BFFF" points="18.844395 10.2868315 26.3097685 4.11349158 26.3097685 5.44015162 18.844395 11.6134916"></polygon>
+                                <polygon id="路径-5" fill="#D38AEA" points="4.88756898e-14 5.47543172 18.844395 10.2868315 26.3097685 4.11349158 8.43874359 0"></polygon>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

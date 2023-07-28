@@ -1,10 +1,14 @@
+import { ref } from 'vue'
+import { isTrue } from '@/utils'
 import { useAppData } from '@/store'
 import { useReactiveHttp, useDict } from '@/hooks'
 import { getDevicGroupList, getStationInfo } from '@/api'
 
 
-export function useDeviceOverview() {
 
+/** 设备列表数据 */
+export function useDeviceOverview() {
+    
 
     const appData = useAppData()
 
@@ -18,15 +22,26 @@ export function useDeviceOverview() {
         request: () => getDevicGroupList(appData.currentParkSerial),
         requestCallback: (res) => {
             const unitGroupList = res.data.unitGroupList
-            return unitGroupList
+            parkTypeStatistics(unitGroupList)
+            return res.data.unitGroupList
         },
         Immediately: false
     })
 
+    /** 统计每个组下的设备的状态 */
+    function parkTypeStatistics (deivceGroupList: DeviceGroup []) {
+        deivceGroupList.forEach(group => {
+            group.stateCount = {}
+            group.list.forEach(device => {
+                const { M2 = 'null' } = device.deviceData
+                isTrue(group.stateCount[ M2 ]) ? group.stateCount[ M2 ]++ : ( group.stateCount[ M2 ] = 1)
+            })
+        })
+    }
 
 
     /** 电站运行概览 */
-    const { result: parkRuningInfo, getResult, loading } = useReactiveHttp({
+    const { result: parkRuningInfo, getResult } = useReactiveHttp({
         initData: {} as ParkRuningInfo,
         request: () => getStationInfo(appData.parkSerial),
         requestCallback(res) {
@@ -39,9 +54,17 @@ export function useDeviceOverview() {
 
     getParkType().then(() => getSubParkInfo())
 
-    const getSubParkInfo = () => {
-        getResult()
-        getDevicGroupListData()
+    const loading = ref(false)
+
+    const getSubParkInfo = async () => {
+        loading.value = true
+        try {
+            await getResult()
+            await getDevicGroupListData()
+        } catch (error) {
+            loading.value = false
+        }
+        loading.value = false
     }
 
 

@@ -13,9 +13,20 @@ defineProps({
         default: () => {},
         require: true,
     },
+    /** 左侧点的电站信息marin-top 属性 */
     subInfoTop: {
         type: Number,
         default: () => 15,
+    },
+    /** 是否显示左侧点的电站信息 */
+    showSubIno: {
+        type: Boolean,
+        default: () => true,
+    },
+    /** 卡片的背景色 并抹去卡片的border */
+    infoCardBg: {
+        type: String,
+        default: () => '',
     }
 })
 </script>
@@ -23,7 +34,7 @@ defineProps({
 <template>
     <div class="flex">
 
-        <div class="w-[296px]">
+        <div class="w-[296px]" v-if="showSubIno">
             <ul class="w-full" :style="`margin-top: ${subInfoTop}px;`">
                 <li class="flex items-center mb-2">
                     <div class="h-[7px] w-[7px] bg-[var(--theme-green-bg)] rounded-full mr-[6px]"></div>
@@ -41,7 +52,9 @@ defineProps({
         <div class="flex-1">
             <ul class="grid grid-cols-6 gap-x-[16px]">
 
-                <li  class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
+                <li 
+                :style="`${ infoCardBg ? `background-color: ${infoCardBg}; border: none;` : '' }`"
+                class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
 
                     <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 运行状态 </div>
 
@@ -54,7 +67,9 @@ defineProps({
 
                 </li>
 
-                <li  class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
+                <li  
+                :style="`${ infoCardBg ? `background-color: ${infoCardBg}; border: none;` : '' }`"
+                class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
 
                     <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 剩余电量 </div>
 
@@ -68,7 +83,9 @@ defineProps({
 
                 </li>
 
-                <li  class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
+                <li  
+                :style="`${ infoCardBg ? `background-color: ${infoCardBg}; border: none;` : '' }`"
+                class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
 
                     <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 日充 </div>
 
@@ -82,7 +99,9 @@ defineProps({
 
                 </li>
 
-                <li  class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
+                <li  
+                :style="`${ infoCardBg ? `background-color: ${infoCardBg}; border: none;` : '' }`"
+                class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
 
                     <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 日放 </div>
 
@@ -96,7 +115,9 @@ defineProps({
 
                 </li>
 
-                <li  class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
+                <li  
+                :style="`${ infoCardBg ? `background-color: ${infoCardBg}; border: none;` : '' }`"
+                class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
 
                     <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 有功 </div>
 
@@ -110,7 +131,9 @@ defineProps({
 
                 </li>
 
-                <li  class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
+                <li  
+                :style="`${ infoCardBg ? `background-color: ${infoCardBg}; border: none;` : '' }`"
+                class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
 
                     <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 无功 </div>
 

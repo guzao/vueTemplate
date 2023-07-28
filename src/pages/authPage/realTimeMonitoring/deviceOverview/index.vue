@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { useDeviceOverview } from '../hooks/useDeviceOverview'
 
+import DeviceList from './DeviceList.vue'
 import SubNavBar from '@/components/common/SubNavBar.vue';
-import SubParkTitle from '../components/SubParkTitle.vue'
 import ParkOverviewNavBar from '../components/ParkOverviewNavBar.vue';
 
 
@@ -17,25 +17,7 @@ const { appData, loading, getSubParkInfo, parkRuningInfo, deivceGroupList } = us
 
         <ParkOverviewNavBar :park-runing-info="parkRuningInfo" class="mb-[16px]" />
 
-        <ul>
-
-            <li class="px-[16px] py-[20px] mb-[16px] last:mb-0 bg-[var(--theme-white-bg)]" v-for="item in deivceGroupList"
-                :key="item.id">
-
-                <SubParkTitle :data="item" />
-
-                <ul class="grid grid-cols-8 gap-[8px]">
-
-                    <li class="h-[131px] bg-[var(--theme-gray251-bg)]" v-for="deivce in item.list" :key="item.id">
-
-                    </li>
-
-                </ul>
-
-
-            </li>
-
-        </ul>
-
+        <DeviceList :deivceGroupList="deivceGroupList" />
+        
     </div>
 </template>

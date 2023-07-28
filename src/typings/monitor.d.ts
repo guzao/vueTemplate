@@ -82,5 +82,7 @@ type DeviceGroup = {
     M19: number,
     M20: number,
     /*** 设备列表 */
-    list: DeviceItem []
+    list: DeviceItem[];
+    /*** 设备状态统计列表 */
+    stateCount: Record<string, number>
 }

@@ -10,6 +10,10 @@ defineProps({
     data: {
         type: Object as PropType<DeviceGroup>,
         default: {}
+    },
+    deviceStateCount: {
+        type: Object as PropType<Record<string, number>>,
+        default: {}
     }
 })
 
@@ -23,7 +27,7 @@ defineProps({
 
         <template #left>
 
-            <div v class="flex datas-center">
+            <div v class="flex items-center">
 
                 <LabelValueUnit class="pl-[16px]" :font-size="16">
                     剩余电量
@@ -78,7 +82,7 @@ defineProps({
         </template>
 
         <template #right>
-            <DeviceStateCountDesc />
+            <DeviceStateCountDesc :states="deviceStateCount" />
         </template>
 
     </TitleBox>

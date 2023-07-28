@@ -3,10 +3,18 @@
 @tailwind utilities;
 
 @import url(./rotVariable.scss);
+@import url(./deviceBattery.scss);
+@import url(./icons.scss);
 
 * {
     font-size: 14px;
     font-family: alipuhuitir;
+}
+
+
+// 进度条颜色
+#nprogress .bar {
+    background: var(--charge); 
 }
 
 html {

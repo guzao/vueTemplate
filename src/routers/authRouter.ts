@@ -31,5 +31,9 @@ export const authRouter: RouteRecordRaw[] = [
             }
         ]
     },
+    {
+        path: '/monitor/deviceDetail',
+        component: () => import('@/pages/authPage/realTimeMonitoring/deviceDetail/index.vue'),
+    }
 
 ]
