@@ -30,7 +30,7 @@ onMounted(() => layout.setScrollbarRefInstance(scrollbarRef.value))
             </el-aside>
 
             <el-scrollbar ref="scrollbarRef" height="100vh" class="flex-1 " @scroll="layout.scrollEvent">
-                <div :style="layout.getLayoutMargingTop" style="min-height:calc(100vh - 66px);" class="px-[12px] box-border flex flex-col">
+                <div :style="layout.getLayoutMargingTop" style="min-height:calc(100vh - 66px);" class="px-[10px] box-border flex flex-col">
 
                     <div class="flex-1 flex flex-col flex-wrap">
                         <router-view></router-view>

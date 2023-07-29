@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import { isTrue } from '@/utils'
-import { useAppData } from '@/store'
-import { useReactiveHttp, useDict } from '@/hooks'
+import { useAppData, useDicts } from '@/store'
+import { useReactiveHttp } from '@/hooks'
 import { getDevicGroupList, getStationInfo } from '@/api'
 
 
@@ -11,10 +11,7 @@ export function useDeviceOverview() {
     
 
     const appData = useAppData()
-
-    /** 电站类型 */
-    const { dictLabel, getResult: getParkType } = useDict('eos_park_type')
-
+    const dicts = useDicts()
 
     /** 子站列表 */
     const { result: deivceGroupList, getResult: getDevicGroupListData } = useReactiveHttp({
@@ -46,13 +43,10 @@ export function useDeviceOverview() {
         request: () => getStationInfo(appData.parkSerial),
         requestCallback(res) {
             res.data.code = appData.currentParkSerial
-            res.data.typeLabel = dictLabel.value[res.data.type]
             return res.data
         },
         Immediately: false
     })
-
-    getParkType().then(() => getSubParkInfo())
 
     const loading = ref(false)
 
@@ -67,6 +61,8 @@ export function useDeviceOverview() {
         loading.value = false
     }
 
+    getSubParkInfo()
+
 
     return {
         getSubParkInfo,
@@ -74,6 +70,7 @@ export function useDeviceOverview() {
         loading,
         deivceGroupList,
         appData,
+        dicts
     }
 
 }

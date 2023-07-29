@@ -3,7 +3,7 @@ import { User, Lock, Discount } from '@element-plus/icons-vue'
 import { useLogin } from './useLogin'
 
 // @ts-ignore
-const { form, rules, handleLogin, getCodeImg, imgSrc, serveConfigData, fromInstance } = useLogin()
+const { form, rules, handleLogin, getCodeImg, imgSrc, serveConfigData, fromInstance, loading } = useLogin()
 </script>
 
 <template>
@@ -36,7 +36,7 @@ const { form, rules, handleLogin, getCodeImg, imgSrc, serveConfigData, fromInsta
                     </el-form>
     
                     <div class="flex flex-1 h-full items-end">
-                        <el-button class="flex-1" type="primary"  @click="handleLogin">登录</el-button>
+                        <el-button class="flex-1" type="primary" :loading="loading" @click="handleLogin">登录</el-button>
                     </div>
 
                 </div>

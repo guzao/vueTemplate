@@ -47,7 +47,7 @@ defineProps({
 
                 <el-table-column property="name" label="剩余电量">
                     <template #default="{ row }">
-                        <span>{{ toFixed(row.deviceData.M2) }}%</span>
+                        <span>{{ toFixed(row.deviceData.M3) }}%</span>
                     </template>
                 </el-table-column>
 

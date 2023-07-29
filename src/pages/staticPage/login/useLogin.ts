@@ -20,6 +20,8 @@ export function useLogin() {
         uuid: '',
     })
 
+    const loading = ref(false)
+
     const imgSrc = ref('')
 
     const fromInstance = ref<FormInstance>()
@@ -74,14 +76,16 @@ export function useLogin() {
 
     const handleLogin = async () => {
         try {
+            loading.value = true
             await fromInstance.value?.validate()
             await userLogin(form.value)
             router.push('/index')
         } catch (error) {
             form.value.code = ''
             getCodeImg()
+            loading.value = false
         }
-
+        loading.value = false
     }
 
     
@@ -95,7 +99,8 @@ export function useLogin() {
         imgSrc,
         handleLogin,
         getCodeImg,
-        serveConfigData
+        serveConfigData,
+        loading
     }
 
 }

@@ -1,8 +1,8 @@
 import { useAppData } from '@/store'
 import { objectToUrlQuery } from '@/utils'
 
-/** 设备详细信息 */
 export function useDeviceDetail() {
+/** 设备详细信息 */
 
     const appData = useAppData()
 
@@ -12,7 +12,8 @@ export function useDeviceDetail() {
             stationCode: appData.currentParkSerial,
             type: appData.currentParkType,
             name: appData.parkAuthList.find(park => park.serial == appData.currentParkSerial)?.name,
-            id: device.id
+            id: device.id,
+            state: device.deviceData.M2
         }
         const urlQuery = objectToUrlQuery(params as any)
         window.open('/monitor/deviceDetail' + urlQuery)

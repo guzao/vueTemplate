@@ -1,10 +1,31 @@
 <script lang="ts" setup>
+import { PropType, computed } from 'vue';
+import { useAppData } from '@/store'
+import { paserTime, getRuningStateInfo, toFixed, conversionUnitKWh, conversionUnitKVar, conversionUnitKW } from '@/utils';
+
+
 import IconVue from '@/components/common/Icon.vue';
 import TitleBox from '@/components/common/TitleBox.vue';
 import LastTime from '@/components/common/LastTime.vue';
-import { paserTime, getRuningStateInfo, toFixed, conversionUnitKWh, conversionUnitKVar, conversionUnitKW } from '@/utils';
-import { useParkOverview } from './useParkOverview'
-const { parkOverview, appData } = useParkOverview()
+
+
+
+const appData = useAppData()
+
+const props = defineProps({
+    parkOverview: {
+        type: Object as PropType<ParkRuningInfo>,
+        default: {}
+    }
+})
+
+const parkStateBg = computed(() => {
+    const { A_M2 } = props.parkOverview
+    if (A_M2 == 3) return ''
+    return A_M2 == 1 ? 'charge' : 'discharge'
+})
+
+
 
 </script>
 
@@ -39,8 +60,8 @@ const { parkOverview, appData } = useParkOverview()
                     <IconVue icon="ionc_cos" :size="68" />
                     <div class="flex flex-col justify-center ml-[8px]">
                         <div class="text-[var(--theme-gray107)]  mt-[16px]">剩余电量</div>
-                        <div class="font-semibold text-[24px] f-dinb text-[var(--charge)]">{{ toFixed(parkOverview.A_M3) }} <span
-                                class="text-[12px] text-[var(--theme-gray107)] font-normal"> % </span> </div>
+                        <div class="font-semibold text-[24px] f-dinb text-[var(--charge)]">{{ toFixed(parkOverview.A_M3) }}
+                            <span class="text-[12px] text-[var(--theme-gray107)] font-normal"> % </span> </div>
                     </div>
                 </li>
 
@@ -50,7 +71,8 @@ const { parkOverview, appData } = useParkOverview()
                         <div class="text-[var(--theme-gray107)]  mt-[16px]">日充</div>
                         <div class="font-semibold text-[24px] f-dinb text-[var(--charge)]">
                             {{ conversionUnitKWh(parkOverview.A_M15).size }}
-                            <span class="text-[12px] text-[var(--theme-gray107)] font-normal"> {{ conversionUnitKWh(parkOverview.A_M15).unit }}
+                            <span class="text-[12px] text-[var(--theme-gray107)] font-normal"> {{
+                                conversionUnitKWh(parkOverview.A_M15).unit }}
                             </span>
                         </div>
                     </div>
@@ -62,7 +84,8 @@ const { parkOverview, appData } = useParkOverview()
                         <div class="text-[var(--theme-gray107)]  mt-[16px]">日放</div>
                         <div class="font-semibold text-[24px] f-dinb text-[var(--charge)]">
                             {{ conversionUnitKWh(parkOverview.A_M16).size }}
-                            <span class="text-[12px] text-[var(--theme-gray107)] font-normal"> {{ conversionUnitKWh(parkOverview.A_M16).unit }}
+                            <span class="text-[12px] text-[var(--theme-gray107)] font-normal"> {{
+                                conversionUnitKWh(parkOverview.A_M16).unit }}
                             </span>
                         </div>
                     </div>
@@ -74,7 +97,8 @@ const { parkOverview, appData } = useParkOverview()
                         <div class="text-[var(--theme-gray107)]  mt-[16px]">有功</div>
                         <div class="font-semibold text-[24px] f-dinb text-[var(--charge)]">
                             {{ conversionUnitKW(parkOverview.A_M7).size }}
-                            <span class="text-[12px] text-[var(--theme-gray107)] font-normal"> {{ conversionUnitKW(parkOverview.A_M7).unit }}
+                            <span class="text-[12px] text-[var(--theme-gray107)] font-normal"> {{
+                                conversionUnitKW(parkOverview.A_M7).unit }}
                             </span>
                         </div>
                     </div>
@@ -86,7 +110,8 @@ const { parkOverview, appData } = useParkOverview()
                         <div class="text-[var(--theme-gray107)]  mt-[16px]">无功</div>
                         <div class="font-semibold text-[24px] f-dinb text-[var(--charge)]">
                             {{ conversionUnitKVar(parkOverview.A_M8).size }}
-                            <span class="text-[12px] text-[var(--theme-gray107)] font-normal"> {{ conversionUnitKVar(parkOverview.A_M8).unit }}
+                            <span class="text-[12px] text-[var(--theme-gray107)] font-normal"> {{
+                                conversionUnitKVar(parkOverview.A_M8).unit }}
                             </span>
                         </div>
                     </div>
@@ -99,8 +124,9 @@ const { parkOverview, appData } = useParkOverview()
 
         </div>
 
-        <div class="w-[330px] h-[392px] mt-[40px] flex justify-center items-center bg-contain bg-no-repeat static_bg">
-            <div class="w-[305px] h-[68px] cnx bg-contain bg-no-repeat"></div>
+        <div :class="parkStateBg"  class="w-[300px] h-[392px] mt-[40px] flex justify-center items-center bg-contain bg-no-repeat static_bg">
+            <div class="w-[305px] h-[68px] bg-contain bg-no-repeat" :class="appData.currentParkType == `${1}` ? 'cng' : 'cnx'"></div>
+            <div class="absolute right-[-265px] w-[255px] h-[121px] house_bg bottom-[10px]"></div>
         </div>
 
         <div class="w-[380px] mt-[70px]">
@@ -118,38 +144,56 @@ const { parkOverview, appData } = useParkOverview()
                     <li>
                         <div class="text-[14px] text-[var(--theme-gray107)]">月充</div>
                         <div class="h-[12px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
-                        <div class="h-[32px] text-[18xp] f-dinb text-[var-(--theme-black51)] text_bg_img pl-[8px] box-border leading-[32px]"> {{
-                            conversionUnitKWh(parkOverview.A_M17).size }} {{ conversionUnitKWh(parkOverview.A_M17).unit }} </div>
+                        <div
+                            class="h-[32px] text-[18xp] f-dinb text-[var-(--theme-black51)] text_bg_img pl-[8px] box-border leading-[32px]">
+                            {{
+                                conversionUnitKWh(parkOverview.A_M17).size }} {{ conversionUnitKWh(parkOverview.A_M17).unit }}
+                        </div>
                     </li>
                     <li>
                         <div class="text-[14px] text-[var(--theme-gray107)]">月放</div>
                         <div class="h-[12px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
-                        <div class="h-[32px] text-[18xp] f-dinb text-[var-(--theme-black51)] text_bg_img pl-[8px] box-border leading-[32px]"> {{
-                            conversionUnitKWh(parkOverview.A_M18).size }} {{ conversionUnitKWh(parkOverview.A_M18).unit }} </div>
+                        <div
+                            class="h-[32px] text-[18xp] f-dinb text-[var-(--theme-black51)] text_bg_img pl-[8px] box-border leading-[32px]">
+                            {{
+                                conversionUnitKWh(parkOverview.A_M18).size }} {{ conversionUnitKWh(parkOverview.A_M18).unit }}
+                        </div>
                     </li>
                     <li>
                         <div class="text-[14px] text-[var(--theme-gray107)]">年充</div>
                         <div class="h-[12px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
-                        <div class="h-[32px] text-[18xp] f-dinb text-[var-(--theme-black51)] text_bg_img pl-[8px] box-border leading-[32px]"> {{
-                            conversionUnitKWh(parkOverview.A_M19).size }} {{ conversionUnitKWh(parkOverview.A_M19).unit }} </div>
+                        <div
+                            class="h-[32px] text-[18xp] f-dinb text-[var-(--theme-black51)] text_bg_img pl-[8px] box-border leading-[32px]">
+                            {{
+                                conversionUnitKWh(parkOverview.A_M19).size }} {{ conversionUnitKWh(parkOverview.A_M19).unit }}
+                        </div>
                     </li>
                     <li>
                         <div class="text-[14px] text-[var(--theme-gray107)]">年放</div>
                         <div class="h-[12px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
-                        <div class="h-[32px] text-[18xp] f-dinb text-[var-(--theme-black51)] text_bg_img pl-[8px] box-border leading-[32px]"> {{
-                            conversionUnitKWh(parkOverview.A_M20).size }} {{ conversionUnitKWh(parkOverview.A_M20).unit }} </div>
+                        <div
+                            class="h-[32px] text-[18xp] f-dinb text-[var-(--theme-black51)] text_bg_img pl-[8px] box-border leading-[32px]">
+                            {{
+                                conversionUnitKWh(parkOverview.A_M20).size }} {{ conversionUnitKWh(parkOverview.A_M20).unit }}
+                        </div>
                     </li>
                     <li>
                         <div class="text-[14px] text-[var(--theme-gray107)]">累充</div>
                         <div class="h-[12px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
-                        <div class="h-[32px] text-[18xp] f-dinb text-[var-(--theme-black51)] text_bg_img pl-[8px] box-border leading-[32px]"> {{
-                            conversionUnitKWh(parkOverview.A_M5).size }} {{ conversionUnitKWh(parkOverview.A_M5).unit }} </div>
+                        <div
+                            class="h-[32px] text-[18xp] f-dinb text-[var-(--theme-black51)] text_bg_img pl-[8px] box-border leading-[32px]">
+                            {{
+                                conversionUnitKWh(parkOverview.A_M5).size }} {{ conversionUnitKWh(parkOverview.A_M5).unit }}
+                        </div>
                     </li>
                     <li>
                         <div class="text-[14px] text-[var(--theme-gray107)]">累放</div>
                         <div class="h-[12px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
-                        <div class="h-[32px] text-[18xp] f-dinb text-[var-(--theme-black51)] text_bg_img pl-[8px] box-border leading-[32px]"> {{
-                            conversionUnitKWh(parkOverview.A_M6).size }} {{ conversionUnitKWh(parkOverview.A_M6).unit }} </div>
+                        <div
+                            class="h-[32px] text-[18xp] f-dinb text-[var-(--theme-black51)] text_bg_img pl-[8px] box-border leading-[32px]">
+                            {{
+                                conversionUnitKWh(parkOverview.A_M6).size }} {{ conversionUnitKWh(parkOverview.A_M6).unit }}
+                        </div>
                     </li>
 
                 </ul>
@@ -177,6 +221,21 @@ const { parkOverview, appData } = useParkOverview()
 
     .static_bg {
         background-image: url(../../../../assets/image/overview/device_point.png);
+        position: relative;
+
+        .house_bg {
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-image: url(../../../../assets/image/overview/house.png);
+        }
+    }
+
+    .charge {
+        background-image: url(../../../../assets/image/common/point.webp);
+    }
+
+    .discharge {
+        background-image: url(../../../../assets/image/common/point.webp);
     }
 
     .cnx {

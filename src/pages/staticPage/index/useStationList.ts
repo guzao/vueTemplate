@@ -64,6 +64,7 @@ export async function initData () {
 
 
 const setDeviceStateAndsetParkType = () => {
+    deviceStateCount.value = {}
     stationList.value.forEach((item, index) => {
         unref(stationList)[index].typeLabel = unref(dictLabel)[ item.type ]
         const state = item.cardList.A_M2 || null

@@ -41,7 +41,7 @@ export function objectToArray<T extends object>(data: T) {
 export function shallowClone <T extends object> (raw: T, filterKey = [] as string []) {
     const result: Record<any, any> = {}
     Object.keys(raw).forEach((key) => {
-        if (filterKey.includes(key)) return
+        if (filterKey.indexOf(key) > -1) return
         result[key] = raw[key as Extract<keyof T, string>]
     })
     return result

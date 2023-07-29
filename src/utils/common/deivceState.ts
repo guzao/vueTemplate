@@ -26,7 +26,7 @@ export function getDeviceStateInfo (state: number) {
 
 
 /** 根据soc计算出 缩放比 */
-function getCellZoom (value: any) {
+export function getCellZoom (value: any) {
     if (isNaN(+value)) return 0
     if (!value) return 0
     if (value == 0) return 0
@@ -34,7 +34,6 @@ function getCellZoom (value: any) {
     if (+value >100) return 10
     return ~~(+value / 10)
 }
-
 
 
 

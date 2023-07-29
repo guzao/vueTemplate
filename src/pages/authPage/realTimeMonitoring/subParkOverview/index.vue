@@ -1,22 +1,31 @@
 <script lang="ts" setup>
 import { useData } from './useData'
-import SubNavBar from '@/components/common/SubNavBar.vue';
+import { isTrue, getArrayLength } from '@/utils'
+
 import SubParkCardList from './SubParkCardList.vue'
+import LessSubParkCard from './LessSubParkCard.vue';
+import SubNavBar from '@/components/common/SubNavBar.vue';
 import ParkOverviewNavBar from '../components/ParkOverviewNavBar.vue';
 
-const { appData, loading, getSubParkInfo, deivceGroupList, parkRuningInfo } = useData()
+
+const { appData, loading, getSubParkInfo, deivceGroupList, parkRuningInfo, dicts } = useData()
+
+
+getSubParkInfo()
 
 </script>
 
 <template>
 
-    <div v-watermark="{ markSatate: appData.currentRelease, text: 'xxxxx' }" class="sub_park_overview" v-loading="loading">
+    <div v-watermark="{ markSatate: appData.currentRelease, text: dicts.parkReleaseStatusDict.dictLabel[ appData.currentRelease ] }" class="sub_park_overview" v-loading="loading">
 
         <SubNavBar class="mb-[16px]" @park-change="getSubParkInfo" />
 
         <ParkOverviewNavBar :park-runing-info="parkRuningInfo" />
 
-        <SubParkCardList :deivce-group-list="deivceGroupList" />
+        <LessSubParkCard v-if="isTrue( getArrayLength(deivceGroupList) == 1 )" :deivce-group-list="deivceGroupList" />
+
+        <SubParkCardList v-else :deivce-group-list="deivceGroupList" />
 
     </div>
 

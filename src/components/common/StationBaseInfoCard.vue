@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import { PropType } from 'vue'
-import { useAppData } from '@/store'
+import { useAppData, useDicts } from '@/store'
 import Icon from '@/components/common/Icon.vue'
 import { conversionUnitKWh, toFixed, conversionUnitKW, conversionUnitKVar, paserTime, getRuningStateInfo } from '@/utils'
 
 const appData = useAppData()
+const dicts = useDicts()
 
 defineProps({
     /** 电站运行信息 */
@@ -39,7 +40,7 @@ defineProps({
                 <li class="flex items-center mb-2">
                     <div class="h-[7px] w-[7px] bg-[var(--theme-green-bg)] rounded-full mr-[6px]"></div>
                     <div class="text-[var(--theme-gray107)] mr-[6px]"> 电站类型 </div>
-                    <div class="text-[var(--theme-black51)] mr-[4px]"> {{  data?.typeLabel }} </div>
+                    <div class="text-[var(--theme-black51)] mr-[4px]"> {{  dicts.parkTypeDict.dictLabel[ data.type ] }} </div>
                 </li>
                 <li class="flex items-center mb-2">
                     <div class="h-[7px] w-[7px] bg-[var(--theme-green-bg)] rounded-full mr-[6px]"></div>

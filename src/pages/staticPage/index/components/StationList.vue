@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { useAppData } from '@/store'
+import { useAppData, useDicts } from '@/store'
 import { getRunningDay, conversionUnitKW, conversionUnitKWh } from '@/utils'
 import { useStationList } from '../useStationList'
 import TitleBox from '@/components/common/TitleBox.vue';
 import StationBaseInfoCard from '@/components/common/StationBaseInfoCard.vue';
 import LabelValueUnit from '@/components/common/LabelValueUnit.vue';
 
-const { releaseStatusDictLabel, filteredList } = useStationList()
+const { filteredList } = useStationList()
 
 const router = useRouter()
 const appData = useAppData()
+const dicts = useDicts()
 const goToOverview = ({ code: stationCode }: ParkMonitorInfo) => {
     appData.parkCodeChnage(stationCode)
     router.push({ path: '/monitor/parkOverview', query: { stationCode: appData.parkSerial } })
@@ -21,7 +22,7 @@ const goToOverview = ({ code: stationCode }: ParkMonitorInfo) => {
 <template>
 
     <div v-for="item in filteredList"
-        v-watermark="{ markSatate: item.releaseStatus, text: releaseStatusDictLabel[ item.releaseStatus ], height: 150, }" :key="item.code"
+        v-watermark="{ markSatate: item.releaseStatus, text: dicts.parkReleaseStatusDict.dictLabel[ item.releaseStatus ], height: 150, }" :key="item.code"
         :class="item.type == '0' ? ' ' : 'cng'"
         class="bg-[var(--theme-white-bg)] mb-[16px] last:mb-0 px-[24px] py-[23px] pt-[20px] station_item">
 

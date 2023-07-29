@@ -96,6 +96,7 @@ export const watermark: Directive = {
 
     updated (el: HTMLElement, { value }: any) {
         const mark = el.querySelector('.mark')! as HTMLDivElement
+        mark.style.background = createWatermarkBgc(value)
         markAction(value, mark, el)
     },
 

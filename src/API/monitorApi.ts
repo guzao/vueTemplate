@@ -13,4 +13,11 @@ export function getDevicGroupList (stationSerial: string) {
         url: `${monitor.deviceList}?stationSerial=${stationSerial}`
     })
 }
+/** 获取指定电站设备组运行信息 */
+export function geStationPowerAll (params: { stationSerial: string, date: string }) {
+    return useGet<ParkPowerLine []>({
+        url: `${monitor.stationPowerAll}`,
+        params
+    })
+}
 

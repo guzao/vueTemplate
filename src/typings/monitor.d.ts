@@ -86,3 +86,10 @@ type DeviceGroup = {
     /*** 设备状态统计列表 */
     stateCount: Record<string, number>
 }
+
+/** 电站实时功率曲线 */
+type ParkPowerLine = {
+    createTime: string
+    power: string
+  }
+  
