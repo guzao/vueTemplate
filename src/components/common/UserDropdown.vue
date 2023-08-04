@@ -1,10 +1,17 @@
 <script lang="ts" setup>
-import { useUser } from '@/store'
+import { useUser, useAppData } from '@/store'
+import { useRouter, useRoute } from 'vue-router'
+
+const appData = useAppData()
 const userInfo = useUser()
+const route = useRoute()
+const router = useRouter()
+
 const handleSlect = (command: 'personCenter' | 'logout') => {
     switch (command) {
         case 'personCenter':
-            
+            const query = route.query
+            router.push({ path: '/config/personCenter', query: { ...query, stationCode: appData.currentParkSerial } })
             break;
         case 'logout':
             userInfo.userlogOut()

@@ -81,7 +81,7 @@ type ParkAuth = {
 }
 
 /** 字典数据接口url字段 */
-type DictType = 'eos_park_type' | 'station_release_status'
+type DictType = 'eos_park_type' | 'station_release_status' | 'sys_user_sex' | 'eos_status' | 'eos_park_use_type' | 'eos_park_run_status'
 
 /** 字典数据类型 */
 type DictTypeData = {

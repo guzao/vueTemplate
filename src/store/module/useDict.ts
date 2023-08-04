@@ -5,6 +5,7 @@ import { defineStore } from "pinia";
 
 const { getResult: getParkType, result: parkType, dictLabel: dictParkLabel } = useDictAction('eos_park_type')
 const { getResult: getReleaseStatus, dictLabel: releaseStatusDictLabel, result: releaseStatus  } = useDictAction('station_release_status')
+const { getResult: getUserSexType, dictLabel: userSexTypeDictLabel, result: userSexType  } = useDictAction('sys_user_sex')
 
 
 /**
@@ -28,6 +29,13 @@ export const useDicts = defineStore('useDict', {
                 /** 数据是否已经被缓存 */
                 loaded: false
             },
+
+            userSexType: {
+                dictLabel: {} as Record<string, string>,
+                dictValue: [] as DictTypeData [],
+                /** 数据是否已经被缓存 */
+                loaded: false
+            }
 
         }
     },
@@ -56,6 +64,18 @@ export const useDicts = defineStore('useDict', {
                 })
             }
             return state.parkReleaseStatus
+        },
+        
+        /** 用户性别字典 */ 
+        userSexTyeDict (state) {
+            if ( isFalse(state.userSexType.loaded) ) {
+                getUserSexType().then(res => {
+                    state.userSexType.dictLabel = userSexTypeDictLabel.value
+                    state.userSexType.dictValue = userSexType.value
+                    state.userSexType.loaded = true
+                })
+            }
+            return state.userSexType
         },
 
     },
