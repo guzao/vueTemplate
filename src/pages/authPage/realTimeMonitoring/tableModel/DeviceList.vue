@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import { PropType } from 'vue'
 import { useDeviceDetail } from '../hooks/useDeviceDetail'
-import { conversionUnitKWh, getRuningStateInfo, toFixed } from '@/utils'
+import { conversionUnitKWh, getRuningStateInfo, toFixed, sleep } from '@/utils'
 
 import Icon from '@/components/common/Icon.vue'
 import SubParkTitle from '../components/SubParkTitle.vue'
@@ -15,6 +15,7 @@ defineProps({
     }
 })
 
+
 </script>
 
 <template>
@@ -25,12 +26,13 @@ defineProps({
 
             <SubParkTitle :data="item" :device-state-count="item.stateCount" />
 
-            <el-table stripe :data="item.list" style="width: 100%;">
+            <el-table stripe :data="item.list" style="width: 100%;" >
 
                 <el-table-column property="name" label="设备名称">
 
                     <template #default="{ row }">
-                        <span class="cursor-pointer underline decoration-1" @click="checkDeviceDetail(row)"> {{ row.name }} </span>
+                        <span class="cursor-pointer underline decoration-1" @click="checkDeviceDetail(row)"> {{ row.name }}
+                        </span>
                     </template>
 
                 </el-table-column>

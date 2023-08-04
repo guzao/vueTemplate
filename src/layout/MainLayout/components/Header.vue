@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     import { useAppData } from '@/store'
-    import { Expand } from '@element-plus/icons-vue'
+    import { Expand, } from '@element-plus/icons-vue'
     import BaseHeader from "@/components/common/BaseHeader.vue";
     import I18nSelect from "@/components/common/I18nSelect.vue";
     import UserDropdown from "@/components/common/UserDropdown.vue";

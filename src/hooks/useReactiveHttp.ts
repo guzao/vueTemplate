@@ -31,15 +31,18 @@ export  function useReactiveHttp <T> (params: UseReactiveGetParams<T>) {
             result.value = requestCallback(res)
         } catch (error) {
             loading.value = false
-            throw new Error(" neetwork error plac check you input ");
+            throw error;
         }
     }
 
     Immediately && getResult()
 
     return {
+        /** 接口返回的数据 */
         result,
+        /** 加载状态 */
         loading,
+        /** 获取数据的方法 */
         getResult,
     }
 

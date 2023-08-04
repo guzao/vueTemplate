@@ -35,3 +35,28 @@ export const fillTodayDate = (date: number) => {
     })
 }
 
+
+/** 
+ * 获取当前月前一个月
+*/
+export function getPrevMonth (baseDate: Date, gapMonth: number) {
+    const currentMonth = DayJs(baseDate).get('month')
+    const nextMonth = DayJs(baseDate).set('month', currentMonth - gapMonth)
+    return nextMonth.toDate()
+}
+
+
+/**
+ * 根据 type 得出时间区间
+*/
+export function getDateCycles (type: string, baseDate: Date) {
+    switch (type) {
+        case 'D':
+            return getPrevMonth(baseDate, 1)
+        case 'M':
+            return getPrevMonth(baseDate, 6)
+        case 'Y':
+            return getPrevMonth(baseDate, 24)
+    }
+    return baseDate
+}

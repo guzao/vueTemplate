@@ -1,7 +1,7 @@
+import { ref } from 'vue'
+import { useReactiveHttp } from '@/hooks'
 import { useAppData, useDicts } from '@/store'
 import { getDevicGroupList, getStationInfo } from '@/api'
-import { useReactiveHttp } from '@/hooks'
-import { ref } from 'vue'
 
 
 const appData = useAppData()

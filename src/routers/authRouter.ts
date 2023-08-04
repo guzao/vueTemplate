@@ -31,9 +31,31 @@ export const authRouter: RouteRecordRaw[] = [
             }
         ]
     },
+
     {
         path: '/monitor/deviceDetail',
         component: () => import('@/pages/authPage/realTimeMonitoring/deviceDetail/index.vue'),
+    },
+
+    {
+        path: '/parkReport',
+        component: MainLayout,
+        children: [
+            {
+                meta: {
+                    title: '电站报表'
+                },
+                path: '/dataAnalysis/parkReport',
+                component: () => import('@/pages/authPage/dataAnalysis/parkReport/index.vue'),
+            },
+            {
+                meta: {
+                    title: '设备报表'
+                },
+                path: '/dataAnalysis/deviceReport',
+                component: () => import('@/pages/authPage/dataAnalysis/deviceReport/index.vue'),
+            },
+        ]
     }
 
 ]

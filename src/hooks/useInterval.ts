@@ -4,9 +4,9 @@ import { onMounted, onUnmounted } from 'vue'
 /**
  * 注册定时器 组件销毁时自动清除
  * @param time 间隔时间
- * @param callack 回调函数
+ * @param callback 回调函数
 */
-export function useInterval(time: number, callack: () => any) {
+export function useInterval(time: number, callback: () => any) {
 
     let id: NodeJS.Timer
 
@@ -16,10 +16,10 @@ export function useInterval(time: number, callack: () => any) {
     /** 重置定时器 */
     const _resetInterval = () => {
         _clearInterval()
-        id = setInterval(callack, time)
+        id = setInterval(callback, time)
     }
 
-    onMounted(() => id = setInterval(callack, time))
+    onMounted(() => id = setInterval(callback, time))
 
     onUnmounted(() => _clearInterval())
 

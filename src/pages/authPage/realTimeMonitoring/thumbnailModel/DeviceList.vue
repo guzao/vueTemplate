@@ -29,7 +29,7 @@ defineProps({
 
             <ul class="grid gap-[4px] " style=" grid-template-columns: repeat(18, minmax(0, 1fr));">
 
-                <li class="h-[86px] bg-[var(--theme-gray251-bg)] cursor-pointer" @click="checkDeviceDetail(deivce)"
+                <li class="h-[96px] pt-1 pb-1 bg-[var(--theme-gray251-bg)] cursor-pointer" @click="checkDeviceDetail(deivce)"
                     v-for="deivce in item.list" :key="item.id">
                     <div class="device_taizi_bg h-[86px]">
 

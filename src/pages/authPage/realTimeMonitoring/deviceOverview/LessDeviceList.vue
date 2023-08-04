@@ -26,12 +26,12 @@ defineProps({
             class="h-[148px] bg-[var(--theme-gray251-bg)] pl-[12px] box-border cursor-pointer flex items-center"
             v-for="deivce in deiveList" :key="deivce.id">
 
-            <div class="flex items-center h-[46px] items-center">
+            <div class="flex items-center h-[46px] items-center w-[140px]">
                 <Icon :icon="deivce.unitType == 'container' ? 'icon_cnx' : 'icon_cng'" :size="16" class="mr-[4px]" />
                 <span class="text-[var(--theme-black51)]"> {{ deivce.name }} </span>
             </div>
 
-            <StationBaseInfoCard class="flex-1 ml-[100px]" 
+            <StationBaseInfoCard class="flex-1" gapx="8"
             :info-card-bg="'#fff'"
             :show-sub-ino="false" 
             :data="{
@@ -53,13 +53,13 @@ defineProps({
             }"/>
 
 
-            <div class="w-[340px] h-[148px] device_taizi_bg">
+            <div class="w-[300px] h-[148px] device_taizi_bg">
 
                 <div class="relative h-[148px]"  v-if="deivce.unitType == 'container'">
 
-                    <CNXDevice class="absolute top-[50px] right-[105px]" style="transform: scale(2.5);" :deivce="deivce" />
+                    <CNXDevice class="absolute top-[55px] right-[80px]" style="transform: scale(2.5);" :deivce="deivce" />
 
-                    <div class="flex items-center absolute bottom-[16px] left-[40%]">
+                    <div class="flex items-center absolute bottom-[6px] left-[40%]">
                         <Icon :icon="getDeviceStateInfo(deivce.deviceData.M2).icon" :size="24" class="mr-[1px]" />
                         <span class="font-[600] f-dinb text-[24px]" :class="getDeviceStateInfo(deivce.deviceData.M2).color">
                             {{  toFixed(deivce.deviceData.M3, 1) }}% </span>
@@ -69,7 +69,7 @@ defineProps({
 
                 <div class="relative h-[148px]"  v-else>
 
-                    <CNGDevice class="absolute top-[36px] right-[-166px] m-0"  style="transform: scale(2.1);" :deivce="deivce" />
+                    <CNGDevice class="absolute top-[36px] right-[-136px] m-0"  style="transform: scale(2.1);" :deivce="deivce" />
 
                     <div class="flex items-center absolute bottom-[12px] left-[40%]">
                         <Icon :icon="getDeviceStateInfo(deivce.deviceData.M2).icon" :size="24" class="mr-[1px]" />

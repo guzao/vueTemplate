@@ -24,3 +24,13 @@ export function getDictType (type: string) {
 }
 
 
+
+/** 设备组列表 */
+export function getUnitList (params: UnitListPrams) {
+    return useGet({
+        url: `${common.unitList}`,
+        params
+    })
+}
+
+

@@ -15,7 +15,7 @@ export default defineComponent({
         provide('dictType', result)
 
         getResult().then(res => {
-            console.log(result)
+            emit('dictTypeUpate', result)
         })
 
         return () => {

@@ -8,7 +8,8 @@ export const useLayout = defineStore('useLayout', {
     state() {
         return {
             hasShowHeader: true,
-            scrollbarRef: null as unknown as InstanceType<typeof ElScrollbar>
+            scrollbarRef: null as unknown as InstanceType<typeof ElScrollbar>,
+            showGoTop: layoutConfig.showGoTop,
         }
     },
 
@@ -27,13 +28,12 @@ export const useLayout = defineStore('useLayout', {
         },
 
         setScrollbarRefInstance(scrollbarRefInstance: any) {
-            if ( isFalse(layoutConfig.dynamicHeader) ) return
             this.scrollbarRef = scrollbarRefInstance
         },
 
         scrollEvent(evnet: any) {
             if ( isFalse(layoutConfig.dynamicHeader) ) return
-            this.hasShowHeader = evnet.scrollTop < 120
+            this.hasShowHeader = evnet.scrollTop < layoutConfig.offset
         }
 
     }

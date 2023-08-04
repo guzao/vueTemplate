@@ -1,4 +1,8 @@
 
+/** 时间周期 */
+type DateCycles = 'D' | 'M' | 'Y'
+
+
 /** 信息监视电站运行信息列表 */
 type ParkMonitorInfo = {
     cardList: any;
@@ -103,3 +107,38 @@ type DictTypeData = {
     /** 类型标 统计 */
 	accLabel: string;
 }
+
+/** 设备组列表接口参数 */
+type UnitListPrams = {
+    stationSerial: string;
+    pageSize: number;
+}
+
+/** 设备组列表 */
+type UnitListData = {
+    createBy: any
+    createTime: string
+    updateBy: any
+    updateTime: string
+    remark: any
+    id: number
+    ugroupId: number
+    stationSerial: string
+    name: string
+    serial: string
+    assetSerial: string
+    unitType: string
+    sort: number
+    capacity: any
+    longitude: any
+    latitude: any
+    altitude: any
+    installTime: any
+    acceptTime: any
+    gridTime: any
+    goinTime: any
+    expireTime: any
+    templatePowercurvesSerial: any
+    delFlag: number
+}
+

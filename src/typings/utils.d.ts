@@ -4,3 +4,5 @@ type ArrayGroupBy <T>  = {
     children: T [];
 }
 
+
+type DnamicTableDataHeaderData = { name: string; id: string }

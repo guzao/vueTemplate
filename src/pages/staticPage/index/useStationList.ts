@@ -7,6 +7,8 @@ export const searchCode = ref('')
 
 export const type = ref('')
 
+export const loading = ref(false)
+
 export const filteredList = computed(() => {
     const parkType = type.value
     const search = searchCode.value
@@ -19,7 +21,7 @@ export const filteredList = computed(() => {
     return search ? result.filter(item => item.code.includes(search)) : result
 })
 
-const { getResult, loading, result: stationList } = useReactiveHttp({ 
+const { getResult, result: stationList } = useReactiveHttp({ 
     initData: [] as ParkMonitorInfo[], 
     request: () => getStationList(), 
     requestCallback: (res) => {
@@ -50,12 +52,15 @@ const deviceStateCount = ref<Record<string, number>>({})
 
 /** 加载电站数据 */
 export async function initData () {
-
+    
+    loading.value = true
     await getParkType()
 
     await getReleaseStatus()
 
     await getResult()
+
+    loading.value = false
 
     setDeviceStateAndsetParkType()
 
@@ -80,6 +85,8 @@ function parkTypeStatistics () {
         item.accLabel =  dictValue == '-1' ? `${dictLabel} (${getArrayLength(unref(stationList))})` :`${dictLabel} (${getArrayLength(types)})`
     })
 }
+
+
 
 export function useStationList() {
     

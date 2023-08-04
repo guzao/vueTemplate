@@ -1,31 +1,36 @@
   
 <script lang="ts" setup>
-import { useRoute } from 'vue-router'
-import { sliderConfig } from '@/config'
-import { useUser, useAppData } from '@/store'
-import SliderItem from './SliderItem.vue'
 import { computed } from 'vue';
+import { sliderConfig } from '@/config'
+import SliderItem from './SliderItem.vue'
+import { useUser, useAppData } from '@/store'
+import { useRoute, useRouter } from 'vue-router'
+
 const userData = useUser()
 const appData = useAppData()
 
 const route = useRoute()
+const router = useRouter()
 const defaultActive = computed(() => route.path)
 
-const handleOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
+const handleOpen = (key: string, keyPath: string[]) => console.log(key, keyPath)
+const handleClose = (key: string, keyPath: string[]) => console.log(key, keyPath)
+
+const routerPush = (data: UserRouter) => {
+  const urlQuery = { ...route.query, stationCode: appData.currentParkSerial }
+  router.push({ path: data.path, query: urlQuery })
 }
-const handleClose = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
+
 </script>
 
 
 <template>
-  <el-menu :default-active="defaultActive" class="el-menu-vertical-demo" :collapse="appData.isCollapse" router
-    :active-text-color="sliderConfig.activeTextColor" :background-color="sliderConfig.backgroundColor" @open="handleOpen"
-    @close="handleClose" style="border-right: none;">
+  <!-- :collapse="appData.isCollapse"  -->
+  <el-menu :default-active="defaultActive" class="el-menu-vertical-demo" 
+    :active-text-color="sliderConfig.activeTextColor" :background-color="sliderConfig.backgroundColor"
+    style="border-right: none;">
 
-    <SliderItem v-for="router in userData.userRouters" :router="router" :key="router.path" />
+    <SliderItem @menu-click="routerPush" v-for="router in userData.userRouters" :router="router" :key="router.path" />
 
   </el-menu>
 </template>

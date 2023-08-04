@@ -1,6 +1,7 @@
   
 <script lang="ts" setup>
 import { PropType } from 'vue'
+import { useRoute } from 'vue-router'
 import { arrayIsNotEmpty } from '@/utils'
 import { Location, Setting, } from '@element-plus/icons-vue'
 defineProps({
@@ -8,6 +9,13 @@ defineProps({
         type: Object as PropType<UserRouter>,
     }
 })
+
+const emits = defineEmits<{
+    (event: 'menuClick', data: UserRouter ): void
+}>()
+
+const click = (data: UserRouter ) => emits('menuClick', data)
+
 </script>
 
 
@@ -22,7 +30,7 @@ defineProps({
         </template>
 
         <template v-for="item in router?.children" :key="item.name">
-            <el-menu-item v-if="!item.hidden" :index="item.path" >
+            <el-menu-item v-if="!item.hidden" :index="item.path" @click="click(item)">
                 {{ item?.meta.title }}
             </el-menu-item>
         </template>

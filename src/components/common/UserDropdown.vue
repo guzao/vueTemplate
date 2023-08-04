@@ -9,7 +9,6 @@ const handleSlect = (command: 'personCenter' | 'logout') => {
         case 'logout':
             userInfo.userlogOut()
             break;
-    
         default:
             break;
     }

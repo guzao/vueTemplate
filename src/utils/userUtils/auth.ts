@@ -91,7 +91,7 @@ export function useLang() {
 
 
 function getIsCollapse() {
-    return !!Cookies.get(USER.IS_COLLAPSE)
+    return JSON.parse(Cookies.get(USER.IS_COLLAPSE) || 'false')
 }
 
 function setIsCollapse(isCollapse: boolean) {

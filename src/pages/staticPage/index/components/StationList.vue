@@ -43,15 +43,15 @@ const goToOverview = ({ code: stationCode }: ParkMonitorInfo) => {
                     <div class="h-[7px] w-[7px] bg-[var(--theme-green-bg)] rounded-full mr-[6px] ml-[28px]"></div>
                     <LabelValueUnit>
                         总功率
-                        <template #value> {{ conversionUnitKW(+item.titleInfo.energy).size }} </template>
-                        <template #unit> {{ conversionUnitKW(+item.titleInfo.energy).unit }} </template>
+                        <template #value> {{ conversionUnitKWh(+item.titleInfo.totalPower).size }} </template>
+                        <template #unit> {{ conversionUnitKWh(+item.titleInfo.totalPower).unit }} </template>
                     </LabelValueUnit>
 
                     <div class="h-[7px] w-[7px] bg-[var(--theme-green-bg)] rounded-full mr-[6px] ml-[28px]"></div>
                     <LabelValueUnit>
-                        投运时长
-                        <template #value> {{ conversionUnitKWh(+item.titleInfo.totalPower).size }} </template>
-                        <template #unit> {{ conversionUnitKWh(+item.titleInfo.totalPower).unit }} </template>
+                        总容量
+                        <template #value> {{ conversionUnitKW(+item.titleInfo.energy).size }} </template>
+                        <template #unit> {{ conversionUnitKW(+item.titleInfo.energy).unit }} </template>
                     </LabelValueUnit>
 
                 </div>

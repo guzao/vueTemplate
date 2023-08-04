@@ -10,7 +10,8 @@ const { appData, getSubParkInfo, parkRuningInfo, deivceGroupList, loading, dicts
 </script>
 
 <template>
-    <div v-watermark="{ markSatate: appData.currentRelease, text: dicts.parkReleaseStatusDict.dictLabel[ appData.currentRelease ] }" class="sub_park_overview" v-loading="loading">
+    <div v-watermark="{ markSatate: appData.currentRelease, text: dicts.parkReleaseStatusDict.dictLabel[ appData.currentRelease ] }" 
+    class="sub_park_overview w-full overflow-hidden" v-loading="loading">
 
         <SubNavBar class="mb-[16px]" @park-change="getSubParkInfo" />
 

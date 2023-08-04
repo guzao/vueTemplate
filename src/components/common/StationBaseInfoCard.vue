@@ -28,7 +28,8 @@ defineProps({
     infoCardBg: {
         type: String,
         default: () => '',
-    }
+    },
+
 })
 </script>
 
@@ -51,7 +52,9 @@ defineProps({
         </div>
 
         <div class="flex-1">
-            <ul class="grid grid-cols-6 gap-x-[16px]">
+            <ul 
+            :class="$attrs.gapx ? `gap-x-[${$attrs.gapx}px]` : '' "
+            class="grid grid-cols-6 gap-x-[16px]">
 
                 <li 
                 :style="`${ infoCardBg ? `background-color: ${infoCardBg}; border: none;` : '' }`"

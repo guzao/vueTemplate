@@ -27,7 +27,7 @@ export const useAppData = defineStore('useAppData', {
             /** 用户受权限控制的电站列表  */
             parkAuthList: [] as ParkAuth[],
 
-            /** 初始化用户默认选中的电站 */
+            /** 用户选中的电站 */
             parkSerial: 'null',
 
         }
@@ -36,15 +36,15 @@ export const useAppData = defineStore('useAppData', {
     getters: {
         /** 当前选中电站的最新数据时间 */
         currentLastTime(state) {
-            return state.parkLastTimes[state.parkSerial]
+            return state.parkLastTimes[state.parkSerial] 
         },
         /** 当前选中电站的状态 */
         currentRelease(state) {
-            return state.parkReleaseStatus[state.parkSerial]
+            return state.parkReleaseStatus[state.parkSerial] 
         },
         /** 当前选中电站的类型 */
         currentParkType(state) {
-            return state.parkTypes[state.parkSerial]
+            return state.parkTypes[state.parkSerial] 
         },
         /** 当前选中的电站编号 */
         currentParkSerial(state) {
