@@ -1,100 +1,27 @@
 
 <script lang="ts" setup>
-import { PropType, ref } from 'vue';
-import { getParkInfo } from '@/API'
-import { useReactiveHttp } from '@/hooks'
-import { useAppData, useDicts } from '@/store'
+import { PropType } from 'vue';
+import { useParkList } from './useParkList'
 import { More } from '@element-plus/icons-vue'
-import { conversionUnitKWh, conversionUnitKW, getArrayLength, deepCloe } from '@/utils'
+import { conversionUnitKWh, conversionUnitKW, getArrayLength } from '@/utils'
 
 import ParkForm from './ParkForm.vue'
 import TitleBox from '@/components/common/TitleBox.vue';
 import LabelValueUnit from '@/components/common/LabelValueUnit.vue';
 
-const appData  = useAppData()
-
-const emits = defineEmits<{
-    /** 电站修改添加事件 */
-    (event: 'update'): void
-}>()
-
-const formInstance = ref<InstanceType<typeof ParkForm>>()
-
-const confirm = async () => {
-    try {
-        await formInstance.value?.formInstance?.validate()
-        emits('update')
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-const baseData = {
-    "createBy": '',
-    "createTime": "",
-    "updateBy": "",
-    "updateTime": "",
-    "remark": null,
-    "fullName": "",
-    "name": "",
-    "serial": appData.currentParkSerial,
-    "industryType": "",
-    "type": "0",
-    "useType": "0",
-    "status": "1",
-    "totalPower": "",
-    "energy": "",
-    "buildTime": "",
-    "buildStatus": "",
-    "operateTime": "",
-    "runStatus": "",
-    "countryId": null,
-    "areaId": null,
-    "address": "",
-    "longitude": null,
-    "latitude": null,
-    "delFlag": 0,
-    "releaseStatus": "0",
-    "sort": 0
-} as ParkListData
-
-const parkId = ref('')
-
-const { result, getResult, loading } = useReactiveHttp({
-    initData: deepCloe(baseData),
-    request: () => getParkInfo(parkId.value),
-    Immediately: false
-})
-
-const dicts = useDicts()
-
-const drawerState = ref(false)
-
-const title = ref('')
-const isEdit = ref(false)
-
-const addPark = () => {
-    isEdit.value = false
-    title.value = '添加电站'
-    result.value = deepCloe(baseData)
-    drawerState.value = true
-}
-
-const editPark = async (park: ParkListData) => {
-    title.value = '编辑电站'
-    isEdit.value = false
-    parkId.value = park.id as any
-    getResult()
-    drawerState.value = true
-}
-
-const checkPark = async (park: ParkListData) => {
-    title.value = '查看电站'
-    isEdit.value = true
-    parkId.value = park.id as any
-    getResult()
-    drawerState.value = true
-}
+const {
+    result,
+    loading,
+    drawerState,
+    dicts,
+    title,
+    isEdit,
+    addPark,
+    editPark,
+    checkPark,
+    confirm,
+    formInstance,
+} = useParkList()
 
 defineProps({
     parkList: {
@@ -106,7 +33,6 @@ defineProps({
 </script>
 
 <template>
-
     <TitleBox class="mb-[16px]" :size="18">
         电站列表
         <template #right>
@@ -201,5 +127,4 @@ defineProps({
         </template>
 
     </el-drawer>
-
 </template>

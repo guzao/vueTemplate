@@ -17,4 +17,7 @@ export const layoutConfig = {
 
     /** 二级页面标题 */ 
     hiddenSubTitle: !false,
+
+    /** 使用本地路由 */
+    useLocalRouter: true
 }

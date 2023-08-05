@@ -20,7 +20,7 @@ const click = (data: UserRouter ) => emits('menuClick', data)
 
 
 <template>
-    <el-sub-menu :index="router?.path" v-if="arrayIsNotEmpty(router!.children)">
+    <el-sub-menu :index="router?.path" v-if="arrayIsNotEmpty(router!.children || [])">
 
         <template #title>
             <el-icon>
@@ -38,13 +38,16 @@ const click = (data: UserRouter ) => emits('menuClick', data)
     </el-sub-menu>
 
 
+    <template v-else>
+        
+        <el-menu-item :index="router?.path" v-if="!router!.hidden">
+            <el-icon>
+                <setting />
+            </el-icon>
+            <template #title> {{ router?.meta.title }} </template>
+        </el-menu-item>
 
-    <el-menu-item :index="router?.path" v-else>
-        <el-icon>
-            <setting />
-        </el-icon>
-        <template #title> {{ router?.meta.title }} </template>
-    </el-menu-item>
+    </template>
 
 
 

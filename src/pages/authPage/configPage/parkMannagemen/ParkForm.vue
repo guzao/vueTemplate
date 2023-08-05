@@ -1,9 +1,10 @@
 
 <script lang="ts" setup>
+import { ref } from 'vue';
 import { useDicts } from '@/store'
-import { reactive, ref } from 'vue';
 import type { PropType } from 'vue';
-import type { FormInstance, FormRules } from 'element-plus'
+import type { FormInstance } from 'element-plus'
+import { ruleForm } from './useParkList'
 
 const formInstance = ref<FormInstance>()
 
@@ -19,20 +20,6 @@ defineProps({
         default: false
     }
 })
-
-const ruleForm = {
-    fullName: [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
-    name:  [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
-    serial:  [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
-    industryType:  [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
-    type:  [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
-    useType:  [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
-    totalPower:  [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
-    energy:  [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
-    status:  [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
-    operateTime:  [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
-    buildTime:  [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
-}
 
 defineExpose({
     formInstance: formInstance

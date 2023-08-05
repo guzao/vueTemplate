@@ -43,7 +43,7 @@ defineExpose({
 
             <el-col :span="12">
                 <el-form-item label="部门" prop="name">
-                    <el-cascader v-model="personForm.deptId" :options="result" style="width: 100%;" />
+                    <el-cascader v-model="personForm.deptId" value="id" :options="result" style="width: 100%;" />
                 </el-form-item>
             </el-col>
 

@@ -1,10 +1,12 @@
   
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { sliderConfig } from '@/config'
+import { sliderConfig, layoutConfig } from '@/config'
 import SliderItem from './SliderItem.vue'
 import { useUser, useAppData } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
+
+import {  loaclRouter } from '@/routers'
 
 const userData = useUser()
 const appData = useAppData()
@@ -25,14 +27,19 @@ const routerPush = (data: UserRouter) => {
 
 
 <template>
+
   <!-- :collapse="appData.isCollapse"  -->
+
   <el-menu :default-active="defaultActive" class="el-menu-vertical-demo" 
     :active-text-color="sliderConfig.activeTextColor" :background-color="sliderConfig.backgroundColor"
     style="border-right: none;">
 
-    <SliderItem @menu-click="routerPush" v-for="router in userData.userRouters" :router="router" :key="router.path" />
+    <SliderItem v-if="layoutConfig.useLocalRouter" @menu-click="routerPush" v-for="router in (loaclRouter as any)" :router="router" :key="router.path" />
+
+    <SliderItem v-else @menu-click="routerPush" v-for="router in userData.userRouters" :router="router" :key="router.path!" />
 
   </el-menu>
+  
 </template>
 
   
