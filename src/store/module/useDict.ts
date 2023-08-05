@@ -21,6 +21,11 @@ const { getResult: getGridStatus, dictLabel: gridStatusDictLabel, result: gridSt
 
 const { getResult: getNormalDisable, dictLabel: normalDisableDictLabel, result: normalDisable  } = useDictAction('sys_normal_disable')
 
+const { getResult: getCommonStatus, dictLabel: commonStatusDictLabel, result: commonStatusDisable  } = useDictAction('sys_common_status')
+
+const { getResult: getOperType, dictLabel: operTypeDictLabel, result: operTypeDisable  } = useDictAction('sys_oper_type')
+
+
 
 /**
  * 使用getters 中的数据获取对应的字典内部触发缓存
@@ -87,6 +92,20 @@ export const useDicts = defineStore('useDict', {
             },
 
             normalDisable: {
+                dictLabel: {} as Record<string, string>,
+                dictValue: [] as DictTypeData [],
+                /** 数据是否已经被缓存 */
+                loaded: false
+            },
+
+            commonStatus: {
+                dictLabel: {} as Record<string, string>,
+                dictValue: [] as DictTypeData [],
+                /** 数据是否已经被缓存 */
+                loaded: false
+            },
+
+            operType: {
                 dictLabel: {} as Record<string, string>,
                 dictValue: [] as DictTypeData [],
                 /** 数据是否已经被缓存 */
@@ -204,6 +223,30 @@ export const useDicts = defineStore('useDict', {
                 })
             }
             return state.normalDisable
+        },
+
+        /** 用户登录状态 */ 
+        commonStatusDict (state) {
+            if ( isFalse(state.commonStatus.loaded) ) {
+                getCommonStatus().then(res => {
+                    state.commonStatus.dictLabel = commonStatusDictLabel.value
+                    state.commonStatus.dictValue = commonStatusDisable.value
+                    state.commonStatus.loaded = true
+                })
+            }
+            return state.commonStatus
+        },
+
+        /** 操作类型字典 */   
+        operTypeDict (state) {
+            if ( isFalse(state.operType.loaded) ) {
+                getOperType().then(res => {
+                    state.operType.dictLabel = operTypeDictLabel.value
+                    state.operType.dictValue = operTypeDisable.value
+                    state.operType.loaded = true
+                })
+            }
+            return state.operType
         },
 
     },

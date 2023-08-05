@@ -8,6 +8,9 @@ export const authRouter: RouteRecordRaw[] = [
         path: '/monitor',
         component: MainLayout,
         redirect: '/monitor/parkOverview',
+        meta: {
+            title: '实时监控'
+        },
         children: [
             {
                 path: '/monitor/parkOverview',
@@ -32,7 +35,7 @@ export const authRouter: RouteRecordRaw[] = [
         ]
     },
 
-    /** 设备监控 */ 
+    /** 设备监控 */
     {
         path: '/monitor/deviceDetail',
         component: () => import('@/pages/authPage/realTimeMonitoring/deviceDetail/index.vue'),
@@ -41,6 +44,9 @@ export const authRouter: RouteRecordRaw[] = [
     {
         path: '/parkReport',
         component: MainLayout,
+        meta: {
+            title: '数据分析'
+        },
         children: [
             {
                 meta: {
@@ -58,10 +64,13 @@ export const authRouter: RouteRecordRaw[] = [
             },
         ]
     },
-    
+
     {
         path: '/config',
         component: MainLayout,
+        meta: {
+            title: '配置管理'
+        },
         children: [
             {
                 meta: {
@@ -90,6 +99,30 @@ export const authRouter: RouteRecordRaw[] = [
                 },
                 path: '/config/parkMannagemen',
                 component: () => import('@/pages/authPage/configPage/parkMannagemen/index.vue'),
+            },
+        ]
+    },
+
+    {
+        path: '/logs',
+        component: MainLayout,
+        meta: {
+            title: '日志中心'
+        },
+        children: [
+            {
+                meta: {
+                    title: '登录日志'
+                },
+                path: '/logs/logininfor',
+                component: () => import('@/pages/authPage/logs/logininfor/index.vue'),
+            },
+            {
+                meta: {
+                    title: '操作日志'
+                },
+                path: '/logs/operlog',
+                component: () => import('@/pages/authPage/logs/operlog/index.vue'),
             },
         ]
     }

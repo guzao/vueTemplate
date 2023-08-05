@@ -1,4 +1,4 @@
- export const monitor = {
+export const monitor = {
 
     /** 电站列表 */
     stationList: '/ess/station/list',
@@ -9,6 +9,11 @@
     /**  获取指定电站实施功率曲线 ?stationSerial=ESCNGXAH02&lang=zh_CN */
     stationPowerAll: '/ess/station/powerAll',
 
-    
+
+
+    /** 登录日志 */
+    logininforList: '/monitor/logininfor/list',
+    /** 操作日志 */
+    operlogList: '/monitor/operlog/list',
 }
 

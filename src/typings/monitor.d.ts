@@ -91,5 +91,55 @@ type DeviceGroup = {
 type ParkPowerLine = {
     createTime: string
     power: string
-  }
-  
+}
+
+
+
+/** 用户登录日志 */
+type Logininfor = {
+    createBy: any
+    createTime: any
+    updateBy: any
+    updateTime: any
+    remark: any
+    infoId: number
+    userName: string
+    status: string
+    ipaddr: string
+    loginLocation: string
+    browser: string
+    os: string
+    msg: string
+    loginTime: string
+    operUserId: number
+    deptId: number
+}
+
+
+/** 用户操作日志 */
+type Operlog = {
+    createBy: any
+    createTime: any
+    updateBy: any
+    updateTime: any
+    remark: any
+    operId: number
+    title: string
+    businessType: number
+    businessTypes: any
+    method: string
+    requestMethod: string
+    operatorType: number
+    operName: string
+    operUserId: number
+    deptName: any
+    deptId: number
+    operUrl: string
+    operIp: string
+    operLocation: string
+    operParam: string
+    jsonResult: string
+    status: number
+    errorMsg: any
+    operTime: string
+}

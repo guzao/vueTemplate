@@ -21,3 +21,19 @@ export function geStationPowerAll (params: { stationSerial: string, date: string
     })
 }
 
+
+/** 获取用户登录信息 */
+export function getLogininforList (params: any) {
+    return useGet({
+        url: monitor.logininforList,
+        params
+    })
+}
+
+/** 获取用户操作信息 */
+export function getOperlogList (params: any) {
+    return useGet({
+        url: monitor.operlogList,
+        params
+    })
+}
