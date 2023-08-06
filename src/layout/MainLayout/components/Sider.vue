@@ -1,15 +1,16 @@
   
 <script lang="ts" setup>
-import { computed, PropType } from 'vue';
+import { computed } from 'vue';
 import { sliderConfig, layoutConfig } from '@/config'
 import SliderItem from './SliderItem.vue'
-import { useUser, useAppData } from '@/store'
+import { useUser, useAppData, useLayout } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 
 import {  loaclRouter } from '@/routers'
 
 const userData = useUser()
 const appData = useAppData()
+const layout = useLayout()
 
 const route = useRoute()
 const router = useRouter()
@@ -21,15 +22,8 @@ const handleClose = (key: string, keyPath: string[]) => console.log(key, keyPath
 const routerPush = (data: UserRouter) => {
   const urlQuery = { ...route.query, stationCode: appData.currentParkSerial }
   router.push({ path: data.path, query: urlQuery })
+  layout.scrollTop()
 }
-
-
-defineProps({
-  mode: {
-    type: String as PropType< 'vertical' | 'horizontal ' >,
-    default: 'vertical'
-  }
-})
 
 </script>
 
@@ -38,7 +32,7 @@ defineProps({
 
   <!-- :collapse="appData.isCollapse"  -->
 
-  <el-menu :default-active="defaultActive" class="el-menu-vertical-demo" unique-opened :mode="mode"
+  <el-menu :default-active="defaultActive" class="el-menu-vertical-demo" unique-opened
     :active-text-color="sliderConfig.activeTextColor" :background-color="sliderConfig.backgroundColor"
     style="border-right: none;">
 

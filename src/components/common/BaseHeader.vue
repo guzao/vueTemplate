@@ -1,9 +1,9 @@
 <script lang="ts" setup>
+import { layoutConfig } from '@/config'
 </script>
 
 <template>
-    <!-- heder -->
-    <div class="flex h-[54px] pl-[16px] pr-[26px]  bg-[var(--theme-white-bg)]">
+    <div class="flex pl-[16px] pr-[26px]  bg-[var(--theme-white-bg)]" :style="`height: ${layoutConfig.headerHeight}px`">
         <div class="flex items-center">
             <img src="../../assets/image/login/img_logo.png" alt="" srcset="" class="w-[262px] h-[36px]">
         </div>

@@ -3,6 +3,8 @@ import { ElScrollbar } from 'element-plus'
 import { layoutConfig } from '@/config'
 import { isFalse } from "@/utils";
 
+const gapLimit = 12
+
 export const useLayout = defineStore('useLayout', {
 
     state() {
@@ -16,13 +18,15 @@ export const useLayout = defineStore('useLayout', {
     getters: {
         getLayoutMargingTop(state) {
             return {
-                marginTop: state.hasShowHeader ? '66px' : 0,
+                // 12 
+                // marginTop: state.hasShowHeader ? '66px' : 0,
+                marginTop: state.hasShowHeader ? `${ layoutConfig.headerHeight + gapLimit }px` : 0,
             }
         },
     },
 
     actions: {
-
+        
         scrollTop() {
             this.scrollbarRef?.setScrollTop(0)
         },
