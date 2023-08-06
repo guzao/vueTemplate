@@ -4,7 +4,6 @@
     import BaseHeader from "@/components/common/BaseHeader.vue";
     import I18nSelect from "@/components/common/I18nSelect.vue";
     import UserDropdown from "@/components/common/UserDropdown.vue";
-
     const appData  = useAppData()
 </script>
 

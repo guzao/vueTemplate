@@ -6,14 +6,11 @@ import { deepCloe } from '@/utils'
 import ParkForm from './ParkForm.vue'
 
 
-export function useParkList() {
+export function useParkList(emits: any) {
 
     const appData = useAppData()
 
-    const emits = defineEmits<{
-        /** 电站修改添加事件 */
-        (event: 'update'): void
-    }>()
+
 
     const formInstance = ref<InstanceType<typeof ParkForm>>()
 

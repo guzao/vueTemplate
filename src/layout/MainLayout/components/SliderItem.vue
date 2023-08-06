@@ -42,7 +42,7 @@ const click = (data: UserRouter ) => emits('menuClick', data)
         
         <el-menu-item :index="router?.path" v-if="!router!.hidden">
             <el-icon>
-                <setting />
+                <Setting />
             </el-icon>
             <template #title> {{ router?.meta.title }} </template>
         </el-menu-item>

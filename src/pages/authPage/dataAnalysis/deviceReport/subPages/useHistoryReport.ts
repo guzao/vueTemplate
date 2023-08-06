@@ -3,7 +3,7 @@ import { getUnitList, getHistoryReport } from '@/API'
 import { ref, reactive, computed, watch, nextTick } from 'vue'
 import { dateFormatterType, processTableRowData, renderLine } from '../../parkReport/tools'
 import { useEcharts, useReactiveHttp, useLocalPagnation, useHasShowMoreData } from '@/hooks'
-import { getPrevMonth, getDateCycles, paserTime, getArrayLength, generateDnamicTableData, conversionUnitKWh, getEfficiency, } from '@/utils'
+import { getPrevMonth, getDateCycles, paserTime, generateDnamicTableData } from '@/utils'
 
 
 export function useHistoryReport() {

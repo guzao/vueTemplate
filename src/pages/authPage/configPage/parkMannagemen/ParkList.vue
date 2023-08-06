@@ -9,6 +9,12 @@ import ParkForm from './ParkForm.vue'
 import TitleBox from '@/components/common/TitleBox.vue';
 import LabelValueUnit from '@/components/common/LabelValueUnit.vue';
 
+
+const emits = defineEmits<{
+    /** 电站修改添加事件 */
+    (event: 'update'): void
+}>()
+
 const {
     result,
     loading,
@@ -21,7 +27,7 @@ const {
     checkPark,
     confirm,
     formInstance,
-} = useParkList()
+} = useParkList(emits)
 
 defineProps({
     parkList: {

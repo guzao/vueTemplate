@@ -4,7 +4,7 @@ import { ref, onMounted } from "vue";
 import { ElScrollbar } from 'element-plus'
 import { Top } from '@element-plus/icons-vue'
 import Header from "./components/Header.vue";
-import Sider from './components/Sider.vue'
+import Sider from './components/Sider.vue';
 import Footer from './components/Footer.vue';
 
 const layout = useLayout()
@@ -19,7 +19,7 @@ onMounted(() => layout.setScrollbarRefInstance(scrollbarRef.value))
 
 <template>
 
-    <el-container class="relative" >
+    <el-container class="relative">
 
         <el-header class="absolute top-0 right-0 left-0 z-10" :class="layout.hasShowHeader ? 'block' : 'hidden'"
             style="padding: 0;">
@@ -35,8 +35,9 @@ onMounted(() => layout.setScrollbarRefInstance(scrollbarRef.value))
             </el-aside>
 
             <el-scrollbar ref="scrollbarRef" height="100vh" class="flex-1" @scroll="layout.scrollEvent">
-                <div :style="layout.getLayoutMargingTop" style="min-height:calc(100vh - 66px);" class="px-[10px] box-border flex flex-col flex-1">
-
+                
+                <div style="min-height:calc(100vh - 66px);"
+                    class="px-[10px] box-border flex flex-col flex-1 mt-[66px]">
                     <div class="flex-1 flex flex-col flex-wrap">
                         <router-view></router-view>
                     </div>
@@ -56,7 +57,5 @@ onMounted(() => layout.setScrollbarRefInstance(scrollbarRef.value))
 
 
     </el-container>
-
-
 </template>
   

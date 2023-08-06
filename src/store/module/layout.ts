@@ -33,7 +33,7 @@ export const useLayout = defineStore('useLayout', {
 
         scrollEvent(evnet: any) {
             if ( isFalse(layoutConfig.dynamicHeader) ) return
-            this.hasShowHeader = evnet.scrollTop < layoutConfig.offset
+            this.hasShowHeader = (evnet.scrollTop) < layoutConfig.offset
         }
 
     }

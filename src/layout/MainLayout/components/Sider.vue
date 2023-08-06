@@ -1,6 +1,6 @@
   
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, PropType } from 'vue';
 import { sliderConfig, layoutConfig } from '@/config'
 import SliderItem from './SliderItem.vue'
 import { useUser, useAppData } from '@/store'
@@ -23,6 +23,14 @@ const routerPush = (data: UserRouter) => {
   router.push({ path: data.path, query: urlQuery })
 }
 
+
+defineProps({
+  mode: {
+    type: String as PropType< 'vertical' | 'horizontal ' >,
+    default: 'vertical'
+  }
+})
+
 </script>
 
 
@@ -30,7 +38,7 @@ const routerPush = (data: UserRouter) => {
 
   <!-- :collapse="appData.isCollapse"  -->
 
-  <el-menu :default-active="defaultActive" class="el-menu-vertical-demo" 
+  <el-menu :default-active="defaultActive" class="el-menu-vertical-demo" unique-opened :mode="mode"
     :active-text-color="sliderConfig.activeTextColor" :background-color="sliderConfig.backgroundColor"
     style="border-right: none;">
 
