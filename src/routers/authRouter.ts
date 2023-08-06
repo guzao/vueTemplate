@@ -8,6 +8,9 @@ export const authRouter: RouteRecordRaw[] = [
         path: '/monitor',
         component: MainLayout,
         redirect: '/monitor/parkOverview',
+        meta: {
+            title: '实时监控'
+        },
         children: [
             {
                 path: '/monitor/parkOverview',
@@ -32,6 +35,7 @@ export const authRouter: RouteRecordRaw[] = [
         ]
     },
 
+    /** 设备监控 */
     {
         path: '/monitor/deviceDetail',
         component: () => import('@/pages/authPage/realTimeMonitoring/deviceDetail/index.vue'),
@@ -40,6 +44,9 @@ export const authRouter: RouteRecordRaw[] = [
     {
         path: '/parkReport',
         component: MainLayout,
+        meta: {
+            title: '数据分析'
+        },
         children: [
             {
                 meta: {
@@ -54,6 +61,68 @@ export const authRouter: RouteRecordRaw[] = [
                 },
                 path: '/dataAnalysis/deviceReport',
                 component: () => import('@/pages/authPage/dataAnalysis/deviceReport/index.vue'),
+            },
+        ]
+    },
+
+    {
+        path: '/config',
+        component: MainLayout,
+        meta: {
+            title: '配置管理'
+        },
+        children: [
+            {
+                meta: {
+                    title: '个人中心'
+                },
+                path: '/config/personCenter',
+                component: () => import('@/pages/authPage/configPage/personCenter/index.vue'),
+            },
+            {
+                meta: {
+                    title: '成员管理'
+                },
+                path: '/config/personManagement',
+                component: () => import('@/pages/authPage/configPage/personManagement/index.vue'),
+            },
+            {
+                meta: {
+                    title: '企业信息'
+                },
+                path: '/config/enterprise',
+                component: () => import('@/pages/authPage/configPage/enterprise/index.vue'),
+            },
+            {
+                meta: {
+                    title: '电站管理'
+                },
+                path: '/config/parkMannagemen',
+                component: () => import('@/pages/authPage/configPage/parkMannagemen/index.vue'),
+            },
+        ]
+    },
+
+    {
+        path: '/logs',
+        component: MainLayout,
+        meta: {
+            title: '日志中心'
+        },
+        children: [
+            {
+                meta: {
+                    title: '登录日志'
+                },
+                path: '/logs/logininfor',
+                component: () => import('@/pages/authPage/logs/logininfor/index.vue'),
+            },
+            {
+                meta: {
+                    title: '操作日志'
+                },
+                path: '/logs/operlog',
+                component: () => import('@/pages/authPage/logs/operlog/index.vue'),
             },
         ]
     }

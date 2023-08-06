@@ -21,7 +21,8 @@ const getParkInfo = () => {
 </script>
 
 <template>
-    <div class="park_overview flex flex-col flex-1" v-watermark="{ markSatate: appData.currentRelease, text: dicts.parkReleaseStatusDict.dictLabel[ appData.currentRelease ] }" v-loading="loading">
+
+    <div class="park_overview flex flex-col flex-1 w-full overflow-hidden" v-watermark="{ markSatate: appData.currentRelease, text: dicts.parkReleaseStatusDict.dictLabel[ appData.currentRelease ] }" v-loading="loading">
 
 
         <div class="top_bg flex-1 min-h-[580px]  box-border" >
@@ -32,11 +33,12 @@ const getParkInfo = () => {
 
         </div>
 
-        <div class="bottom_bg h-[27vh] px-[21px] min-h-[250px] w-full overflow-hidden">
+        <div class="bottom_bg h-[27vh] px-[21px] min-h-[250px] ">
             <Bottom />
         </div>
 
     </div>
+    
 </template>
 
 <style lang="scss" scoped>

@@ -129,7 +129,7 @@ watch(() => form.type, (type) =>  {
         </el-table>
 
         <div class="flex justify-end mt-[26px]">
-            <el-pagination background layout="prev, pager, next" @currentChange="currentChange" :pageSize="pageParams.pageSize" :total="getArrayLength(tableData)" />
+            <el-pagination background layout="prev, pager, next, total" @currentChange="currentChange" :pageSize="pageParams.pageSize" :total="getArrayLength(tableData)" />
         </div>
 
     </div>

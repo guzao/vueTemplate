@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { layoutConfig } from '@/config'
 import { useLayout, useAppData } from '@/store'
 import { ref, onMounted } from "vue";
 import { ElScrollbar } from 'element-plus'
 import { Top } from '@element-plus/icons-vue'
+
 import Header from "./components/Header.vue";
-import Sider from './components/Sider.vue'
+import Sider from './components/Sider.vue';
 import Footer from './components/Footer.vue';
 
 const layout = useLayout()
@@ -19,7 +21,7 @@ onMounted(() => layout.setScrollbarRefInstance(scrollbarRef.value))
 
 <template>
 
-    <el-container class="relative" >
+    <el-container class="relative">
 
         <el-header class="absolute top-0 right-0 left-0 z-10" :class="layout.hasShowHeader ? 'block' : 'hidden'"
             style="padding: 0;">
@@ -35,8 +37,10 @@ onMounted(() => layout.setScrollbarRefInstance(scrollbarRef.value))
             </el-aside>
 
             <el-scrollbar ref="scrollbarRef" height="100vh" class="flex-1" @scroll="layout.scrollEvent">
-                <div :style="layout.getLayoutMargingTop" style="min-height:calc(100vh - 66px);" class="px-[10px] box-border flex flex-col flex-1">
-
+                
+                <div 
+                    class="px-[10px] box-border flex flex-col flex-1" 
+                    :style="`margin-top: ${ layoutConfig.headerHeight + 12 }px;min-height:calc(100vh - ${ layoutConfig.headerHeight + 12  }px);`">
                     <div class="flex-1 flex flex-col flex-wrap">
                         <router-view></router-view>
                     </div>
@@ -56,7 +60,5 @@ onMounted(() => layout.setScrollbarRefInstance(scrollbarRef.value))
 
 
     </el-container>
-
-
 </template>
   

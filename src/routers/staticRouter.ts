@@ -14,17 +14,7 @@ export const staticRouter: RouteRecordRaw[] = [
         component: () => import('@/pages/staticPage/register/index.vue'),
     },
 
-    {
-        path: '/',
-        component: MainLayout,
-        redirect: '/index',
-        children: [
-            {
-                path: '/index',
-                component: () => import('@/pages/staticPage/index/index.vue'),
-            }
-        ]
-    },
+
 
     {
         path: '/401',
@@ -41,5 +31,38 @@ export const staticRouter: RouteRecordRaw[] = [
         meta: {
             title: '页面丢了',
         },
-    }
+    },
+
+    {
+        path: '/',
+        component: MainLayout,
+        redirect: '/index',
+        children: [
+            {
+                path: '/index',
+                component: () => import('@/pages/staticPage/index/index.vue'),
+            },
+            {
+                meta: {
+                    title: '编辑个人信息'
+                },
+                path: '/config/personCenter/editPerson',
+                component: () => import('@/pages/constance/editPerson/index.vue'),
+            },
+            {
+                meta: {
+                    title: '编辑登录密码'
+                },
+                path: '/config/personCenter/editPassword',
+                component: () => import('@/pages/constance/editPassword/index.vue'),
+            },
+            {
+                meta: {
+                    title: '编辑企业信息'
+                },
+                path: '/config/enterprise/editEnterprise',
+                component: () => import('@/pages/constance/editEnterprise/index.vue'),
+            }
+        ]
+    },
 ]

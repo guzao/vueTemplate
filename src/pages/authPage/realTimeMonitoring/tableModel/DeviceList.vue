@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { PropType } from 'vue'
 import { useDeviceDetail } from '../hooks/useDeviceDetail'
-import { conversionUnitKWh, getRuningStateInfo, toFixed, sleep } from '@/utils'
+import { conversionUnitKWh, getRuningStateInfo, toFixed } from '@/utils'
 
 import Icon from '@/components/common/Icon.vue'
 import SubParkTitle from '../components/SubParkTitle.vue'
@@ -60,7 +60,7 @@ defineProps({
                     </template>
                 </el-table-column>
 
-                <el-table-column property="name" label="日充">
+                <el-table-column property="name" label="日放">
                     <template #default="{ row }">
                         <span>{{ conversionUnitKWh(row.deviceData.M16).size }} {{ conversionUnitKWh(row.deviceData.M16).unit
                         }}</span>

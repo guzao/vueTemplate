@@ -11,6 +11,7 @@ type DeptInfo = {
     deptId: number,
     deptName: string;
     leader: string;
+    status: string;
 }
 
 /** 用户的详细信息 */

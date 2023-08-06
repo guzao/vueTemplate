@@ -10,7 +10,7 @@ useInterval(1000 * 60 * 3, appData.loopGetParkAuthLastTime)
 </script>
 
 <template>
-  <el-config-provider  :locale="I18nStore.local">
+  <el-config-provider :locale="I18nStore.local">
     <router-view></router-view>
   </el-config-provider>
 </template>
