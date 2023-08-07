@@ -2,9 +2,10 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { sliderConfig, layoutConfig } from '@/config'
-import SliderItem from './SliderItem.vue'
 import { useUser, useAppData, useLayout } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
+
+import SliderItem from './SliderItem.vue'
 
 import {  loaclRouter } from '@/routers'
 

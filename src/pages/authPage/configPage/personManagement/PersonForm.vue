@@ -76,7 +76,7 @@ defineExpose({
 
             <el-col :span="12">
                 <el-form-item label="密码" prop="email">
-                    <el-input v-model="personForm.password" type="password" style="width: 100%;" />
+                    <el-input v-model="personForm.password" :disabled="!!personId" type="password" style="width: 100%;" />
                 </el-form-item>
             </el-col>
 

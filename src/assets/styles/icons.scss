@@ -1,4 +1,25 @@
 
+// 菜单icon
+.menu_monitor {
+    background-image: url(../../assets/icons/common/menu_monitor.svg);
+}
+
+.menu_dataAnalysis {
+    background-image: url(../../assets/icons/common/menu_dataAnalysis.svg);
+}
+
+.menu_tem {
+    background-image: url(../../assets/icons/common/menu_tmp.svg);
+}
+
+.menu_config {
+    background-size: 18px 18px !important;
+    background-position: center center;
+    background-image: url(../../assets/icons/common/menu_config.svg);
+}
+
+
+
 .icon_cnx {
     background-size: contain;
     background-image: url(../../assets/image/overview/cnx_icon.png);
@@ -14,6 +35,8 @@
     background-size: contain;
     background-repeat: no-repeat;
 }
+
+
 
 .icon_day_charge_green {
     background-image: url(../../assets/icons/common/day_charge_green.svg);

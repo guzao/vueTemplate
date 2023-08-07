@@ -18,7 +18,7 @@ defineProps({
 
         <li class="px-[16px] py-[20px] mb-[8px] sub_park_overview_item last:mb-0" v-for="item in deivceGroupList" :key="item.id">
 
-            <div class="sub_park_overview_item_bg min-h-[54vh]">
+            <div class="sub_park_overview_item_bg min-h-[53vh]">
 
                 <TitleBox>
 

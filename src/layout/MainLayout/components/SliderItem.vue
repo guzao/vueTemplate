@@ -4,6 +4,8 @@ import { PropType } from 'vue'
 import { useRoute } from 'vue-router'
 import { arrayIsNotEmpty } from '@/utils'
 import { Location, Setting, } from '@element-plus/icons-vue'
+import Icon from '@/components/common/Icon.vue'
+
 defineProps({
     router: {
         type: Object as PropType<UserRouter>,
@@ -24,9 +26,7 @@ const click = (data: UserRouter ) => emits('menuClick', data)
     <el-sub-menu :index="router?.path" v-if="arrayIsNotEmpty(router!.children || [])">
 
         <template #title>
-            <el-icon>
-                <location />
-            </el-icon>
+            <Icon :icon="router?.meta.icon" :size="24" class="mr-[4px]" v-if="router?.meta.icon" />
             <span>{{ router?.meta.title }}</span>
         </template>
 
@@ -41,9 +41,7 @@ const click = (data: UserRouter ) => emits('menuClick', data)
     <template v-else>
         
         <el-menu-item :index="router?.path" v-if="!router!.hidden" @click="click(router!)">
-            <el-icon>
-                <Setting />
-            </el-icon>
+            <Icon :icon="router?.meta.icon" :size="24" class="mr-[4px]" v-if="router?.meta.icon" />
             <template #title> {{ router?.meta.title }} </template>
         </el-menu-item>
 

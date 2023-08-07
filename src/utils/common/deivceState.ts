@@ -37,7 +37,7 @@ export function getCellZoom (value: any) {
 
 
 
-const deviceCNXBatteryMarks = [ '', 'charge_mark_cnx', 'discharge_mark_cnx', 'standby_mark_cnx', 'alarm_mark_cnx', 'alarm_mark_cnx', 'alarm_mark_cnx' ]
+const deviceCNXBatteryMarks = [ '', 'charge_mark_cnx', 'discharge_mark_cnx', 'standby_mark_cnx', 'alarm_mark_cnx', 'alarm_mark_cnx', 'standby_mark_cnx' ]
 const deviceCNXBatteryCells = [ '', 'charge_cell_cnx', 'discharge_cell_cnx', 'standby_cell_cnx', 'alarm_cell_cnx', 'weihu_cell_cnx', 'offline_cell_cnx' ]
 /** 储能箱设备不同状态电池小节 */
 export const getDeviceCNXBatteryMarkInfo = (state: number) => deviceCNXBatteryMarks[ state ] || getLastElement(deviceCNXBatteryMarks)

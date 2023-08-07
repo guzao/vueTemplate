@@ -18,8 +18,6 @@ export const useLayout = defineStore('useLayout', {
     getters: {
         getLayoutMargingTop(state) {
             return {
-                // 12 
-                // marginTop: state.hasShowHeader ? '66px' : 0,
                 marginTop: state.hasShowHeader ? `${ layoutConfig.headerHeight + gapLimit }px` : 0,
             }
         },

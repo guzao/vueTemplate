@@ -7,7 +7,7 @@ import { useRoute, useRouter } from 'vue-router'
 
 import { loaclRouter } from '@/routers'
 
-import { Location, Setting } from '@element-plus/icons-vue'
+import Icon from '@/components/common/Icon.vue'
 
 const appData = useAppData()
 const layout = useLayout()
@@ -36,9 +36,7 @@ const routerPush = (data: UserRouter) => {
                 <el-sub-menu :index="router?.path" v-if="arrayIsNotEmpty(router!.children || [])">
 
                     <template #title>
-                        <el-icon>
-                            <location />
-                        </el-icon>
+                        <Icon :icon="router?.meta.icon" :size="24" class="mr-[4px]" v-if="router?.meta.icon" />
                         <span>{{ router?.meta.title }}</span>
                     </template>
 
@@ -53,9 +51,7 @@ const routerPush = (data: UserRouter) => {
                 <template v-else>
 
                     <el-menu-item :index="router?.path" v-if="!router!.hidden" @click="routerPush(router as any)">
-                        <el-icon>
-                            <Setting />
-                        </el-icon>
+                        <Icon :icon="router?.meta.icon" :size="24" class="mr-[4px]" v-if="router?.meta.icon" />
                         <template #title> {{ router?.meta.title }} </template>
                     </el-menu-item>
 

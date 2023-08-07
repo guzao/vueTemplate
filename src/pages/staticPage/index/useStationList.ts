@@ -1,4 +1,4 @@
-import { computed, ref, unref } from 'vue'
+import { computed, ref, unref, onMounted } from 'vue'
 import { getStationList } from '@/API'
 import { useReactiveHttp, useDict, useInterval } from '@/hooks'
 import { getArrayLength } from '@/utils'
@@ -6,6 +6,8 @@ import { getArrayLength } from '@/utils'
 export const searchCode = ref('')
 
 export const type = ref('')
+
+const state = ref(-1)
 
 export const loading = ref(false)
 
@@ -99,7 +101,8 @@ export function useStationList() {
         stationList,
         deviceStateCount,
         parkType,
-        releaseStatusDictLabel
+        releaseStatusDictLabel,
+        state
     }
 
 }

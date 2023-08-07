@@ -38,13 +38,29 @@ type GenerateDnamicTableDataParams <T> = {
 */
 export function generateDnamicTableData <T> (raw: T [], params: GenerateDnamicTableDataParams<T>) {
 
+    // 生成表格数据
+    const tableData = generateTableData<T>(raw, params)
+
+    // 生成表头
+    const  headerData = generateTableHeader(tableData, params)
+
+    return {
+        tableData,
+        headerData
+    }
+
+}
+
+
+function generateTableData  <T> (raw: T [], params: GenerateDnamicTableDataParams<T>) {
+
     const { key, splitSymbol = "$", processTableRowData } = params
 
     const tableData = [] as T[]
-    const headerData: DnamicTableDataHeaderData [] = [] 
 
     const group = arrayGroupByMap(raw, key)
 
+    // 生成表格数据
     group.forEach((value) => {
 
         let tableDataItem = {} as Record<string, string>
@@ -56,7 +72,18 @@ export function generateDnamicTableData <T> (raw: T [], params: GenerateDnamicTa
         tableData.push(tableDataItem as any)
     })
 
+    return tableData
+}
+
+
+function generateTableHeader <T> (tableData: any, params: GenerateDnamicTableDataParams<T>) {
+
+    const {  splitSymbol = "$" } = params
+
+    const headerData: DnamicTableDataHeaderData [] = [] 
+
     const firstElement = getFirstElement(tableData) as any
+
     objectForEach(firstElement, (_, key) => {
         if ( key.includes(splitSymbol) ) {
             const [ name, id ] = key.split(splitSymbol)
@@ -64,10 +91,5 @@ export function generateDnamicTableData <T> (raw: T [], params: GenerateDnamicTa
         }
     })
 
-    return {
-        tableData,
-        headerData
-    }
-
+    return headerData
 }
-

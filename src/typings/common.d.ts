@@ -1,4 +1,47 @@
 
+/** 应用报错信息 */
+type AppErrorPool = {
+    /** 错误时间 */
+    date: number,
+    /** 错误元素 */
+    tag: string,
+    /** 错误元素内容 */
+    tagInnerText: string,
+    /** 错误信息 */
+    info: string,
+    /** 错误详细信息 */
+    errorInfo: string,
+    /** 错误发生页面 */
+    page: string,
+    /** 错误类型 */
+    errorType: string,
+    offsetLeft?: any,
+    offsetTop?: any,
+    width?: any,
+    height?: any,
+}
+
+type NetworkErrorPool = {
+    /** 错误时间 */
+    date: number,
+    /** 错误信息 */
+    mesage: string,
+    /** 错误状态码 */
+    status: number,
+    /** 请求的url */
+    apiUrl: string,
+    /** 请求方式 */
+    method: string,
+    /** 请求参数 get 方式参数 */
+    params: any,
+    /** 请求参数 post put delet */
+    data: any
+}
+
+
+
+
+
 /** 时间周期 */
 type DateCycles = 'D' | 'M' | 'Y'
 
@@ -21,7 +64,7 @@ type ParkMonitorInfo = {
     type: string;
     /** 电站类型名称 */
     typeLabel: string;
-    
+
     A_M2: number;
     A_M3: number;
     A_M5: number;
@@ -82,33 +125,33 @@ type ParkAuth = {
 
 /** 字典数据接口url字段 */
 type DictType = 'eos_park_type' | 'station_release_status' | 'sys_user_sex' | 'eos_status' | 'eos_park_use_type'
-                | 'eos_park_run_status' | 'eos_park_use_type' | 'eos_industry_type' | 'eos_grid_status' | 'sys_normal_disable'
-                | 'sys_common_status' | 'sys_oper_type'
-                
+    | 'eos_park_run_status' | 'eos_park_use_type' | 'eos_industry_type' | 'eos_grid_status' | 'sys_normal_disable'
+    | 'sys_common_status' | 'sys_oper_type'
+
 
 /** 字典数据类型 */
 type DictTypeData = {
     createBy: string;
-	createTime: string;
-	updateBy?: any;
-	updateTime?: any;
-	remark: string;
-	dictCode: number;
-	dictSort: number;
+    createTime: string;
+    updateBy?: any;
+    updateTime?: any;
+    remark: string;
+    dictCode: number;
+    dictSort: number;
     /** 中文类型 */
-	dictLabel: string;
+    dictLabel: string;
     /** 英文类型 */
-	dictLabelEn: string;
+    dictLabelEn: string;
     /** 类型标识值 */
-	dictValue: string;
-	dictType: string;
-	cssClass?: any;
-	listClass: string;
-	isDefault: string;
-	status: string;
-	default: boolean;
+    dictValue: string;
+    dictType: string;
+    cssClass?: any;
+    listClass: string;
+    isDefault: string;
+    status: string;
+    default: boolean;
     /** 类型标 统计 */
-	accLabel: string;
+    accLabel: string;
 }
 
 /** 设备组列表接口参数 */

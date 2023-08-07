@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { useAppData, useDicts } from '@/store'
-import { getRunningDay, conversionUnitKW, conversionUnitKWh } from '@/utils'
 import { useStationList } from '../useStationList'
+import { getRunningDay, conversionUnitKW, conversionUnitKWh } from '@/utils'
+
 import TitleBox from '@/components/common/TitleBox.vue';
 import StationBaseInfoCard from '@/components/common/StationBaseInfoCard.vue';
 import LabelValueUnit from '@/components/common/LabelValueUnit.vue';

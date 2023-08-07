@@ -28,8 +28,12 @@ export const layoutConfig = {
     chartHeight: 300,
 
     /** 二级页面标题 */
-    hiddenSubTitle: !false,
+    hiddenSubTitle: true,
 
     /** 使用本地路由 */
-    useLocalRouter: true
+    useLocalRouter: true,
+
+    /** 软件版本 */
+    version: ' 1.1.01'
+    
 }

@@ -1,8 +1,9 @@
-import { ElMessage, ElMessageBox } from 'element-plus'
-import { AxiosResponse, AxiosError } from 'axios'
+import { useUser } from '@/store'
 import { HTTPSTATE } from '@/enum'
 import { isFalse, isTrue } from '@/utils';
-import { useUser } from '@/store'
+import { AxiosResponse, AxiosError } from 'axios'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { networkErrorHandle } from '@/systemRuntimeInfoTrack'
 
 let userLogout: () => Promise<void>
 
@@ -29,6 +30,8 @@ export async function responseHandle(response: AxiosResponse) {
 export function responseErrorHandle(error: AxiosError) {
 
   let { message } = error;
+
+  networkErrorHandle(error)
 
   if (message == "Network Error") {
     message = "后端接口连接异常";

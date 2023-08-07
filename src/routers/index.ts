@@ -15,7 +15,8 @@ export const loaclRouter = [
         redirect: '/monitor/parkOverview',
         hidden: false,
         meta: {
-            title: '实时监控'
+            title: '实时监控',
+            icon: 'menu_monitor'
         },
         children: [
             {
@@ -67,7 +68,8 @@ export const loaclRouter = [
     {
         path: '/monitor/deviceDetail',
         meta: {
-            title: '设备监控'
+            title: '设备监控',
+            icon: 'menu_monitor'
         },
         hidden: true
     },
@@ -75,7 +77,8 @@ export const loaclRouter = [
     {
         path: '/parkReport',
         meta: {
-            title: '数据分析'
+            title: '数据分析',
+            icon: 'menu_dataAnalysis'
         },
         hidden: false,
         children: [
@@ -99,7 +102,8 @@ export const loaclRouter = [
     {
         path: '/config',
         meta: {
-            title: '配置管理'
+            title: '配置管理',
+            icon: 'menu_config'
         },
         hidden: false,
         children: [
@@ -137,7 +141,8 @@ export const loaclRouter = [
     {
         path: '/logs',
         meta: {
-            title: '日志中心'
+            title: '日志中心',
+            icon: 'menu_tem'
         },
         hidden: false,
         children: [

@@ -1,8 +1,10 @@
-import { createApp } from 'vue'
 import App from '@/App.vue'
+import { createApp } from 'vue'
+import { appErrorHandle } from '@/systemRuntimeInfoTrack'
 import { useAsset, useRouter, useDirective, useNprogress, useElementPlus, usePinan } from '@/plugins'
-import '@/assets/styles/index.scss'
 
+
+import '@/assets/styles/index.scss'
 
 export function setupApp () {
 
@@ -20,8 +22,8 @@ export function setupApp () {
     
     useRouter(appInstance)
 
+    appInstance.config.errorHandler = appErrorHandle
 
     appInstance.mount("#app")
-
 
 }

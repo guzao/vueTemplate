@@ -52,7 +52,7 @@ defineProps({
 
             <div class="h-[48px] flex justify-between items-center px-[15px] box-border "
                 style="background: linear-gradient(270deg, rgba(14,169,68,0) 0%, rgba(14,169,68,0.05) 100%);">
-                <TitleBox class="flex-1">
+                <TitleBox class="flex-1" :size="14">
                     {{ item.name }}
                     <template #right>
                         <el-dropdown trigger="click">

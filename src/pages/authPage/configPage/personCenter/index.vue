@@ -2,6 +2,10 @@
 import { useAppData, useUser, useDicts } from '@/store'
 import { useRouter, useRoute } from 'vue-router'
 
+import SubTitle from '@/components/common/SubTitle.vue'
+import TitleBox from '@/components/common/TitleBox.vue';
+import LabelValueUnit from '@/components/common/LabelValueUnit.vue';
+
 const dicts = useDicts()
 const route = useRoute()
 const router = useRouter()
@@ -13,14 +17,12 @@ const routerPush = (path: string) => {
     router.push({ path, query: { ...query, stationCode: appData.currentParkSerial } })
 }
 
-import SubTitle from '@/components/common/SubTitle.vue'
-import TitleBox from '@/components/common/TitleBox.vue';
-import LabelValueUnit from '@/components/common/LabelValueUnit.vue';
-
 </script>
 
 <template>
+
     <SubTitle />
+
     <div class="bg-[var(--theme-white-bg)] px-[60px] py-[40px] box-border">
 
         <div class="flex justify-between items-center">
@@ -86,4 +88,6 @@ import LabelValueUnit from '@/components/common/LabelValueUnit.vue';
         </div>
 
     </div>
+
+
 </template>

@@ -5,8 +5,8 @@ import { useStationList, initData } from './useStationList'
 import NavBar from './components/NavBar.vue'
 import StationList from './components/StationList.vue'
 const { loading, stationList, getResult } = useStationList()
-initData()
 
+initData()
 
 useInterval(1000 * 60 * 5, getResult)
 

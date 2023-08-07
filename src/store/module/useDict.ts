@@ -2,27 +2,37 @@ import { useDict as useDictAction } from '@/hooks'
 import { isFalse } from '@/utils';
 import { defineStore } from "pinia";
 
-
+/** 电站类型 */ 
 const { getResult: getParkType, result: parkType, dictLabel: dictParkLabel } = useDictAction('eos_park_type')
 
+/** 发布状态 */ 
 const { getResult: getReleaseStatus, dictLabel: releaseStatusDictLabel, result: releaseStatus  } = useDictAction('station_release_status')
 
+/** 用户性别 */ 
 const { getResult: getUserSexType, dictLabel: userSexTypeDictLabel, result: userSexType  } = useDictAction('sys_user_sex')
 
+/** 电站运行状态 */ 
 const { getResult: getParkRunStatus, dictLabel: parkRunStatusDictLabel, result: parkRunStatus  } = useDictAction('eos_park_run_status')
 
+/** 电站状态 */ 
 const { getResult: getParkStatus, dictLabel: parkStatusDictLabel, result: parkStatus  } = useDictAction('eos_status')
 
+/** 电站使用类型 */ 
 const { getResult: getParkUseType, dictLabel: parkUseTypeDictLabel, result: parkUseType  } = useDictAction('eos_park_use_type')
 
+/** 行业类型 */ 
 const { getResult: getIndustryType, dictLabel: industryTypeDictLabel, result: industryType  } = useDictAction('eos_industry_type')
 
+/** 建设状态 */ 
 const { getResult: getGridStatus, dictLabel: gridStatusDictLabel, result: gridStatus  } = useDictAction('eos_grid_status')
 
+/** 用户的状态 */ 
 const { getResult: getNormalDisable, dictLabel: normalDisableDictLabel, result: normalDisable  } = useDictAction('sys_normal_disable')
 
+/** 用户登录状态 */ 
 const { getResult: getCommonStatus, dictLabel: commonStatusDictLabel, result: commonStatusDisable  } = useDictAction('sys_common_status')
 
+/** 操作状态 */ 
 const { getResult: getOperType, dictLabel: operTypeDictLabel, result: operTypeDisable  } = useDictAction('sys_oper_type')
 
 
