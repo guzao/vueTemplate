@@ -167,7 +167,7 @@ type UnitListData = {
     updateBy: any
     updateTime: string
     remark: any
-    id: number
+    id: string
     ugroupId: number
     stationSerial: string
     name: string
@@ -185,6 +185,23 @@ type UnitListData = {
     goinTime: any
     expireTime: any
     templatePowercurvesSerial: any
-    delFlag: number
+    delFlag: number,
+    /** 父节点的名称 前端追加的参数 */
+    parentName: string
 }
 
+
+/** 单元组 */
+type GroupList = {
+	createBy?: any;
+	createTime: string;
+	updateBy?: any;
+	updateTime: string;
+	remark?: any;
+	id: number;
+	stationSerial: string;
+	name: string;
+	sort: number;
+	delFlag: number;
+	eosUnitList: UnitListData [];
+}

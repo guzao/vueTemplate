@@ -21,6 +21,14 @@ export function geStationPowerAll (params: { stationSerial: string, date: string
     })
 }
 
+/** 获取指定设备基本信息 */
+export function getDeviceInfo (params: DeviceInfoParams) {
+    return useGet({
+        url: monitor.deviceInfo,
+        params
+    })
+}
+
 
 /** 获取用户登录信息 */
 export function getLogininforList (params: any) {

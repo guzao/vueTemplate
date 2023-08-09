@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useLayout } from '@/store'
+import { layoutConfig } from '@/config'
 import { ref, onMounted } from "vue";
 import { ElScrollbar } from 'element-plus'
 import { Top } from '@element-plus/icons-vue'
@@ -25,15 +26,19 @@ onMounted(() => layout.setScrollbarRefInstance(scrollbarRef.value))
 
             <el-aside style="width: auto;" class="h-[100vh]">
                 <div :style="layout.getLayoutMargingTop">
-                    <slot name="left" />
+
+                    <el-scrollbar :style="`height:calc(100vh - ${ layoutConfig.offset }px);`">
+
+                        <slot name="left" />
+
+                    </el-scrollbar>
 
                 </div>
             </el-aside>
 
 
             <el-scrollbar ref="scrollbarRef" height="100vh" class="flex-1 " @scroll="layout.scrollEvent">
-                <div style="min-height:calc(100vh - 66px);"
-                    class="px-[12px] box-border flex flex-col mt-[66px]">
+                <div style="min-height:calc(100vh - 66px);" class="px-[12px] box-border flex flex-col mt-[66px]">
 
                     <div class="flex-1 flex flex-col flex-wrap">
 

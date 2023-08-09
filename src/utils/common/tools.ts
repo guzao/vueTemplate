@@ -31,7 +31,7 @@ export function objectToUrlQuery(params: Record<string, string>) {
  * @params newParams 新的地址栏参数
  * @BUG BUG 会导致获取不到 路由的 query参数
 */
-export function replaceUrlQuery(newParams: Record<string, string>) {
+export function replaceUrlQuery(newParams: Record<any, any>) {
 
     const { search, origin, pathname } = location
 

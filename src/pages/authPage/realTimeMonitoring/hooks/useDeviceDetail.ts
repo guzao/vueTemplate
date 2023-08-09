@@ -8,11 +8,10 @@ export function useDeviceDetail() {
 
     /** 设备详情 */
     const checkDeviceDetail = (device: DeviceItem) => {
-        const params = {
+        const params: DeviceDetailNewTapUrlParam = {
             stationCode: appData.currentParkSerial,
             type: appData.currentParkType,
-            name: appData.parkAuthList.find(park => park.serial == appData.currentParkSerial)?.name,
-            id: device.id,
+            unitId: device.id,
             state: device.deviceData.M2
         }
         const urlQuery = objectToUrlQuery(params as any)

@@ -22,6 +22,15 @@ export  function useReactiveHttp <T> (params: UseReactiveGetParams<T>) {
 
     const loading = ref(false)
 
+    // const getResult = () => {
+    //     loading.value = true
+    //     return request().then(res => {
+    //         loading.value = false
+    //         if (hasEror(res)) return
+    //         result.value = requestCallback(res) || res
+    //     })
+    // }
+
     const getResult = async () => {
         loading.value = true
         try {

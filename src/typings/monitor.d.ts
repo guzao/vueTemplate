@@ -1,4 +1,18 @@
 
+
+/** 电站设备详情 新窗口地址栏参数 */
+type DeviceDetailNewTapUrlParam = {
+    /** 场站 */
+    stationCode: string;
+    /** 电站类型 */
+    type: string;
+    /** 设备id */
+    unitId: string;
+    /** 设备状态 */
+    state: number;
+}
+
+
 /** 电站运行详情 */
 type ParkRuningInfo = {
     A_M2: number,
@@ -142,4 +156,59 @@ type Operlog = {
     status: number
     errorMsg: any
     operTime: string
+}
+
+/** 设备基本信息 */
+type DeviceInfoParams = {
+    stationSerial: string,
+    type: string,
+    unitId: string,
+    groupId?: string
+}
+
+
+/** 设备基本信息 */
+type DeviceInfoData = {
+    E: StoreageUnit[]
+    deviceMap: DeviceMap
+}
+
+/** 储能单元列表 */
+interface StoreageUnit {
+    id: number
+    stationSerial: string
+    modelName: string
+    name: string
+    serial: string
+    prefix: string
+    sort: number
+    params: Params
+}
+
+
+/** 设备基本信息 */
+interface DeviceMap {
+    M2: number
+    M3: number
+    M4: number
+    M5: number
+    M6: number
+    M7: number
+    M20: number
+    M8: number
+    M22: number
+    M9: number
+    M23: number
+    M26: number
+    M25: number
+    M11: number
+    M10: number
+    M13: number
+    M12: number
+    M15: number
+    M14: number
+    M17: number
+    M16: number
+    M19: number
+    M18: number
 }
