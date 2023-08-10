@@ -2,7 +2,7 @@ import { ref, watch, } from 'vue'
 import { useDicts } from '@/store'
 import { useReactiveHttp } from '@/hooks'
 import type { FormInstance } from 'element-plus'
-import { getUserDeptTree, getUserDetail } from '@/API'
+import { getUserDeptTree, getUserDetail, getAddUserProfileInitPwd } from '@/API'
 import { deepCloe, arrayIsEmpty, isTrue } from '@/utils';
 
 
@@ -59,9 +59,23 @@ export function usePersonForm(props: any) {
         }
     })
 
+    const {  result: initPassword } = useReactiveHttp({
+        initData: '',
+        request: () => {
+            loading.value = true
+            return getAddUserProfileInitPwd()
+        },
+        requestCallback: ({msg}) => {
+            personForm.value.password = msg
+            loading.value = false
+            return msg
+        }
+    })
+
     watch(() => props.personId, () => {
         if (isTrue(props.personId)) return getResult()
         personForm.value = deepCloe(baseForm)
+        personForm.value.password = initPassword.value
     })
 
     return {

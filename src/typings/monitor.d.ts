@@ -47,6 +47,7 @@ type DeviceItem = {
     createTime: number,
     updateTime: number,
     params: Params$1Type,
+    [ key:string ]: any,
     /** 设备运行参数 */
     deviceData: {
         M2: number

@@ -6,3 +6,8 @@ type ArrayGroupBy <T>  = {
 
 
 type DnamicTableDataHeaderData = { name: string; id: string }
+
+/**
+ * 查找数组中的最大元素的回调函数
+*/
+type MaxElementCallback <T> =  (maxEl: T, cur: T) => boolean

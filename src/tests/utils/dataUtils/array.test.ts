@@ -45,6 +45,8 @@ describe('test array utils ', () => {
     const arr = [] as any
     const arr1 = [1]
 
+    console.log('=====')
+
     it('getArrayLength', () => {
         expect(getArrayLength(arr)).toBe(0)
         expect(getArrayLength(arr1)).toBe(1)

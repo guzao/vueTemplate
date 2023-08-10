@@ -24,11 +24,12 @@
       </div>
     </div>
   </template>
-  
   <script>
-  
   export default {
     name: 'Page404',
+    data () {
+      return {}
+    },
     computed: {
       message() {
         return '找不到网页！'

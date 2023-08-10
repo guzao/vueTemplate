@@ -22,27 +22,27 @@ export  function useReactiveHttp <T> (params: UseReactiveGetParams<T>) {
 
     const loading = ref(false)
 
-    // const getResult = () => {
-    //     loading.value = true
-    //     return request().then(res => {
-    //         loading.value = false
-    //         if (hasEror(res)) return
-    //         result.value = requestCallback(res) || res
-    //     })
-    // }
-
-    const getResult = async () => {
+    const getResult = () => {
         loading.value = true
-        try {
-            const res = await request()
+        return request().then(res => {
             loading.value = false
             if (hasEror(res)) return
             result.value = requestCallback(res) || res
-        } catch (error) {
-            loading.value = false
-            throw error;
-        }
+        })
     }
+
+    // const getResult = async () => {
+    //     loading.value = true
+    //     try {
+    //         const res = await request()
+    //         loading.value = false
+    //         if (hasEror(res)) return
+    //         result.value = requestCallback(res) || res
+    //     } catch (error) {
+    //         loading.value = false
+    //         throw error;
+    //     }
+    // }
 
     Immediately && getResult()
 

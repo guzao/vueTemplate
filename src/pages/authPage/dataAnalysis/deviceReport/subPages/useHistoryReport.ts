@@ -2,8 +2,8 @@ import { useAppData } from '@/store'
 import { getUnitList, getHistoryReport } from '@/API'
 import { ref, reactive, computed, watch, nextTick } from 'vue'
 import { dateFormatterType, processTableRowData, renderLine } from '../../parkReport/tools'
-import { useEcharts, useReactiveHttp, useLocalPagnation, useHasShowMoreData } from '@/hooks'
-import { getPrevMonth, getDateCycles, paserTime, generateDnamicTableData } from '@/utils'
+import { getPrevMonth, getDateCycles, paserTime, generateDnamicTableData, arrayIsEmpty, isFalse } from '@/utils'
+import { useEcharts, useReactiveHttp, useLocalPagnation, useHasShowMoreData, useSelectAll } from '@/hooks'
 
 
 export function useHistoryReport() {
@@ -14,12 +14,14 @@ export function useHistoryReport() {
         { initData: [] as UnitListData[], request: () => getUnitList({ stationSerial: appdate.currentParkSerial, pageSize: 1000 }), requestCallback: (res) => res.rows }
     )
 
-    const { toggleShowMore, showMore, limitDataList } = useHasShowMoreData(unitList, 6)
+    const { checkAll, handleCheckAllChange, handleCheckedIdsChange, checkedIds, isIndeterminate, resetSelectAll } = useSelectAll(unitList, 'assetSerial')
+
+    const { toggleShowMore, showMore, limitDataList } = useHasShowMoreData(unitList, 8)
 
     const form = reactive({
         dataCycle: 'D',
         date: [getPrevMonth(new Date(), 1), new Date()],
-        assetSerials: [] as string[],
+        assetSerials: checkedIds,
     })
 
     const createParams = () => {
@@ -30,7 +32,7 @@ export function useHistoryReport() {
             startTime: paserTime(startTime, formatterTag as any),
             endTime: paserTime(endTime, formatterTag as any),
             stationSerial: appdate.currentParkSerial,
-            dataCycle: form.dataCycle as any,
+            dataCycle: dataCycle as any,
             assetSerials
         }
     }
@@ -57,13 +59,35 @@ export function useHistoryReport() {
         Immediately: false
     })
 
-    const { currentPageData, pageParams } = useLocalPagnation(result, { page: 1, pageSize: 10 })
+    const { currentPageData, pageParams, initArrayChunk } = useLocalPagnation(result, { page: 1, pageSize: 10 })
 
     const currentChange = (page: number) => pageParams.page = page
 
+    const allChange = (value: boolean) => {
+        handleCheckAllChange(value)
+        if (isFalse(value)) {
+            result.value = []
+            tableHeader.value = []
+            initArrayChunk()
+            return
+        }
+        getResult()
+    }
+    
+    const assetSerialsChange = (value: any []) => {
+        handleCheckedIdsChange(value)
+        if (arrayIsEmpty(value)) {
+            result.value = []
+            tableHeader.value = []
+            initArrayChunk()
+            return
+        }
+        getResult()
+    }
+
     const reset = () => {
-        pageParams.page = 1
         result.value = []
+        tableHeader.value = []
     }
 
     watch(() => form.dataCycle, (type) => {
@@ -74,6 +98,7 @@ export function useHistoryReport() {
 
     watch(() => appdate.currentParkSerial, () => {
         reset()
+        resetSelectAll()
         form.assetSerials = []
         _getUnitList()
     })
@@ -93,6 +118,11 @@ export function useHistoryReport() {
         getResult,
         unitList,
         loading,
-        chartRef
+        chartRef,
+        checkAll, 
+        allChange,
+        assetSerialsChange,
+        checkedIds, 
+        isIndeterminate
     }
 }

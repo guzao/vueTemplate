@@ -1,16 +1,16 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 
-
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: usePlugins(),
-  server: useServer(),
-  resolve: useResolve(),
-  build: useBuild(),
-})
-
+export default defineConfig((({ mode }) => {
+  return {
+    plugins: usePlugins(),
+    server: useServer(mode),
+    resolve: useResolve(),
+    build: useBuild(),
+  }
+}))
 
 function usePlugins() {
   return [
@@ -18,23 +18,20 @@ function usePlugins() {
   ]
 }
 
-
-function useServer() {
+function useServer(model: string) {
+  const config = loadEnv(model, './')
   return {
     open: true,
     proxy: {
-      '/api': {
+      [ config.VITE_APP_BASE_URL ]: {
         target: 'http://124.223.210.24/',
         changeOrigin: true,
         ws: true,
-        rewrite: (path) => {
-          return path.replace(/^\/api/, '/prod-api')
-        },
+        rewrite: (path) => path,
       },
     },
   }
 }
-
 
 function useResolve() {
   return {
@@ -43,7 +40,6 @@ function useResolve() {
     },
   }
 }
-
 
 function useBuild () {
   return {

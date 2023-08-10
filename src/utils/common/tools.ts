@@ -1,4 +1,5 @@
 import { isFalse } from '../dataUtils'
+import { ElMessage } from 'element-plus'
 import { objectForEach } from '../dataUtils/objectTools'
 
 /**
@@ -36,7 +37,7 @@ export function replaceUrlQuery(newParams: Record<any, any>) {
     const { search, origin, pathname } = location
 
     let params = urlQueryToObject(search)
-    
+
 
     params = { ...params, ...newParams }
 
@@ -48,8 +49,12 @@ export function replaceUrlQuery(newParams: Record<any, any>) {
 }
 
 /** 延时执行 */
-export function sleep (dlayTime: number = 500) {
+export function sleep(dlayTime: number = 500) {
     return new Promise((resolove, reject) => {
         setTimeout(resolove, dlayTime)
     })
 }
+
+export const successMessage = (msg: string) => ElMessage.success(msg)
+
+export const errorMessage = (msg: string) => ElMessage.error(msg)

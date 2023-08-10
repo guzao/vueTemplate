@@ -1,47 +1,11 @@
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
-import { deepCloe } from '@/utils';
-import { useRouter, useRoute } from 'vue-router'
-import { useAppData, useUser } from '@/store'
-import { ArrowLeft, View, } from '@element-plus/icons-vue'
-import type { FormInstance } from 'element-plus'
-
-
-const router = useRouter()
-const route = useRoute()
-const userData = useUser()
-
-
-const fromInstance = ref<FormInstance>()
-const form = reactive({
-    oldPassword: '',
-    newPassword: '',
-    confirmPassword: ''
-})
-
-const inputTypes = reactive({
-    oldPasswordType: true,
-    newPasswordType: true,
-    confirmPasswordType: true,
-})
-
-const rules = {
-    oldPasswordType: [{ required: true, message: '请输入旧密码', trigger: 'blur' },],
-    newPasswordType: [{ required: true, message: '请输入旧密码', trigger: 'blur' },],
-    confirmPasswordType: [{ required: true, message: '请输入新密码', trigger: 'blur' },],
-}
-
-const confirm = async () => {
-    try {
-        await fromInstance.value?.validate()
-        console.log(form)
-    } catch (error) {
-        console.log(error)
-    }
-}
+import { useUpdatePassword } from './useUpdatePassword'
+import { ArrowLeft, View, Hide } from '@element-plus/icons-vue'
 
 import SubTitle from '@/components/common/SubTitle.vue'
 import TitleBox from '@/components/common/TitleBox.vue';
+
+const { confirm, rules, inputTypes, fromInstance, router, form, loading } = useUpdatePassword()
 
 </script>
 
@@ -62,7 +26,8 @@ import TitleBox from '@/components/common/TitleBox.vue';
                     :type="inputTypes.oldPasswordType ? 'password' : 'text'" style="width: 340px;" clearable>
                     <template #suffix>
                         <el-icon class="cursor-pointer" @click="inputTypes.oldPasswordType = !inputTypes.oldPasswordType">
-                            <View />
+                            <Hide v-if="inputTypes.oldPasswordType" />
+                            <View v-else  />
                         </el-icon>
                     </template>
                 </el-input>
@@ -73,7 +38,8 @@ import TitleBox from '@/components/common/TitleBox.vue';
                     :type="inputTypes.newPasswordType ? 'password' : 'text'" style="width: 340px;" clearable>
                     <template #suffix>
                         <el-icon class="cursor-pointer" @click="inputTypes.newPasswordType = !inputTypes.newPasswordType">
-                            <View />
+                            <Hide v-if="inputTypes.newPasswordType" />
+                            <View v-else  />
                         </el-icon>
                     </template>
                 </el-input>
@@ -84,7 +50,8 @@ import TitleBox from '@/components/common/TitleBox.vue';
                     :type="inputTypes.confirmPasswordType ? 'password' : 'text'" style="width: 340px;" clearable>
                     <template #suffix>
                         <el-icon class="cursor-pointer" @click="inputTypes.confirmPasswordType = !inputTypes.confirmPasswordType">
-                            <View />
+                            <Hide v-if="inputTypes.confirmPasswordType" />
+                            <View v-else  />
                         </el-icon>
                     </template>
                 </el-input>
@@ -92,6 +59,6 @@ import TitleBox from '@/components/common/TitleBox.vue';
 
     </el-form>
 
-    <el-button class="flex-1" type="primary" size="default" @click="confirm">提交</el-button>
+    <el-button class="flex-1" type="primary" size="default" :loading="loading" @click="confirm">提交</el-button>
 
 </div></template>

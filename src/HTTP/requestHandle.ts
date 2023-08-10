@@ -35,6 +35,7 @@ function configAddProps(config: InternalAxiosRequestConfig,) {
     if (getToken()) config.headers['Authorization'] = 'Bearer ' + getToken()
 
     const { params = {} } = config
+
     config.params = { ...params,  lang: getLang() }
 
 }

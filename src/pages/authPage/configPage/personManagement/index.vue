@@ -34,12 +34,12 @@ const {
 
             <div class="flex h-[50px] items-center mb-[26px]">
 
-                <el-button type="primary" class="mr-[20px]" @click="addPerson"> 新增 </el-button>
+                <el-button type="primary" class="mr-[20px]" size="default" @click="addPerson"> 新增 </el-button>
 
-                <el-input clearable style="width: 260px;" v-model="userName" placeholder="请输入用户名" class="mr-[20px]"
+                <el-input size="default" clearable style="width: 260px;" v-model="userName" placeholder="请输入用户名" class="mr-[20px]"
                     @clear="getResult" />
 
-                <el-button :icon="Search" @click="getResult" circle />
+                <el-button size="default" :icon="Search" @click="getResult" circle />
 
             </div>
 

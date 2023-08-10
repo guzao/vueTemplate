@@ -24,7 +24,7 @@ onMounted(() => searchCode.value = '')
             
         </div>
 
-        <DeviceStateCountDescVue :states="deviceStateCount" @state-click="(value) => state = value" :total="getArrayLength(stationList)"/>
+        <DeviceStateCountDescVue :states="deviceStateCount" :open-state-click="true" @state-click="(value) => state = value" :total="getArrayLength(stationList)"/>
 
     </div>
 </template>

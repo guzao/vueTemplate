@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useHistoryReport } from './useHistoryReport'
-import {  getArrayLength, conversionUnitKWh, getEfficiency } from '@/utils'
+import { getArrayLength, conversionUnitKWh, getEfficiency, arrayIsNotEmpty, arrayIsEmpty } from '@/utils'
 
 import TitleBox from '@/components/common/TitleBox.vue'
 import LabelValueUnit from '@/components/common/LabelValueUnit.vue'
@@ -21,8 +21,13 @@ const {
     getResult,
     unitList,
     loading,
-    chartRef
+    chartRef,
+    checkAll,
+    isIndeterminate,
+    allChange,
+    assetSerialsChange,
 } = useHistoryReport()
+
 
 </script>
 
@@ -49,7 +54,9 @@ const {
 
             <el-form-item label="设备单元" prop="type" v-loading="unitListLoading">
 
-                <el-checkbox-group v-model="form.assetSerials" @change="getResult">
+                <el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" @change="allChange" class="pr-4">全选</el-checkbox>
+
+                <el-checkbox-group v-model="form.assetSerials" @change="assetSerialsChange">
 
                     <el-checkbox v-for="item in limitDataList" :label="item.assetSerial" :key="item.id"> {{ item.name
                     }}</el-checkbox>
@@ -66,7 +73,8 @@ const {
 
         <TitleBox class="mb-[16px]"> 趋势图表 </TitleBox>
 
-        <div ref="chartRef" class="h-[300px] mb-[32px]"></div>
+        <div ref="chartRef" v-show="arrayIsNotEmpty(result)" class="h-[300px] mb-[32px]" ></div>
+        <el-empty v-if="arrayIsEmpty(result)"  />
 
         <el-table :data="currentPageData" stripe style="width: 100%" v-loading="loading">
 
@@ -96,7 +104,9 @@ const {
         </el-table>
 
         <div class="flex justify-end mt-[26px]">
-            <el-pagination background layout="prev, pager, next" @currentChange="currentChange"
+            <el-pagination background layout="prev, pager, next"
+                 v-model:current-page="pageParams.page"
+                 @currentChange="currentChange"
                 :pageSize="pageParams.pageSize" :total="getArrayLength(result)" />
         </div>
 

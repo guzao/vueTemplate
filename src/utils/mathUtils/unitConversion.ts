@@ -17,7 +17,7 @@ export function edgeCaseToFixed(raw: any) {
     return raw
 }
 
-export const unitConversion = function unitConversion(limit: number, size: number) {
+export const unitConversion = (limit: number, size: number) => {
     var index = 0;
     while (size >= limit) {
         size = size / limit;
@@ -72,19 +72,13 @@ const conversionUnit = (raw: number, units: string[], fractionDigits = 2) => {
 
 export const KWHUnits = ['kWh', 'MWh', 'GWh', 'TWh']
 
-export const conversionUnitKWh = (raw: number, fractionDigits?: number) => {
-    return conversionUnit(raw, KWHUnits, fractionDigits)
-}
+export const conversionUnitKWh = (raw: number, fractionDigits?: number) => conversionUnit(raw, KWHUnits, fractionDigits)
 
 export const KWUnits = ['kW', 'MW', 'GW', 'TW']
-export const conversionUnitKW = (raw: number, fractionDigits?: number) => {
-    return conversionUnit(raw, KWUnits, fractionDigits)
-}
+export const conversionUnitKW = (raw: number, fractionDigits?: number) => conversionUnit(raw, KWUnits, fractionDigits)
 
 export const KVARUnits = ['kVar', 'MVar', 'GVar', 'TVar']
-export const conversionUnitKVar = (raw: number, fractionDigits?: number) => {
-    return conversionUnit(raw, KVARUnits, fractionDigits)
-}
+export const conversionUnitKVar = (raw: number, fractionDigits?: number) => conversionUnit(raw, KVARUnits, fractionDigits)
 
 /** 找出最大值 并以此为基础 进行缩小 */
 export function getZoomRato(numbers: number[], units: string[]) {

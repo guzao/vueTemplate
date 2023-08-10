@@ -15,7 +15,6 @@ defineProps({
     }
 })
 
-
 </script>
 
 <template>
@@ -39,7 +38,7 @@ defineProps({
 
                 <el-table-column property="name" label="状态">
                     <template #default="{ row }">
-                        <div class="flex items-center">
+                        <div class="flex items-center ">
                             <Icon :icon="getRuningStateInfo(row.deviceData.M2).icon" :size="24" class="mr-[8px]" />
                             <span :class="getRuningStateInfo(row.deviceData.M2).color">{{
                                 getRuningStateInfo(row.deviceData.M2).text }}</span>
@@ -49,48 +48,48 @@ defineProps({
 
                 <el-table-column property="name" label="剩余电量">
                     <template #default="{ row }">
-                        <span>{{ toFixed(row.deviceData.M3) }}%</span>
+                        <span  >{{ toFixed(row.deviceData.M3) }}%</span>
                     </template>
                 </el-table-column>
 
                 <el-table-column property="name" label="日充">
                     <template #default="{ row }">
-                        <span>{{ conversionUnitKWh(row.deviceData.M15).size }} {{ conversionUnitKWh(row.deviceData.M15).unit
+                        <span :class="row.maxDayCharge ? 'discharge_color' : ''">{{ conversionUnitKWh(row.deviceData.M15).size }} {{ conversionUnitKWh(row.deviceData.M15).unit
                         }}</span>
                     </template>
                 </el-table-column>
 
                 <el-table-column property="name" label="日放">
                     <template #default="{ row }">
-                        <span>{{ conversionUnitKWh(row.deviceData.M16).size }} {{ conversionUnitKWh(row.deviceData.M16).unit
+                        <span :class="row.maxDayDisCharge ? 'discharge_color' : ''">{{ conversionUnitKWh(row.deviceData.M16).size }} {{ conversionUnitKWh(row.deviceData.M16).unit
                         }}</span>
                     </template>
                 </el-table-column>
 
                 <el-table-column property="name" label="年充">
                     <template #default="{ row }">
-                        <span>{{ conversionUnitKWh(row.deviceData.M19).size }} {{ conversionUnitKWh(row.deviceData.M19).unit
+                        <span :class="row.maxYearCharge ? 'discharge_color' : ''">{{ conversionUnitKWh(row.deviceData.M19).size }} {{ conversionUnitKWh(row.deviceData.M19).unit
                         }}</span>
                     </template>
                 </el-table-column>
 
                 <el-table-column property="name" label="年充">
                     <template #default="{ row }">
-                        <span>{{ conversionUnitKWh(row.deviceData.M20).size }} {{ conversionUnitKWh(row.deviceData.M20).unit
+                        <span :class="row.maxYearDisCharge ? 'discharge_color' : ''">{{ conversionUnitKWh(row.deviceData.M20).size }} {{ conversionUnitKWh(row.deviceData.M20).unit
                         }}</span>
                     </template>
                 </el-table-column>
 
                 <el-table-column property="name" label="累充">
                     <template #default="{ row }">
-                        <span>{{ conversionUnitKWh(row.deviceData.M5).size }} {{ conversionUnitKWh(row.deviceData.M5).unit
+                        <span :class="row.maxAccCharge ? 'discharge_color' : ''">{{ conversionUnitKWh(row.deviceData.M5).size }} {{ conversionUnitKWh(row.deviceData.M5).unit
                         }}</span>
                     </template>
                 </el-table-column>
 
                 <el-table-column property="name" label="累充">
                     <template #default="{ row }">
-                        <span>{{ conversionUnitKWh(row.deviceData.M6).size }} {{ conversionUnitKWh(row.deviceData.M6).unit
+                        <span :class="row.maxAccDisCharge ? 'discharge_color' : ''">{{ conversionUnitKWh(row.deviceData.M6).size }} {{ conversionUnitKWh(row.deviceData.M6).unit
                         }}</span>
                     </template>
                 </el-table-column>
