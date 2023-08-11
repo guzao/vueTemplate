@@ -1,5 +1,6 @@
 import { expect, it, describe } from 'vitest'
-import { convertBoolean, isTrue, isFalse, normIsTrue } from '@/utils'
+import { convertBoolean, isTrue, isFalse, normIsTrue } from '../../../utils'
+
 
 describe('booleanTools', () => {
 

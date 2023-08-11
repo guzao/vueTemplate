@@ -20,6 +20,13 @@ export function geStationPowerAll (params: { stationSerial: string, date: string
         params
     })
 }
+/** 获取指定电站指定设备实施功率曲线 */
+export function geStationPowerByUnit (params: { stationSerial: string, date: string, unitId: any }) {
+    return useGet<ParkPowerLine []>({
+        url: `${monitor.stationPowerByUnit}`,
+        params
+    })
+}
 
 /** 获取指定设备基本信息 */
 export function getDeviceInfo (params: DeviceInfoParams) {

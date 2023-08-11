@@ -23,7 +23,7 @@ defineProps({
     <ul class="grid grid-cols-1 gap-[8px] more_device_list">
 
         <li @click="checkDeviceDetail(deivce)"
-            class="h-[148px] bg-[var(--theme-gray251-bg)] pl-[12px] box-border cursor-pointer flex items-center"
+            class="h-[158px] bg-[var(--theme-gray251-bg)] pl-[12px] box-border cursor-pointer flex items-center"
             v-for="deivce in deiveList" :key="deivce.id">
 
             <div class="flex items-center h-[46px] items-center w-[140px]">

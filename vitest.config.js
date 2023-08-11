@@ -6,6 +6,7 @@ export default defineConfig({
     test: {
         // 模拟dom环境
         environment: "happy-dom",
+        include: ['./src/tests/**'],
         alias: {
             "@": resolve(__dirname, 'src'),
         }

@@ -28,21 +28,10 @@ export  function useReactiveHttp <T> (params: UseReactiveGetParams<T>) {
             loading.value = false
             if (hasEror(res)) return
             result.value = requestCallback(res) || res
+        }).catch(err => {
+            console.warn(err)
         })
     }
-
-    // const getResult = async () => {
-    //     loading.value = true
-    //     try {
-    //         const res = await request()
-    //         loading.value = false
-    //         if (hasEror(res)) return
-    //         result.value = requestCallback(res) || res
-    //     } catch (error) {
-    //         loading.value = false
-    //         throw error;
-    //     }
-    // }
 
     Immediately && getResult()
 

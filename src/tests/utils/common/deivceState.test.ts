@@ -1,5 +1,6 @@
 import { expect, it, describe } from 'vitest'
-import { getRuningStateInfo, getDeviceStateInfo, getDeviceCNXBatteryMarkInfo } from '@/utils'
+import { getRuningStateInfo, getDeviceStateInfo, getDeviceCNXBatteryMarkInfo } from '../../../utils'
+
 
 describe('test array utils ', () => {
 

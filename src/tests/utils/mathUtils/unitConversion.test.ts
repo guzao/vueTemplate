@@ -1,5 +1,6 @@
 import { expect, it, describe } from 'vitest'
-import { conversionUnitKVar, conversionUnitKW, conversionUnitKWh, isNegative, toFixed } from "@/utils";
+import { conversionUnitKVar, conversionUnitKW, conversionUnitKWh, isNegative, toFixed } from '../../../utils'
+
 
 
 describe('unit conversion tools', () => {

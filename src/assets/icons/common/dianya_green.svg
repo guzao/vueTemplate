@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>切片</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#E1EBF5" offset="0%"></stop>
+            <stop stop-color="#0EA944" offset="100%"></stop>
+        </linearGradient>
+        <ellipse id="path-2" cx="12.1260073" cy="15.922121" rx="9.57655678" ry="4.34962717"></ellipse>
+        <linearGradient x1="-27.7527451%" y1="0%" x2="78.5813165%" y2="87.4410787%" id="linearGradient-3">
+            <stop stop-color="#C5EAD2" offset="0%"></stop>
+            <stop stop-color="#0EA944" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="设备监控-储能箱备份" transform="translate(-485.000000, -936.000000)">
+            <g id="编组-60" transform="translate(469.000000, 889.000000)">
+                <g id="icon/68/电量-电压" transform="translate(16.000000, 47.000000)">
+                    <ellipse id="椭圆形备份-2" fill-opacity="0.399622137" fill="#CEF8DD" cx="12" cy="18.4076222" rx="12" ry="5.5923778"></ellipse>
+                    <path d="M12.1260073,13.0637945 C16.3636562,13.0637945 19.9584405,14.3139355 21.2201311,16.0465232 L21.7025641,16.046396 L21.7025641,17.5376968 C21.5545841,19.8821538 17.3239055,21.7630489 12.1260073,21.7630489 C6.83702106,21.7630489 2.54945055,19.8156545 2.54945055,17.4134217 L2.55345055,17.5367945 L2.54945055,17.5376968 L2.54945055,16.046396 L3.03188359,16.0465232 C4.29357418,14.3139355 7.88835848,13.0637945 12.1260073,13.0637945 Z" id="形状结合" fill="#B9F6CF"></path>
+                    <g id="椭圆形">
+                        <use fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+                        <use fill="#CEF8DD" xlink:href="#path-2"></use>
+                    </g>
+                    <ellipse id="椭圆形" fill="#ACEBC3" cx="13.7549731" cy="16.4769564" rx="3.88235294" ry="1"></ellipse>
+                    <polygon id="路径" fill="#96ECB5" fill-rule="nonzero" transform="translate(12.486674, 11.456599) scale(1, -1) translate(-12.486674, -11.456599) " points="14.836877 13.713369 15.9293262 16.5882353 17.2086417 16.5882353 13.1694545 6.32496257 11.803893 6.32496257 7.76470588 16.5882353 9.02964706 16.5882353 10.1220963 13.713369 12.3320451 7.67689995"></polygon>
+                    <polygon id="路径" fill="url(#linearGradient-3)" fill-rule="nonzero" transform="translate(11.780791, 11.456599) scale(1, -1) translate(-11.780791, -11.456599) " points="15.2234439 16.5882353 16.5027594 16.5882353 12.4635722 6.32496257 11.0980107 6.32496257 7.05882353 16.5882353 8.32376471 16.5882353 9.4162139 13.713369 11.7807914 7.58990374"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

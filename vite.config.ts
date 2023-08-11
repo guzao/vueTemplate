@@ -27,7 +27,7 @@ function useServer(model: string) {
         target: 'http://124.223.210.24/',
         changeOrigin: true,
         ws: true,
-        rewrite: (path) => path,
+        rewrite: (path: string) => path,
       },
     },
   }

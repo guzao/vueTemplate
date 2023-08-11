@@ -1,5 +1,6 @@
 import { expect, it, describe } from 'vitest'
-import { urlQueryToObject, objectToUrlQuery } from '@/utils'
+import { urlQueryToObject, objectToUrlQuery } from '../../../utils'
+
 
 
 describe('common utils ', () => {

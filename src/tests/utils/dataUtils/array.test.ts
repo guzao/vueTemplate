@@ -2,7 +2,8 @@ import { expect, it, describe } from 'vitest'
 import { 
     getArrayLength, arrayIsEmpty, arrayIsNotEmpty, arrayGroupBy, arrayGroupByMap, arrayChunk,
     getFirstElement, getLastElement, 
-} from '@/utils'
+} from '../../../utils'
+
 
 
 

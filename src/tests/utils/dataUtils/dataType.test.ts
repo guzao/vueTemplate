@@ -1,5 +1,5 @@
 import { expect, it, describe } from 'vitest'
-import { isArray, isBoolean, isDate, isFunction, isNull, isNumber, isObject, isStrinNull, isString } from '@/utils'
+import { isArray, isBoolean, isDate, isFunction, isNull, isNumber, isObject, isStrinNull, isString } from '../../../utils'
 
 describe('data Type Tools', () => {
 
