@@ -9,7 +9,7 @@ import SubLayout from "@/layout/SubLayout/index.vue"
 import DeviceBaseInfo from './components/DeviceBaseInfo.vue'
 import DeviceHeaderInfo from './components/DeviceHeaderInfo.vue'
 
-const { deviceBaseInfo, loading, deviceDetialContext }  = useDeviceDetialContext()
+const { deviceBaseInfo, loading }  = useDeviceDetialContext()
 
 </script>
 
@@ -29,14 +29,8 @@ const { deviceBaseInfo, loading, deviceDetialContext }  = useDeviceDetialContext
             <!-- 基本信息 功率曲线 -->
             <DeviceBaseInfo :device-base-info="deviceBaseInfo.deviceMap" v-loading="loading" />
 
-            <!-- 储能单元 -->
+            <!-- 储能单元 pcd -->
             <DeviceUnit :storage-unit="deviceBaseInfo.E" />
-
-            <!-- 电网信息 -->
-            <!-- <PowerGrid /> -->
-
-            <!-- PCS 信息 -->
-            <PCSInfo />
 
         </div>
 

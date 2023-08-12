@@ -2,16 +2,16 @@ import { reactive, watch } from 'vue'
 
 
 type UsePaginationParams = {
-    total: number;
+    total?: number;
     pageNum?: number;
     pageSize?: number;
     callback: () => any
 }
 
-export function usePagination ({ pageNum = 1, pageSize = 10, callback }: UsePaginationParams) {
+export function usePagination ({ pageNum = 1, pageSize = 10, callback, total}: UsePaginationParams) {
     
     const pageParams = reactive({
-        total: 0,
+        total: total || 0,
         pageNum: pageNum || 1,
         pageSize: pageSize || 10,
     })

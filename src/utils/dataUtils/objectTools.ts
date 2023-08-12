@@ -65,7 +65,10 @@ export function deepCloe <T> (object: T): T {
     let result: any;
     if (isArray(object)) result = []
     if (isObject(object)) result = {}
-    if (isDate(object)) result = new Date(+object)
+    if (isDate(object)) {
+        result = new Date(+object)
+        return result
+    }
 
     for (const key in object) {
         if (Object.prototype.hasOwnProperty.call(object, key)) {

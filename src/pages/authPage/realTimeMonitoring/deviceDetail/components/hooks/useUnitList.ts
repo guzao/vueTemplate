@@ -44,7 +44,7 @@ export function useUnitGroup() {
 
         const oldParams = urlQueryToObject()
 
-        const urlParams = { ...oldParams, unitId: unit.id } as DeviceDetailNewTapUrlParam
+        const urlParams = { ...oldParams, unitId: unit.id, state: deviceDetail?.deviceState } as DeviceDetailNewTapUrlParam
 
         replaceUrlQuery(urlParams)
 

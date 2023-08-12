@@ -59,3 +59,58 @@ export function arrayChunk<T>(data: T[] = [], groupNmber: number) {
  * 查找数组中的最大元素
 */
 export const getMaxElement = <T> (data: T[], callback: MaxElementCallback<T>) => data.reduce((maxEl, cur) => callback(maxEl, cur) ? cur : maxEl, data[0])
+
+
+
+type DataRangeResult <T> = {
+    start: {
+        index: number,
+        value: T
+    },
+    end: {
+        index: number,
+        value: T
+    },
+}
+
+type CachePoolData<T> = { index: number, value:T }
+
+/**
+ * 统计数组内的元素的区间 [1, 2, 3, 4, 5, 6, 1, 2,3 ] == > [ {}, {} ]
+*/
+export function getDataRange <T> (originData: T [], processCallback: (item: T) => boolean) {
+
+    const result: DataRangeResult<T> [] = []
+
+    const cachePool: CachePoolData<T>[] = []
+
+    originData.forEach((item, index) => {
+        if (processCallback(item)) {
+            cachePool.push({ value: item, index: index })
+        } else {
+            if (arrayIsEmpty(cachePool)) return
+            setDataRangeResult(cachePool, result)
+        }
+    })
+    
+    setDataRangeResult(cachePool, result)
+
+    return result
+
+}
+
+function setDataRangeResult <T> (cachePool: CachePoolData<T>[], result: DataRangeResult<T> []) {
+    const startEl = getFirstElement(cachePool)
+    const endEl = getLastElement(cachePool)
+    result.push({
+        start: {
+            index: startEl.index,
+            value: startEl.value
+        },
+        end: {
+            index: endEl.index,
+            value: endEl.value
+        }
+    })
+    cachePool.length = 0
+}

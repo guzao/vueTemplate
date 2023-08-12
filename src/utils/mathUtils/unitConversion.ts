@@ -5,7 +5,8 @@ export const isNegative = (raw: number) => raw < 0
 export const toFixed = (raw: number, fractionDigits = 1) => {
     if (raw == 0) return 0
     raw = edgeCaseToFixed(raw) as any
-    return raw.toFixed(fractionDigits) + ''
+    const toFixedEd = raw.toFixed(fractionDigits)
+    return `${toFixedEd}`
 }
 
 export function edgeCaseToFixed(raw: any) {

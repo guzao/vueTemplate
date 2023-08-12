@@ -38,7 +38,7 @@ const { getResult: getOperType, dictLabel: operTypeDictLabel, result: operTypeDi
 
 
 /**
- * 使用getters 中的数据获取对应的字典内部触发缓存
+ * 使用getter 中的数据获取对应的字典内部触发缓存
 */
 export const useDicts = defineStore('useDict', {
 

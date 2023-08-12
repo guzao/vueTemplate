@@ -1,5 +1,6 @@
 import { CreateAxiosDefaults } from "axios"
 import { login } from '@/ApiMap'
+
 const config = import.meta.env
 export const axiosConfig: CreateAxiosDefaults = {
     baseURL: config.VITE_APP_BASE_URL,

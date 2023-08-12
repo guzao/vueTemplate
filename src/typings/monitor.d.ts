@@ -47,7 +47,7 @@ type DeviceItem = {
     createTime: number,
     updateTime: number,
     params: Params$1Type,
-    [ key:string ]: any,
+    [key: string]: any,
     /** 设备运行参数 */
     deviceData: {
         M2: number
@@ -212,4 +212,94 @@ interface DeviceMap {
     M16: number
     M19: number
     M18: number
+    [key: string]: any
+}
+
+/** PCS 信息 */
+type PCSInfo = {
+    "P01.X39": boolean
+    "P01.X38": boolean
+    "P01.C23": number
+    "P01.C22": number
+    "P01.C21": number
+    "P01.C20": number
+    "P01.C24": number
+    "P01.X40": boolean
+    "P01.X44": boolean
+    "P01.X43": boolean
+    "P01.X42": boolean
+    "P01.X41": boolean
+    "P01.X45": boolean
+    "P01.X29": boolean
+    "P01.X9": boolean
+    "P01.X28": boolean
+    "P01.X8": boolean
+    "P01.X27": boolean
+    "P01.X7": boolean
+    "P01.C12": number
+    "P01.X6": boolean
+    "P01.C11": number
+    "P01.X5": boolean
+    "P01.C10": number
+    "P01.X4": boolean
+    "P01.X3": boolean
+    "P01.C16": number
+    "P01.X2": boolean
+    "P01.C15": number
+    "P01.X1": boolean
+    "P01.C14": number
+    "P01.C13": number
+    "P01.C9": number
+    "P01.C19": number
+    "P01.C8": number
+    "P01.C18": number
+    "P01.C7": number
+    "P01.C17": number
+    "P01.C6": number
+    "P01.C5": number
+    "P01.C4": number
+    "P01.C3": number
+    "P01.C2": number
+    "P01.C1": number
+    "P01.X33": boolean
+    "P01.X32": boolean
+    "P01.X31": boolean
+    "P01.X30": boolean
+    "P01.X37": boolean
+    "P01.X36": boolean
+    "P01.X35": boolean
+    "P01.X34": boolean
+    "P01.X19": boolean
+    "P01.X18": boolean
+    "P01.X17": boolean
+    "P01.X16": boolean
+    "P01.X22": boolean
+    "P01.X21": boolean
+    "P01.X20": boolean
+    "P01.X26": boolean
+    "P01.X25": boolean
+    "P01.X24": boolean
+    "P01.X23": boolean
+    "P01.X11": boolean
+    "P01.X10": boolean
+    "P01.X15": boolean
+    "P01.X14": boolean
+    "P01.X13": boolean
+    "P01.X12": boolean
+}
+
+/** 设备状态 */
+type DeviceState = {
+    "Y01.X6": number
+    "Y01.C1": number
+    "Y01.X7": number
+    "Y01.C2": number
+    "Y01.X4": number
+    "Y01.X5": number
+    "Y01.X8": number
+    "Y01.C3": number
+    "Y01.X9": number
+    "Y01.C4": number
+    "E01.C1": number
+    [key: string]: any
 }

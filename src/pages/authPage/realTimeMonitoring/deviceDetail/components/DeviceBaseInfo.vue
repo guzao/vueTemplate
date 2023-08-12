@@ -133,6 +133,7 @@ const { chartRef } = usePowerLine({ height: 180, device: 'device' })
                 <el-tabs v-model="activeName" class="demo-tabs" @tab-click="() => { }">
 
                     <el-tab-pane label="实时功率" name="powerLine">
+                        <!-- 功率曲线 -->
                         <div ref="chartRef"></div>
                     </el-tab-pane>
 

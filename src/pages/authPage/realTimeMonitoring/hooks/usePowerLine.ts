@@ -40,6 +40,8 @@ export function usePowerLine(config: UsePowerLineConfig) {
 
     const { renderChart, chartRef, echarts } = useEcharts(config.height)
 
+    const gridRight = config.device == 'park' ? '0%' : '1%'
+
     const render = async (data: ParkPowerLine[]) => {
         await nextTick()
         renderChart({
@@ -54,7 +56,7 @@ export function usePowerLine(config: UsePowerLineConfig) {
             grid: {
                 top: '6%',
                 left: '1%',
-                right: '0%',
+                right: gridRight,
                 bottom: '4%',
                 containLabel: true
             },
@@ -170,7 +172,7 @@ export function usePowerLine(config: UsePowerLineConfig) {
     })
 
 
-    const { _resetInterval } = useInterval(1000 * 60 * 2, getResult)
+    const { _resetInterval } = useInterval(1000 * 60 * 3, getResult)
 
     watch(() => config.device == 'park' ? appData.currentParkSerial : deviceDetailContext?.unitId, () => {
         currentTime.value = writeDefaultDate(appData.currentLastTime)

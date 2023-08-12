@@ -6,6 +6,8 @@ import { useReactiveHttp } from '@/hooks'
 import { PropType, watch, inject } from 'vue'
 import { deviceDetailContextKey } from '../useDevice'
 
+import PCSInfo from './PCSInfo.vue'
+import DeviceState from './DeviceState.vue'
 import Icon from '@/components/common/Icon.vue'
 import LabelValueUnit from '@/components/common/LabelValueUnit.vue'
 
@@ -24,26 +26,47 @@ const deviceDetailContext = inject(deviceDetailContextKey)
 const { result, getResult, loading } = useReactiveHttp({
     initData: {} as any,
     request: () => getDeviceInfo({ stationSerial: appData.currentParkSerial, type: 'S', groupId: deviceDetailContext?.storageUnitId, unitId: deviceDetailContext?.unitId! }),
-    requestCallback: ({ data }) => {
-        return data.S
-    },
+    requestCallback: ({ data }) => data.S,
     Immediately: false
 })
 
-const stop = watch(() => deviceDetailContext?.storageUnitId, () => {
-    getResult()
-    stop()
+const { result: PcsInfo, getResult: getPcsInfo } = useReactiveHttp({
+    initData: {} as PCSInfo,
+    request: () => getDeviceInfo({ stationSerial: appData.currentParkSerial, type: 'P', groupId: deviceDetailContext?.storageUnitId, unitId: deviceDetailContext?.unitId! }),
+    requestCallback: ({ data }) => data.P,
+    Immediately: false
+})
+
+const { result: deviceState, getResult: getDeviceState } = useReactiveHttp({
+    initData: {} as DeviceState,
+    request: () => getDeviceInfo({ stationSerial: appData.currentParkSerial, type: 'F', groupId: deviceDetailContext?.storageUnitId, unitId: deviceDetailContext?.unitId! }),
+    requestCallback: ({ data }) => data.F,
+    Immediately: false
 })
 
 
-watch(() => deviceDetailContext?.unitId, getResult)
+const getData = () => {
+    getResult()
+    getPcsInfo()
+    getDeviceState()
+}
+
+const stop = watch(() => deviceDetailContext?.storageUnitId, () => {
+    getData()
+    stop()
+})
+
+watch(() => deviceDetailContext?.unitId,  getData)
 
 </script>
 
 <template>
+
+    <DeviceState  :device-state="deviceState" />
+
     <div class="bg-[var(--theme-white-bg)] mb-[16px] p-[20px] pt-[10px]" v-loading="loading">
 
-        <el-tabs v-model="deviceDetailContext!.storageUnitId" class="demo-tabs" @tab-click="getResult">
+        <el-tabs v-model="deviceDetailContext!.storageUnitId" class="demo-tabs" @tab-click="getData">
 
             <el-tab-pane :label="unit.name" :name="unit.id" v-for="unit in storageUnit" :key="unit.id">
 
@@ -64,7 +87,7 @@ watch(() => deviceDetailContext?.unitId, getResult)
                             </LabelValueUnit>
 
                             <LabelValueUnit :font-size="16">
-                                电压
+                                电流
                                 <template #value> {{ toFixed(result['S01.C3'], 3) }} </template>
                                 <template #unit> A </template>
                             </LabelValueUnit>
@@ -107,13 +130,13 @@ watch(() => deviceDetailContext?.unitId, getResult)
 
                             <LabelValueUnit :font-size="16">
                                 最高电池温度
-                                <template #value> {{ toFixed(result['S01.C16'], 3) }} </template>
+                                <template #value> {{ toFixed(result['S01.C16']) }} </template>
                                 <template #unit> % </template>
                             </LabelValueUnit>
 
                             <LabelValueUnit :font-size="16">
                                 最低电池温度
-                                <template #value>  {{ toFixed(result['S01.C20'], 3) }} </template>
+                                <template #value>  {{ toFixed(result['S01.C20']) }} </template>
                                 <template #unit> % </template>
                             </LabelValueUnit>
 
@@ -131,7 +154,7 @@ watch(() => deviceDetailContext?.unitId, getResult)
                     </ul>
 
                 </div>
-                <ul class="grid grid-cols-4 gap-[32px]">
+                <ul class="grid grid-cols-4 gap-[18px]">
                     <li class=" bg-[var(--theme-gray251-bg)]" v-for="(item, index) in result.B" :key="index">
 
                         <div class="h-[36px] flex justify-between items-center px-[15px] box-border"
@@ -143,13 +166,13 @@ watch(() => deviceDetailContext?.unitId, getResult)
 
                             <li class="flex pl-[16px] box-border flex-1 items-center">
                                 <Icon :size="24" icon="icon_dinaya_green" class="mr-[8px]" />
-                                <div class="mr-[8px]"> 电压/ U </div>
+                                <div class="mr-[4px]"> 电压/ U </div>
                                 <div> {{ toFixed(item.C2) }} V </div>
                             </li> 
 
                             <li class="flex  pl-[16px] box-border flex-1 items-center">
                                 <Icon :size="24" icon="icon_dinaliu_green" class="mr-[8px]" />
-                                <div class="mr-[8px]"> 电流/ I </div>
+                                <div class="mr-[4px]"> 电流/ I </div>
                                 <div> {{ toFixed(item.C3) }} A </div>
                             </li>
 
@@ -213,6 +236,9 @@ watch(() => deviceDetailContext?.unitId, getResult)
         </el-tabs>
 
     </div>
+
+    <PCSInfo :pcs-info="PcsInfo" />
+
 </template>
 
 

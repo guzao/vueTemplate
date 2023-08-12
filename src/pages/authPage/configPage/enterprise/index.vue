@@ -38,7 +38,7 @@ import LabelValueUnit from '@/components/common/LabelValueUnit.vue';
 
         <LabelValueUnit :font-size="16" class="my-[10px]">
             公司状态
-            <template #value> {{   dept.status  }} </template>
+            <template #value> {{ dept.status  }} </template>
         </LabelValueUnit>
 
         <LabelValueUnit :font-size="16" class="my-[10px]">

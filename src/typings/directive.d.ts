@@ -13,4 +13,6 @@ type Watermark = {
     color?: string;
     /** 水印文本字体大小 */
     fontSize?: number;
+    /** 是否作为指定元素的背景图 */
+    isBcg?: boolean
 }
