@@ -11,7 +11,7 @@ export function useDeviceDetail() {
         const params: DeviceDetailNewTapUrlParam = {
             stationCode: appData.currentParkSerial,
             type: appData.currentParkType,
-            unitId: device.id,
+            unitId: device.id as any,
             state: device.deviceData.M2
         }
         const urlQuery = objectToUrlQuery(params as any)

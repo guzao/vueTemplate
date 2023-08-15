@@ -15,8 +15,8 @@ export function useLogin() {
 
     const form = ref({
         code: '',
-        password: 'SmartOps@1234',
-        username: 'demo',
+        password: '',
+        username: '',
         uuid: '',
     })
 

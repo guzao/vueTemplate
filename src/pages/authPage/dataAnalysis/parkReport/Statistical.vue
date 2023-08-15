@@ -79,7 +79,7 @@ watch(() => appData.currentParkSerial, getParkOverview)
 
                     <LabelValueUnit :font-size="18">
                         效率
-                        <template #value> {{ getEfficiency(parkOverview.A_M18, parkOverview.A_M17) }} </template>
+                        <template #value> {{ getEfficiency(parkOverview.A_M17, parkOverview.A_M18) }} </template>
                         <template #unit>  % </template>
                     </LabelValueUnit>
 
@@ -134,7 +134,7 @@ watch(() => appData.currentParkSerial, getParkOverview)
 
                     <LabelValueUnit :font-size="18">
                         效率
-                        <template #value> {{ getEfficiency(parkOverview.A_M6, parkOverview.A_M5)  }} </template>
+                        <template #value> {{ getEfficiency(parkOverview.A_M5, parkOverview.A_M6)  }} </template>
                         <template #unit> % </template>
                     </LabelValueUnit>
 

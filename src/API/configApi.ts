@@ -62,3 +62,10 @@ export function getAddUserProfileInitPwd () {
         url: configApiMap.addUserProfileInitPwd,
     })
 }
+
+/** 企业管理 列表 */
+export function getDeptList () {
+    return useGet({
+        url: configApiMap.deptList,
+    })
+}

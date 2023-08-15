@@ -5,5 +5,9 @@ export const dataAnalysisMap = {
     /** ess/report/dailyReport?stationSerial=ESCNGXAH02&date=2023-08-02&lang=zh_CN */
     dailyReport: '/ess/report/dailyReport',
     /** 获取设备历史充放电数据 */ 
-    historyReport: '/ess/report/historyReport'
+    historyReport: '/ess/report/historyReport',
+    /** 设备告警类型 /ess/eos_warning/count.by.device.type */
+    warningBydeviceType: '/ess/eos_warning/count.by.device.type',
+    /** 设备告警等级  */
+    warningByLevel: '/ess/eos_warning/count.by.level'
 }

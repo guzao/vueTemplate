@@ -50,7 +50,7 @@ defineExpose({
 
             <el-col :span="12">
                 <el-form-item label="场站编号"  prop="serial">
-                    <el-input v-model="parkForm.serial" style="width: 100%;" />
+                    <el-input v-model="parkForm.serial" :disabled="!!parkForm.id" style="width: 100%;" />
                 </el-form-item>
             </el-col>
 

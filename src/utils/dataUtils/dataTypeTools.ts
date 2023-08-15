@@ -25,4 +25,4 @@ export const isFunction = (data: any) => getToStrigResult(data) == DataType.FUNC
 export const isDate = (data: any) => getToStrigResult(data) == DataType.Date
 
 /** 数值是否是字符串类型的null */
-export const isStrinNull = (data: any) => data === 'null'
+export const isStringNull = (data: any) => data === 'null'

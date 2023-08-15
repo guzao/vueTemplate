@@ -39,6 +39,9 @@ export const authRouter: RouteRecordRaw[] = [
     {
         path: '/monitor/deviceDetail',
         component: () => import('@/pages/authPage/realTimeMonitoring/deviceDetail/index.vue'),
+        meta: {
+            layoutType: 'newTab'
+        }
     },
 
     {
@@ -61,6 +64,20 @@ export const authRouter: RouteRecordRaw[] = [
                 },
                 path: '/dataAnalysis/deviceReport',
                 component: () => import('@/pages/authPage/dataAnalysis/deviceReport/index.vue'),
+            },
+            {
+                meta: {
+                    title: '告警统计'
+                },
+                path: '/dataAnalysis/warning',
+                component: () => import('@/pages/authPage/dataAnalysis/warning/index.vue'),
+            },
+            {
+                meta: {
+                    title: '历史数据'
+                },
+                path: '/dataAnalysis/historyData',
+                component: () => import('@/pages/authPage/dataAnalysis/historyData/index.vue'),
             },
         ]
     },

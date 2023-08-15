@@ -1,5 +1,5 @@
 import { expect, it, describe } from 'vitest'
-import { isArray, isBoolean, isDate, isFunction, isNull, isNumber, isObject, isStrinNull, isString } from '../../../utils'
+import { isArray, isBoolean, isDate, isFunction, isNull, isNumber, isObject, isStringNull, isString } from '../../../utils'
 
 describe('data Type Tools', () => {
 
@@ -57,10 +57,10 @@ describe('data Type Tools', () => {
 
     })
 
-    it('isStrinNull', () => {
+    it('isStringNull', () => {
 
-        expect(isStrinNull(null)).toBe(false)
-        expect(isStrinNull('null')).toBe(true)
+        expect(isStringNull(null)).toBe(false)
+        expect(isStringNull('null')).toBe(true)
 
     })
 

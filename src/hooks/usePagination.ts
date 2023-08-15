@@ -26,7 +26,7 @@ export function usePagination ({ pageNum = 1, pageSize = 10, callback, total}: U
     })
 
     const resteParams = () => {
-        pageParams.pageNum = 1
+        pageParams.pageNum = pageNum
         pageParams.pageSize = pageSize
     }
 

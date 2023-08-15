@@ -15,4 +15,6 @@ export const configApiMap = {
     userProfileUpdatePwd: '/system/user/profile/updatePwd',
     /** 添加用户时的初始密码  */
     addUserProfileInitPwd: '/system/config/configKey/sys.user.initPassword',
+    /** 企业管理 列表  */
+    deptList: '/system/dept/list',
 }

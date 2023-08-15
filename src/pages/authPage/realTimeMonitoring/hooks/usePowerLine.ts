@@ -24,7 +24,6 @@ export function usePowerLine(config: UsePowerLineConfig) {
 
     const nextDisabled = ref(hasCurrentDay())
 
-
     const deviceDetailContext = inject(deviceDetailContextKey, {} as any)
     
     const prevTime = () => {
@@ -153,12 +152,11 @@ export function usePowerLine(config: UsePowerLineConfig) {
         })
     }
 
-
     const getMetholds = () => {
         if (config.device == 'park') {
             return geStationPowerAll({ stationSerial: appData.currentParkSerial, date: paserTime(currentTime.value, 'YYYY-MM-DD') })
         } else {
-            return geStationPowerByUnit({ stationSerial: appData.currentParkSerial, date: paserTime(writeDefaultDate(appData.currentLastTime), 'YYYY-MM-DD'), unitId: deviceDetailContext?.unitId })
+            return geStationPowerByUnit({ stationSerial: appData.currentParkSerial, date: paserTime(writeDefaultDate(currentTime.value), 'YYYY-MM-DD'), unitId: deviceDetailContext?.unitId })
         }
     }
 
@@ -170,7 +168,6 @@ export function usePowerLine(config: UsePowerLineConfig) {
             return data
         }
     })
-
 
     const { _resetInterval } = useInterval(1000 * 60 * 3, getResult)
 

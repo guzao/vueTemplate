@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import { PropType, ref } from 'vue';
 import { usePowerLine } from '../../hooks/usePowerLine'
-import { conversionUnitKWh, toFixed, conversionUnitKVar, conversionUnitKW } from '@/utils'
+import { conversionUnitKWh, toFixed, conversionUnitKVar, conversionUnitKW, paserTime } from '@/utils'
 
 import TitleBoxVue from '@/components/common/TitleBox.vue';
+import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
+
 
 defineProps({
     /** 设备基本信息 */
@@ -15,9 +17,10 @@ defineProps({
     }
 })
 
-const activeName = ref('powerLine')
+type ActiveName = 'powerLine' | 'alarms'
+const activeName = ref<ActiveName>('powerLine')
 
-const { chartRef } = usePowerLine({ height: 180, device: 'device' })
+const { chartRef, currentTime, prevTime, nextTime } = usePowerLine({ height: 180, device: 'device' })
 
 </script>
 
@@ -128,7 +131,7 @@ const { chartRef } = usePowerLine({ height: 180, device: 'device' })
 
             </div>
 
-            <div class="h-[250px] bg-[var(--theme-white-bg)] p-[20px] py-[5px] box-border">
+            <div class="h-[250px] bg-[var(--theme-white-bg)] p-[20px] py-[5px] box-border relative">
 
                 <el-tabs v-model="activeName" class="demo-tabs" @tab-click="() => { }">
 
@@ -141,6 +144,23 @@ const { chartRef } = usePowerLine({ height: 180, device: 'device' })
                     </el-tab-pane>
 
                 </el-tabs>
+
+                <div v-show="activeName == 'powerLine'" class="flex absolute top-[10px] right-[10px]">
+                    <div @click="prevTime"
+                        class="bg-[var(--theme-gray-bg)] w-[20px] flex justify-center items-center rounded-[4px] cursor-pointer">
+                        <el-icon>
+                            <ArrowLeft />
+                        </el-icon>
+                    </div>
+                    <div class="tex-[12px] text-[var(--theme-gray153)] mx-[20px]"> 当前时间：{{ paserTime(currentTime,
+                        'YYYY-MM-DD') }} </div>
+                    <div @click="nextTime"
+                        class="bg-[var(--theme-gray-bg)] w-[20px] flex justify-center items-center  rounded-[4px] cursor-pointer">
+                        <el-icon>
+                            <ArrowRight />
+                        </el-icon>
+                    </div>
+                </div>
 
             </div>
 

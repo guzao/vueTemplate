@@ -25,7 +25,7 @@ export const layoutConfig = {
     showSlider: false,
 
     /** 通用 图表高度 */
-    chartHeight: 300,
+    chartHeight: 360,
 
     /** 二级页面标题 */
     hiddenSubTitle: true,

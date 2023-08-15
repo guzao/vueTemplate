@@ -96,6 +96,20 @@ export const loaclRouter = [
                 path: '/dataAnalysis/deviceReport',
                 hidden: false,
             },
+            {
+                meta: {
+                    title: '告警统计'
+                },
+                path: '/dataAnalysis/warning',
+                hidden: false,
+            },
+            {
+                meta: {
+                    title: '历史数据'
+                },
+                path: '/dataAnalysis/historyData',
+                hidden: false,
+            },
         ]
     },
 

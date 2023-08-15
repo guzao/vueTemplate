@@ -1,6 +1,11 @@
 import { toFixed } from "./unitConversion";
 
-/** 计算效率 */
+/** 
+ * 计算效率
+ * @param charge 充电
+ * @param diacharge 放电
+ * @param fractionDigits 保留小数位
+ */
 export function getEfficiency ( charge: number, diacharge: number, fractionDigits: number = 3) {
     if (charge == 0) charge = 1
     const efficiency = diacharge / charge

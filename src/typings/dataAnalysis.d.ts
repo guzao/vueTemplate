@@ -1,4 +1,14 @@
 
+/** 电站设备运行数据 */
+type ParkDeviceRunningData = {
+    stationSerial: string,
+    step: number,
+    sTime: string,
+    eTime: string,
+    unitId: string,
+    page: string,
+}
+
 
 /** 电站报表 */
 type ParkRunReportParams = {
@@ -43,8 +53,8 @@ type DailyReportDataData = {
 type DailyReportData = {
     charge: number,
     discharge: number,
-    data: DailyReportDataData [],
-    subNum: number []
+    data: DailyReportDataData[],
+    subNum: number[]
 }
 
 /** 设备历史充放电数据接口参数 */
@@ -63,5 +73,18 @@ type HistoryReportData = {
     id: string
     time: string
     disCharge: string
-    [ key: string ]: any 
+    [key: string]: any
 }
+
+/** 设备告警数据 */
+type WarningData = {
+    time: string
+    name: string
+    count: number
+    id: string
+    level: any
+    [key: string]: any
+}
+
+/** 设备告警等级 */
+type WarningLevel = WarningData

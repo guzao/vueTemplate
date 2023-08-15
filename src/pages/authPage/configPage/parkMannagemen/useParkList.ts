@@ -30,7 +30,7 @@ export function useParkList(emits: any) {
         "remark": null,
         "fullName": "",
         "name": "",
-        "serial": appData.currentParkSerial,
+        "serial": '',
         "industryType": "",
         "type": "0",
         "useType": "",

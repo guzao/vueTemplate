@@ -24,3 +24,19 @@ export function getHistoryReport (data: HistoryReportParams) {
         data
     })
 }
+
+/** 设备告警类型 */
+export function getWarningBydeviceType (data: any) {
+    return usePost({
+        url: dataAnalysisMap.warningBydeviceType,
+        data
+    })
+}
+
+/** 设备告警等级 */
+export function getWarningByLevel (data: any) {
+    return usePost({
+        url: dataAnalysisMap.warningByLevel,
+        data
+    })
+}

@@ -23,7 +23,7 @@ export const processData = ({ expressions, timestamps, values }: ParkRunReportDa
         const raw_discharge = discharge[index]
         const { size: chargeSzie, unit: chargeUnit } = conversionUnitKWh(charge[index])
         const { size: dischargeSzie, unit: dischargeUnit } = conversionUnitKWh(discharge[index])
-        const efficiency = getEfficiency(raw_discharge, raw_charge)
+        const efficiency = getEfficiency(raw_charge, raw_discharge)
         return {
             date: time,
             time: paserTime(time, 'YYYY-MM-DD'),

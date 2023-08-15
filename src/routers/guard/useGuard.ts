@@ -30,14 +30,11 @@ const beforeEach = async (to: RouteLocationNormalized, form: RouteLocationNormal
   // 1看 token
   if (getToken()) {
 
-    const { getRoles, getUserInfo, getRouter } = useUser()
-    const { getParkAuthList, getParkAuthLastTime, getParkSerial } = useAppData()
+    const { getRoles, getUserInfo, getRouter, userInfo } = useUser()
+    const { getParkAuthList, getParkAuthLastTime, getParkSerial, currentParkSerial } = useAppData()
 
     // 登录过的在去登录页无意义
-    if (to.path === '/login' && arrayIsNotEmpty(getRoles)) {
-      next('/')
-      return
-    }
+    if (to.path === '/login' && arrayIsNotEmpty(getRoles)) return next('/')
 
     // 运行时不存在用户的角色数据 获取用户信息
     if (arrayIsEmpty(getRoles)) {
@@ -48,26 +45,27 @@ const beforeEach = async (to: RouteLocationNormalized, form: RouteLocationNormal
         await getParkAuthList()
         await getParkAuthLastTime()
         // 地址栏记录当前选中的电站编号
-        next({ ...to, replace: true, query: { ...to.query, stationCode: getParkSerial() } })
-        return
+        return next({ ...to, replace: true, query: { ...to.query, stationCode: getParkSerial() } })
+
       } catch (error) {
         console.log('====== error =======')
       }
 
-      next()
-      return
+      return next()
 
     }
 
-    next()
-    return
+    if (to.path !== '/config/personCenter/editPassword') {
+      if (userInfo.user.firstLoginFlag == '0') return next('/config/personCenter/editPassword')
+    }
+
+    return next()
+
   }
 
   // 2看 是否是白名单路径
-  if (routerWhiteLsit.indexOf(to.path) > -1) {
-    next()
-    return
-  }
+  if (routerWhiteLsit.indexOf(to.path) > -1) return next()
+
 
   // 3 都不是进入登录页
   next(`/login?redirect=${to.fullPath}`) // 否则全部重定向到登录页

@@ -44,7 +44,7 @@ defineProps({
 
             <li 
                 class="h-[84px] bg-[rgba(14,169,68,.05)] px-[17px] pt-[17px] box-border">
-                <div class="text-[--theme-gray107] mb-[10px]"> 是在输出功率 </div>
+                <div class="text-[--theme-gray107] mb-[10px]"> 视在输出功率 </div>
                 <div class="text-[--theme-black51]"> {{ pcsInfo['P01.C17'] }} <span class="text-[12px]">V</span> </div>
             </li>
 

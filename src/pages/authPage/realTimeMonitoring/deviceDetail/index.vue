@@ -2,7 +2,6 @@
 
 import { useDeviceDetialContext } from './useDevice'
 
-import PCSInfo from './components/PCSInfo.vue'
 import UnitList from './components/UnitList.vue'
 import DeviceUnit from './components/DeviceUnit.vue'
 import SubLayout from "@/layout/SubLayout/index.vue"

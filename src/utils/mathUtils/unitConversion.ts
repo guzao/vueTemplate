@@ -1,11 +1,11 @@
-import { isNull, isString, isStrinNull, isUndefined, stringSplit, } from "../dataUtils";
+import { isNull, isString, isStringNull, isUndefined, stringSplit, } from "../dataUtils";
 
 export const isNegative = (raw: number) => raw < 0
 
 export const toFixed = (raw: number, fractionDigits = 1) => {
     if (raw == 0) return 0
     raw = edgeCaseToFixed(raw) as any
-    const toFixedEd = raw.toFixed(fractionDigits)
+    const toFixedEd = +raw.toFixed(fractionDigits)
     return `${toFixedEd}`
 }
 
@@ -13,7 +13,7 @@ export function edgeCaseToFixed(raw: any) {
     if (isNull(raw)) return 0
     if (isNaN(+raw)) return 0
     if (isUndefined(raw)) return 0
-    if (isStrinNull(raw)) return 0
+    if (isStringNull(raw)) return 0
     if (isString(raw) && !isNaN(raw)) return +raw
     return raw
 }
@@ -54,7 +54,7 @@ const writeDefault = (size: string, unit: string) => {
 
 const conversionUnit = (raw: number, units: string[], fractionDigits = 2) => {
     if (isNull(raw)) return writeDefault('--', units[0])
-    if (isStrinNull(raw)) return writeDefault('--', units[0])
+    if (isStringNull(raw)) return writeDefault('--', units[0])
     if (isString(raw)) raw = +raw
     if (isNaN(raw)) return writeDefault('--', units[0])
     let { size, index } = unitConversionEdgeProcess(raw)

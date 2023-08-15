@@ -2,7 +2,9 @@ import { ref } from 'vue'
 import { isTrue } from '@/utils'
 import { getUserList } from '@/API'
 import { useReactiveHttp, usePagination } from '@/hooks'
+
 import PersonForm from './PersonForm.vue'
+import { ElMessageBox } from 'element-plus'
 
 
 
@@ -70,6 +72,16 @@ export function usePerson() {
         console.log('===', row)
     }
 
+    const stateChange = async (value: string, rowData: UserListData) => {
+        const prevState = value == '1' ? '0' : '1'
+        try {
+            await ElMessageBox.confirm('是否确认修改状态?', '提示', { confirmButtonText: 'OK', cancelButtonText: 'close', buttonSize: 'default' })
+        } catch (error) {
+            rowData.status = prevState
+        }
+    
+    }
+
     return {
         userName,
         personId,
@@ -83,7 +95,8 @@ export function usePerson() {
         editPerson,
         confirm,
         confirmDelet,
-        pageParams
+        pageParams,
+        stateChange
     }
 
 }

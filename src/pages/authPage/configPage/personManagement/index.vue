@@ -2,6 +2,7 @@
 import { usePerson } from './usePerson'
 import { Search } from '@element-plus/icons-vue'
 
+
 import PersonForm from './PersonForm.vue'
 import SubTitle from '@/components/common/SubTitle.vue';
 import TitleBox from '@/components/common/TitleBox.vue';
@@ -19,9 +20,9 @@ const {
     editPerson,
     confirm,
     confirmDelet,
-    pageParams
+    pageParams,
+    stateChange
 } = usePerson()
-
 
 </script>
 
@@ -36,8 +37,8 @@ const {
 
                 <el-button type="primary" class="mr-[20px]" size="default" @click="addPerson"> 新增 </el-button>
 
-                <el-input size="default" clearable style="width: 260px;" v-model="userName" placeholder="请输入用户名" class="mr-[20px]"
-                    @clear="getResult" />
+                <el-input size="default" clearable style="width: 260px;" v-model="userName" placeholder="请输入用户名"
+                    class="mr-[20px]" @clear="getResult" />
 
                 <el-button size="default" :icon="Search" @click="getResult" circle />
 
@@ -59,7 +60,8 @@ const {
 
                 <el-table-column prop="status" label="状态">
                     <template #default="{ row }">
-                        <el-switch active-value="0" inactive-value="1" size="default" v-model="row.status" />
+                        <el-switch active-value="0" @change="(value: string) => stateChange(value, row)" inactive-value="1"
+                            size="default" v-model="row.status" />
                     </template>
                 </el-table-column>
 
