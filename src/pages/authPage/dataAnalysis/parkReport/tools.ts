@@ -1,5 +1,5 @@
 import { EChartsOption } from "echarts"
-import { conversionUnitKWh, getEfficiency, paserTime, arrayGroupByMap, unitConversionEdgeProcess, KWHUnits, getKWHZoomRatioAndUnit } from "@/utils"
+import { conversionUnitKWh, getEfficiency, paserTime, arrayGroupByMap, getKWHZoomRatioAndUnit } from "@/utils"
 
 export type TableData = {
     time: string,

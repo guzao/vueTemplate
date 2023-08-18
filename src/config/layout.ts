@@ -34,6 +34,16 @@ export const layoutConfig = {
     useLocalRouter: true,
 
     /** 软件版本 */
-    version: ' 1.1.01'
+    version: ' 1.1.01',
+
+    /** 视图模式 */ 
+    viewModel: [
+        { label: '整站全景视图', code: 1, url: '/monitor/parkOverview' },
+        { label: '整站收益视图', code: 2, url: '/monitor/parkIncome' },
+        { label: '子站列表视图', code: 3, url: '/monitor/subParkOverview' },
+        { label: '设备概览视图', code: 4, url: '/monitor/deviceOverview' },
+        { label: '设备缩略视图', code: 5, url: '/monitor/thumbnailModel' },
+        { label: '设备列表视图', code: 6, url: '/monitor/tableModel' },
+    ]
     
 }

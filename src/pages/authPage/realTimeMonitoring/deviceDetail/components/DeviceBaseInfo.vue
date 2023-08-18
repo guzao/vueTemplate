@@ -152,7 +152,7 @@ const { chartRef, currentTime, prevTime, nextTime } = usePowerLine({ height: 180
                             <ArrowLeft />
                         </el-icon>
                     </div>
-                    <div class="tex-[12px] text-[var(--theme-gray153)] mx-[20px]"> 当前时间：{{ paserTime(currentTime,
+                    <div class="tex-[12px] text-[var(--theme-gray153)] mx-[20px] select-none"> 当前时间：{{ paserTime(currentTime,
                         'YYYY-MM-DD') }} </div>
                     <div @click="nextTime"
                         class="bg-[var(--theme-gray-bg)] w-[20px] flex justify-center items-center  rounded-[4px] cursor-pointer">

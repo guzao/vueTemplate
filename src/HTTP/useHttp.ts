@@ -26,8 +26,8 @@ export function useGet <T = any> (config: { url: string, params?: any }) {
 /**
  * PUT
 */
-export function usePut <T = any> (config: { url: string, data?: any, params: any }) {
+export function usePut <T = any> (config: { url: string, data?: any, params?: any,  }) {
     const { url,  data = {}, params = {}} =  config
-    return axiosInstance.put(url, data, { params: params }) as Promise<ResponseData<T>>
+    return axiosInstance.put(url, data, { params: params },) as Promise<ResponseData<T>>
 }
 

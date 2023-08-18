@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { PropType, ref } from 'vue';
-import LabelValueUnitVue from './LabelValueUnit.vue';
+
 import Icon from '@/components/common/Icon.vue'
+import LabelValueUnitVue from './LabelValueUnit.vue';
 import { getRuningStateInfo, isFalse, isTrue } from '@/utils';
 
 const props = defineProps({
@@ -28,6 +29,7 @@ const props = defineProps({
 
 const emits = defineEmits<{ 
     (event: 'stateClick', id: number): void,
+    (event: 'update:modelValue', id: number): void,
 }>()
 
 const activeState = ref(-1)
@@ -37,9 +39,8 @@ const stateClick = (state: number) => {
     if (isFalse(props.openStateClick)) return
     isTrue(activeState.value == state) ? activeState.value = -1 : activeState.value = state
     emits('stateClick', activeState.value)
-
+    emits('update:modelValue', activeState.value)
 }
-
 
 </script>
 

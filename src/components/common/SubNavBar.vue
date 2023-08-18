@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
 import { useAppData } from '@/store'
+import { layoutConfig } from '@/config'
+import { useRoute, useRouter } from 'vue-router'
 import DeviceStateDesc from './DeviceStateDesc.vue';
+
 const appData = useAppData()
 const emits = defineEmits<{
     /** 电站变化事件 */
@@ -33,14 +35,6 @@ const parkChange = (code: string) => {
     emits('parkChange', code)
 }
 
-const viewModel = [
-    { label: '整站全景视图', code: 1, url: '/monitor/parkOverview' },
-    { label: '子站列表视图', code: 2, url: '/monitor/subParkOverview' },
-    { label: '设备概览视图', code: 3, url: '/monitor/deviceOverview' },
-    { label: '设备缩略视图', code: 4, url: '/monitor/thumbnailModel' },
-    { label: '设备列表视图', code: 5, url: '/monitor/tableModel' },
-]
-
 const viewModelChange = (path: string) =>  router.push({ query: { stationCode: appData.parkSerial }, path: path })
 
 </script>
@@ -58,8 +52,8 @@ const viewModelChange = (path: string) =>  router.push({ query: { stationCode: a
             <DeviceStateDesc />
         </div>
 
-        <el-select v-if="showDeviceStateDesc" v-model="viewModelPath" class="m-2" placeholder="Select" style="width: 260px;" filterable @change="viewModelChange">
-            <el-option v-for="item in viewModel" :key="item.code" :label="item.label" :value="item.url" />
+        <el-select v-if="showViewModelSelect" v-model="viewModelPath" class="m-2" placeholder="Select" style="width: 260px;" filterable @change="viewModelChange">
+            <el-option v-for="item in layoutConfig.viewModel" :key="item.code" :label="item.label" :value="item.url" />
         </el-select>
 
         <div v-if="$slots.default" class="flex-1">

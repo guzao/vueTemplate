@@ -60,6 +60,13 @@ export const loaclRouter = [
                 },
                 path: '/monitor/tableModel',
                 hidden: true
+            },
+            {
+                meta: {
+                    title: '电站首页'
+                },
+                path: '/monitor/parkIncome',
+                hidden: true
             }
         ]
     },

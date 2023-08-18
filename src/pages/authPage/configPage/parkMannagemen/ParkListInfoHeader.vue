@@ -24,9 +24,12 @@ defineProps({
 </script>
 
 <template>
+
+    <TitleBox class="my-[16px]" :size="18"> 场站信息统计 </TitleBox>
+
     <div class="bg-[var(--theme-white-bg)] px-[20px] py-[30px] box-border mb-[16px]">
 
-        <TitleBox class="mb-[26px]" :size="18"> 场站信息统计 </TitleBox>
+        <!-- <TitleBox class="mb-[26px]" :size="18"> 场站信息统计 </TitleBox> -->
 
         <ul class="grid grid-cols-6">
 

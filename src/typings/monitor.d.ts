@@ -41,6 +41,7 @@ type DeviceItem = {
     name: string,
     serial: string,
     assetSerial: string,
+    /** 设备类型 */
     unitType: string,
     sort: number,
     delFlag: number,

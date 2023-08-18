@@ -1,4 +1,4 @@
-
+import type { NProgressOptions } from 'nprogress'
 
 //全局进度条的配置
 export const nprogressConfigure = {
@@ -7,4 +7,4 @@ export const nprogressConfigure = {
     showSpinner: false,
     trickleSpeed: 600,
     minimum: 0.5,
-}
+} as NProgressOptions

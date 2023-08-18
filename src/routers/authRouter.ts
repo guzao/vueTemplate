@@ -31,6 +31,10 @@ export const authRouter: RouteRecordRaw[] = [
             {
                 path: '/monitor/tableModel',
                 component: () => import('@/pages/authPage/realTimeMonitoring/tableModel/index.vue'),
+            },
+            {
+                path: '/monitor/parkIncome',
+                component: () => import('@/pages/authPage/realTimeMonitoring/parkIncome/index.vue'), 
             }
         ]
     },

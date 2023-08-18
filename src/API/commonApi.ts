@@ -11,7 +11,7 @@ export function getUserParkListAll () {
 /** 电站数据最新时间 */
 export function getUserParkLastTime () {
     return useGet({
-        url: common.parkLastTime
+        url: common.parkLastTime,
     })
 }
 

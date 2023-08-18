@@ -5,7 +5,7 @@ import { EChartsOption, EChartsType } from 'echarts'
 /** 处理电站设备当日数据 */
 export function processDailyData(dailyReportData: DailyReportData) {
 
-    const { data, charge, discharge, subNum } = dailyReportData
+    const { data } = dailyReportData
 
     const groupMap = arrayGroupByMap(data, 'subName')
     groupMap.forEach((value) => {

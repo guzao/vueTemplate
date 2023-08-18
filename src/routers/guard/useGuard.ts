@@ -31,7 +31,7 @@ const beforeEach = async (to: RouteLocationNormalized, form: RouteLocationNormal
   if (getToken()) {
 
     const { getRoles, getUserInfo, getRouter, userInfo } = useUser()
-    const { getParkAuthList, getParkAuthLastTime, getParkSerial, currentParkSerial } = useAppData()
+    const { getParkAuthList, getParkAuthLastTime, getParkSerial, currentRelease } = useAppData()
 
     // 登录过的在去登录页无意义
     if (to.path === '/login' && arrayIsNotEmpty(getRoles)) return next('/')

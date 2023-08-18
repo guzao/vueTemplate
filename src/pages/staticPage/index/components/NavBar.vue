@@ -5,7 +5,11 @@ import { useStationList } from '../useStationList'
 import DeviceStateCountDescVue from '@/components/common/DeviceStateCountDesc.vue';
 const { searchCode, stationList, deviceStateCount, parkType, type, filteredList, state } = useStationList()
 
-onMounted(() => searchCode.value = '')
+onMounted(() => {
+    searchCode.value = ''
+    state.value = -1
+    type.value = ''
+})
 
 </script>
 
@@ -24,7 +28,7 @@ onMounted(() => searchCode.value = '')
             
         </div>
 
-        <DeviceStateCountDescVue :states="deviceStateCount" :open-state-click="true" @state-click="(value) => state = value" :total="getArrayLength(stationList)"/>
+        <DeviceStateCountDescVue :states="deviceStateCount" :open-state-click="true" v-model:model-value="state" :total="getArrayLength(stationList)"/>
 
     </div>
 </template>
