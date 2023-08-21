@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { PropType } from 'vue';
+import { Type } from '@/enum'
 import { getDeviceStateInfo, toFixed } from "@/utils"
 import { useDeviceDetail } from '../hooks/useDeviceDetail'
 
@@ -27,7 +28,7 @@ defineProps({
             v-for="deivce in deiveList" :key="deivce.id">
 
             <div class="flex items-center h-[46px] items-center w-[140px]">
-                <Icon :icon="deivce.unitType == 'container' ? 'icon_cnx' : 'icon_cng'" :size="16" class="mr-[4px]" />
+                <Icon :icon="deivce.unitType == Type.CONTAINER ? 'icon_cnx' : 'icon_cng'" :size="16" class="mr-[4px]" />
                 <span class="text-[var(--theme-black51)]"> {{ deivce.name }} </span>
             </div>
 
@@ -55,14 +56,15 @@ defineProps({
 
             <div class="w-[300px] h-[148px] device_taizi_bg">
 
-                <div class="relative h-[148px]"  v-if="deivce.unitType == 'container'">
+                <div class="relative h-[148px]"  v-if="deivce.unitType == Type.CONTAINER">
 
                     <CNXDevice class="absolute top-[55px] right-[80px]" style="transform: scale(2.5);" :deivce="deivce" />
 
                     <div class="flex items-center absolute bottom-[6px] left-[40%]">
                         <Icon :icon="getDeviceStateInfo(deivce.deviceData.M2).icon" :size="24" class="mr-[1px]" />
                         <span class="font-[600] f-dinb text-[24px]" :class="getDeviceStateInfo(deivce.deviceData.M2).color">
-                            {{  toFixed(deivce.deviceData.M3, 1) }}% </span>
+                            {{  toFixed(deivce.deviceData.M3, 1) }}% 
+                        </span>
                     </div>
 
                 </div>
@@ -74,7 +76,8 @@ defineProps({
                     <div class="flex items-center absolute bottom-[12px] left-[40%]">
                         <Icon :icon="getDeviceStateInfo(deivce.deviceData.M2).icon" :size="24" class="mr-[1px]" />
                         <span class="font-[600] f-dinb text-[24px]" :class="getDeviceStateInfo(deivce.deviceData.M2).color">
-                            {{  toFixed(deivce.deviceData.M3, 1) }}% </span>
+                            {{  toFixed(deivce.deviceData.M3, 1) }}% 
+                        </span>
                     </div>
 
                 </div>

@@ -4,7 +4,7 @@ import { login } from '@/ApiMap'
 const config = import.meta.env
 export const axiosConfig: CreateAxiosDefaults = {
     baseURL: config.VITE_APP_BASE_URL,
-    timeout: 1000 * 30,
+    timeout: 1000 * 60,
     headers: {
         'Content-Type': 'application/json;charset=utf-8'
     }

@@ -38,4 +38,6 @@ function configAddProps(config: InternalAxiosRequestConfig,) {
 
     config.params = { ...params,  lang: getLang() }
 
+    // config.params.lang = getLang()
+
 }

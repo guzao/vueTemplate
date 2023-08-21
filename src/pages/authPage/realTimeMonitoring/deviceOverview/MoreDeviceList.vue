@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { Type } from '@/enum'
 import { PropType } from 'vue';
 import { useDeviceDetail } from '../hooks/useDeviceDetail'
 import { conversionUnitKWh, toFixed, getDeviceStateInfo } from '@/utils';
@@ -11,7 +12,7 @@ const { checkDeviceDetail } = useDeviceDetail()
 
 defineProps({
     deiveList: {
-        type: Array as PropType<DeviceItem []>,
+        type: Array as PropType<DeviceItem[]>,
         default: []
     }
 })
@@ -26,7 +27,7 @@ defineProps({
             :key="deivce.id">
 
             <div class="flex items-center h-[46px] items-center">
-                <Icon :icon="deivce.unitType == 'container' ? 'icon_cnx' : 'icon_cng'" :size="16" class="mr-[4px]" />
+                <Icon :icon="deivce.unitType == Type.CONTAINER ? 'icon_cnx' : 'icon_cng'" :size="16" class="mr-[4px]" />
                 <span class="text-[var(--theme-black51)]"> {{ deivce.name }} </span>
             </div>
 
@@ -38,33 +39,37 @@ defineProps({
 
                     <div class="flex items-center">
                         <div class="text-[var(--theme-gray107)] text-[12px] mr-[2px]">日充 </div>
-                        <div class="text-[var(--theme-black51)] mr-[2px] f-dinp"> {{
-                            conversionUnitKWh(deivce.deviceData.M15, 1).size }} </div>
-                        <div class="text-[var(--theme-gray153)] text-[12px]"> {{
-                            conversionUnitKWh(deivce.deviceData.M15).unit }} </div>
+                        <div class="text-[var(--theme-black51)] mr-[2px] f-dinp">
+                            {{ conversionUnitKWh(deivce.deviceData.M15, 1).size }}
+                        </div>
+                        <div class="text-[var(--theme-gray153)] text-[12px]">
+                            {{ conversionUnitKWh(deivce.deviceData.M15).unit }}
+                        </div>
                     </div>
 
                     <div class="flex items-center">
                         <div class="text-[var(--theme-gray107)] text-[12px] mr-[2px]">日放 </div>
-                        <div class="text-[var(--theme-black51)] mr-[2px] f-dinp"> {{
-                            conversionUnitKWh(deivce.deviceData.M16, 1).size }} </div>
-                        <div class="text-[var(--theme-gray153)] text-[12px]"> {{
-                            conversionUnitKWh(deivce.deviceData.M16).unit }} </div>
+                        <div class="text-[var(--theme-black51)] mr-[2px] f-dinp">
+                            {{ conversionUnitKWh(deivce.deviceData.M16, 1).size }}
+                        </div>
+                        <div class="text-[var(--theme-gray153)] text-[12px]">
+                            {{ conversionUnitKWh(deivce.deviceData.M16).unit }}
+                        </div>
                     </div>
 
                 </div>
 
                 <div class="w-[80px]  device_taizi_bg">
 
-                    <CNXDevice v-if="deivce.unitType == 'container'" :deivce="deivce" />
+                    <CNXDevice v-if="deivce.unitType == Type.CONTAINER" :deivce="deivce" />
 
                     <CNGDevice v-else :deivce="deivce" />
 
                     <div class="flex items-center">
                         <Icon :icon="getDeviceStateInfo(deivce.deviceData.M2).icon" :size="18" class="mr-[1px]" />
                         <span class="font-[600] f-dinb text-[15px]" :class="getDeviceStateInfo(deivce.deviceData.M2).color">
-                            {{
-                                toFixed(deivce.deviceData.M3, 1) }}% </span>
+                            {{ toFixed(deivce.deviceData.M3, 1) }}%
+                        </span>
                     </div>
 
                 </div>

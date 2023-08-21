@@ -7,6 +7,8 @@ declare module '*.vue' {
 }
 
 interface ImportMetaEnv {
-  /** 服务器地址 */ 
+  /** 服务器API地址 */ 
   readonly VITE_APP_BASE_URL: string;
+  /** 服务器地址 */ 
+  readonly VITE_APP_SERVER_URL: string;
 }

@@ -17,6 +17,8 @@ const route = useRoute()
 const router = useRouter()
 const defaultActive = computed(() => route.path)
 
+appData.setActiveMenu(route.path)
+
 const handleOpen = (key: string, keyPath: string[]) => console.log(key, keyPath)
 const handleClose = (key: string, keyPath: string[]) => console.log(key, keyPath)
 

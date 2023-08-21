@@ -15,6 +15,9 @@ export const useAppData = defineStore('useAppData', {
             /** 侧边栏状态 */
             isCollapse: getIsCollapse(),
 
+            /** 侧边栏选中的菜单 */
+            activeMenu: '',
+
             /** 电站发布状态 */
             parkReleaseStatus: {} as Record<string, number>,
 
@@ -63,6 +66,10 @@ export const useAppData = defineStore('useAppData', {
         chnageIsCollapse() {
             this.isCollapse = !this.isCollapse
             setIsCollapse(this.isCollapse)
+        },
+
+        setActiveMenu (menu: string) {
+            this.activeMenu = menu
         },
 
         /** 用户受权限控制的电站列表 */

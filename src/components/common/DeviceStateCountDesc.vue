@@ -29,7 +29,7 @@ const props = defineProps({
 
 const emits = defineEmits<{ 
     (event: 'stateClick', id: number): void,
-    (event: 'update:modelValue', id: number): void,
+    (event: "update:modelValue", id: number): void,
 }>()
 
 const activeState = ref(-1)
@@ -39,7 +39,7 @@ const stateClick = (state: number) => {
     if (isFalse(props.openStateClick)) return
     isTrue(activeState.value == state) ? activeState.value = -1 : activeState.value = state
     emits('stateClick', activeState.value)
-    emits('update:modelValue', activeState.value)
+    emits("update:modelValue", activeState.value)
 }
 
 </script>

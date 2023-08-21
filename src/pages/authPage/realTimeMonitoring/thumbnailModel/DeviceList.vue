@@ -1,4 +1,5 @@
 <script lang="ts" setup >
+import { Type } from '@/enum'
 import { PropType } from 'vue';
 import { useDeviceDetail } from '../hooks/useDeviceDetail'
 import { getDeviceStateInfo, toFixed } from '@/utils'
@@ -35,15 +36,15 @@ defineProps({
 
                         <div class="text-[var(--theme-black51)] text-[10px] text-center"> {{ deivce.name }} </div>
 
-                        <CNXDevice style="margin: 0 auto;margin-top: 5px;" class="mt-0" v-if="deivce.unitType == 'container'" :deivce="deivce" />
+                        <CNXDevice style="margin: 0 auto;margin-top: 5px;" class="mt-0" v-if="deivce.unitType == Type.CONTAINER" :deivce="deivce" />
 
                         <CNGDevice style="margin: 0 auto; " class="mt-0 ml-[30px]" v-else :deivce="deivce" />
 
                         <div class="flex items-center justify-center">
                             <Icon :icon="getDeviceStateInfo(deivce.deviceData.M2).icon" :size="18" class="mr-[1px]" />
-                            <span class="font-[600] f-dinb text-[15px]"
-                                :class="getDeviceStateInfo(deivce.deviceData.M2).color"> {{
-                                    toFixed(deivce.deviceData.M3, 1) }}% </span>
+                            <span class="font-[600] f-dinb text-[15px]"  :class="getDeviceStateInfo(deivce.deviceData.M2).color"> 
+                                {{ toFixed(deivce.deviceData.M3, 1) }}% 
+                            </span>
                         </div>
 
 
@@ -65,7 +66,6 @@ defineProps({
         background-position: bottom;
         background-image: url(../../../../assets/image/overview/small_device_taizi.png);
     }
-
 }
 </style>
 

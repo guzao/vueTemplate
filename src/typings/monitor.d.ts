@@ -13,7 +13,7 @@ type DeviceDetailNewTapUrlParam = {
 }
 
 
-/** 电站运行详情 */
+/*** 电站运行详情 */
 type ParkRuningInfo = {
     A_M2: number,
     A_M3: number,

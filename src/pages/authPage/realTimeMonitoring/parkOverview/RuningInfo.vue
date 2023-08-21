@@ -1,14 +1,22 @@
 <script lang="ts" setup>
-import { PropType, computed } from 'vue';
+import { State, Type } from '@/enum'
 import { useAppData } from '@/store'
+import { onClickOutside } from '@vueuse/core'
+import { PropType, computed, ref } from 'vue';
 import { paserTime, getRuningStateInfo, toFixed, conversionUnitKWh, conversionUnitKVar, conversionUnitKW } from '@/utils';
 
+import { InfoFilled } from "@element-plus/icons-vue"
 
 import IconVue from '@/components/common/Icon.vue';
 import TitleBox from '@/components/common/TitleBox.vue';
 import LastTime from '@/components/common/LastTime.vue';
 
 
+const show = ref(false)
+
+const target = ref(null)
+
+onClickOutside(target, _ => show.value = false)
 
 const appData = useAppData()
 
@@ -21,11 +29,9 @@ const props = defineProps({
 
 const parkStateBg = computed(() => {
     const { A_M2 } = props.parkOverview
-    if (A_M2 == 3) return ''
-    return A_M2 == 1 ? 'charge' : 'discharge'
+    if (A_M2 == State.STANDBY) return ''
+    return A_M2 == State.CHARGE ? 'charge' : 'discharge'
 })
-
-
 
 </script>
 
@@ -34,7 +40,7 @@ const parkStateBg = computed(() => {
     <div class="flex justify-between px-[60px] runing_info">
 
 
-        <div class="w-[380px] mt-[70px]">
+        <div class="w-[380px] mt-[4%]">
 
             <TitleBox>
                 电站基本信息
@@ -61,7 +67,8 @@ const parkStateBg = computed(() => {
                     <div class="flex flex-col justify-center ml-[8px]">
                         <div class="text-[var(--theme-gray107)]  mt-[16px]">剩余电量</div>
                         <div class="font-semibold text-[24px] f-dinb text-[var(--charge)]">{{ toFixed(parkOverview.A_M3) }}
-                            <span class="text-[12px] text-[var(--theme-gray107)] font-normal"> % </span> </div>
+                            <span class="text-[12px] text-[var(--theme-gray107)] font-normal"> % </span>
+                        </div>
                     </div>
                 </li>
 
@@ -124,15 +131,38 @@ const parkStateBg = computed(() => {
 
         </div>
 
-        <div :class="parkStateBg"  class="w-[300px] h-[392px] mt-[40px] flex justify-center items-center bg-contain bg-no-repeat static_bg">
-            <div class="w-[305px] h-[68px] bg-contain bg-no-repeat" :class="appData.currentParkType == `${1}` ? 'cng' : 'cnx'"></div>
+        <div :class="parkStateBg"
+            class="w-[300px] h-[392px] mt-[3%] flex justify-center items-center bg-contain bg-no-repeat static_bg">
+            <div class="w-[305px] h-[68px] bg-contain bg-no-repeat"
+                :class="appData.currentParkType == `${Type.NUMBER_CABINET}` ? 'cng' : 'cnx'"></div>
             <div class="absolute right-[-265px] w-[255px] h-[121px] house_bg bottom-[10px]"></div>
         </div>
 
-        <div class="w-[380px] mt-[70px]">
+        <div class="w-[380px] mt-[4%]">
 
             <TitleBox>
                 全站详细信息
+                <template #right>
+                    <div class="relative">
+                        <span  @click="show = true" class="cursor-pointer">
+                            <el-icon>
+                                <InfoFilled />
+                            </el-icon>
+                        </span>
+                        <el-collapse-transition class="absolute top-[20px] right-0 bg-[var(--theme-white-bg)]">
+                            <div ref="target" v-show="show" class="w-[300px]">
+                                <el-card class="box-card">
+                                    <template #header>
+                                        <div class="card-header">
+                                            <span>Card name</span>
+                                        </div>
+                                    </template>
+                                    <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div>
+                                </el-card>
+                            </div>
+                        </el-collapse-transition>
+                    </div>
+                </template>
             </TitleBox>
 
             <div class="h-[2px] bg-[var(--theme-gray235-bg)] my-[12px]"></div>

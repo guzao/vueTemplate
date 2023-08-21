@@ -1,4 +1,5 @@
 export const enum HTTPSTATE {
+    
     /** 成功 */
     SUCCESS = 200,
 

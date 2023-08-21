@@ -49,11 +49,7 @@ export function replaceUrlQuery(newParams: Record<any, any>) {
 }
 
 /** 延时执行 */
-export function sleep(dlayTime: number = 500) {
-    return new Promise((resolove, reject) => {
-        setTimeout(resolove, dlayTime)
-    })
-}
+export const sleep = (dlayTime: number = 500) => new Promise((resolove, reject) => setTimeout(resolove, dlayTime) )
 
 export const successMessage = (msg: string) => ElMessage.success(msg)
 

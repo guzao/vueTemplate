@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { getDeviceCNXBatteryMarkInfo, getCNXBatteryCellBg } from '@/utils';
 import { PropType } from 'vue';
+import { getDeviceCNXBatteryMarkInfo, getCNXBatteryCellBg } from '@/utils';
 
 defineProps({
     deivce: {

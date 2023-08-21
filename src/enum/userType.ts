@@ -12,4 +12,10 @@ export const enum USER {
     /** 是否关闭侧边栏 */
     IS_COLLAPSE = 'IS_COLLAPSE',
 
+    /** 是否是本地化部署 */
+    IS_LOCALSTORAGE = 'IS_LOCALSTORAGE',
+
+    /** 是否显示跳转旧系统链接 */
+    OLD_SYSTEM_URL_FLAG = 'OLD_SYSTEM_URL_FLAG'
 }
+

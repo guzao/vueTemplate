@@ -61,7 +61,7 @@ type ParkMonitorInfo = {
         totalPower: string;
     };
     /** 电站类型 */
-    type: string;
+    type: string | number;
     /** 电站类型名称 */
     typeLabel: string;
 

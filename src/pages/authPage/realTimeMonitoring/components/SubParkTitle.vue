@@ -38,15 +38,15 @@ defineProps({
 
                 <LabelValueUnit class="pl-[8px]" :font-size="16">
                     日充
-                    <template #value> {{ conversionUnitKWh(data.M17).size }} </template>
-                    <template #unit> {{ conversionUnitKWh(data.M17).unit }} </template>
+                    <template #value> {{ conversionUnitKWh(data.dailyCharge).size }} </template>
+                    <template #unit> {{ conversionUnitKWh(data.dailyCharge).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[6px]"></div>
 
                 <LabelValueUnit class="pl-[8px]" :font-size="16">
                     日放
-                    <template #value> {{ conversionUnitKWh(data.M18).size }} </template>
-                    <template #unit> {{ conversionUnitKWh(data.M18).unit }} </template>
+                    <template #value> {{ conversionUnitKWh(data.dailyDisCharge).size }} </template>
+                    <template #unit> {{ conversionUnitKWh(data.dailyDisCharge).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[6px]"></div>
 

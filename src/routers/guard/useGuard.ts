@@ -1,12 +1,11 @@
-import type { Router, NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
-import nProgress from '@/plugins/steupNprogress'
+import { Common } from '@/enum'
 import { routerWhiteLsit } from '@/config'
-import { arrayIsEmpty, arrayIsNotEmpty, useToken } from '@/utils'
 import { useUser, useAppData } from '@/store'
+import nProgress from '@/plugins/steupNprogress'
+import { arrayIsEmpty, arrayIsNotEmpty, useToken } from '@/utils'
+import type { Router, NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
 
 const { getToken } = useToken()
-
-
 
 
 /** 
@@ -25,7 +24,9 @@ export function useGuard(router: Router) {
 
 const beforeEach = async (to: RouteLocationNormalized, form: RouteLocationNormalized, next: NavigationGuardNext) => {
 
+  
   nProgress.start()
+
 
   // 1看 token
   if (getToken()) {
@@ -56,12 +57,17 @@ const beforeEach = async (to: RouteLocationNormalized, form: RouteLocationNormal
     }
 
     if (to.path !== '/config/personCenter/editPassword') {
-      if (userInfo.user.firstLoginFlag == '0') return next('/config/personCenter/editPassword')
+      if (userInfo.user.firstLoginFlag == Common.FIRST_LOGIN) return next('/config/personCenter/editPassword')
+    }
+
+    if (to.path !== '/index') {
+      if (currentRelease == Common.DE_BUGGER  ) return next('/index')
     }
 
     return next()
 
   }
+
 
   // 2看 是否是白名单路径
   if (routerWhiteLsit.indexOf(to.path) > -1) return next()
@@ -70,3 +76,4 @@ const beforeEach = async (to: RouteLocationNormalized, form: RouteLocationNormal
   // 3 都不是进入登录页
   next(`/login?redirect=${to.fullPath}`) // 否则全部重定向到登录页
 }
+
