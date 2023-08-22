@@ -1,6 +1,11 @@
 <script lang="ts" setup>
+
+import { useRouter } from 'vue-router'
+
 import SubTitle from '@/components/common/SubTitle.vue';
 import TitleBox from '@/components/common/TitleBox.vue'
+
+const router = useRouter()
 
 </script>
 
@@ -11,7 +16,7 @@ import TitleBox from '@/components/common/TitleBox.vue'
 
         <div class="flex justify-between items-center">
             <TitleBox> 系统配置 </TitleBox>
-            <el-button text size="small" type="success"> 编辑信息
+            <el-button text size="small" type="success" @click="router.go(-1)"> 返回
             </el-button>
         </div>
 
