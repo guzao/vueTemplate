@@ -25,9 +25,13 @@ function useServer(model: string) {
     proxy: {
       [ config.VITE_APP_BASE_URL ]: {
         target: 'http://124.223.210.24/',
+        // target: config.VITE_APP_SERVER_URL,
         changeOrigin: true,
         ws: true,
-        rewrite: (path: string) => path,
+        rewrite: (path: string) => {
+          console.log(path);
+          return path
+        },
       },
     },
   }

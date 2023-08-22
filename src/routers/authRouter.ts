@@ -121,6 +121,13 @@ export const authRouter: RouteRecordRaw[] = [
                 path: '/config/parkMannagemen',
                 component: () => import('@/pages/authPage/configPage/parkMannagemen/index.vue'),
             },
+            {
+                meta: {
+                    title: '电价配置'
+                },
+                path: '/config/parkElectricPrice',
+                component: () => import('@/pages/authPage/configPage/parkElectricPrice/index.vue'),
+            },
         ]
     },
 

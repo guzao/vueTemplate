@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useInterval } from '@/hooks'
 import { useI18nStore, useAppData } from "@/store";
+
+
 const I18nStore = useI18nStore()
 const appData = useAppData()
 

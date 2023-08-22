@@ -69,6 +69,13 @@ export const staticRouter: RouteRecordRaw[] = [
                 },
                 path: '/config/enterprise/editEnterprise',
                 component: () => import('@/pages/constance/editEnterprise/index.vue'),
+            },
+            {
+                meta: {
+                    title: '系统配置'
+                },
+                path: '/config/systemConfig',
+                component: () => import('@/pages/constance/systemConfig/index.vue'),
             }
         ]
     },

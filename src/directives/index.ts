@@ -2,6 +2,7 @@ import type { App } from "vue";
 import { watermark }  from './watermark'
 import { debounce }  from './debounce'
 import { hasPermission }  from './hasPermission'
+import { clickOutset }  from './clickOutset'
 
 
 export default {
@@ -10,5 +11,6 @@ export default {
         Vue.directive('watermark', watermark)
         Vue.directive('debounce', debounce)
         Vue.directive('hasPermission', hasPermission)
+        Vue.directive('clickOutset', clickOutset)
     }
 }

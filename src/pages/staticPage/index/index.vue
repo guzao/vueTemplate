@@ -13,7 +13,7 @@ useInterval(1000 * 60 * 5, getResult)
 </script>
 
 <template>
-    
+
     <div v-loading="loading">
 
         <NavBar />
@@ -23,5 +23,5 @@ useInterval(1000 * 60 * 5, getResult)
         <el-empty v-else description="暂无数据" />
 
     </div>
-
+    
 </template>

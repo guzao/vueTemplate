@@ -7,11 +7,16 @@ const userInfo = useUser()
 const route = useRoute()
 const router = useRouter()
 
-const handleSlect = (command: 'personCenter' | 'logout') => {
+type CommandType = 'personCenter' | 'logout' | 'systemConfig'
+
+const handleSlect = (command: CommandType) => {
+    const query = route.query
     switch (command) {
         case 'personCenter':
-            const query = route.query
             router.push({ path: '/config/personCenter', query: { ...query, stationCode: appData.currentParkSerial } })
+            break;
+        case 'systemConfig':
+            router.push({ path: '/config/systemConfig', query: { ...query, stationCode: appData.currentParkSerial } })
             break;
         case 'logout':
             userInfo.userlogOut()
@@ -32,7 +37,8 @@ const handleSlect = (command: 'personCenter' | 'logout') => {
         <template #dropdown>
             <el-dropdown-menu>
                 <el-dropdown-item command="personCenter"> 个人中心 </el-dropdown-item>
-                <el-dropdown-item command="logout"> 退出登录 </el-dropdown-item>
+                <el-dropdown-item command="systemConfig"> 系统配置 </el-dropdown-item>
+                <el-dropdown-item command="logout" > 退出登录 </el-dropdown-item>
             </el-dropdown-menu>
         </template>
     </el-dropdown>

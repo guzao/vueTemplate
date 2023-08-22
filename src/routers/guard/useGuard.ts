@@ -1,4 +1,4 @@
-import { Common } from '@/enum'
+import { State } from '@/enum'
 import { routerWhiteLsit } from '@/config'
 import { useUser, useAppData } from '@/store'
 import nProgress from '@/plugins/steupNprogress'
@@ -57,11 +57,11 @@ const beforeEach = async (to: RouteLocationNormalized, form: RouteLocationNormal
     }
 
     if (to.path !== '/config/personCenter/editPassword') {
-      if (userInfo.user.firstLoginFlag == Common.FIRST_LOGIN) return next('/config/personCenter/editPassword')
+      if (userInfo.user.firstLoginFlag == State.FIRST_LOGIN) return next('/config/personCenter/editPassword')
     }
 
     if (to.path !== '/index') {
-      if (currentRelease == Common.DE_BUGGER  ) return next('/index')
+      if (currentRelease == State.DE_BUGGER  ) return next('/index')
     }
 
     return next()

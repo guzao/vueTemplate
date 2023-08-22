@@ -156,6 +156,13 @@ export const loaclRouter = [
                 path: '/config/parkMannagemen',
                 hidden: false,
             },
+            {
+                meta: {
+                    title: '电价配置'
+                },
+                path: '/config/parkElectricPrice',
+                hidden: false,
+            },
         ]
     },
 

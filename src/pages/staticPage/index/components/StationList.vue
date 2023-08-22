@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { Type } from '@/enum'
 import { useRouter } from 'vue-router'
 import { useAppData, useDicts } from '@/store'
 import { useStationList } from '../useStationList'
 import { getRunningDay, conversionUnitKW, conversionUnitKWh } from '@/utils'
+import { Type } from '@/enum'
+
+
 
 import TitleBox from '@/components/common/TitleBox.vue';
 import StationBaseInfoCard from '@/components/common/StationBaseInfoCard.vue';
@@ -22,10 +24,9 @@ const goToOverview = ({ code: stationCode }: ParkMonitorInfo) => {
 </script>
 
 <template>
-
-    <div v-for="item in filteredList"
-        v-watermark="{ markSatate: item.releaseStatus, text: dicts.parkReleaseStatusDict.dictLabel[ item.releaseStatus ], height: 150, }" :key="item.code"
-        :class="item.type == '0' Type.NUMBER_CONTAINER ? ' ' : 'cng'"
+    <div v-for="item in  filteredList "
+        v-watermark=" { markSatate: item.releaseStatus, text: dicts.parkReleaseStatusDict.dictLabel[item.releaseStatus], height: 150, } "
+        :key="item.code" :class="item.type == Type.NUMBER_CONTAINER ? ' ' : 'cng'"
         class="bg-[var(--theme-white-bg)] mb-[16px] last:mb-0 px-[24px] py-[23px] pt-[20px] station_item">
 
         <TitleBox>
@@ -61,14 +62,14 @@ const goToOverview = ({ code: stationCode }: ParkMonitorInfo) => {
 
             <template #right>
                 <div class="justify-end flex cursor-pointer text-[var(--theme-blue0)]" @click="goToOverview(item)"
-                    v-hasPermission="'ess:park:group'">
+                    v-hasPermission=" 'ess:park:group' ">
                     <div>进入电站 ></div>
                 </div>
             </template>
 
         </TitleBox>
 
-        <StationBaseInfoCard :data="item" class="mt-[16px]" />
+        <StationBaseInfoCard :data=" item " class="mt-[16px]" />
 
         <div class="flex pl-[296px] box-border flex-col ">
 
@@ -76,42 +77,42 @@ const goToOverview = ({ code: stationCode }: ParkMonitorInfo) => {
 
             <div class="flex items-center">
 
-                <LabelValueUnit :font-size="16">
+                <LabelValueUnit :font-size=" 16 ">
                     月充
                     <template #value> {{ conversionUnitKWh(+item.detailList.A_M17).size }} </template>
                     <template #unit> {{ conversionUnitKWh(+item.detailList.A_M17).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
-                <LabelValueUnit :font-size="16">
+                <LabelValueUnit :font-size=" 16 ">
                     月放
                     <template #value> {{ conversionUnitKWh(+item.detailList.A_M18).size }} </template>
                     <template #unit> {{ conversionUnitKWh(+item.detailList.A_M18).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
-                <LabelValueUnit :font-size="16">
+                <LabelValueUnit :font-size=" 16 ">
                     年充
                     <template #value> {{ conversionUnitKWh(+item.detailList.A_M19).size }} </template>
                     <template #unit> {{ conversionUnitKWh(+item.detailList.A_M19).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
-                <LabelValueUnit :font-size="16">
+                <LabelValueUnit :font-size=" 16 ">
                     年放
                     <template #value> {{ conversionUnitKWh(+item.detailList.A_M20).size }} </template>
                     <template #unit> {{ conversionUnitKWh(+item.detailList.A_M20).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
-                <LabelValueUnit :font-size="16">
+                <LabelValueUnit :font-size=" 16 ">
                     累充
                     <template #value> {{ conversionUnitKWh(+item.detailList.A_M5).size }} </template>
                     <template #unit> {{ conversionUnitKWh(+item.detailList.A_M5).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
-                <LabelValueUnit :font-size="16">
+                <LabelValueUnit :font-size=" 16 ">
                     累放
                     <template #value> {{ conversionUnitKWh(+item.detailList.A_M6).size }} </template>
                     <template #unit> {{ conversionUnitKWh(+item.detailList.A_M6).unit }} </template>
@@ -123,7 +124,6 @@ const goToOverview = ({ code: stationCode }: ParkMonitorInfo) => {
 
 
     </div>
-    
 </template>
 
 <style lang="scss" scoped>

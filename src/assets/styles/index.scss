@@ -14,7 +14,7 @@
 
 // 进度条颜色
 #nprogress .bar {
-    background: var(--charge); 
+    background: var(--charge);
 }
 
 html {
@@ -32,9 +32,11 @@ html {
 .f-din {
     font-family: D-DIN;
 }
+
 .f-dinb {
     font-family: D-DIN-Bold;
 }
+
 .f-pangmenTitle {
     font-family: pangmenTitle;
 }
@@ -46,18 +48,23 @@ html {
 .charge_color {
     color: var(--charge) !important;
 }
+
 .discharge_color {
     color: var(--discharge) !important;
 }
+
 .standby_color {
     color: var(--standby) !important;
 }
+
 .alarm_color {
     color: var(--alarm) !important;
 }
+
 .weihu_color {
     color: var(--weihu) !important;
 }
+
 .offline_color {
     color: var(--offline) !important;
 }
@@ -66,6 +73,12 @@ html {
 
 // 
 .el-table thead th.el-table__cell {
-    background-color: rgba(14,169,68,.05) !important;
+    background-color: rgba(14, 169, 68, .05) !important;
     font-weight: normal;
+}
+
+
+// 
+.el-loading-mask {
+    opacity: 0.5 !important;
 }

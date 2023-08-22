@@ -144,13 +144,13 @@ const parkStateBg = computed(() => {
                 全站详细信息
                 <template #right>
                     <div class="relative">
-                        <span  @click="show = true" class="cursor-pointer">
+                        <span  @click="show = true"  class="cursor-pointer">
                             <el-icon>
                                 <InfoFilled />
                             </el-icon>
                         </span>
                         <el-collapse-transition class="absolute top-[20px] right-0 bg-[var(--theme-white-bg)]">
-                            <div ref="target" v-show="show" class="w-[300px]">
+                            <div ref="target"  v-show="show" class="w-[300px]">
                                 <el-card class="box-card">
                                     <template #header>
                                         <div class="card-header">
