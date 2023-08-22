@@ -53,6 +53,10 @@ export const useAppData = defineStore('useAppData', {
         currentParkSerial(state) {
             return state.parkSerial
         },
+        /** 当前选中的电站编号 */
+        currentPark(state) {
+            return state.parkAuthList.find(item => item.serial == state.parkSerial)!
+        },
     },
 
     actions: {

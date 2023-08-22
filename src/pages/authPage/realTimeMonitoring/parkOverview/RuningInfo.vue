@@ -10,6 +10,7 @@ import { InfoFilled } from "@element-plus/icons-vue"
 import IconVue from '@/components/common/Icon.vue';
 import TitleBox from '@/components/common/TitleBox.vue';
 import LastTime from '@/components/common/LastTime.vue';
+import LabelValueUnit from '@/components/common/LabelValueUnit.vue';
 
 
 const show = ref(false)
@@ -144,21 +145,40 @@ const parkStateBg = computed(() => {
                 全站详细信息
                 <template #right>
                     <div class="relative">
-                        <span  @click="show = true"  class="cursor-pointer">
+                        <span @click="show = true" class="cursor-pointer">
                             <el-icon>
                                 <InfoFilled />
                             </el-icon>
                         </span>
                         <el-collapse-transition class="absolute top-[20px] right-0 bg-[var(--theme-white-bg)]">
-                            <div ref="target"  v-show="show" class="w-[300px]">
-                                <el-card class="box-card">
-                                    <template #header>
-                                        <div class="card-header">
-                                            <span>Card name</span>
-                                        </div>
-                                    </template>
-                                    <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div>
-                                </el-card>
+                            <div ref="target" v-show="show" class="w-[360px] px-[10px] py-[20px]">
+
+                                <LabelValueUnit>
+                                    项目地址 <template #value> {{ appData.currentPark.address }} </template>
+                                </LabelValueUnit>
+
+                                <div class="h-[1px] bg-[var(--theme-gray235-bg)] w-full my-[8px]"></div>
+
+                                <LabelValueUnit>
+                                    总功率　
+                                    <template #value> {{ conversionUnitKW(+appData.currentPark.totalPower).size  }} </template>
+                                    <template #unit> {{ conversionUnitKW(+appData.currentPark.totalPower).unit  }} </template>
+                                </LabelValueUnit>
+
+                                <div class="h-[1px] bg-[var(--theme-gray235-bg)] w-full my-[8px]"></div>
+
+                                <LabelValueUnit>
+                                    总能量　
+                                    <template #value> {{ conversionUnitKWh(+appData.currentPark.energy).size  }} </template>
+                                    <template #unit> {{ conversionUnitKWh(+appData.currentPark.energy).unit  }} </template>
+                                </LabelValueUnit>
+
+                                <div class="h-[1px] bg-[var(--theme-gray235-bg)] w-full my-[8px]"></div>
+
+                                <LabelValueUnit>
+                                    投运时间 <template #value> {{ appData.currentPark.operateTime }} </template>
+                                </LabelValueUnit>
+
                             </div>
                         </el-collapse-transition>
                     </div>
