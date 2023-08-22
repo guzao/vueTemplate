@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+import { useEcharts } from '@/hooks'
+
+import { conversionUnitKVar, conversionUnitPrice } from '@/utils'
 
 import TitleBox from '@/components/common/TitleBox.vue';
 </script>

@@ -31,14 +31,14 @@ export const unitConversion = (limit: number, size: number) => {
 }
 
 
-export function unitConversionEdgeProcess(raw: number) {
+export function unitConversionEdgeProcess(raw: number, limit = 1000) {
 
     let symbolTag
     if (isNegative(raw)) {
         symbolTag = '-'
         raw = +stringSplit(`${raw}`, '-', 1)
     }
-    const { size, index } = unitConversion(1000, raw)
+    const { size, index } = unitConversion(limit, raw)
     return {
         size: symbolTag ? +`${symbolTag}${size}` : size,
         index
@@ -52,12 +52,12 @@ const writeDefault = (size: string, unit: string) => {
     }
 }
 
-const conversionUnit = (raw: number, units: string[], fractionDigits = 2) => {
+const conversionUnit = (raw: number, units: string[], fractionDigits = 2, limit = 1000) => {
     if (isNull(raw)) return writeDefault('--', units[0])
     if (isStringNull(raw)) return writeDefault('--', units[0])
     if (isString(raw)) raw = +raw
     if (isNaN(raw)) return writeDefault('--', units[0])
-    let { size, index } = unitConversionEdgeProcess(raw)
+    let { size, index } = unitConversionEdgeProcess(raw, limit)
 
     try {
         size = size.toFixed(fractionDigits) as any
@@ -73,13 +73,21 @@ const conversionUnit = (raw: number, units: string[], fractionDigits = 2) => {
 
 export const KWHUnits = ['kWh', 'MWh', 'GWh', 'TWh']
 
-export const conversionUnitKWh = (raw: number, fractionDigits?: number) => conversionUnit(raw, KWHUnits, fractionDigits)
+export const conversionUnitKWh = (raw: number, fractionDigits?: number) => conversionUnit(raw, KWHUnits, fractionDigits, 1000)
 
 export const KWUnits = ['kW', 'MW', 'GW', 'TW']
-export const conversionUnitKW = (raw: number, fractionDigits?: number) => conversionUnit(raw, KWUnits, fractionDigits)
+export const conversionUnitKW = (raw: number, fractionDigits?: number) => conversionUnit(raw, KWUnits, fractionDigits, 1000)
 
 export const KVARUnits = ['kVar', 'MVar', 'GVar', 'TVar']
-export const conversionUnitKVar = (raw: number, fractionDigits?: number) => conversionUnit(raw, KVARUnits, fractionDigits)
+export const conversionUnitKVar = (raw: number, fractionDigits?: number) => conversionUnit(raw, KVARUnits, fractionDigits, 1000)
+
+export const PriceUnits = ['元', '万', '亿', '兆']
+/** 金额单位转换 */
+export const conversionUnitPrice = (raw: number, fractionDigits?: number) => conversionUnit(raw, PriceUnits, fractionDigits, 10000)
+
+
+
+
 
 /** 找出最大值 并以此为基础 进行缩小 */
 export function getZoomRato(numbers: number[], units: string[]) {

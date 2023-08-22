@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { paserTime } from '@/utils'
+import { paserTime, conversionUnitPrice } from '@/utils'
 import { useAppData } from '@/store'
 
 import IconVue from '@/components/common/Icon.vue';
@@ -16,7 +16,7 @@ const appData = useAppData()
     <div class="flex justify-between px-[60px] runing_info">
 
 
-        <div class="w-[380px] mt-[4%]">
+        <div class="w-[390px] mt-[4%]">
 
             <TitleBox>
                 电站近期收益
@@ -33,8 +33,8 @@ const appData = useAppData()
                     <IconVue icon="ionc_cos" :size="68" />
                     <div class="flex flex-col justify-center ml-[8px]">
                         <div class="text-[var(--theme-gray107)]  mt-[16px]">今日充电金额</div>
-                        <div class="font-semibold text-[24px] f-dinb text-[var(--charge)]"> 1000
-                            <span class="text-[12px] text-[var(--theme-gray107)] font-normal"> 元 </span>
+                        <div class="font-semibold text-[24px] f-dinb text-[var(--charge)]"> {{ conversionUnitPrice(10000000).size }}
+                            <span class="text-[12px] text-[var(--theme-gray107)] font-normal">  {{ conversionUnitPrice(10000000).unit }} </span>
                         </div>
                     </div>
                 </li>
@@ -53,7 +53,7 @@ const appData = useAppData()
                     <IconVue icon="ionc_cos" :size="68" />
                     <div class="flex flex-col justify-center ml-[8px]">
                         <div class="text-[var(--theme-gray107)]  mt-[16px]">今日放电金额</div>
-                        <div class="font-semibold text-[24px] f-dinb text-[var(--charge)]"> 1000
+                        <div class="font-semibold text-[24px] f-dinb text-[var(--discharge)]"> 1000
                             <span class="text-[12px] text-[var(--theme-gray107)] font-normal"> 元 </span>
                         </div>
                     </div>
@@ -63,7 +63,7 @@ const appData = useAppData()
                     <IconVue icon="ionc_cos" :size="68" />
                     <div class="flex flex-col justify-center ml-[8px]">
                         <div class="text-[var(--theme-gray107)]  mt-[16px]">昨日放电金额</div>
-                        <div class="font-semibold text-[24px] f-dinb text-[var(--charge)]"> 1000
+                        <div class="font-semibold text-[24px] f-dinb text-[var(--discharge)]"> 1000
                             <span class="text-[12px] text-[var(--theme-gray107)] font-normal"> 元 </span>
                         </div>
                     </div>
@@ -95,7 +95,7 @@ const appData = useAppData()
 
         </div>
 
-        <div class="w-[350px] h-[392px] mt-[3%] flex justify-center flex flex-col items-center bg-contain bg-no-repeat">
+        <div class="h-[392px] mt-[3%] flex justify-center flex flex-col items-center bg-contain bg-no-repeat">
 
             <div>
                 <div class="text-center  font-semibold text-[24px] f-dinb text-[var(--charge)]"> 1000 </div>
@@ -110,7 +110,7 @@ const appData = useAppData()
                 </li>
 
                 <li class="mx-[20px]">
-                    <div class="text-center font-semibold text-[24px] f-dinb text-[var(--charge)]"> 1000 </div>
+                    <div class="text-center font-semibold text-[24px] f-dinb text-[var(--discharge)]"> 1000 </div>
                     <div class="text-center text-[var(--theme-gray107)]"> 放电收益金额 </div>
                 </li>
 

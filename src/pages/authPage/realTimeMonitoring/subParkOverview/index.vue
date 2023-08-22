@@ -4,6 +4,7 @@ import { isTrue, getArrayLength } from '@/utils'
 
 import SubParkCardList from './SubParkCardList.vue'
 import LessSubParkCard from './LessSubParkCard.vue';
+import Skeleton from '@/components/common/Skeleton.vue'
 import SubNavBar from '@/components/common/SubNavBar.vue';
 import ParkOverviewNavBar from '../components/ParkOverviewNavBar.vue';
 
@@ -16,19 +17,6 @@ getSubParkInfo()
 </script>
 
 <template>
-
-    <!-- <div v-watermark="{ markSatate: appData.currentRelease, text: dicts.parkReleaseStatusDict.dictLabel[ appData.currentRelease ] }" class="sub_park_overview" v-loading="loading">
-
-        <SubNavBar class="mb-[16px]" @park-change="getSubParkInfo" />
-
-        <ParkOverviewNavBar :park-runing-info="parkRuningInfo" />
-
-        <LessSubParkCard v-if="isTrue( getArrayLength(deivceGroupList) == 1 )" :deivce-group-list="deivceGroupList" />
-
-        <SubParkCardList v-else :deivce-group-list="deivceGroupList" />
-
-    </div> -->
-
     
     <div v-watermark="{ markSatate: appData.currentRelease, text: dicts.parkReleaseStatusDict.dictLabel[ appData.currentRelease ] }" class="sub_park_overview" >
 
@@ -36,13 +24,13 @@ getSubParkInfo()
 
         <ParkOverviewNavBar :park-runing-info="parkRuningInfo" />
 
-        <el-skeleton :rows="6"  :loading="loading" animated>
+        <Skeleton :rows="4"  :loading="loading" animated>
 
             <LessSubParkCard v-if="isTrue( getArrayLength(deivceGroupList) == 1 )" :deivce-group-list="deivceGroupList" />
 
             <SubParkCardList v-else :deivce-group-list="deivceGroupList" />
 
-        </el-skeleton>
+        </Skeleton>
 
     </div>
 
