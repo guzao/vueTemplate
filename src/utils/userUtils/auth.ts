@@ -50,6 +50,8 @@ export function useI18nSelectState() {
 
 
 
+
+
 const getLang = () => Cookies.get(USER.LANG)
 
 const setLang = (lang: string) => Cookies.set(USER.LANG, lang)
@@ -71,7 +73,6 @@ export function useLang() {
 
 
 
-
 const getIsCollapse = () => JSON.parse(Cookies.get(USER.IS_COLLAPSE) || 'false')
 
 const setIsCollapse = (isCollapse: boolean) => Cookies.set(USER.IS_COLLAPSE, `${isCollapse}`)
@@ -89,7 +90,6 @@ export function useIsCollapse() {
         removeIsCollapse
     }
 }
-
 
 
 
