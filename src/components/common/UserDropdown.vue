@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useRouter, useRoute } from 'vue-router'
 import { useUser, useAppData, useSystemConfig } from '@/store'
-import { User, Setting, Guide } from '@element-plus/icons-vue'
+import { User, Setting, Guide, Promotion } from '@element-plus/icons-vue'
 
 const route = useRoute()
 const userInfo = useUser()
@@ -18,7 +18,6 @@ const handleSlect = (command: CommandType) => {
             router.push({ path: '/config/personCenter', query: { ...query, stationCode: appData.currentParkSerial } })
             break;
         case 'systemConfig':
-            // router.push({ path: '/config/systemConfig', query: { ...query, stationCode: appData.currentParkSerial } })
             systemConfig.configModelState = true
             break;
         case 'logout':
@@ -48,7 +47,7 @@ const handleSlect = (command: CommandType) => {
                     系统配置 
                 </el-dropdown-item>
                 <el-dropdown-item command="logout" > 
-                    <el-icon :size="26"> <Guide /> </el-icon>
+                    <el-icon :size="26"> <Promotion /> </el-icon>
                     退出登录 
                 </el-dropdown-item>
             </el-dropdown-menu>
