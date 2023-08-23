@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { layoutConfig } from '@/config'
-import { useLayout, useAppData } from '@/store'
 import { ref, onMounted } from "vue";
+import { layoutConfig } from '@/config'
 import { ElScrollbar } from 'element-plus'
+import { useLayout, useAppData } from '@/store'
 import { Top } from '@element-plus/icons-vue'
 
-import Header from "./components/Header.vue";
 import Sider from './components/Sider.vue';
+import Header from "./components/Header.vue";
 import Footer from './components/Footer.vue';
 
 const layout = useLayout()
@@ -23,7 +23,7 @@ onMounted(() => layout.setScrollbarRefInstance(scrollbarRef.value))
 
     <el-container class="relative">
 
-        <el-header class="absolute top-0 right-0 left-0 z-10" :class="layout.hasShowHeader ? 'top-0' : 'top-[-100px]'"
+        <el-header class="absolute top-0 right-0 left-0 z-10 transition-all" :class="layout.hasShowHeader ? 'top-0' : 'top-[-70px]'"
             style="padding: 0;">
             <Header />
         </el-header>

@@ -16,7 +16,7 @@ onMounted(() => layout.setScrollbarRefInstance(scrollbarRef.value))
 <template>
     <el-container class="relative">
 
-        <el-header class="absolute top-0 right-0 left-0 z-10" :class="layout.hasShowHeader ? 'block' : 'hidden'"
+        <el-header class="absolute top-0 right-0 left-0 z-10 transition-all" :class="layout.hasShowHeader ? 'top-0' : 'top-[-70px]'"
             style="padding: 0;">
             <Header />
         </el-header>
