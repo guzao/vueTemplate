@@ -1,56 +1,13 @@
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
-import { deepCloe, successMessage } from '@/utils';
-import { useReactiveHttp } from '@/hooks'
-import { updateUserProfile } from '@/API'
-import { useRouter, useRoute } from 'vue-router'
-import { useUser, useDicts } from '@/store'
+import { useEditPerson } from './useEditPerson'
 import { ArrowLeft } from '@element-plus/icons-vue'
-import type { FormInstance } from 'element-plus'
-
 
 import SubTitle from '@/components/common/SubTitle.vue'
 import TitleBox from '@/components/common/TitleBox.vue';
 
 
-const router = useRouter()
-const route = useRoute()
-const userData = useUser()
-const dicts = useDicts()
+const { confirm, loading, rules, dicts, form, router } = useEditPerson()
 
-
-const userInfo = deepCloe(userData.userInfo.user)
-const fromInstance = ref<FormInstance>()
-const form = reactive(userInfo)
-const rules = {
-    userName: [ { required: true, message: '请输入用户名', trigger: 'blur' },],
-    phonenumber: [ { required: true, message: '请输入用户名', trigger: 'blur' },],
-    email: [ { required: true, message: '请输入用户名', trigger: 'blur' },],
-    sex: [ { required: true, message: '请输入用户名', trigger: 'blur' },],
-}
-
-
-const { loading, getResult: setUserProfile } = useReactiveHttp({
-    initData: {} as any,
-    request: () => updateUserProfile(form),
-    requestCallback: (res) => {
-        successMessage(res.msg)
-        return res
-    },
-    Immediately: false
-})
-
-
-const confirm = async () => {
-    try {
-        await fromInstance.value?.validate()
-        await setUserProfile()
-        userData.getUserInfo()
-        router.go(-1)
-    } catch (error) {
-        console.log(error)
-    }
-}
 
 </script>
 

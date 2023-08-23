@@ -79,7 +79,6 @@ export const useSystemConfig = defineStore('useSystemConfig', {
 
         },
 
-        /** 系统配置抽屉 */
 
     },
 })

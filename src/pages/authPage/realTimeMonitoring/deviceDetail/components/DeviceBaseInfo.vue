@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { PropType, ref } from 'vue';
-import { usePowerLine } from '../../hooks/usePowerLine'
+import { usePowerCurve } from '../../hooks/usePowerCurve'
 import { conversionUnitKWh, toFixed, conversionUnitKVar, conversionUnitKW, paserTime } from '@/utils'
 
 import TitleBoxVue from '@/components/common/TitleBox.vue';
@@ -20,7 +20,7 @@ defineProps({
 type ActiveName = 'powerLine' | 'alarms'
 const activeName = ref<ActiveName>('powerLine')
 
-const { chartRef, currentTime, prevTime, nextTime } = usePowerLine({ height: 180, device: 'device' })
+const { chartRef, currentTime, prevTime, nextTime } = usePowerCurve({ height: 180, device: 'device' })
 
 </script>
 
@@ -182,4 +182,4 @@ const { chartRef, currentTime, prevTime, nextTime } = usePowerLine({ height: 180
     }
 
 }
-</style>
+</style>../../hooks/usePowerCurve

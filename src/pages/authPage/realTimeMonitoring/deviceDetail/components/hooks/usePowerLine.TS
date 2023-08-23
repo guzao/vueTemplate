@@ -1,4 +1,4 @@
 
-export function usePowerLine () {
+export function usePowerCurve () {
     
 }

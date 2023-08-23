@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { paserTime } from '@/utils';
-import { usePowerLine } from '../hooks/usePowerLine'
+import { usePowerCurve } from '../hooks/usePowerCurve'
 
 import TitleBox from '@/components/common/TitleBox.vue';
 import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
 
-const { currentTime, prevTime, nextTime, chartRef } = usePowerLine({ height: 206, device: 'park' })
+const { currentTime, prevTime, nextTime, chartRef } = usePowerCurve({ height: 206, device: 'park' })
 </script>
 
 <template>

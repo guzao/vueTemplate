@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useRouter, useRoute } from 'vue-router'
 import { useUser, useAppData, useSystemConfig } from '@/store'
-import { User, Setting, Guide, Promotion } from '@element-plus/icons-vue'
+import { User, Setting, Promotion } from '@element-plus/icons-vue'
 
 const route = useRoute()
 const userInfo = useUser()

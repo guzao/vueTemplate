@@ -1,12 +1,12 @@
 import { useAppData } from '@/store'
-import { nextTick, ref, watch, inject } from 'vue'
+import { nextTick, ref, watch, inject, computed } from 'vue'
 import { geStationPowerAll, geStationPowerByUnit } from '@/API'
 import { deviceDetailContextKey } from '../deviceDetail/useDevice'
 import { useEcharts, useInterval, useReactiveHttp } from '@/hooks'
 import { allDayNumber, fillTodayDate, paserTime, writeDefaultDate } from '@/utils'
 
 
-type UsePowerLineConfig = {
+type usePowerCurveConfig = {
     /** 图表高度 */
     height: number,
     /** 功率曲线的类型 park 电站  device 设备 */
@@ -14,15 +14,13 @@ type UsePowerLineConfig = {
 }
 
 /** 实时功率曲线 */
-export function usePowerLine(config: UsePowerLineConfig) {
+export function usePowerCurve(config: usePowerCurveConfig) {
 
     const appData = useAppData()
 
-    const hasCurrentDay = () => paserTime(Date.now(), 'YYYY-MM-DD') == paserTime(currentTime.value, 'YYYY-MM-DD')
-
     const currentTime = ref(writeDefaultDate(appData.currentLastTime))
 
-    const nextDisabled = ref(hasCurrentDay())
+    const nextDisabled = computed(() => paserTime(Date.now(), 'YYYY-MM-DD') == paserTime(currentTime.value, 'YYYY-MM-DD'))
 
     const deviceDetailContext = inject(deviceDetailContextKey, {} as any)
     
@@ -32,7 +30,7 @@ export function usePowerLine(config: UsePowerLineConfig) {
     }
 
     const nextTime = () => {
-        if (hasCurrentDay()) return
+        if (nextDisabled.value) return
         currentTime.value = +currentTime.value + allDayNumber
         getResult()
     }
@@ -153,11 +151,9 @@ export function usePowerLine(config: UsePowerLineConfig) {
     }
 
     const getMetholds = () => {
-        if (config.device == 'park') {
-            return geStationPowerAll({ stationSerial: appData.currentParkSerial, date: paserTime(currentTime.value, 'YYYY-MM-DD') })
-        } else {
-            return geStationPowerByUnit({ stationSerial: appData.currentParkSerial, date: paserTime(writeDefaultDate(currentTime.value), 'YYYY-MM-DD'), unitId: deviceDetailContext?.unitId })
-        }
+        return config.device == 'park' 
+                                    ? geStationPowerAll({ stationSerial: appData.currentParkSerial, date: paserTime(currentTime.value, 'YYYY-MM-DD') }) 
+                                    : geStationPowerByUnit({ stationSerial: appData.currentParkSerial, date: paserTime(writeDefaultDate(currentTime.value), 'YYYY-MM-DD'), unitId: deviceDetailContext?.unitId })
     }
 
     const { getResult, loading } = useReactiveHttp({
@@ -177,10 +173,7 @@ export function usePowerLine(config: UsePowerLineConfig) {
         getResult()
     })
 
-    watch(currentTime, () => nextDisabled.value = hasCurrentDay())
-
     return {
-        hasCurrentDay,
         currentTime,
         prevTime,
         nextDisabled,
