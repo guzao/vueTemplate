@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import { isTrue } from '@/utils'
 import { useAppData, useDicts } from '@/store'
 import { useReactiveHttp } from '@/hooks'
-import { getDevicGroupList, getStationInfo } from '@/api'
+import { getDevicGroupList, getStationInfo } from '@/API'
 
 
 
