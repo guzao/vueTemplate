@@ -16,6 +16,9 @@ export const enum USER {
     IS_LOCALSTORAGE = 'IS_LOCALSTORAGE',
 
     /** 是否显示跳转旧系统链接 */
-    OLD_SYSTEM_URL_FLAG = 'OLD_SYSTEM_URL_FLAG'
+    OLD_SYSTEM_URL_FLAG = 'OLD_SYSTEM_URL_FLAG',
+
+    /** 是否本地化部署 */
+    IS_LOCALIZATION = 'IS_LOCALIZATION'
 }
 

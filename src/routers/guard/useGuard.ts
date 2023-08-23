@@ -4,6 +4,7 @@ import { useUser, useAppData } from '@/store'
 import nProgress from '@/plugins/steupNprogress'
 import { arrayIsEmpty, arrayIsNotEmpty, useToken } from '@/utils'
 import type { Router, NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
+import { ElNotification } from 'element-plus'
 
 const { getToken } = useToken()
 
@@ -15,18 +16,14 @@ export function useGuard(router: Router) {
 
   router.beforeEach(beforeEach)
 
-  router.afterEach((to, form, next) => {
-    nProgress.done()
-  })
+  router.afterEach((to, form, next) =>  nProgress.done())
 
 }
 
 
 const beforeEach = async (to: RouteLocationNormalized, form: RouteLocationNormalized, next: NavigationGuardNext) => {
 
-  
   nProgress.start()
-
 
   // 1看 token
   if (getToken()) {
@@ -56,12 +53,19 @@ const beforeEach = async (to: RouteLocationNormalized, form: RouteLocationNormal
 
     }
 
+
     if (to.path !== '/config/personCenter/editPassword') {
-      if (userInfo.user.firstLoginFlag == State.FIRST_LOGIN) return next('/config/personCenter/editPassword')
+      if (userInfo.user.firstLoginFlag == State.FIRST_LOGIN) {
+        ElNotification({ title: '提示', message: '首次登录请修改密码', type: 'warning' })
+        return next(to.fullPath)
+      }
     }
 
     if (to.path !== '/index') {
-      if (currentRelease == State.DE_BUGGER  ) return next('/index')
+      if (currentRelease == State.RELEASE && to.path.includes('/dataAnalysis')) {
+        ElNotification({ title: '提示', message: '电站不是发布状态,数据分析无法使用', type: 'warning' })
+        return next('/index')
+      }
     }
 
     return next()

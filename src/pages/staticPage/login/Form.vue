@@ -3,7 +3,7 @@ import { User, Lock, Discount } from '@element-plus/icons-vue'
 import { useLogin } from './useLogin'
 
 // @ts-ignore
-const { form, rules, handleLogin, getCodeImg, imgSrc, serveConfigData, fromInstance, loading } = useLogin()
+const { form, rules, handleLogin, getCodeImg, imgSrc, systemConfig, fromInstance, loading } = useLogin()
 </script>
 
 <template>
@@ -25,7 +25,7 @@ const { form, rules, handleLogin, getCodeImg, imgSrc, serveConfigData, fromInsta
                             <el-input v-model="form.password" @keyup.enter.native="handleLogin" placeholder="请输入密码" type="password" class="h-[48px]"  :prefix-icon="Lock" clearable />
                         </el-form-item>
     
-                        <el-form-item prop="code" v-if="serveConfigData.captchaEnabled">
+                        <el-form-item prop="code" v-if="systemConfig.baseConfig.captchaEnabled">
                             <el-input v-model="form.code" @keyup.enter.native="handleLogin" :prefix-icon="Discount" class="h-[48px]"  clearable   placeholder="请输入验证码">
                                 <template #suffix >
                                     <img :src="imgSrc" alt="" class="w-[100px] h-[40px] cursor-pointer" @click="getCodeImg">

@@ -12,7 +12,13 @@ export const enum Type {
     NUMBER_CONTAINER = 0,
 
     /** 数值类型储能柜 */
-    NUMBER_CABINET = 1
+    NUMBER_CABINET = 1,
+    
+    /** 直流 */ 
+    COCURRENT = 'DC',
+    
+    /** 交流 */ 
+    EXCHANGE = 'AC',
     
 }
 

@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { useI18nStore, langs } from '@/store'
+import { useI18nStore, langs, useSystemConfig } from '@/store'
 const i18nStore = useI18nStore()
-
+const systemConfig = useSystemConfig()
 
 </script>
 
 <template>
-    <el-dropdown trigger="click" @command="i18nStore.setLang">
+    <el-dropdown trigger="click" @command="i18nStore.setLang" v-if="systemConfig.baseConfig.internationalization">
         <el-button text>
             {{ i18nStore.langLable }}
         </el-button>

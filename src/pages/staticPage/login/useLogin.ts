@@ -1,17 +1,16 @@
 import { ref, onBeforeMount } from 'vue'
 import type { FormInstance } from 'element-plus'
 import { getCodeImg as getcode } from '@/API'
-import { useRouter } from 'vue-router'
-import { useUser } from '@/store'
-import { useLang } from '@/utils'
+import { useRouter, useRoute } from 'vue-router'
+import { useUser, useSystemConfig } from '@/store'
 
-
-const { getLang, setLang } = useLang()
 
 export function useLogin() {
 
 
     const { userLogin } = useUser()
+
+    const systemConfig = useSystemConfig()
 
     const form = ref({
         code: '',
@@ -38,15 +37,6 @@ export function useLogin() {
         ],
     }
 
-    const serveConfigData = ref<ServeConfigData>({
-        internationalization: false,
-        localization: false,
-        register: false,
-        language: '',
-        resetPassword: false,
-        captchaEnabled: true,
-    })
-
     const getCodeImg = () => {
         getcode().then(res => {
             const data = res as any
@@ -60,18 +50,12 @@ export function useLogin() {
     const setServeConfigData = (data: CaptchaImageData) => {
 
         const { internationalization, localization, register, language, resetPassword, captchaEnabled } = data
-        serveConfigData.value.internationalization = internationalization
-        serveConfigData.value.localization = localization
-        serveConfigData.value.register = register
-        serveConfigData.value.language = language
-        serveConfigData.value.resetPassword = resetPassword
-        serveConfigData.value.captchaEnabled = captchaEnabled
 
-        if (getLang()) return
-        setLang(language)
+        systemConfig.setBaseConfig({ internationalization, localization, register, language, resetPassword, captchaEnabled })
 
     }
 
+    const { query: { redirect = '/index' } } = useRoute()
     const router = useRouter()
 
     const handleLogin = async () => {
@@ -79,7 +63,7 @@ export function useLogin() {
             loading.value = true
             await fromInstance.value?.validate()
             await userLogin(form.value)
-            router.push('/index')
+            router.push(`${redirect}`)
         } catch (error) {
             form.value.code = ''
             getCodeImg()
@@ -88,9 +72,7 @@ export function useLogin() {
         loading.value = false
     }
 
-    
-
-    onBeforeMount(getCodeImg)
+    getCodeImg()
 
     return {
         form,
@@ -99,8 +81,8 @@ export function useLogin() {
         imgSrc,
         handleLogin,
         getCodeImg,
-        serveConfigData,
-        loading
+        loading,
+        systemConfig
     }
 
 }

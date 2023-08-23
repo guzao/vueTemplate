@@ -1,20 +1,15 @@
 import { USER } from '@/enum'
 import Cookies from "js-cookie";
+import { convertBoolean } from '../dataUtils';
 
 /** 获取 */
-function getToken() {
-    return Cookies.get(USER.TOKEN)
-}
+const getToken = () => Cookies.get(USER.TOKEN)
 
 /** 修改 */
-function setToken(token: string) {
-    Cookies.set(USER.TOKEN, token)
-}
+const setToken = (token: string) => Cookies.set(USER.TOKEN, token)
 
 /** 删除 */
-function removetToken() {
-    Cookies.remove(USER.TOKEN)
-}
+const removetToken = () => Cookies.remove(USER.TOKEN)
 
 /** token 添加 获取 删除 */
 export function useToken() {
@@ -35,17 +30,11 @@ export function useToken() {
 
 
 /** 语言选择按钮展示状态的 添加 获取 删除 */
-function getHasShowI18nSelect() {
-    return Cookies.get(USER.HAS_SHOW_I18NSCLECT)
-}
+const getHasShowI18nSelect = () => convertBoolean(Cookies.get(USER.HAS_SHOW_I18NSCLECT))
 
-function setHasShowI18nSelect(hasShow: boolean) {
-    Cookies.set(USER.HAS_SHOW_I18NSCLECT, `${hasShow}`)
-}
+const setHasShowI18nSelect = (hasShow: boolean) => Cookies.set(USER.HAS_SHOW_I18NSCLECT, `${hasShow}`)
 
-function removeHasShowI18nSelect() {
-    Cookies.remove(USER.HAS_SHOW_I18NSCLECT)
-}
+const removeHasShowI18nSelect = () => Cookies.remove(USER.HAS_SHOW_I18NSCLECT)
 
 /** 用户语言切换按钮 */
 export function useI18nSelectState() {
@@ -61,17 +50,11 @@ export function useI18nSelectState() {
 
 
 
-function getLang() {
-    return localStorage.getItem(USER.LANG)
-}
+const getLang = () => Cookies.get(USER.LANG)
 
-function setLang(lang: string) {
-    localStorage.setItem(USER.LANG, `${lang}`)
-}
+const setLang = (lang: string) => Cookies.set(USER.LANG, lang)
 
-function removeLang() {
-    localStorage.removeItem(USER.LANG)
-}
+const removeLang = () => Cookies.remove(USER.LANG)
 
 /** 语言的 添加 获取 删除  存在localStorage中 */
 export function useLang() {
@@ -89,18 +72,11 @@ export function useLang() {
 
 
 
+const getIsCollapse = () => JSON.parse(Cookies.get(USER.IS_COLLAPSE) || 'false')
 
-function getIsCollapse() {
-    return JSON.parse(Cookies.get(USER.IS_COLLAPSE) || 'false')
-}
+const setIsCollapse = (isCollapse: boolean) => Cookies.set(USER.IS_COLLAPSE, `${isCollapse}`)
 
-function setIsCollapse(isCollapse: boolean) {
-    Cookies.set(USER.IS_COLLAPSE, `${isCollapse}`)
-}
-
-function removeIsCollapse() {
-    Cookies.remove(USER.IS_COLLAPSE)
-}
+const removeIsCollapse = () => Cookies.remove(USER.IS_COLLAPSE)
 
 /** 侧边栏的 添加 获取 删除 状态  Cookies */
 export function useIsCollapse() {
@@ -114,3 +90,25 @@ export function useIsCollapse() {
     }
 }
 
+
+
+
+
+const setIslocalization = (state: boolean) => Cookies.set(USER.IS_LOCALIZATION, `${state}`)
+
+const getIslocalization = () => JSON.parse(Cookies.get(USER.IS_LOCALIZATION) || 'false')
+
+const removeIslocalization = () => Cookies.remove(USER.IS_LOCALIZATION)
+
+
+/** 是否本地化部署 添加 获取 删除 状态  Cookies */
+export function useIslocalization() {
+    return {
+        /** 获取 */
+        getIslocalization,
+        /** 修改 */
+        setIslocalization,
+        /** 删除 */
+        removeIslocalization
+    }
+}

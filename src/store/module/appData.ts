@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import { getFirstElement, hasEror, isFalse, useIsCollapse, urlQueryToObject, replaceUrlQuery, sleep, arrayIsEmpty } from '@/utils'
 import { getUserParkListAll, getUserParkLastTime } from '@/API'
+import { getFirstElement, hasEror, isFalse, useIsCollapse, urlQueryToObject, replaceUrlQuery, sleep, arrayIsEmpty } from '@/utils'
 
 
 const { getIsCollapse, setIsCollapse } = useIsCollapse()
@@ -53,7 +53,7 @@ export const useAppData = defineStore('useAppData', {
         currentParkSerial(state) {
             return state.parkSerial
         },
-        /** 当前选中的电站编号 */
+        /** 当前选中的电站信息 */
         currentPark(state) {
             return state.parkAuthList.find(item => item.serial == state.parkSerial)!
         },

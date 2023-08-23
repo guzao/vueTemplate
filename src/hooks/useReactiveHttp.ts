@@ -1,7 +1,7 @@
-import { ref } from 'vue'
+import { Ref, ref, UnwrapRef } from 'vue'
 import { hasEror } from '@/utils'
 
-interface UseReactiveGetParams <T> {
+interface UseReactiveGetParams<T> {
     /**  初始化参数*/
     initData: T,
     /** 请求接口 */
@@ -12,10 +12,10 @@ interface UseReactiveGetParams <T> {
     requestCallback?: (res: ResponseData) => any,
 }
 
-const defaultRequestCallback =  (res: ResponseData) => res.data
+const defaultRequestCallback = (res: ResponseData) => res.data
 
-export  function useReactiveHttp <T> (params: UseReactiveGetParams<T>) {
-    
+export function useReactiveHttp<T>(params: UseReactiveGetParams<T>) {
+
     const { initData, request, Immediately = true, requestCallback = defaultRequestCallback } = params
 
     const result = ref<T>(initData)

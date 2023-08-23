@@ -1,4 +1,5 @@
 import DayJs from 'dayjs'
+import { isDate } from '../dataUtils'
 import { isFalse } from '../dataUtils'
 
 export const allDayNumber = 24 * 60 * 60 * 1000
@@ -59,4 +60,34 @@ export function getDateCycles (type: string, baseDate: Date) {
             return getPrevMonth(baseDate, 24)
     }
     return baseDate
+}
+
+/**
+ * 获取本周的第一天
+*/
+export function getWeekFirstDay (origin: Date | number) {
+
+    let baseDate = isDate(origin) ? origin as Date : new Date(origin) 
+
+    const day = baseDate.getDay() - 1
+
+    baseDate = new Date(+baseDate - (day * allDayNumber))
+
+    const { Y, M, D, } = getYearMonthDayHms(baseDate)
+
+    return new Date(Y, M, D, 0, 0, 0)
+
+}
+
+
+export function getYearMonthDayHms (origin: Date) {
+    const baseDate = DayJs(origin)
+    return {
+        Y: baseDate.get('years'),
+        M: baseDate.get('months'),
+        D: baseDate.get('dates'),
+        H: baseDate.get('hours'),
+        m: baseDate.get('minutes'),
+        s: baseDate.get('seconds')
+    }
 }

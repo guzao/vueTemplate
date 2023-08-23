@@ -6,6 +6,9 @@ import { useAsset, useRouter, useDirective, useNprogress, useElementPlus, usePin
 
 import '@/assets/styles/index.scss'
 
+/**
+ * 启动应用
+*/
 export function setupApp () {
 
     useAsset()

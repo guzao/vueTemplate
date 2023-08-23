@@ -3,9 +3,9 @@ import { useInterval } from '@/hooks'
 import { useAppData, useDicts } from '@/store'
 import { useParkOverview } from './useParkOverview'
 
-import SubNavBar from '@/components/common/SubNavBar.vue';
-import RuningInfo from './RuningInfo.vue'
 import Bottom from './Bottom.vue'
+import RuningInfo from './RuningInfo.vue'
+import SubNavBar from '@/components/common/SubNavBar.vue';
 
 const appData = useAppData()
 const dicts = useDicts()
