@@ -21,6 +21,9 @@ export const has = (target: object, propertyKey: string | number | symbol | any)
 /** 获取对象上的属性 */
 export const ownKeys = (target: object) => Reflect.ownKeys(target)
 
+/** 获取对象上的键个数 */
+export const objectSize = (target: object) => ownKeys(target).length
+
 /** 对象为空 */
 export const objectIsEmpty = (target = {}) => !ownKeys(target).length
 

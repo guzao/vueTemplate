@@ -1,4 +1,4 @@
-import { arrayGroupByMap, getFirstElement, getMaxElement, objectForEach, ownKeys } from "../dataUtils"
+import { arrayGroupByMap, objectSize, getMaxElement, objectForEach, ownKeys } from "../dataUtils"
 
 type GenerateDnamicTableDataParams <T> = {
     /** 以某个字段为类别 */
@@ -82,7 +82,7 @@ function generateTableHeader <T> (tableData: any, params: GenerateDnamicTableDat
 
     const headerData: DnamicTableDataHeaderData [] = [] 
 
-    const firstElement = getMaxElement(tableData, (maxEl, item) => ownKeys(item).length > ownKeys(maxEl).length) as any
+    const firstElement = getMaxElement(tableData, (maxEl, item) => objectSize(item) > objectSize(maxEl)) as any
 
     objectForEach(firstElement, (_, key) => {
         if ( key.includes(splitSymbol) ) {
