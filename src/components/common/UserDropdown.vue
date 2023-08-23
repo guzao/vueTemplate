@@ -1,11 +1,13 @@
 <script lang="ts" setup>
-import { useUser, useAppData } from '@/store'
 import { useRouter, useRoute } from 'vue-router'
+import { useUser, useAppData, useSystemConfig } from '@/store'
+import { User, Setting, Guide } from '@element-plus/icons-vue'
 
-const appData = useAppData()
-const userInfo = useUser()
 const route = useRoute()
+const userInfo = useUser()
 const router = useRouter()
+const appData = useAppData()
+const systemConfig  = useSystemConfig()
 
 type CommandType = 'personCenter' | 'logout' | 'systemConfig'
 
@@ -16,7 +18,8 @@ const handleSlect = (command: CommandType) => {
             router.push({ path: '/config/personCenter', query: { ...query, stationCode: appData.currentParkSerial } })
             break;
         case 'systemConfig':
-            router.push({ path: '/config/systemConfig', query: { ...query, stationCode: appData.currentParkSerial } })
+            // router.push({ path: '/config/systemConfig', query: { ...query, stationCode: appData.currentParkSerial } })
+            systemConfig.configModelState = true
             break;
         case 'logout':
             userInfo.userlogOut()
@@ -36,9 +39,18 @@ const handleSlect = (command: CommandType) => {
         </el-button>
         <template #dropdown>
             <el-dropdown-menu>
-                <el-dropdown-item command="personCenter"> 个人中心 </el-dropdown-item>
-                <el-dropdown-item command="systemConfig"> 系统配置 </el-dropdown-item>
-                <el-dropdown-item command="logout" > 退出登录 </el-dropdown-item>
+                <el-dropdown-item command="personCenter"> 
+                    <el-icon :size="26"> <User /> </el-icon>
+                    个人中心 
+                </el-dropdown-item>
+                <el-dropdown-item command="systemConfig"> 
+                    <el-icon :size="26"> <Setting /> </el-icon>
+                    系统配置 
+                </el-dropdown-item>
+                <el-dropdown-item command="logout" > 
+                    <el-icon :size="26"> <Guide /> </el-icon>
+                    退出登录 
+                </el-dropdown-item>
             </el-dropdown-menu>
         </template>
     </el-dropdown>

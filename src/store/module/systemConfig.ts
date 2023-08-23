@@ -22,6 +22,9 @@ export const useSystemConfig = defineStore('useSystemConfig', {
     state() {
         return {
 
+            /** 系统配置抽屉状态 */
+            configModelState: false,
+
             /**  是否固定全局 Heder */
             dynamicHeader: layoutConfig.dynamicHeader,
 
@@ -62,6 +65,7 @@ export const useSystemConfig = defineStore('useSystemConfig', {
 
     actions: {
 
+        /** 系统基本配置 */
         setBaseConfig (config: ServeConfigData) {
             
             this.baseConfig = config
@@ -73,6 +77,9 @@ export const useSystemConfig = defineStore('useSystemConfig', {
             if (getLang()) return
             setLang(language)
 
-        }
+        },
+
+        /** 系统配置抽屉 */
+
     },
 })

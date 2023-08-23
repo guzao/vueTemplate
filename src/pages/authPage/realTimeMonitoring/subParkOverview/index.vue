@@ -24,7 +24,7 @@ getSubParkInfo()
 
         <ParkOverviewNavBar :park-runing-info="parkRuningInfo" />
 
-        <Skeleton :rows="4" :loading="loading" animated>
+        <Skeleton :rows="4" :loading="loading">
 
             <LessSubParkCard v-if="isTrue( getArrayLength(deivceGroupList) == 1 )" :deivce-group-list="deivceGroupList" />
 

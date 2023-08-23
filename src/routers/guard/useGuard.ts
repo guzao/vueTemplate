@@ -62,7 +62,7 @@ const beforeEach = async (to: RouteLocationNormalized, form: RouteLocationNormal
     }
 
     if (to.path !== '/index') {
-      if (currentRelease == State.RELEASE && to.path.includes('/dataAnalysis')) {
+      if (currentRelease == State.DE_BUGGER && to.path.includes('/dataAnalysis')) {
         ElNotification({ title: '提示', message: '电站不是发布状态,数据分析无法使用', type: 'warning' })
         return next('/index')
       }
