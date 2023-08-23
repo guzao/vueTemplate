@@ -95,7 +95,7 @@ const appData = useAppData()
 
         </div>
 
-        <div class="h-[392px] mt-[3%] flex justify-center flex flex-col items-center bg-contain bg-no-repeat">
+        <div class="h-[392px] mt-[3%] flex justify-center  flex-col items-center bg-contain bg-no-repeat">
 
             <div>
                 <div class="text-center  font-semibold text-[24px] f-dinb text-[var(--charge)]"> 1000 </div>
