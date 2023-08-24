@@ -18,6 +18,10 @@ export const common = {
 
     park: 'Park',
 
+    device: 'Device',
+
+    state: 'State',
+
     enter: 'Enter',
 
     operationState: 'Operation State',

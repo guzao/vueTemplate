@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { t } from '@/langs'
 import { Type } from '@/enum'
 import { PropType } from 'vue';
 import { useDeviceDetail } from '../hooks/useDeviceDetail'
@@ -20,7 +21,7 @@ defineProps({
 </script>
 
 <template>
-    <ul class="grid grid-cols-8 gap-[8px] more_device_list">
+    <ul class=" grid grid-cols-8  gap-[8px] more_device_list">
 
         <li @click="checkDeviceDetail(deivce)"
             class="h-[131px] bg-[var(--theme-gray251-bg)] pl-[12px] box-border cursor-pointer" v-for="deivce in deiveList"
@@ -38,7 +39,7 @@ defineProps({
                 <div class="flex-1 h-full flex flex-col justify-evenly">
 
                     <div class="flex items-center">
-                        <div class="text-[var(--theme-gray107)] text-[12px] mr-[2px]">日充 </div>
+                        <div class="text-[var(--theme-gray107)] text-[12px] mr-[2px]"> {{ t('common.dayCharge') }} </div>
                         <div class="text-[var(--theme-black51)] mr-[2px] f-dinp">
                             {{ conversionUnitKWh(deivce.deviceData.M15, 1).size }}
                         </div>
@@ -48,7 +49,7 @@ defineProps({
                     </div>
 
                     <div class="flex items-center">
-                        <div class="text-[var(--theme-gray107)] text-[12px] mr-[2px]">日放 </div>
+                        <div class="text-[var(--theme-gray107)] text-[12px] mr-[2px]">{{ t('common.dayDischarge') }} </div>
                         <div class="text-[var(--theme-black51)] mr-[2px] f-dinp">
                             {{ conversionUnitKWh(deivce.deviceData.M16, 1).size }}
                         </div>

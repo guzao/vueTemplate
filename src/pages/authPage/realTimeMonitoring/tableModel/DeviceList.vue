@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { t } from '@/langs'
 import { PropType } from 'vue'
 import { useDeviceDetail } from '../hooks/useDeviceDetail'
 import { conversionUnitKWh, getRuningStateInfo, toFixed } from '@/utils'
@@ -27,7 +28,7 @@ defineProps({
 
             <el-table stripe :data="item.list" style="width: 100%;" >
 
-                <el-table-column property="name" label="设备名称">
+                <el-table-column property="name" :label="t('common.device')">
 
                     <template #default="{ row }">
                         <span class="cursor-pointer underline decoration-1" @click="checkDeviceDetail(row)"> {{ row.name }}
@@ -36,7 +37,7 @@ defineProps({
 
                 </el-table-column>
 
-                <el-table-column property="name" label="状态">
+                <el-table-column property="name" :label="t('common.state')">
                     <template #default="{ row }">
                         <div class="flex items-center ">
                             <Icon :icon="getRuningStateInfo(row.deviceData.M2).icon" :size="24" class="mr-[8px]" />
@@ -46,48 +47,48 @@ defineProps({
                     </template>
                 </el-table-column>
 
-                <el-table-column property="name" label="剩余电量">
+                <el-table-column property="name" :label="t('common.soc')">
                     <template #default="{ row }">
                         <span  >{{ toFixed(row.deviceData.M3) }}%</span>
                     </template>
                 </el-table-column>
 
-                <el-table-column property="name" label="日充">
+                <el-table-column property="name" :label="t('common.dayCharge')">
                     <template #default="{ row }">
                         <span :class="row.maxDayCharge ? 'discharge_color' : ''">{{ conversionUnitKWh(row.deviceData.M15).size }} {{ conversionUnitKWh(row.deviceData.M15).unit
                         }}</span>
                     </template>
                 </el-table-column>
 
-                <el-table-column property="name" label="日放">
+                <el-table-column property="name" :label="t('common.dayDischarge')">
                     <template #default="{ row }">
                         <span :class="row.maxDayDisCharge ? 'discharge_color' : ''">{{ conversionUnitKWh(row.deviceData.M16).size }} {{ conversionUnitKWh(row.deviceData.M16).unit
                         }}</span>
                     </template>
                 </el-table-column>
 
-                <el-table-column property="name" label="年充">
+                <el-table-column property="name" :label="t('common.yearCharge')">
                     <template #default="{ row }">
                         <span :class="row.maxYearCharge ? 'discharge_color' : ''">{{ conversionUnitKWh(row.deviceData.M19).size }} {{ conversionUnitKWh(row.deviceData.M19).unit
                         }}</span>
                     </template>
                 </el-table-column>
 
-                <el-table-column property="name" label="年充">
+                <el-table-column property="name" :label="t('common.yaerDischarge')">
                     <template #default="{ row }">
                         <span :class="row.maxYearDisCharge ? 'discharge_color' : ''">{{ conversionUnitKWh(row.deviceData.M20).size }} {{ conversionUnitKWh(row.deviceData.M20).unit
                         }}</span>
                     </template>
                 </el-table-column>
 
-                <el-table-column property="name" label="累充">
+                <el-table-column property="name" :label="t('common.totalCharge')">
                     <template #default="{ row }">
                         <span :class="row.maxAccCharge ? 'discharge_color' : ''">{{ conversionUnitKWh(row.deviceData.M5).size }} {{ conversionUnitKWh(row.deviceData.M5).unit
                         }}</span>
                     </template>
                 </el-table-column>
 
-                <el-table-column property="name" label="累充">
+                <el-table-column property="name" :label="t('common.totalDischarge')">
                     <template #default="{ row }">
                         <span :class="row.maxAccDisCharge ? 'discharge_color' : ''">{{ conversionUnitKWh(row.deviceData.M6).size }} {{ conversionUnitKWh(row.deviceData.M6).unit
                         }}</span>

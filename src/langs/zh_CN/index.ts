@@ -1,9 +1,12 @@
 import { login } from './login'
 import { common } from './common'
-import { parkOverview } from './monitor'
+import { parkOverview, parkIncome } from './monitor'
+import { deviceState } from './state'
 
 export const ZH_CN = {
     login,
     common,
-    parkOverview
+    parkOverview,
+    parkIncome,
+    deviceState
 }

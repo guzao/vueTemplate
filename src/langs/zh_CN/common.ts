@@ -18,6 +18,10 @@ export const common = {
     
     park: '电站',
 
+    device: '设备',
+
+    state: '状态',
+
     enter: '进入',
 
     operationState: '运行状态',
