@@ -1,14 +1,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { paserTime } from '@/utils'
-import { useAppData } from '@/store'
 
 import RunningData from './subPage/RunningData.vue'
-import SubTitle from '@/components/common/SubTitle.vue'
-import LastTime from '@/components/common/LastTime.vue'
-import SubNavBar from '@/components/common/SubNavBar.vue'
-
-const appdate = useAppData()
+import TitleAndStationNavBar from '@/components/business/TitleAndStationNavBar.vue';
 
 type ActiveTab = 'runningData' | 'deviceType' | 'warning'
 const activeTab = ref<ActiveTab>('runningData')
@@ -18,14 +12,7 @@ const activeTab = ref<ActiveTab>('runningData')
 <template>
     <div class="w-full overflow-hidden" >
 
-        <SubTitle />
-
-        <SubNavBar :show-view-model-select="false" :show-device-state-desc="false">
-            <div class="flex justify-end">
-                <LastTime> {{ paserTime(appdate.currentLastTime, 'YYYY-MM-DD HH:mm:ss') }} </LastTime>
-            </div>
-        </SubNavBar>
-
+        <TitleAndStationNavBar />
 
         <el-tabs v-model="activeTab" class="mt-[16px]" >
 

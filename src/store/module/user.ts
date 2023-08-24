@@ -80,7 +80,7 @@ export const useUser =  defineStore('useUser', {
             return userLogout().then(res => {
                 if (hasEror(res)) return
                 removetToken()
-                location.href = '/login';
+                location.reload()
             })
         }
     }

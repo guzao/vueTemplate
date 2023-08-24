@@ -39,6 +39,7 @@ defineProps({
 </script>
 
 <template>
+    
     <TitleBox class="mb-[16px]" :size="18">
         电站列表
         <template #right>

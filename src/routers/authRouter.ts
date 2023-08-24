@@ -4,6 +4,7 @@ import MainLayout from '@/layout/MainLayout/index.vue'
 
 export const authRouter: RouteRecordRaw[] = [
 
+    /** 实时监控 */
     {
         path: '/monitor',
         component: MainLayout,
@@ -34,7 +35,7 @@ export const authRouter: RouteRecordRaw[] = [
             },
             {
                 path: '/monitor/parkIncome',
-                component: () => import('@/pages/authPage/realTimeMonitoring/parkIncome/index.vue'), 
+                component: () => import('@/pages/authPage/realTimeMonitoring/parkIncome/index.vue'),
             }
         ]
     },
@@ -48,6 +49,7 @@ export const authRouter: RouteRecordRaw[] = [
         }
     },
 
+    /** 数据分析 */
     {
         path: '/parkReport',
         component: MainLayout,
@@ -86,6 +88,31 @@ export const authRouter: RouteRecordRaw[] = [
         ]
     },
 
+    {
+        path: '/parkReport',
+        component: MainLayout,
+        meta: {
+            title: '收益分析'
+        },
+        children: [
+            {
+                meta: {
+                    title: '电站收益'
+                },
+                path: '/incomeAnalysis/parkIncomeReport',
+                component: () => import('@/pages/authPage/incomeAnalysis/parkIncomeReport/index.vue'),
+            },
+            {
+                meta: {
+                    title: '设备收益'
+                },
+                path: '/incomeAnalysis/deviceIncomeReport',
+                component: () => import('@/pages/authPage/incomeAnalysis/deviceIncomeReport/index.vue'),
+            },
+        ]
+    },
+
+    /** 配置管理 */
     {
         path: '/config',
         component: MainLayout,
@@ -131,6 +158,7 @@ export const authRouter: RouteRecordRaw[] = [
         ]
     },
 
+    /** 日志中心 */
     {
         path: '/logs',
         component: MainLayout,

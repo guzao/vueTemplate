@@ -6,6 +6,7 @@ import { getArrayLength } from '@/utils'
 
 import ParkList from './ParkList.vue'
 import SubTitle from '@/components/common/SubTitle.vue'
+import Skeleton from '@/components/common/Skeleton.vue'
 import ParkListInfoHeader from './ParkListInfoHeader.vue'
 
 const parkListInfo = reactive({
@@ -51,14 +52,17 @@ const accParkListInfo = (data: ParkListData[]) => {
 
 <template>
 
-    <div v-loading="loading">
+    <!-- <div v-loading="loading"> -->
+        
+    <div >
 
         <SubTitle />
 
         <ParkListInfoHeader :park-list-info="parkListInfo" />
 
-        <ParkList @update="getResult" :park-list="parkList" />
-        
+        <Skeleton :loading="loading">
+            <ParkList @update="getResult" :park-list="parkList" />
+        </Skeleton>
     </div>
 
 </template>

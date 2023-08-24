@@ -70,6 +70,32 @@ html {
 }
 
 
+// 设备运行状态背景颜色
+.charge_color_bg {
+    background-color: var(--charge) !important;
+}
+
+.discharge_color_bg {
+    background-color: var(--discharge) !important;
+}
+
+.standby_color_bg {
+    background-color: var(--standby) !important;
+}
+
+.alarm_color_bg {
+    background-color: var(--alarm) !important;
+}
+
+.weihu_color_bg {
+    background-color: var(--weihu) !important;
+}
+
+.offline_color_bg {
+    background-color: var(--offline) !important;
+}
+
+
 
 // 
 .el-table thead th.el-table__cell {

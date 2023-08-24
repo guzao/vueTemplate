@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { objectForEach, deepCloe, has, ownKeys, objectIsEmpty, objectNotEmpty, objectToArray } from '@/utils/dataUtils/objectTools'
+import { objectForEach, deepCloe, has, ownKeys, objectIsEmpty, objectNotEmpty, objectToArray, objectSize } from '@/utils/dataUtils/objectTools'
 
 describe('objectTools', () => {
 
@@ -54,6 +54,13 @@ describe('objectTools', () => {
     test('objectToArray', () => {
         const origin  = { id: 1, name: 2 }
         expect(objectToArray(origin)).toEqual([ [ 'id', 1 ],[ 'name', 2 ]  ])
+    })
+    
+    
+    test('objectSize', () => {
+        const origin  = { id: 1, name: 2 }
+        expect(objectSize(origin)).toBe(2)
+        expect(objectSize({})).toBe(0)
     })
     
     

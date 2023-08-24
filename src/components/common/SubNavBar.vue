@@ -4,6 +4,9 @@ import { useAppData } from '@/store'
 import { layoutConfig } from '@/config'
 import { useRoute, useRouter } from 'vue-router'
 import DeviceStateDesc from './DeviceStateDesc.vue';
+import { getDeviceStateInfo } from '@/utils'
+
+import Icon from './Icon.vue';
 
 const appData = useAppData()
 const emits = defineEmits<{
@@ -35,7 +38,7 @@ const parkChange = (code: string) => {
     emits('parkChange', code)
 }
 
-const viewModelChange = (path: string) =>  router.push({ query: { stationCode: appData.parkSerial }, path: path })
+const viewModelChange = (path: string) => router.push({ query: { stationCode: appData.parkSerial }, path: path })
 
 </script>
 
@@ -45,14 +48,35 @@ const viewModelChange = (path: string) =>  router.push({ query: { stationCode: a
 
         <el-select v-model="appData.parkSerial" class="m-2" placeholder="Select" style="width: 260px;" filterable
             @change="parkChange">
-            <el-option v-for="item in appData.parkAuthList" :key="item.id" :label="item.name" :value="item.serial" />
+
+            <template #prefix>
+                <Icon icon="icon_parkselect" />
+            </template>
+
+            <!-- <el-option v-for="item in appData.parkAuthList" :key="item.id" :label="item.name" :value="item.serial" /> -->
+
+            <el-option v-for="item in appData.parkAuthList" :key="item.id" :label="item.name" :value="item.serial">
+
+                <div class="flex justify-between items-center">
+                    <span>{{ item.name }}</span>
+                    <Icon :size="16" :icon="getDeviceStateInfo(appData.parkRuningState[item.serial]).icon" />
+                </div>
+
+            </el-option>
+
         </el-select>
 
         <div class="flex-1 flex justify-end items-center" v-if="showDeviceStateDesc">
             <DeviceStateDesc />
         </div>
 
-        <el-select v-if="showViewModelSelect" v-model="viewModelPath" class="m-2" placeholder="Select" style="width: 260px;" filterable @change="viewModelChange">
+        <el-select v-if="showViewModelSelect" v-model="viewModelPath" class="m-2" placeholder="Select" style="width: 260px;"
+            filterable @change="viewModelChange">
+
+            <template #prefix>
+                <Icon icon="icon_viewmodel" />
+            </template>
+
             <el-option v-for="item in layoutConfig.viewModel" :key="item.code" :label="item.label" :value="item.url" />
         </el-select>
 

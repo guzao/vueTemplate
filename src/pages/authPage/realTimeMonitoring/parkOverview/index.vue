@@ -19,6 +19,7 @@ const getParkInfo = () => {
     getParkOverview()
 }
 
+
 </script>
 
 <template>

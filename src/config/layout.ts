@@ -34,7 +34,7 @@ export const layoutConfig = {
     useLocalRouter: true,
 
     /** 软件版本 */
-    version: ' 1.1.01',
+    version: ' 1.1.1',
 
     /** 视图模式 */ 
     viewModel: [

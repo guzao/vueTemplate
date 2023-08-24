@@ -37,7 +37,7 @@ export const useSystemConfig = defineStore('useSystemConfig', {
             baseConfig: {
 
                 /** 禁用验证码 */
-                captchaEnabled: false,
+                captchaEnabled: true,
 
                 /** 国际化是否开启 */
                 internationalization: getHasShowI18nSelect(),

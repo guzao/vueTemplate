@@ -9,6 +9,9 @@ export const router = createRouter({
     routes: [...staticRouter, ...authRouter],
 })
 
+
+type LayoutType = 'MainLayou' | 'SubLayout' | 'Components'
+
 export const loaclRouter = [
     {
         path: '/monitor',
@@ -18,55 +21,63 @@ export const loaclRouter = [
             title: '实时监控',
             icon: 'menu_monitor'
         },
+        layoutType: 'MainLayou',
         children: [
             {
                 meta: {
                     title: '电站列表',
                 },
                 path: '/index',
-                hidden: false
+                hidden: false,
+                layoutType: 'Components',
             },
             {
                 meta: {
                     title: '整站概览',
                 },
                 path: '/monitor/parkOverview',
-                hidden: false
+                hidden: false,
+                layoutType: 'Components',
             },
             {
                 meta: {
                     title: '整站概览'
                 },
                 path: '/monitor/subParkOverview',
-                hidden: true
+                hidden: true,
+                layoutType: 'Components',
             },
             {
                 meta: {
                     title: '设备概览'
                 },
                 path: '/monitor/deviceOverview',
-                hidden: true
+                hidden: true,
+                layoutType: 'Components',
             },
             {
                 meta: {
                     title: '设备概览'
                 },
                 path: '/monitor/thumbnailModel',
-                hidden: true
+                hidden: true,
+                layoutType: 'Components',
             },
             {
                 meta: {
                     title: '设备监控'
                 },
                 path: '/monitor/tableModel',
-                hidden: true
+                hidden: true,
+                layoutType: 'Components',
             },
             {
                 meta: {
                     title: '电站首页'
                 },
                 path: '/monitor/parkIncome',
-                hidden: true
+                hidden: true,
+                layoutType: 'Components',
             }
         ]
     },
@@ -78,7 +89,8 @@ export const loaclRouter = [
             title: '设备监控',
             icon: 'menu_monitor'
         },
-        hidden: true
+        hidden: true,
+        layoutType: 'SubLayout',
     },
 
     {
@@ -88,6 +100,7 @@ export const loaclRouter = [
             icon: 'menu_dataAnalysis'
         },
         hidden: false,
+        layoutType: 'MainLayou',
         children: [
             {
                 meta: {
@@ -95,6 +108,7 @@ export const loaclRouter = [
                 },
                 path: '/dataAnalysis/parkReport',
                 hidden: false,
+                layoutType: 'Components',
             },
             {
                 meta: {
@@ -102,6 +116,7 @@ export const loaclRouter = [
                 },
                 path: '/dataAnalysis/deviceReport',
                 hidden: false,
+                layoutType: 'Components',
             },
             {
                 meta: {
@@ -109,6 +124,7 @@ export const loaclRouter = [
                 },
                 path: '/dataAnalysis/warning',
                 hidden: false,
+                layoutType: 'Components',
             },
             {
                 meta: {
@@ -116,6 +132,35 @@ export const loaclRouter = [
                 },
                 path: '/dataAnalysis/historyData',
                 hidden: false,
+                layoutType: 'Components',
+            },
+        ]
+    },
+
+    {
+        path: '/incomeAnalysis',
+        meta: {
+            title: '收益分析',
+            icon: 'menu_dataAnalysis'
+        },
+        hidden: false,
+        layoutType: 'MainLayou',
+        children: [
+            {
+                meta: {
+                    title: '电站收益'
+                },
+                path: '/incomeAnalysis/parkIncomeReport',
+                hidden: false,
+                layoutType: 'Components',
+            },
+            {
+                meta: {
+                    title: '设备收益'
+                },
+                path: '/incomeAnalysis/deviceIncomeReport',
+                hidden: false,
+                layoutType: 'Components',
             },
         ]
     },
@@ -127,6 +172,7 @@ export const loaclRouter = [
             icon: 'menu_config'
         },
         hidden: false,
+        layoutType: 'MainLayou',
         children: [
             {
                 meta: {
@@ -134,6 +180,7 @@ export const loaclRouter = [
                 },
                 path: '/config/personCenter',
                 hidden: false,
+                layoutType: 'Components',
             },
             {
                 meta: {
@@ -141,6 +188,7 @@ export const loaclRouter = [
                 },
                 path: '/config/personManagement',
                 hidden: false,
+                layoutType: 'Components',
             },
             {
                 meta: {
@@ -148,6 +196,7 @@ export const loaclRouter = [
                 },
                 path: '/config/enterprise',
                 hidden: false,
+                layoutType: 'Components',
             },
             {
                 meta: {
@@ -155,6 +204,7 @@ export const loaclRouter = [
                 },
                 path: '/config/parkMannagemen',
                 hidden: false,
+                layoutType: 'Components',
             },
             {
                 meta: {
@@ -162,6 +212,7 @@ export const loaclRouter = [
                 },
                 path: '/config/parkElectricPrice',
                 hidden: false,
+                layoutType: 'Components',
             },
         ]
     },
@@ -173,6 +224,7 @@ export const loaclRouter = [
             icon: 'menu_tem'
         },
         hidden: false,
+        layoutType: 'MainLayou',
         children: [
             {
                 meta: {
@@ -180,6 +232,7 @@ export const loaclRouter = [
                 },
                 path: '/logs/logininfor',
                 hidden: false,
+                layoutType: 'Components',
             },
             {
                 meta: {
@@ -187,6 +240,7 @@ export const loaclRouter = [
                 },
                 path: '/logs/operlog',
                 hidden: false,
+                layoutType: 'Components',
             },
         ]
     }

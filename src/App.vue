@@ -8,7 +8,10 @@ const I18nStore = useI18nStore()
 const appData = useAppData()
 
 /** 定时获取电站最新数据 */
-useInterval(1000 * 60 * 3, appData.loopGetParkAuthLastTime)
+useInterval(1000 * 60 * 5, () => {
+  appData.loopGetParkAuthLastTime()
+  appData.loopGetStationRuningState()
+})
 
 </script>
 

@@ -26,6 +26,12 @@ export function getDeviceStateInfo (state: number) {
     }
 }
 
+const parkRuningBgcColor =  [ '', 'charge_color_bg', 'discharge_color_bg', 'standby_color_bg', 'alarm_color_bg', 'weihu_color_bg', 'offline_color_bg' ]
+/** 电站运行状态背景色 */
+export function getParkRuningBgc (state: number) {
+    return parkRuningBgcColor[state] || getLastElement(parkRuningBgcColor)
+}
+
 
 /** 根据soc计算出 缩放比 */
 export function getCellZoom (value: any) {

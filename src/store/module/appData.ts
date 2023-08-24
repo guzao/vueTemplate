@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { getUserParkListAll, getUserParkLastTime } from '@/API'
+import { getUserParkListAll, getUserParkLastTime, getStationList } from '@/API'
 import { getFirstElement, hasEror, isFalse, useIsCollapse, urlQueryToObject, replaceUrlQuery, sleep, arrayIsEmpty } from '@/utils'
 
 
@@ -8,7 +8,7 @@ const { getIsCollapse, setIsCollapse } = useIsCollapse()
 
 /** 应用数据 */
 export const useAppData = defineStore('useAppData', {
-    
+
     state() {
         return {
 
@@ -27,6 +27,9 @@ export const useAppData = defineStore('useAppData', {
             /** 电站类型 */
             parkTypes: {} as Record<string, string>,
 
+            /** 电站运行状态 */
+            parkRuningState: {} as Record<string, number>,
+
             /** 用户受权限控制的电站列表  */
             parkAuthList: [] as ParkAuth[],
 
@@ -39,15 +42,15 @@ export const useAppData = defineStore('useAppData', {
     getters: {
         /** 当前选中电站的最新数据时间 */
         currentLastTime(state) {
-            return state.parkLastTimes[state.parkSerial] 
+            return state.parkLastTimes[state.parkSerial]
         },
         /** 当前选中电站的状态 */
         currentRelease(state) {
-            return state.parkReleaseStatus[state.parkSerial] 
+            return state.parkReleaseStatus[state.parkSerial]
         },
         /** 当前选中电站的类型 */
         currentParkType(state) {
-            return state.parkTypes[state.parkSerial] 
+            return state.parkTypes[state.parkSerial]
         },
         /** 当前选中的电站编号 */
         currentParkSerial(state) {
@@ -72,7 +75,7 @@ export const useAppData = defineStore('useAppData', {
             setIsCollapse(this.isCollapse)
         },
 
-        setActiveMenu (menu: string) {
+        setActiveMenu(menu: string) {
             this.activeMenu = menu
         },
 
@@ -98,7 +101,7 @@ export const useAppData = defineStore('useAppData', {
         },
 
         /** 定时获取电站最新数据 根据登录状态判断是否获取电站最新数据时间 */
-        loopGetParkAuthLastTime () {
+        loopGetParkAuthLastTime() {
             if (arrayIsEmpty(this.parkAuthList)) return
             this.getParkAuthLastTime()
         },
@@ -110,6 +113,21 @@ export const useAppData = defineStore('useAppData', {
             replaceUrlQuery({ stationCode: code })
         },
 
+        /** 用户受权限控制的电站运行状态 */
+        getStationRuningState() {
+            getStationList().then(res => {
+                if (hasEror(res)) return
+                const stationList = res.data.stationList as ParkMonitorInfo[]
+                this.parkRuningState = createParkRuningStateMap(stationList)
+            })
+        },
+
+        /** 定时获取用户受权限控制的电站运行状态 根据登录状态判断是否获取 */
+        loopGetStationRuningState() {
+            if (arrayIsEmpty(this.parkAuthList)) return
+            this.getStationRuningState()
+        }
+
     },
 
 })
@@ -120,9 +138,7 @@ export const useAppData = defineStore('useAppData', {
 function createParkReleaseStatusMap(rows: ParkAuth[]) {
     return rows.reduce((acc, cur) => {
         const { releaseStatus, serial } = cur
-        if (isFalse(acc[serial])) {
-            acc[serial] = releaseStatus
-        }
+        if (isFalse(acc[serial])) acc[serial] = releaseStatus
         return acc
     }, {} as Record<string, number>)
 }
@@ -131,9 +147,16 @@ function createParkReleaseStatusMap(rows: ParkAuth[]) {
 function createParkTypesMap(rows: ParkAuth[]) {
     return rows.reduce((acc, cur) => {
         const { type, serial } = cur
-        if (isFalse(acc[serial])) {
-            acc[serial] = type
-        }
+        if (isFalse(acc[serial])) acc[serial] = type
         return acc
     }, {} as Record<string, string>)
+}
+
+/** 生成电站运行状态型表 */
+function createParkRuningStateMap(rows: ParkMonitorInfo[]) {
+    return rows.reduce((acc, cur) => {
+        const { cardList: { A_M2 = '6' }, code } = cur
+        if (isFalse(acc[code])) acc[code] = A_M2
+        return acc
+    }, {} as Record<string, number>)
 }

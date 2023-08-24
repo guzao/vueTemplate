@@ -23,7 +23,7 @@ export const filteredList = computed(() => {
     }
 
     // 二次筛选
-    const result = parkType ? stationList.value.filter(item => item.type.includes(parkType)) : stationList.value
+    const result = parkType ? stationList.value.filter(item => (item.type as string).includes(parkType)) : stationList.value
 
     // 状态筛选
     if (state.value > 0) return result.filter(item => item.cardList.A_M2 == state.value)

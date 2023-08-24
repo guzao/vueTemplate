@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useParkIncome } from './useParkIncome'
 
-const { appData } = useParkIncome()
+const { appData, dicts } = useParkIncome()
 
 import IncomeInfo from './IncomeInfo.vue'
 import IncomeChart from './IncomeChart.vue'
@@ -9,7 +9,8 @@ import SubNavBar from '@/components/common/SubNavBar.vue';
 </script>
 
 <template>
-    <div class="w-full overflow-hidden park_income  flex flex-col flex-1">
+    <div class="w-full overflow-hidden park_income  flex flex-col flex-1"
+        v-watermark="{ markSatate: appData.currentRelease, text: dicts.parkReleaseStatusDict.dictLabel[appData.currentRelease] }">
 
         <div class="top_bg flex-1 min-h-[580px] box-border flex flex-col ">
 
@@ -25,7 +26,6 @@ import SubNavBar from '@/components/common/SubNavBar.vue';
 </template>
 
 <style lang="scss" scoped>
-
 .park_income {
     .top_bg {
         background-image: url(../../../.././assets/image/overview/parklOverview_top_bg.png);
@@ -34,5 +34,4 @@ import SubNavBar from '@/components/common/SubNavBar.vue';
     }
 
 }
-
 </style>

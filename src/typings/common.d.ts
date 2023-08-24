@@ -1,3 +1,8 @@
+/** 用户下来框 选项卡 类型 */
+type CommandType = 'personCenter' | 'logout' | 'systemConfig'
+
+/** 组件类型 */
+type LayoutType = 'MainLayou' | 'SubLayout' | 'Components'
 
 /** 应用报错信息 */
 type AppErrorPool = {

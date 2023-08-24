@@ -2,7 +2,6 @@
 import { User, Lock, Discount } from '@element-plus/icons-vue'
 import { useLogin } from './useLogin'
 
-// @ts-ignore
 const { form, rules, handleLogin, getCodeImg, imgSrc, systemConfig, fromInstance, loading } = useLogin()
 </script>
 
@@ -48,6 +47,6 @@ const { form, rules, handleLogin, getCodeImg, imgSrc, systemConfig, fromInstance
 
 <style lang="scss" scoped>
 .login_bg {
-    background-image: url(../../../assets/image/login/login-bg.png);
+    background-image: url(../../../assets/image/login/login_bg.png);
 }
 </style>
