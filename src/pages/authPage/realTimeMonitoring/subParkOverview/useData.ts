@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import { useReactiveHttp } from '@/hooks'
 import { useAppData, useDicts } from '@/store'
-import { getDevicGroupList, getStationInfo } from '@/api'
+import { getDevicGroupList, getStationInfo } from '@/API'
 
 
 
