@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { t } from '@/langs'
 import { conversionUnitKWh, conversionUnitKW, conversionUnitKVar, getRuningStateInfo, toFixed } from '@/utils'
 import TitleBox from '@/components/common/TitleBox.vue';
 import Icon from '@/components/common/Icon.vue';
@@ -29,42 +30,42 @@ defineProps({
                         <div class="flex items-center">
 
                             <LabelValueUnit class="pl-[20px]" :font-size="16">
-                                月充
+                                {{ t('common.monthCharge') }}
                                 <template #value> {{ conversionUnitKWh(item.M17).size }} </template>
                                 <template #unit> {{ conversionUnitKWh(item.M17).unit }} </template>
                             </LabelValueUnit>
                             <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
                             <LabelValueUnit class="pl-[10px]" :font-size="16">
-                                月放
+                                {{ t('common.moonthDischarge') }}
                                 <template #value> {{ conversionUnitKWh(item.M18).size }} </template>
                                 <template #unit> {{ conversionUnitKWh(item.M18).unit }} </template>
                             </LabelValueUnit>
                             <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
                             <LabelValueUnit class="pl-[10px]" :font-size="16">
-                                年充
+                                {{ t('common.yearCharge') }}
                                 <template #value> {{ conversionUnitKWh(item.M19).size }} </template>
                                 <template #unit> {{ conversionUnitKWh(item.M19).unit }} </template>
                             </LabelValueUnit>
                             <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
                             <LabelValueUnit class="pl-[10px]" :font-size="16">
-                                年充
+                                {{ t('common.yaerDischarge') }}
                                 <template #value> {{ conversionUnitKWh(item.M20).size }} </template>
                                 <template #unit> {{ conversionUnitKWh(item.M20).unit }} </template>
                             </LabelValueUnit>
                             <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
                             <LabelValueUnit class="pl-[10px]" :font-size="16">
-                                累充
+                                {{ t('common.totalCharge') }}
                                 <template #value> {{ conversionUnitKWh(item.M5).size }} </template>
                                 <template #unit> {{ conversionUnitKWh(item.M5).unit }} </template>
                             </LabelValueUnit>
                             <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
                             <LabelValueUnit class="pl-[10px]" :font-size="16">
-                                累充
+                                {{ t('common.totalDischarge') }}
                                 <template #value> {{ conversionUnitKWh(item.M6).size }} </template>
                                 <template #unit> {{ conversionUnitKWh(item.M6).unit }} </template>
                             </LabelValueUnit>
@@ -82,7 +83,7 @@ defineProps({
                     <li
                         class="h-[127px] bg-[var(--theme-white-bg)]  border-[1px] border-cool-[rgba(255,255,255,0.42)] pl-[12px] pt-[10px] relative">
 
-                        <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 运行状态 </div>
+                        <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]">  {{ t('common.operationState') }} </div>
 
                         <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
 
@@ -98,7 +99,7 @@ defineProps({
                     <li
                         class="h-[127px] bg-[var(--theme-white-bg)]  border-[1px] border-cool-[rgba(255,255,255,0.42)] pl-[12px] pt-[10px] relative">
 
-                        <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 剩余电量 </div>
+                        <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> {{ t('common.soc') }} </div>
 
                         <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
 
@@ -114,7 +115,7 @@ defineProps({
                     <li
                         class="h-[127px] bg-[var(--theme-white-bg)]  border-[1px] border-cool-[rgba(255,255,255,0.42)] pl-[12px] pt-[10px] relative">
 
-                        <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 日充 </div>
+                        <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> {{ t('common.dayCharge') }} </div>
 
                         <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
 
@@ -131,7 +132,7 @@ defineProps({
                     <li
                         class="h-[127px] bg-[var(--theme-white-bg)]  border-[1px] border-cool-[rgba(255,255,255,0.42)] pl-[12px] pt-[10px] relative">
 
-                        <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 日放 </div>
+                        <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> {{ t('common.dayDischarge') }}  </div>
 
                         <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
 
@@ -148,7 +149,7 @@ defineProps({
                     <li
                         class="h-[127px] bg-[var(--theme-white-bg)]  border-[1px] border-cool-[rgba(255,255,255,0.42)] pl-[12px] pt-[10px] relative">
 
-                        <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 有功 </div>
+                        <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> {{ t('common.activePower') }} </div>
 
                         <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
 
@@ -165,7 +166,7 @@ defineProps({
                     <li
                         class="h-[127px] bg-[var(--theme-white-bg)]  border-[1px] border-cool-[rgba(255,255,255,0.42)] pl-[12px] pt-[10px] relative">
 
-                        <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 无功 </div>
+                        <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> {{ t('common.reactivePower') }} </div>
 
                         <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
 

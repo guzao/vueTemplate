@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { t } from '@/langs'
 import { conversionUnitKWh, toFixed } from '@/utils'
 import TitleBox from '@/components/common/TitleBox.vue';
 import LabelValueUnit from '@/components/common/LabelValueUnit.vue';
@@ -30,49 +31,49 @@ defineProps({
             <div v class="flex items-center">
 
                 <LabelValueUnit class="pl-[16px]" :font-size="16">
-                    剩余电量
+                    {{  t('common.soc')}}
                     <template #value> {{ toFixed(data.soc) }} </template>
                     <template #unit> % </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[6px]"></div>
 
                 <LabelValueUnit class="pl-[8px]" :font-size="16">
-                    日充
+                    {{ t('common.dayCharge') }}
                     <template #value> {{ conversionUnitKWh(data.dailyCharge).size }} </template>
                     <template #unit> {{ conversionUnitKWh(data.dailyCharge).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[6px]"></div>
 
                 <LabelValueUnit class="pl-[8px]" :font-size="16">
-                    日放
+                    {{ t('common.dayDischarge') }}
                     <template #value> {{ conversionUnitKWh(data.dailyDisCharge).size }} </template>
                     <template #unit> {{ conversionUnitKWh(data.dailyDisCharge).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[6px]"></div>
 
                 <LabelValueUnit class="pl-[20px]" :font-size="16">
-                    月充
+                    {{ t('common.monthCharge') }}
                     <template #value> {{ conversionUnitKWh(data.M17).size }} </template>
                     <template #unit> {{ conversionUnitKWh(data.M17).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[6px]"></div>
 
                 <LabelValueUnit class="pl-[8px]" :font-size="16">
-                    月放
+                    {{ t('common.moonthDischarge') }}
                     <template #value> {{ conversionUnitKWh(data.M18).size }} </template>
                     <template #unit> {{ conversionUnitKWh(data.M18).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[6px]"></div>
 
                 <LabelValueUnit class="pl-[8px]" :font-size="16">
-                    累充
+                    {{ t('common.totalCharge') }}
                     <template #value> {{ conversionUnitKWh(data.M5).size }} </template>
                     <template #unit> {{ conversionUnitKWh(data.M5).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[6px]"></div>
 
                 <LabelValueUnit class="pl-[8px]" :font-size="16">
-                    累充
+                    {{ t('common.totalDischarge') }}
                     <template #value> {{ conversionUnitKWh(data.M6).size }} </template>
                     <template #unit> {{ conversionUnitKWh(data.M6).unit }} </template>
                 </LabelValueUnit>

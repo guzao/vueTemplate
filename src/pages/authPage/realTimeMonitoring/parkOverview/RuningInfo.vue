@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import {  t } from '@/langs'
 import { State, Type } from '@/enum'
 import { useAppData } from '@/store'
 import { onClickOutside } from '@vueuse/core'
@@ -44,7 +45,7 @@ const parkStateBg = computed(() => {
         <div class="w-[380px] mt-[4%]">
 
             <TitleBox>
-                电站基本信息
+                {{ t('parkOverview.baseInfo') }}
                 <template #right>
                     <LastTime> {{ paserTime(appData.currentLastTime, 'YYYY-MM-DD HH:mm:ss') }} </LastTime>
                 </template>
@@ -57,7 +58,7 @@ const parkStateBg = computed(() => {
                 <li class="h-[68px] flex">
                     <IconVue :icon="getRuningStateInfo(parkOverview.A_M2).icon" :size="68" />
                     <div class="flex flex-col ml-[8px]">
-                        <div class="text-[var(--theme-gray107)] mt-[16px]">运行状态</div>
+                        <div class="text-[var(--theme-gray107)] mt-[16px]">{{ t('common.operationTime') }}</div>
                         <div :class="getRuningStateInfo(parkOverview.A_M2).color" class="font-semibold text-[20px]">{{
                             getRuningStateInfo(parkOverview.A_M2).text }}</div>
                     </div>
@@ -66,7 +67,7 @@ const parkStateBg = computed(() => {
                 <li class="h-[68px] flex">
                     <IconVue icon="ionc_cos" :size="68" />
                     <div class="flex flex-col justify-center ml-[8px]">
-                        <div class="text-[var(--theme-gray107)]  mt-[16px]">剩余电量</div>
+                        <div class="text-[var(--theme-gray107)]  mt-[16px]">{{ t('common.soc') }}</div>
                         <div class="font-semibold text-[24px] f-dinb text-[var(--charge)]">{{ toFixed(parkOverview.A_M3) }}
                             <span class="text-[12px] text-[var(--theme-gray107)] font-normal"> % </span>
                         </div>
@@ -76,7 +77,7 @@ const parkStateBg = computed(() => {
                 <li class="h-[68px] flex">
                     <IconVue icon="icon_day_charge_green" :size="68" />
                     <div class="flex flex-col justify-center ml-[8px]">
-                        <div class="text-[var(--theme-gray107)]  mt-[16px]">日充</div>
+                        <div class="text-[var(--theme-gray107)]  mt-[16px]">{{  t('common.dayCharge')}}</div>
                         <div class="font-semibold text-[24px] f-dinb text-[var(--charge)]">
                             {{ conversionUnitKWh(parkOverview.A_M15).size }}
                             <span class="text-[12px] text-[var(--theme-gray107)] font-normal"> {{
@@ -89,7 +90,7 @@ const parkStateBg = computed(() => {
                 <li class="h-[68px] flex">
                     <IconVue icon="icon_day_discharge_green" :size="68" />
                     <div class="flex flex-col justify-center ml-[8px]">
-                        <div class="text-[var(--theme-gray107)]  mt-[16px]">日放</div>
+                        <div class="text-[var(--theme-gray107)]  mt-[16px]">{{ t('common.dayCharge') }}</div>
                         <div class="font-semibold text-[24px] f-dinb text-[var(--charge)]">
                             {{ conversionUnitKWh(parkOverview.A_M16).size }}
                             <span class="text-[12px] text-[var(--theme-gray107)] font-normal"> {{
@@ -102,7 +103,7 @@ const parkStateBg = computed(() => {
                 <li class="h-[68px] flex">
                     <IconVue icon="icon_active_power_green" :size="68" />
                     <div class="flex flex-col justify-center ml-[8px]">
-                        <div class="text-[var(--theme-gray107)]  mt-[16px]">有功</div>
+                        <div class="text-[var(--theme-gray107)]  mt-[16px]">{{ t('common.activePower')   }}</div>
                         <div class="font-semibold text-[24px] f-dinb text-[var(--charge)]">
                             {{ conversionUnitKW(parkOverview.A_M7).size }}
                             <span class="text-[12px] text-[var(--theme-gray107)] font-normal"> {{
@@ -115,7 +116,7 @@ const parkStateBg = computed(() => {
                 <li class="h-[68px] flex">
                     <IconVue icon="icon_reactactive_power_green" :size="68" />
                     <div class="flex flex-col justify-center ml-[8px]">
-                        <div class="text-[var(--theme-gray107)]  mt-[16px]">无功</div>
+                        <div class="text-[var(--theme-gray107)]  mt-[16px]">{{ t('common.reactivePower') }}</div>
                         <div class="font-semibold text-[24px] f-dinb text-[var(--charge)]">
                             {{ conversionUnitKVar(parkOverview.A_M8).size }}
                             <span class="text-[12px] text-[var(--theme-gray107)] font-normal"> {{
@@ -142,7 +143,7 @@ const parkStateBg = computed(() => {
         <div class="w-[380px] mt-[4%]">
 
             <TitleBox>
-                全站详细信息
+                {{ t('parkOverview.detail') }}
                 <template #right>
                     <div class="relative">
                         <span @click="show = true" class="cursor-pointer">
@@ -154,13 +155,13 @@ const parkStateBg = computed(() => {
                             <div ref="target" v-show="show" class="w-[360px] px-[10px] py-[20px]">
 
                                 <LabelValueUnit>
-                                    项目地址 <template #value> {{ appData.currentPark.address }} </template>
+                                    {{ t('parkOverview.addres') }} <template #value> {{ appData.currentPark.address }} </template>
                                 </LabelValueUnit>
 
                                 <div class="h-[1px] bg-[var(--theme-gray235-bg)] w-full my-[8px]"></div>
 
                                 <LabelValueUnit>
-                                    总功率　
+                                    {{ t('common.totalPower') }}
                                     <template #value> {{ conversionUnitKW(+appData.currentPark.totalPower).size  }} </template>
                                     <template #unit> {{ conversionUnitKW(+appData.currentPark.totalPower).unit  }} </template>
                                 </LabelValueUnit>
@@ -168,7 +169,7 @@ const parkStateBg = computed(() => {
                                 <div class="h-[1px] bg-[var(--theme-gray235-bg)] w-full my-[8px]"></div>
 
                                 <LabelValueUnit>
-                                    总能量　
+                                    {{ t('common.totalEnergy') }}
                                     <template #value> {{ conversionUnitKWh(+appData.currentPark.energy).size  }} </template>
                                     <template #unit> {{ conversionUnitKWh(+appData.currentPark.energy).unit  }} </template>
                                 </LabelValueUnit>
@@ -192,7 +193,7 @@ const parkStateBg = computed(() => {
                 <ul class="grid grid-cols-2 gap-[20px] w-[350px]">
 
                     <li>
-                        <div class="text-[14px] text-[var(--theme-gray107)]">月充</div>
+                        <div class="text-[14px] text-[var(--theme-gray107)]">{{ t('common.monthCharge') }}</div>
                         <div class="h-[12px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
                         <div
                             class="h-[32px] text-[18xp] f-dinb text-[var-(--theme-black51)] text_bg_img pl-[8px] box-border leading-[32px]">
@@ -201,7 +202,7 @@ const parkStateBg = computed(() => {
                         </div>
                     </li>
                     <li>
-                        <div class="text-[14px] text-[var(--theme-gray107)]">月放</div>
+                        <div class="text-[14px] text-[var(--theme-gray107)]">{{ t('common.moonthDischarge') }}</div>
                         <div class="h-[12px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
                         <div
                             class="h-[32px] text-[18xp] f-dinb text-[var-(--theme-black51)] text_bg_img pl-[8px] box-border leading-[32px]">
@@ -210,7 +211,7 @@ const parkStateBg = computed(() => {
                         </div>
                     </li>
                     <li>
-                        <div class="text-[14px] text-[var(--theme-gray107)]">年充</div>
+                        <div class="text-[14px] text-[var(--theme-gray107)]">{{ t('common.yearCharge') }}</div>
                         <div class="h-[12px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
                         <div
                             class="h-[32px] text-[18xp] f-dinb text-[var-(--theme-black51)] text_bg_img pl-[8px] box-border leading-[32px]">
@@ -219,7 +220,7 @@ const parkStateBg = computed(() => {
                         </div>
                     </li>
                     <li>
-                        <div class="text-[14px] text-[var(--theme-gray107)]">年放</div>
+                        <div class="text-[14px] text-[var(--theme-gray107)]">{{  t('common.yaerDischarge')}}</div>
                         <div class="h-[12px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
                         <div
                             class="h-[32px] text-[18xp] f-dinb text-[var-(--theme-black51)] text_bg_img pl-[8px] box-border leading-[32px]">
@@ -228,7 +229,7 @@ const parkStateBg = computed(() => {
                         </div>
                     </li>
                     <li>
-                        <div class="text-[14px] text-[var(--theme-gray107)]">累充</div>
+                        <div class="text-[14px] text-[var(--theme-gray107)]">{{ t('common.totalCharge') }}</div>
                         <div class="h-[12px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
                         <div
                             class="h-[32px] text-[18xp] f-dinb text-[var-(--theme-black51)] text_bg_img pl-[8px] box-border leading-[32px]">
@@ -237,7 +238,7 @@ const parkStateBg = computed(() => {
                         </div>
                     </li>
                     <li>
-                        <div class="text-[14px] text-[var(--theme-gray107)]">累放</div>
+                        <div class="text-[14px] text-[var(--theme-gray107)]">{{ t('common.totalDischarge') }}</div>
                         <div class="h-[12px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
                         <div
                             class="h-[32px] text-[18xp] f-dinb text-[var-(--theme-black51)] text_bg_img pl-[8px] box-border leading-[32px]">

@@ -141,7 +141,7 @@ export const loaclRouter = [
         path: '/incomeAnalysis',
         meta: {
             title: '收益分析',
-            icon: 'menu_dataAnalysis'
+            icon: 'menu_income'
         },
         hidden: false,
         layoutType: 'MainLayou',

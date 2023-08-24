@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { t } from '@/langs'
 import { conversionUnitKWh } from '@/utils'
 import TitleBox from '@/components/common/TitleBox.vue';
 import LabelValueUnit from '@/components/common/LabelValueUnit.vue';
@@ -20,49 +21,49 @@ defineProps({
 <template>
     <TitleBox>
 
-        全场概览
+        {{ t('common.overview') }}
 
         <template #left>
 
             <div class="flex items-center">
 
                 <LabelValueUnit class="pl-[20px]" :font-size="16">
-                    月充 
+                    {{ t('common.monthCharge') }}
                     <template #value> {{ conversionUnitKWh(parkInfo.A_M17).size }} </template>
                     <template #unit> {{ conversionUnitKWh(parkInfo.A_M17).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
                 <LabelValueUnit class="pl-[10px]" :font-size="16">
-                    月充
+                    {{ t('common.moonthDischarge') }}
                     <template #value> {{ conversionUnitKWh(parkInfo.A_M18).size }} </template>
                     <template #unit> {{ conversionUnitKWh(parkInfo.A_M18).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
                 <LabelValueUnit class="pl-[10px]" :font-size="16">
-                    年充
+                    {{ t('common.yearCharge') }}
                     <template #value> {{ conversionUnitKWh(parkInfo.A_M19).size }} </template>
                     <template #unit> {{ conversionUnitKWh(parkInfo.A_M19).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
                 <LabelValueUnit class="pl-[10px]" :font-size="16">
-                    年充
+                    {{ t('common.yaerDischarge') }}
                     <template #value> {{ conversionUnitKWh(parkInfo.A_M20).size }} </template>
                     <template #unit> {{ conversionUnitKWh(parkInfo.A_M20).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
                 <LabelValueUnit class="pl-[10px]" :font-size="16">
-                    累充
+                    {{ t('common.totalCharge') }}
                     <template #value> {{ conversionUnitKWh(parkInfo.A_M5).size }} </template>
                     <template #unit> {{ conversionUnitKWh(parkInfo.A_M5).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
                 <LabelValueUnit class="pl-[10px]" :font-size="16">
-                    累充
+                    {{ t('common.totalDischarge') }}
                     <template #value> {{ conversionUnitKWh(parkInfo.A_M6).size }} </template>
                     <template #unit> {{ conversionUnitKWh(parkInfo.A_M6).unit }} </template>
                 </LabelValueUnit>

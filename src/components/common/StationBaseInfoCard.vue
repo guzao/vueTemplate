@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { t } from '@/langs'
 import { PropType } from 'vue'
 import { useAppData, useDicts } from '@/store'
 import Icon from '@/components/common/Icon.vue'
@@ -40,12 +41,12 @@ defineProps({
             <ul class="w-full" :style="`margin-top: ${subInfoTop}px;`">
                 <li class="flex items-center mb-2">
                     <div class="h-[7px] w-[7px] bg-[var(--theme-green-bg)] rounded-full mr-[6px]"></div>
-                    <div class="text-[var(--theme-gray107)] mr-[6px]"> 电站类型 </div>
+                    <div class="text-[var(--theme-gray107)] mr-[6px]"> {{ t('common.parkType') }}  </div>
                     <div class="text-[var(--theme-black51)] mr-[4px]"> {{  dicts.parkTypeDict.dictLabel[ data.type ] }} </div>
                 </li>
                 <li class="flex items-center mb-2">
                     <div class="h-[7px] w-[7px] bg-[var(--theme-green-bg)] rounded-full mr-[6px]"></div>
-                    <div class="text-[var(--theme-gray107)] mr-[6px]"> 最新时间 </div>
+                    <div class="text-[var(--theme-gray107)] mr-[6px]"> {{ t('common.dataLastTime') }} </div>
                     <div class="text-[var(--theme-gray107)] mr-[4px] font-medium f-dinb"> {{ paserTime(appData.parkLastTimes[ data?.code ], 'YYYY-MM-DD HH:mm:ss') }} </div>
                 </li>
             </ul>
@@ -60,7 +61,7 @@ defineProps({
                 :style="`${ infoCardBg ? `background-color: ${infoCardBg}; border: none;` : '' }`"
                 class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
 
-                    <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 运行状态 </div>
+                    <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> {{ t('common.operationState') }} </div>
 
                     <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
 
@@ -75,7 +76,7 @@ defineProps({
                 :style="`${ infoCardBg ? `background-color: ${infoCardBg}; border: none;` : '' }`"
                 class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
 
-                    <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 剩余电量 </div>
+                    <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]">  {{ t('common.soc') }} </div>
 
                     <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
 
@@ -91,7 +92,7 @@ defineProps({
                 :style="`${ infoCardBg ? `background-color: ${infoCardBg}; border: none;` : '' }`"
                 class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
 
-                    <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 日充 </div>
+                    <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> {{ t('common.dayCharge') }} </div>
 
                     <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
 
@@ -107,7 +108,7 @@ defineProps({
                 :style="`${ infoCardBg ? `background-color: ${infoCardBg}; border: none;` : '' }`"
                 class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
 
-                    <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 日放 </div>
+                    <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> {{ t('common.dayDischarge') }} </div>
 
                     <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
 
@@ -123,7 +124,7 @@ defineProps({
                 :style="`${ infoCardBg ? `background-color: ${infoCardBg}; border: none;` : '' }`"
                 class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
 
-                    <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 有功 </div>
+                    <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> {{ t('common.activePower') }} </div>
 
                     <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
 
@@ -139,7 +140,7 @@ defineProps({
                 :style="`${ infoCardBg ? `background-color: ${infoCardBg}; border: none;` : '' }`"
                 class="bg-[var(--theme-gray-bg)] h-[100px] border-[1px] border-cool-[rgba(206,248,221,0.42)] pl-[12px] pt-[10px] relative">
 
-                    <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> 无功 </div>
+                    <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> {{ t('common.reactivePower') }} </div>
 
                     <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
 

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { t } from '@/langs'
 import { useRouter } from 'vue-router'
 import { useAppData, useDicts } from '@/store'
 import { useStationList } from '../useStationList'
@@ -38,21 +39,21 @@ const goToOverview = ({ code: stationCode }: ParkMonitorInfo) => {
 
                     <div class="h-[7px] w-[7px] bg-[var(--theme-green-bg)] rounded-full mr-[6px] ml-[28px]"></div>
                     <LabelValueUnit>
-                        投运时长
+                        {{ t('common.operationTime') }}
                         <template #value> {{ getRunningDay(item.titleInfo.runTime) }} </template>
-                        <template #unit> 天 </template>
+                        <template #unit> {{ t('common.day') }} </template>
                     </LabelValueUnit>
 
                     <div class="h-[7px] w-[7px] bg-[var(--theme-green-bg)] rounded-full mr-[6px] ml-[28px]"></div>
                     <LabelValueUnit>
-                        总功率
+                        {{ t('common.totalPower') }}
                         <template #value> {{ conversionUnitKWh(+item.titleInfo.totalPower).size }} </template>
                         <template #unit> {{ conversionUnitKWh(+item.titleInfo.totalPower).unit }} </template>
                     </LabelValueUnit>
 
                     <div class="h-[7px] w-[7px] bg-[var(--theme-green-bg)] rounded-full mr-[6px] ml-[28px]"></div>
                     <LabelValueUnit>
-                        总容量
+                        {{ t('common.totalEnergy') }}
                         <template #value> {{ conversionUnitKW(+item.titleInfo.energy).size }} </template>
                         <template #unit> {{ conversionUnitKW(+item.titleInfo.energy).unit }} </template>
                     </LabelValueUnit>
@@ -63,7 +64,7 @@ const goToOverview = ({ code: stationCode }: ParkMonitorInfo) => {
             <template #right>
                 <div class="justify-end flex cursor-pointer text-[var(--theme-blue0)]" @click="goToOverview(item)"
                     v-hasPermission=" 'ess:park:group' ">
-                    <div>进入电站 ></div>
+                    <div>{{ t('common.enter') }} ></div>
                 </div>
             </template>
 
@@ -78,42 +79,42 @@ const goToOverview = ({ code: stationCode }: ParkMonitorInfo) => {
             <div class="flex items-center">
 
                 <LabelValueUnit :font-size=" 16 ">
-                    月充
+                    {{ t('common.monthCharge') }}
                     <template #value> {{ conversionUnitKWh(+item.detailList.A_M17).size }} </template>
                     <template #unit> {{ conversionUnitKWh(+item.detailList.A_M17).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
                 <LabelValueUnit :font-size=" 16 ">
-                    月放
+                    {{ t('common.moonthDischarge') }}
                     <template #value> {{ conversionUnitKWh(+item.detailList.A_M18).size }} </template>
                     <template #unit> {{ conversionUnitKWh(+item.detailList.A_M18).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
                 <LabelValueUnit :font-size=" 16 ">
-                    年充
+                    {{ t('common.yaerDischarge') }}
                     <template #value> {{ conversionUnitKWh(+item.detailList.A_M19).size }} </template>
                     <template #unit> {{ conversionUnitKWh(+item.detailList.A_M19).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
                 <LabelValueUnit :font-size=" 16 ">
-                    年放
+                    {{ t('common.yaerDischarge') }}
                     <template #value> {{ conversionUnitKWh(+item.detailList.A_M20).size }} </template>
                     <template #unit> {{ conversionUnitKWh(+item.detailList.A_M20).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
                 <LabelValueUnit :font-size=" 16 ">
-                    累充
+                    {{ t('common.totalCharge') }}
                     <template #value> {{ conversionUnitKWh(+item.detailList.A_M5).size }} </template>
                     <template #unit> {{ conversionUnitKWh(+item.detailList.A_M5).unit }} </template>
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[12px]"></div>
 
                 <LabelValueUnit :font-size=" 16 ">
-                    累放
+                    {{ t('common.totalDischarge') }}
                     <template #value> {{ conversionUnitKWh(+item.detailList.A_M6).size }} </template>
                     <template #unit> {{ conversionUnitKWh(+item.detailList.A_M6).unit }} </template>
                 </LabelValueUnit>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { t } from '@/langs'
 import { useInterval } from '@/hooks'
 import { getArrayLength } from '@/utils'
 import { useStationList, initData } from './useStationList'
@@ -22,7 +23,7 @@ useInterval(1000 * 60 * 5, getResult)
 
         <StationList v-if="getArrayLength(stationList)" />
 
-        <el-empty v-else description="暂无数据" />
+        <el-empty v-else :description="t('common.empty')" />
 
     </Skeleton>
 

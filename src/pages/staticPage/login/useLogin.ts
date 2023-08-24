@@ -1,4 +1,5 @@
-import { ref, onBeforeMount } from 'vue'
+import { t } from '@/langs'
+import { ref } from 'vue'
 import type { FormInstance } from 'element-plus'
 import { getCodeImg as getcode } from '@/API'
 import { useRouter, useRoute } from 'vue-router'
@@ -27,13 +28,13 @@ export function useLogin() {
 
     const rules = {
         username: [
-            { required: true, message: '请输入用户名', trigger: 'blur' },
+            { required: true, message: `${t('common.placeholder')}${t('login.name')}`, trigger: 'blur' },
         ],
         password: [
-            { required: true, message: '请输入密码', trigger: 'blur' },
+            { required: true, message: `${t('common.placeholder')}${t('login.password')}`, trigger: 'blur' },
         ],
         code: [
-            { required: true, message: '请输入验证码', trigger: 'blur' },
+            { required: true, message: `${t('common.placeholder')}${t('login.imgCode')}`, trigger: 'blur' },
         ],
     }
 
