@@ -54,7 +54,7 @@ onMounted(() => layout.setScrollbarRefInstance(scrollbarRef.value))
 
         </el-container>
 
-        <div class="fixed right-[10px] bottom-20 z-50">
+        <div class="fixed right-[10px] bottom-20 z-[999]">
             <template v-if="layout.showGoTop">
                 <el-button @click="layout.scrollTop" v-if="!layout.hasShowHeader" :icon="Top" circle />
             </template>

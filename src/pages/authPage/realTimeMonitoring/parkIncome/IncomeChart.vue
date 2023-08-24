@@ -1,15 +1,51 @@
 <script lang="ts" setup>
-import { useEcharts } from '@/hooks'
-
-import { conversionUnitKVar, conversionUnitPrice } from '@/utils'
-
+import { paserTime } from '@/utils'
+import { useIncomeChart } from './useIncomeChart'
 import TitleBox from '@/components/common/TitleBox.vue';
+import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
+
+const { chartRef, type, currentTime } = useIncomeChart()
+
 </script>
 
 <template>
     <div class="bottom_bg income_chart h-[27vh] px-[21px] min-h-[250px] ">
 
-        <TitleBox class="my-[10px]"> 经济收益趋势图 </TitleBox>
+        <TitleBox class="my-[10px]">
+            经济收益趋势图
+
+            <template #right>
+                <div class="flex flex-1">
+
+                    <el-select v-model="type" class="w-[80px]  mr-[30px]" size="small">
+                        <el-option label="日" value="D" />
+                        <el-option label="周" value="W" />
+                        <el-option label="月" value="M" />
+                        <el-option label="年" value="Y" />
+                    </el-select>
+
+                    <div class="flex">
+                        <div 
+                            class="bg-[var(--theme-white-bg)] w-[20px] flex justify-center items-center rounded-[4px] cursor-pointer">
+                            <el-icon>
+                                <ArrowLeft />
+                            </el-icon>
+                        </div>
+                        <div class="tex-[12px] text-[var(--theme-gray153)] mx-[20px]"> 当前时间：{{ paserTime(currentTime, 'YYYY-MM-DD') }} </div>
+                        <div 
+                            class="bg-[var(--theme-white-bg)] w-[20px] flex justify-center items-center  rounded-[4px] cursor-pointer">
+                            <el-icon>
+                                <ArrowRight />
+                            </el-icon>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+        </TitleBox>
+
+
+        <div ref="chartRef"></div>
 
     </div>
 </template>

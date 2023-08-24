@@ -28,7 +28,7 @@ const goToOverview = ({ code: stationCode }: ParkMonitorInfo) => {
     <div v-for="item in  filteredList "
         v-watermark=" { markSatate: item.releaseStatus, text: dicts.parkReleaseStatusDict.dictLabel[item.releaseStatus], height: 150, } "
         :key="item.code" :class="item.type == Type.NUMBER_CONTAINER ? ' ' : 'cng'"
-        class="bg-[var(--theme-white-bg)] mb-[16px] last:mb-0 px-[24px] py-[23px] pt-[20px] station_item">
+        class="bg-[var(--theme-white-bg)] mb-[16px] last:mb-0 px-[24px] py-[23px] pt-[20px] station_item ">
 
         <TitleBox>
 

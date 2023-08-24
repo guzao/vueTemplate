@@ -1,3 +1,7 @@
+
+/** z周期 类型 */
+type DateType = 'D' | 'W' | 'M' | 'Y'
+
 /** 用户下来框 选项卡 类型 */
 type CommandType = 'personCenter' | 'logout' | 'systemConfig'
 
