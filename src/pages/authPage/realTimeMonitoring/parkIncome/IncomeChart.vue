@@ -1,10 +1,11 @@
 <script lang="ts" setup>
+import { t } from '@/langs'
 import { paserTime } from '@/utils'
 import { useIncomeChart } from './useIncomeChart'
 import TitleBox from '@/components/common/TitleBox.vue';
 import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
 
-const { chartRef, type, currentTime } = useIncomeChart()
+const { chartRef, type, currentTime, nextTime, prevTime, disabled, formatType } = useIncomeChart()
 
 </script>
 
@@ -12,7 +13,7 @@ const { chartRef, type, currentTime } = useIncomeChart()
     <div class="bottom_bg income_chart h-[27vh] px-[21px] min-h-[250px] ">
 
         <TitleBox class="my-[10px]">
-            经济收益趋势图
+            {{ t('parkIncome.incomeChart') }}
 
             <template #right>
                 <div class="flex flex-1">
@@ -25,15 +26,18 @@ const { chartRef, type, currentTime } = useIncomeChart()
                     </el-select>
 
                     <div class="flex">
-                        <div 
+                        <div @click="prevTime"
                             class="bg-[var(--theme-white-bg)] w-[20px] flex justify-center items-center rounded-[4px] cursor-pointer">
                             <el-icon>
                                 <ArrowLeft />
                             </el-icon>
                         </div>
-                        <div class="tex-[12px] text-[var(--theme-gray153)] mx-[20px]"> 当前时间：{{ paserTime(currentTime, 'YYYY-MM-DD') }} </div>
-                        <div 
-                            class="bg-[var(--theme-white-bg)] w-[20px] flex justify-center items-center  rounded-[4px] cursor-pointer">
+                        <div class="tex-[12px] text-[var(--theme-gray153)] mx-[20px] select-none"> 
+                            {{ t('common.currentTime') }}：{{ paserTime(currentTime, formatType) }}
+                        </div>
+                        <div @click="nextTime"
+                            :class="[ disabled ? 'cursor-not-allowed' : ' ' ]"
+                            class="bg-[var(--theme-white-bg)] w-[20px] flex justify-center items-center  rounded-[4px] cursor-pointer ">
                             <el-icon>
                                 <ArrowRight />
                             </el-icon>

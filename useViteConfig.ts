@@ -2,6 +2,13 @@ import { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
 import { loadEnv, ServerOptions, ResolveOptions, BuildOptions, PluginOption } from 'vite'
 
+type MateEnv = {
+  /** 服务器API地址 */ 
+  readonly VITE_APP_BASE_URL: string;
+  /** 服务器地址 */ 
+  readonly VITE_APP_SERVER_URL: string;
+}
+
 export function usePlugins(): PluginOption [] {
   return [
     vue()
@@ -9,24 +16,26 @@ export function usePlugins(): PluginOption [] {
 }
 
 export function useServer(model: string): ServerOptions {
-  const config = loadEnv(model, './')
+
+  const { VITE_APP_BASE_URL, VITE_APP_SERVER_URL } = loadEnv(model, './') as MateEnv
+
   return {
     open: true,
     host: '0.0.0.0',
     port: 8888,
     proxy: {
-      [ config.VITE_APP_BASE_URL ]: {
-        target: 'http://124.223.210.24/',
-        // target: config.VITE_APP_SERVER_URL,
+      [ VITE_APP_BASE_URL ]: {
+        target: VITE_APP_SERVER_URL,
         changeOrigin: true,
-        ws: true,
         rewrite: (path: string) => {
+          path = VITE_APP_BASE_URL == '/dev-api' ? path.replace(VITE_APP_BASE_URL, '') : path
           console.log(path);
           return path
         },
       },
     },
   }
+
 }
 
 export function useResolve(): ResolveOptions {

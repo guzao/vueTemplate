@@ -1,4 +1,5 @@
 import DayJs from 'dayjs'
+import { Common } from '@/enum'
 import { isDate } from '../dataUtils'
 import { isFalse } from '../dataUtils'
 
@@ -62,6 +63,7 @@ export function getDateCycles (type: string, baseDate: Date) {
     return baseDate
 }
 
+
 /**
  * 获取本周的第一天
 */
@@ -80,6 +82,9 @@ export function getWeekFirstDay (origin: Date | number) {
 }
 
 
+/**
+ * 获取指定日期的年月日时分秒
+*/
 export function getYearMonthDayHms (origin: Date) {
     const baseDate = DayJs(origin)
     return {
@@ -89,5 +94,20 @@ export function getYearMonthDayHms (origin: Date) {
         H: baseDate.get('hours'),
         m: baseDate.get('minutes'),
         s: baseDate.get('seconds')
+    }
+}
+
+
+/** 获取时间格式化类型 */
+export const getFormatter = (type: DateType) => {
+    switch (type) {
+        case 'D':
+            return Common.YYYY_MM_DD
+        case 'W':
+            return Common.YYYY_MM_DD
+        case 'M':
+            return Common.YYYY_MM
+        default:
+            return Common.YYYY
     }
 }

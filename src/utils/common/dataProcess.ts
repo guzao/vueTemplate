@@ -1,4 +1,4 @@
-import { arrayGroupByMap, objectSize, getMaxElement, objectForEach, ownKeys } from "../dataUtils"
+import { arrayGroupByMap, objectSize, getMaxElement, objectForEach } from "../dataUtils"
 
 type GenerateDnamicTableDataParams <T> = {
     /** 以某个字段为类别 */

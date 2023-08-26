@@ -14,6 +14,8 @@ export const common = {
 
     dataLastTime: 'Data Latest time',
 
+    currentTime: 'Time',
+
     parkType: 'Park Type',
 
     park: 'Park',
@@ -63,5 +65,7 @@ export const common = {
     placeholder: 'Placeholder',
 
     placeSelect: 'placeSelect',
+
+    realTime: 'Real-time charge-discharge power curve'
 
 }

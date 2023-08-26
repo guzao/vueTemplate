@@ -12,3 +12,5 @@ interface ImportMetaEnv {
   /** 服务器地址 */ 
   readonly VITE_APP_SERVER_URL: string;
 }
+
+export type MateEnv = ImportMetaEnv

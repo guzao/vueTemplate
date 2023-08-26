@@ -1,7 +1,7 @@
 import { ZH_CN } from './zh_CN'
 import { EN_US } from './en_US'
-import { createI18n } from 'vue-i18n'
 import { useLang } from '@/utils'
+import { createI18n } from 'vue-i18n'
 
 const { getLang } = useLang()
 

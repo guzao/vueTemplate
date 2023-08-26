@@ -1,7 +1,8 @@
 <script lang="ts" setup>
+import { t } from '@/langs'
 import { PropType, ref } from 'vue';
 import { usePowerCurve } from '../../hooks/usePowerCurve'
-import { conversionUnitKWh, toFixed, conversionUnitKVar, conversionUnitKW, paserTime } from '@/utils'
+import { conversionUnitKWh, toFixed, conversionUnitKVar, conversionUnitKW, paserTime, } from '@/utils'
 
 import TitleBoxVue from '@/components/common/TitleBox.vue';
 import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
@@ -20,7 +21,7 @@ defineProps({
 type ActiveName = 'powerLine' | 'alarms'
 const activeName = ref<ActiveName>('powerLine')
 
-const { chartRef, currentTime, prevTime, nextTime } = usePowerCurve({ height: 180, device: 'device' })
+const { chartRef, currentTime, prevTime, nextTime, loading, nextDisabled } = usePowerCurve({ height: 180, device: 'device' })
 
 </script>
 
@@ -40,7 +41,7 @@ const { chartRef, currentTime, prevTime, nextTime } = usePowerCurve({ height: 18
                     <li class="h-[40px]">
                         <div class="h-[12px] w-[168px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
                         <div class="h-[32px] w-[168px] flex justify-between items-center text_bg_img px-[4px] box-border">
-                            <span class="text-[var(--theme-gray107)]"> 日充 </span>
+                            <span class="text-[var(--theme-gray107)]">  {{ t('common.dayCharge') }}</span>
                             <span class="text-[var(--theme-black51)] text-[16px] f-dinb font-medium"> {{
                                 conversionUnitKWh(deviceBaseInfo.M15).size }} {{ conversionUnitKWh(deviceBaseInfo.M15).unit
     }} </span>
@@ -50,7 +51,7 @@ const { chartRef, currentTime, prevTime, nextTime } = usePowerCurve({ height: 18
                     <li class="h-[40px]">
                         <div class="h-[12px] w-[168px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
                         <div class="h-[32px] w-[168px] flex justify-between items-center text_bg_img px-[4px] box-border">
-                            <span class="text-[var(--theme-gray107)]"> 月充 </span>
+                            <span class="text-[var(--theme-gray107)]">  {{ t('common.monthCharge') }} </span>
                             <span class="text-[var(--theme-black51)] text-[16px] f-dinb font-medium"> {{
                                 conversionUnitKWh(deviceBaseInfo.M17).size }} {{ conversionUnitKWh(deviceBaseInfo.M17).unit
     }} </span>
@@ -146,15 +147,17 @@ const { chartRef, currentTime, prevTime, nextTime } = usePowerCurve({ height: 18
                 </el-tabs>
 
                 <div v-show="activeName == 'powerLine'" class="flex absolute top-[10px] right-[10px]">
-                    <div @click="prevTime"
+                    <div @click="prevTime" :class="[loading ? 'cursor-wait' : ' ']"
                         class="bg-[var(--theme-gray-bg)] w-[20px] flex justify-center items-center rounded-[4px] cursor-pointer">
                         <el-icon>
                             <ArrowLeft />
                         </el-icon>
                     </div>
-                    <div class="tex-[12px] text-[var(--theme-gray153)] mx-[20px] select-none"> 当前时间：{{ paserTime(currentTime,
-                        'YYYY-MM-DD') }} </div>
+                    <div class="tex-[12px] text-[var(--theme-gray153)] mx-[20px] select-none">
+                        {{ t('common.currentTime') }}：{{ paserTime(currentTime, 'YYYY-MM-DD') }}
+                    </div>
                     <div @click="nextTime"
+                        :class="[loading ? 'cursor-wait' : ' ', nextDisabled ? 'cursor-not-allowed' : ' ']"
                         class="bg-[var(--theme-gray-bg)] w-[20px] flex justify-center items-center  rounded-[4px] cursor-pointer">
                         <el-icon>
                             <ArrowRight />

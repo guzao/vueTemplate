@@ -46,4 +46,5 @@ export const parkIncome = {
 
     latYearIncome: '上年收益',
 
+    incomeChart: '收益趋势图'
 }

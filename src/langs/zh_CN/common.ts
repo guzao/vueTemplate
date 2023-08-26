@@ -14,6 +14,8 @@ export const common = {
 
     dataLastTime: '数据最新时间',
 
+    currentTime: '当前时间',
+
     parkType: '电站类型',
     
     park: '电站',
@@ -64,5 +66,6 @@ export const common = {
 
     placeSelect: '请选择',
 
+    realTime: '实时充放电功率曲线'
 
 }
