@@ -45,12 +45,7 @@ export function unitConversionEdgeProcess(raw: number, limit = 1000) {
     }
 }
 
-const writeDefault = (size: string, unit: string) => {
-    return {
-        size,
-        unit
-    }
-}
+const writeDefault = (size: string, unit: string) => ( { size, unit } )
 
 const conversionUnit = (raw: number, units: string[], fractionDigits = 2, limit = 1000) => {
     if (isNull(raw)) return writeDefault('--', units[0])
@@ -90,12 +85,12 @@ export const conversionUnitPrice = (raw: number, fractionDigits?: number) => con
 
 
 /** 找出最大值 并以此为基础 进行缩小 */
-export function getZoomRato(numbers: number[], units: string[]) {
+export function getZoomRato(numbers: number[], units: string[], limit: number = 1000) {
 
     const max = Math.max(...numbers)
     const { index } = unitConversionEdgeProcess(max)
     /** 缩放比 */
-    const zoomLimit = Math.pow(1000, index)
+    const zoomLimit = Math.pow(limit, index)
 
     return {
         /** 单位 */
@@ -106,8 +101,9 @@ export function getZoomRato(numbers: number[], units: string[]) {
 
 }
 
-export const getKWHZoomRatioAndUnit = (numbers: number[]) => getZoomRato(numbers, KWHUnits)
 
-export const getKWZoomRatioAndUnit = (numbers: number[]) => getZoomRato(numbers, KWUnits)
+export const getKWHZoomRatioAndUnit = (numbers: number[]) => getZoomRato(numbers, KWHUnits, 1000)
 
-export const getKVARZoomRatioAndUnit = (numbers: number[]) => getZoomRato(numbers, KVARUnits)
+export const getKWZoomRatioAndUnit = (numbers: number[]) => getZoomRato(numbers, KWUnits, 1000)
+
+export const getKVARZoomRatioAndUnit = (numbers: number[]) => getZoomRato(numbers, KVARUnits, 1000)
