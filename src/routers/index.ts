@@ -214,6 +214,30 @@ export const loaclRouter = [
                 hidden: false,
                 layoutType: 'Components',
             },
+            {
+                meta: {
+                    title: '测点配置'
+                },
+                path: '/config/metric',
+                hidden: false,
+                layoutType: 'Components',
+            },
+            {
+                meta: {
+                    title: '模型管理'
+                },
+                path: '/config/modelTemplate',
+                hidden: false,
+                layoutType: 'Components',
+            },
+            {
+                meta: {
+                    title: '单元组管理'
+                },
+                path: '/config/unitGroup',
+                hidden: true,
+                layoutType: 'Components',
+            },
         ]
     },
 

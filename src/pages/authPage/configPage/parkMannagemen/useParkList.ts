@@ -1,15 +1,19 @@
 import { ref } from 'vue';
+import { deepCloe } from '@/utils'
 import { getParkInfo } from '@/API'
 import { useReactiveHttp } from '@/hooks'
 import { useAppData, useDicts } from '@/store'
-import { deepCloe } from '@/utils'
+import { useRoute, useRouter } from 'vue-router'
 import ParkForm from './ParkForm.vue'
 
 
 export function useParkList(emits: any) {
 
-    const appData = useAppData()
+    const route = useRoute()
 
+    const router = useRouter()
+
+    const appData = useAppData()
 
     const formInstance = ref<InstanceType<typeof ParkForm>>()
 
@@ -89,10 +93,12 @@ export function useParkList(emits: any) {
         drawerState.value = true
     }
 
+    const editUnitGroup = (park: ParkListData) => router.push({ path: '/config/unitGroup', query: { ...route.query, eidtCode: park.serial, name: encodeURI(park.name) } })
+
     return {
         parkId,
-        result, 
-        getResult, 
+        result,
+        getResult,
         loading,
         drawerState,
         dicts,
@@ -102,6 +108,7 @@ export function useParkList(emits: any) {
         editPark,
         checkPark,
         confirm,
+        editUnitGroup,
         formInstance,
         emits,
         appData
@@ -111,15 +118,15 @@ export function useParkList(emits: any) {
 
 
 export const ruleForm = {
-    fullName: [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
-    name:  [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
-    serial:  [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
-    industryType:  [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
-    type:  [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
-    useType:  [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
-    totalPower:  [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
-    energy:  [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
-    status:  [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
-    operateTime:  [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
-    buildTime:  [  { required: true, message: 'Please input Activity name', trigger: 'blur' }, ],
+    fullName: [{ required: true, message: 'Please input Activity name', trigger: 'blur' },],
+    name: [{ required: true, message: 'Please input Activity name', trigger: 'blur' },],
+    serial: [{ required: true, message: 'Please input Activity name', trigger: 'blur' },],
+    industryType: [{ required: true, message: 'Please input Activity name', trigger: 'blur' },],
+    type: [{ required: true, message: 'Please input Activity name', trigger: 'blur' },],
+    useType: [{ required: true, message: 'Please input Activity name', trigger: 'blur' },],
+    totalPower: [{ required: true, message: 'Please input Activity name', trigger: 'blur' },],
+    energy: [{ required: true, message: 'Please input Activity name', trigger: 'blur' },],
+    status: [{ required: true, message: 'Please input Activity name', trigger: 'blur' },],
+    operateTime: [{ required: true, message: 'Please input Activity name', trigger: 'blur' },],
+    buildTime: [{ required: true, message: 'Please input Activity name', trigger: 'blur' },],
 }

@@ -66,6 +66,22 @@ export const common = {
 
     placeSelect: '请选择',
 
-    realTime: '实时充放电功率曲线'
+    realTime: '实时充放电功率曲线',
+
+    confirm: '提交',
+
+    close: '取消',
+
+    back: '返回',
+
+    add: '新增',
+
+    remove: '删除',
+    
+    check: '查看',
+
+    edit: '编辑',
+
+    list: '列表'
 
 }

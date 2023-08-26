@@ -9,7 +9,7 @@ const { pageParams } = useParkElectricPrice()
 
 <template>
     
-    <SubTitle class="mb-[16px]" />
+    <SubTitle  />
 
     <div class="p-[24px] box-border bg-[var(--theme-white-bg)]">
         

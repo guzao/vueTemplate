@@ -1,13 +1,11 @@
 <script lang="ts" setup>
 import { paserTime } from '@/utils'
 import { useAppData } from '@/store'
-
-import NavBar from '@/components/common/SubNavBar.vue';
-import SubTitle from '@/components/common/SubTitle.vue';
-import LastTime from '@/components/common/LastTime.vue';
+import NavBar from '@/components/common/SubNavBar.vue'
+import SubTitle from '@/components/common/SubTitle.vue'
+import LastTime from '@/components/common/LastTime.vue'
 
 const appdate = useAppData()
-
 </script>
 
 

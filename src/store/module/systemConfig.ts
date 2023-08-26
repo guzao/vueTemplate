@@ -5,7 +5,7 @@ import { useI18nSelectState, useLang, useIslocalization } from '@/utils'
 /**
  * * 功率类型
  * * @param DC 直流
- * * @param DC 交流
+ * * @param AC 交流
 */
 type ElectricPowerType = 'DC' | 'AC'
 

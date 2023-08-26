@@ -66,6 +66,22 @@ export const common = {
 
     placeSelect: 'placeSelect',
 
-    realTime: 'Real-time charge-discharge power curve'
+    realTime: 'Real-time charge-discharge power curve',
+
+    confirm: 'Confirm',
+
+    close: 'Close',
+
+    back: 'Back',
+
+    add: 'Add',
+
+    remove: 'Remove',
+
+    check: 'Check',
+
+    edit: 'Edit',
+
+    list: 'List'
 
 }

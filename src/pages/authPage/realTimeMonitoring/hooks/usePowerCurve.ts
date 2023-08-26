@@ -169,7 +169,7 @@ export function usePowerCurve(config: usePowerCurveConfig) {
         getResult()
     }
 
-    const { _resetInterval } = useInterval(1000 * 60 * 3, getResult)
+    const { _resetInterval } = useInterval(1000 * 60 * 5, getResult)
 
     watch(() => config.device == 'park' ? appData.currentParkSerial : deviceDetailContext?.unitId, () => {
         currentTime.value = writeDefaultDate(appData.currentLastTime)

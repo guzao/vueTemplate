@@ -1,5 +1,5 @@
-
 <script lang="ts" setup>
+import { t } from '@/langs'
 import { PropType } from 'vue';
 import { useParkList } from './useParkList'
 import { More } from '@element-plus/icons-vue'
@@ -27,6 +27,7 @@ const {
     checkPark,
     confirm,
     formInstance,
+    editUnitGroup
 } = useParkList(emits)
 
 defineProps({
@@ -39,11 +40,11 @@ defineProps({
 </script>
 
 <template>
-    
+
     <TitleBox class="mb-[16px]" :size="18">
-        电站列表
+        {{ t('common.park') }}{{ t('common.list') }}
         <template #right>
-            <el-button size="default" type="success" @click="addPark"> 添加电站 </el-button>
+            <el-button size="default" type="success" @click="addPark"> {{ t('common.add')  }}{{ t('common.park') }} </el-button>
         </template>
     </TitleBox>
 
@@ -60,8 +61,9 @@ defineProps({
                             <el-button text :icon="More"> </el-button>
                             <template #dropdown>
                                 <el-dropdown-menu>
-                                    <el-dropdown-item @click="checkPark(item)"> 查看电站 </el-dropdown-item>
-                                    <el-dropdown-item @click="editPark(item)"> 编辑电站 </el-dropdown-item>
+                                    <el-dropdown-item @click="checkPark(item)"> {{ t('common.check') }}{{ t('common.park') }} </el-dropdown-item>
+                                    <el-dropdown-item @click="editPark(item)">  {{ t('common.edit') }}{{ t('common.park') }}  </el-dropdown-item>
+                                    <el-dropdown-item @click="editUnitGroup(item)"> 单元组管理 </el-dropdown-item>
                                 </el-dropdown-menu>
                             </template>
                         </el-dropdown>
