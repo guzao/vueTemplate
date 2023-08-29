@@ -2,7 +2,7 @@
 import { useRouter } from 'vue-router'
 import { useSystemConfig } from '@/store'
 import BaseHeader from '@/components/common/BaseHeader.vue'
-import I18nSelect from '@/components/common/I18nSelect.vue';
+import I18nSelect from '@/components/common/I18nSelect.vue'
 
 const router = useRouter()
 const systemConfig = useSystemConfig()

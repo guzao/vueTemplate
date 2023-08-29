@@ -1,11 +1,13 @@
 import { useUser } from '@/store'
 import { HTTPSTATE } from '@/enum'
-import { isFalse, isTrue } from '@/utils';
 import { AxiosResponse, AxiosError } from 'axios'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { networkErrorHandle } from '@/systemRuntimeInfoTrack'
+import { isFalse, isTrue, getLocalLanMessage } from '@/utils'
 
 let userLogout: () => Promise<void>
+
+const { tipsInfo, common } = getLocalLanMessage()
 
 // 是否显示重新登录
 export let isRelogin = { show: false };
@@ -16,7 +18,7 @@ export async function responseHandle(response: AxiosResponse) {
 
   if (code === HTTPSTATE.UNAUTHORIZED) {
     handleUnauthorized()
-    return Promise.reject('无效的会话，或者会话已过期，请重新登录。')
+    return Promise.reject(tipsInfo.invalidSession)
   }
 
   if (code === HTTPSTATE.SERVER_ERROR) {
@@ -27,6 +29,30 @@ export async function responseHandle(response: AxiosResponse) {
   return response.data
 }
 
+async function handleUnauthorized () {
+
+  if (isTrue(isRelogin.show)) return 
+  isRelogin.show = true;
+
+  try {
+    await ElMessageBox.confirm(tipsInfo.invalidSessionAndTips, tipsInfo.systemTips,{
+      confirmButtonText: tipsInfo.loginAgain, 
+      cancelButtonText: common.close, 
+      type: 'warning',
+    })
+    if (isFalse(userLogout)) {
+      userLogout = useUser().userlogOut
+    }
+    userLogout().then(() => {
+      isRelogin.show = false
+    })
+  } catch (error) {
+    isRelogin.show = false
+  }
+  
+}
+
+
 export function responseErrorHandle(error: AxiosError) {
 
   let { message } = error;
@@ -34,9 +60,9 @@ export function responseErrorHandle(error: AxiosError) {
   networkErrorHandle(error)
 
   if (message == "Network Error") {
-    message = "后端接口连接异常";
+    message = tipsInfo.networkError;
   } else if (message.includes("timeout")) {
-    message = "系统接口请求超时";
+    message = tipsInfo.timeout;
   } else if (message.includes("Request failed with status code")) {
     message = "系统接口" + message.substr(message.length - 3) + "异常";
   }
@@ -51,26 +77,4 @@ export function responseErrorHandle(error: AxiosError) {
 }
 
 
-async function handleUnauthorized () {
-
-    if (isTrue(isRelogin.show)) return 
-    isRelogin.show = true;
-
-    try {
-      await ElMessageBox.confirm('登录状态已过期，您可以继续留在该页面，或者重新登录', '系统提示',{
-        confirmButtonText: '重新登录', 
-        cancelButtonText: '取消', 
-        type: 'warning',
-      })
-      if (isFalse(userLogout)) {
-        userLogout = useUser().userlogOut
-      }
-      userLogout().then(() => {
-        isRelogin.show = false
-      })
-    } catch (error) {
-      isRelogin.show = false
-    }
-    
-}
 

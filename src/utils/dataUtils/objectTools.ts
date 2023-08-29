@@ -60,7 +60,7 @@ export function objectFilterInvalidValue(obj: object)  {
 /**
  * 深度克隆
 */
-export function deepCloe <T> (object: T): T {
+export function deepClone <T> (object: T): T {
 
     if ( isNumber(object) ) return object 
     if ( isString(object) ) return object 
@@ -76,7 +76,7 @@ export function deepCloe <T> (object: T): T {
     for (const key in object) {
         if (Object.prototype.hasOwnProperty.call(object, key)) {
             const value = object[key];
-            result[ key ] = typeof value == "object" ? deepCloe(value) : value;
+            result[ key ] = typeof value == "object" ? deepClone(value) : value;
         }
     }
     return result

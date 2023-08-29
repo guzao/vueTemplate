@@ -4,7 +4,7 @@ import { updateUserProfile } from '@/API'
 import { useUser, useDicts } from '@/store'
 import type { FormInstance } from 'element-plus'
 import { useRouter, useRoute } from 'vue-router'
-import { deepCloe, successMessage } from '@/utils';
+import { deepClone, successMessage } from '@/utils';
 
 
 export function useEditPerson() {
@@ -15,7 +15,7 @@ export function useEditPerson() {
     const dicts = useDicts()
 
 
-    const userInfo = deepCloe(userData.userInfo.user)
+    const userInfo = deepClone(userData.userInfo.user)
     const fromInstance = ref<FormInstance>()
     const form = reactive(userInfo)
     const rules = {

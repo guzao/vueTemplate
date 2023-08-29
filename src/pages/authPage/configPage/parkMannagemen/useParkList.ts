@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { deepCloe } from '@/utils'
+import { deepClone } from '@/utils'
 import { getParkInfo } from '@/API'
 import { useReactiveHttp } from '@/hooks'
 import { useAppData, useDicts } from '@/store'
@@ -58,7 +58,7 @@ export function useParkList(emits: any) {
     const parkId = ref('')
 
     const { result, getResult, loading } = useReactiveHttp({
-        initData: deepCloe(baseData),
+        initData: deepClone(baseData),
         request: () => getParkInfo(parkId.value),
         Immediately: false
     })
@@ -73,7 +73,7 @@ export function useParkList(emits: any) {
     const addPark = () => {
         isEdit.value = false
         title.value = '添加电站'
-        result.value = deepCloe(baseData)
+        result.value = deepClone(baseData)
         drawerState.value = true
     }
 

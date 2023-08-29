@@ -1,4 +1,9 @@
 
+/** 
+ * 组件类型 
+*/
+type LayoutType = 'MainLayou' | 'SubLayout' | 'Components'
+
 /** z周期 类型 */
 type DateType = 'D' | 'W' | 'M' | 'Y'
 

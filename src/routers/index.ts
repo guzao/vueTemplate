@@ -10,8 +10,6 @@ export const router = createRouter({
 })
 
 
-type LayoutType = 'MainLayou' | 'SubLayout' | 'Components'
-
 export const loaclRouter = [
     {
         path: '/monitor',

@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { useInterval } from '@/hooks'
-import { useI18nStore, useAppData } from "@/store";
+import { useI18nStore, useAppData } from "@/store"
+import { useInterval, useDocumentTitle } from '@/hooks'
+import SystemConfig from './components/common/SystemConfig.vue'
 
-import SystemConfig from './components/common/SystemConfig.vue';
 
-const I18nStore = useI18nStore()
+useDocumentTitle()
 const appData = useAppData()
+const I18nStore = useI18nStore()
 
 /** 定时获取电站最新数据 */
 useInterval(1000 * 60 * 5, () => {

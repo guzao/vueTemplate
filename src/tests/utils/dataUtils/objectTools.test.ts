@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { objectForEach, deepCloe, has, ownKeys, objectIsEmpty, objectNotEmpty, objectToArray, objectSize } from '@/utils/dataUtils/objectTools'
+import { objectForEach, deepClone, has, ownKeys, objectIsEmpty, objectNotEmpty, objectToArray, objectSize } from '@/utils/dataUtils/objectTools'
 
 describe('objectTools', () => {
 
@@ -21,9 +21,9 @@ describe('objectTools', () => {
     })
 
 
-    test('deepCloe', () => {
+    test('deepClone', () => {
         const origin  = { id: 1, name: 2 }
-        expect(deepCloe(origin)).not.toBe(origin)
+        expect(deepClone(origin)).not.toBe(origin)
     })
 
     test('has', () => {

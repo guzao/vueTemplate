@@ -1,8 +1,9 @@
-import { t } from '@/langs'
 import { ref } from 'vue'
-import type { FormInstance } from 'element-plus'
+import { t } from '@/langs'
+import { Common } from '@/enum'
 import { getCodeImg as getcode } from '@/API'
 import { useRouter, useRoute } from 'vue-router'
+import type { FormInstance } from 'element-plus'
 import { useUser, useSystemConfig } from '@/store'
 
 
@@ -56,7 +57,7 @@ export function useLogin() {
 
     }
 
-    const { query: { redirect = '/index' } } = useRoute()
+    const { query: { redirect = Common.HOME_PAGE } } = useRoute()
     const router = useRouter()
 
     const handleLogin = async () => {

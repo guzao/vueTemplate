@@ -94,7 +94,7 @@ export const useAppData = defineStore('useAppData', {
 
         /** 用户受权限控制的电站数据的最新时间 */
         getParkAuthLastTime() {
-            return getUserParkLastTime().then(res => {
+            getUserParkLastTime().then(res => {
                 if (hasEror(res)) return
                 this.parkLastTimes = res.data
             })
