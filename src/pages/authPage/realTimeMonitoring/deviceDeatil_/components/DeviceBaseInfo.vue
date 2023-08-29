@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import { t } from '@/langs'
-import { PropType, ref } from 'vue';
+import { PropType, ref, watch } from 'vue';
 import { usePowerCurve } from '../../hooks/usePowerCurve'
 import { conversionUnitKWh, toFixed, conversionUnitKVar, conversionUnitKW, paserTime, } from '@/utils'
 
 import TitleBoxVue from '@/components/common/TitleBox.vue';
 import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
+
 
 
 defineProps({
@@ -21,7 +22,10 @@ defineProps({
 type ActiveName = 'powerLine' | 'alarms'
 const activeName = ref<ActiveName>('powerLine')
 
-const { chartRef, currentTime, prevTime, nextTime, loading, nextDisabled } = usePowerCurve({ height: 180, device: 'device' })
+const { chartRef, currentTime, prevTime, nextTime, loading, nextDisabled, appData, getResult } = usePowerCurve({ height: 180, device: 'device' })
+
+watch(() => appData.currentParkSerial, getResult)
+
 
 </script>
 

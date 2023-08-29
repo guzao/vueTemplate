@@ -15,9 +15,9 @@ export function useGroupForm() {
         serial: ''
     })
 
-    const addGroup = () => {
-        console.log('addGroup');
-    }
+const addGroup = () => {
+    console.log('addGroup');
+}
 
     return {
         validate,

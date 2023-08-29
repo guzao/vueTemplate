@@ -5,7 +5,9 @@ import DailyReport from './subPages/DailyReport.vue'
 import Historyeport from './subPages/HistoryReport.vue'
 import TitleAndStationNavBar from '@/components/business/TitleAndStationNavBar.vue';
 
-const activeTab = ref('day')
+type TabType = 'day' | 'history'
+
+const activeTab = ref<TabType>('day')
 
 const handleClick = () => {}
 </script>

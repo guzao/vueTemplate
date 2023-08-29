@@ -4,7 +4,7 @@ import { useTable } from './useTable'
 import { Edit, Delete } from '@element-plus/icons-vue'
 import ConfirmButton from '@/components/common/ConfirmButton.vue'
 
-const { addGroup, addUint, editGroup, editUint, deletGroup, deltUint } = useTable()
+const { addGroup, addUint, editGroup, editUint, deletGroup, deltUint, expandChange } = useTable()
 
 defineProps({
     tableData: Array
@@ -13,9 +13,9 @@ defineProps({
 </script>
 
 <template>
-    <el-table :data="tableData" style="width: 100%">
+    <el-table :data="tableData" style="width: 100%" @expand-change="expandChange">
 
-        <el-table-column type="expand">
+        <el-table-column type="expand" >
 
             <template #default="props">
 

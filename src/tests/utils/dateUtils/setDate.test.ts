@@ -7,7 +7,7 @@ describe('setdate', () => {
 
     test('addDate',  () => {
 
-        let testDate = new Date()
+        let testDate = new Date(2023, 7, 26)
 
         testDate = addDate(testDate, 2)
         
@@ -22,7 +22,7 @@ describe('setdate', () => {
 
     test('addMonth',  () => {
 
-        let testDate = new Date()
+        let testDate = new Date(2023, 7)
 
         testDate = addMonth(testDate, 2)
         
@@ -37,22 +37,22 @@ describe('setdate', () => {
     
     test('addYear',  () => {
 
-        let testDate = new Date()
+        let testDate = new Date(2023, 0, 0, 0, 0, 0)
 
         testDate = addYear(testDate, 2)
         
-        expect(paserTime(testDate, 'YYYY')).toBe('2025')
+        expect(paserTime(testDate, 'YYYY')).toBe('2024')
         
         testDate = addYear(testDate, 1)
 
-        expect(paserTime(testDate, 'YYYY')).toBe('2026')
+        expect(paserTime(testDate, 'YYYY')).toBe('2025')
 
 
     })
 
     test('subtractDate',  () => {
 
-        let testDate = new Date()
+        let testDate = new Date(2023, 7, 26)
 
         testDate = subtractDate(testDate, 2)
         
@@ -67,7 +67,7 @@ describe('setdate', () => {
 
     test('subtractMonth',  () => {
 
-        let testDate = new Date()
+        let testDate = new Date(2023, 7)
 
         testDate = subtractMonth(testDate, 2)
         
@@ -83,15 +83,15 @@ describe('setdate', () => {
 
     test('subtractYear',  () => {
 
-        let testDate = new Date()
+        let testDate = new Date(2023)
 
         testDate = subtractYear(testDate, 2)
         
-        expect(paserTime(testDate, 'YYYY')).toBe('2021')
+        expect(paserTime(testDate, 'YYYY')).toBe('1968')
         
         testDate = subtractYear(testDate, 1)
 
-        expect(paserTime(testDate, 'YYYY')).toBe('2020')
+        expect(paserTime(testDate, 'YYYY')).toBe('1967')
 
 
     })

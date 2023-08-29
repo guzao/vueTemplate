@@ -1,4 +1,4 @@
-import { State } from '@/enum'
+import { State, Common } from '@/enum'
 import { routerWhiteLsit } from '@/config'
 import { useUser, useAppData } from '@/store'
 import nProgress from '@/plugins/steupNprogress'
@@ -16,7 +16,7 @@ export function useGuard(router: Router) {
 
   router.beforeEach(beforeEach)
 
-  router.afterEach((to, form, next) =>  nProgress.done())
+  router.afterEach((to, form, next) => nProgress.done())
 
 }
 
@@ -32,7 +32,7 @@ const beforeEach = async (to: RouteLocationNormalized, form: RouteLocationNormal
     const { getParkAuthList, getParkAuthLastTime, getParkSerial, currentRelease, getStationRuningState } = useAppData()
 
     // 登录过的在去登录页无意义
-    if (to.path === '/login' && arrayIsNotEmpty(getRoles)) return next('/')
+    if (to.path === Common.LOGIN_PAGE && arrayIsNotEmpty(getRoles)) return next(Common.ROOT_PAGE)
 
     // 运行时不存在用户的角色数据 获取用户信息
     if (arrayIsEmpty(getRoles)) {
@@ -45,7 +45,6 @@ const beforeEach = async (to: RouteLocationNormalized, form: RouteLocationNormal
         await getParkAuthLastTime()
         // 地址栏记录当前选中的电站编号
         return next({ ...to, replace: true, query: { ...to.query, stationCode: getParkSerial() } })
-
       } catch (error) {
         console.log('====== error =======')
       }
@@ -54,22 +53,7 @@ const beforeEach = async (to: RouteLocationNormalized, form: RouteLocationNormal
 
     }
 
-
-    if (to.path !== '/config/personCenter/editPassword') {
-      if (userInfo.user.firstLoginFlag == State.FIRST_LOGIN) {
-        ElNotification({ title: '提示', message: '首次登录请修改密码', type: 'warning' })
-        return next(to.fullPath)
-      }
-    }
-
-    if (to.path !== '/index') {
-      if (currentRelease == State.DE_BUGGER && to.path.includes('/dataAnalysis')) {
-        ElNotification({ title: '提示', message: '电站不是发布状态,数据分析无法使用', type: 'warning' })
-        return next('/index')
-      }
-    }
-
-    return next()
+    return businessProcess(to, form, next)
 
   }
 
@@ -82,3 +66,27 @@ const beforeEach = async (to: RouteLocationNormalized, form: RouteLocationNormal
   next(`/login?redirect=${to.fullPath}`) // 否则全部重定向到登录页
 }
 
+
+/** 业务路由处理 */
+function businessProcess(to: RouteLocationNormalized, form: RouteLocationNormalized, next: NavigationGuardNext) {
+
+  const { userInfo } = useUser()
+  const { currentRelease } = useAppData()
+
+  if (to.path !== Common.EDIT_PASSWORD_PAGE) {
+    if (userInfo.user.firstLoginFlag == State.FIRST_LOGIN) {
+      ElNotification({ title: '提示', message: '首次登录请修改密码', type: 'warning' })
+      return next(to.fullPath)
+    }
+  }
+
+  if (to.path !== Common.HOME_PAGE) {
+    if (currentRelease == State.DE_BUGGER && to.path.includes('/dataAnalysis')) {
+      ElNotification({ title: '提示', message: '电站不是发布状态,数据分析无法使用', type: 'warning' })
+      return next(Common.HOME_PAGE)
+    }
+  }
+
+  return next()
+
+}

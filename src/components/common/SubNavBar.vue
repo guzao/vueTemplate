@@ -2,9 +2,9 @@
 import { ref } from 'vue'
 import { useAppData } from '@/store'
 import { layoutConfig } from '@/config'
+import { getDeviceStateInfo } from '@/utils'
 import { useRoute, useRouter } from 'vue-router'
 import DeviceStateDesc from './DeviceStateDesc.vue';
-import { getDeviceStateInfo } from '@/utils'
 
 import Icon from './Icon.vue';
 
@@ -52,8 +52,6 @@ const viewModelChange = (path: string) => router.push({ query: { stationCode: ap
             <template #prefix>
                 <Icon icon="icon_parkselect" />
             </template>
-
-            <!-- <el-option v-for="item in appData.parkAuthList" :key="item.id" :label="item.name" :value="item.serial" /> -->
 
             <el-option v-for="item in appData.parkAuthList" :key="item.id" :label="item.name" :value="item.serial">
 

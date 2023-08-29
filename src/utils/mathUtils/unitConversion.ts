@@ -67,7 +67,6 @@ const conversionUnit = (raw: number, units: string[], fractionDigits = 2, limit 
 }
 
 export const KWHUnits = ['kWh', 'MWh', 'GWh', 'TWh']
-
 export const conversionUnitKWh = (raw: number, fractionDigits?: number) => conversionUnit(raw, KWHUnits, fractionDigits, 1000)
 
 export const KWUnits = ['kW', 'MW', 'GW', 'TW']
@@ -77,7 +76,6 @@ export const KVARUnits = ['kVar', 'MVar', 'GVar', 'TVar']
 export const conversionUnitKVar = (raw: number, fractionDigits?: number) => conversionUnit(raw, KVARUnits, fractionDigits, 1000)
 
 export const PriceUnits = ['元', '万', '亿', '兆']
-/** 金额单位转换 */
 export const conversionUnitPrice = (raw: number, fractionDigits?: number) => conversionUnit(raw, PriceUnits, fractionDigits, 10000)
 
 

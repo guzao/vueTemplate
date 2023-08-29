@@ -33,6 +33,7 @@ export const staticRouter: RouteRecordRaw[] = [
 
     {
         path: '/:path(.*)*',
+        // @ts-ignore
         component: () => import('@/pages/staticPage/errorPages/401.vue'),
         name: '404',
         meta: {

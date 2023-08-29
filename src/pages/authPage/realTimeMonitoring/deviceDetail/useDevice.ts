@@ -1,9 +1,9 @@
-import { getDeviceInfo } from '@/API'
 import { useAppData } from '@/store'
-import { InjectionKey, watch } from 'vue'
+import { getDeviceInfo } from '@/API'
 import { reactive, provide } from 'vue'
-import { getFirstElement, urlQueryToObject } from '@/utils'
+import { InjectionKey, watch } from 'vue'
 import { useReactiveHttp } from '@/hooks'
+import { getFirstElement, urlQueryToObject } from '@/utils'
 
 
 /** 注入key */
@@ -40,7 +40,6 @@ export const deviceDetailContextKey: InjectionKey<{
     updateStorageUnitId: (name: string) => void,
 
 }> = Symbol('deviceDetialContext')
-
 
 
 

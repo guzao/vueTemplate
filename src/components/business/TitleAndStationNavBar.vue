@@ -10,6 +10,7 @@ const appdate = useAppData()
 
 
 <template>
+    
     <SubTitle />
 
     <NavBar class="mb-[16px]" :show-view-model-select="false" :show-device-state-desc="false">
