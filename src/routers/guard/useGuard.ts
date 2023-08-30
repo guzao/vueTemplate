@@ -1,10 +1,9 @@
-import { Common } from '@/enum'
 import { loaclRouter } from '../index'
 import { routerWhiteLsit } from '@/config'
 import { useUser, useAppData } from '@/store'
+import { arrayIsEmpty, useToken } from '@/utils'
 import nProgress from '@/plugins/steupNprogress'
-import { businessProcess, generateAndAddRouters } from './helper'
-import { arrayIsEmpty, arrayIsNotEmpty, useToken } from '@/utils'
+import { businessProcess, generateRouterAndAddRouters } from './helper'
 import type { Router, NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
 
 const { getToken } = useToken()
@@ -29,27 +28,17 @@ const beforeEach = async (to: RouteLocationNormalized, form: RouteLocationNormal
   // 1看 token
   if (getToken()) {
 
-    const { getRoles, } = useUser()
-    const { getParkSerial, } = useAppData()
-
-    // 登录过的在去登录页无意义
-    if (to.path === Common.LOGIN_PAGE && arrayIsNotEmpty(getRoles)) return next(Common.ROOT_PAGE)
+    const { getRoles } = useUser()
+    
+    const { getParkSerial } = useAppData()
 
     // 运行时不存在用户的角色数据 获取用户信息
     if (arrayIsEmpty(getRoles)) {
 
-      try {
+      await getInitBaseInfo().catch(err => console.log('===='))
 
-        await getInitBaseInfo()
-        
-        // 地址栏记录当前选中的电站编号
-        return next({ ...to, replace: true, query: { ...to.query, stationCode: getParkSerial() } })
-
-      } catch (error) {
-        console.log('====== error =======')
-      }
-
-      return next()
+      // 地址栏记录当前选中的电站编号
+      return next({ ...to, replace: true, query: { ...to.query, stationCode: getParkSerial() } })
 
     }
 
@@ -68,14 +57,18 @@ const beforeEach = async (to: RouteLocationNormalized, form: RouteLocationNormal
 
 
 
-
+/** 获取用户信息、菜单、电站列表、电站发布状态、电站运行状态、最新数据时间、添加动态路由 */
 const getInitBaseInfo = async () => {
+
   const { getUserInfo, getRouter } = useUser()
   const { getParkAuthList, getParkAuthLastTime, getStationRuningState } = useAppData()
+
   await getUserInfo()
   await getRouter()
-  generateAndAddRouters(loaclRouter)
+  generateRouterAndAddRouters(loaclRouter)
+
   await getParkAuthList()
   getStationRuningState()
   getParkAuthLastTime()
+
 }

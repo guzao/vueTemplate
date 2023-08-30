@@ -3,37 +3,32 @@ import { State, Common } from '@/enum'
 import { useUser, useAppData } from '@/store'
 import { ElNotification } from 'element-plus'
 import MainLayout from '@/layout/MainLayout/index.vue'
-import { getLocalLanMessage, isTrue, deepClone } from '@/utils'
+import { getLocalLanMessage, isTrue, deepClone, arrayIsNotEmpty } from '@/utils'
 import { NavigationGuardNext, RouteLocationNormalized, RouteRecordRaw } from 'vue-router'
 
 const { tipsInfo } = getLocalLanMessage()
 
 const routeAllPathToCompMap = import.meta.glob(`@/pages/**/*.vue`);
 
-
-/** 需要新开tab的路由 */
 let newTabLayOut: RouteRecordRaw[] = []
 
-
-/** 根据数据生成动态路由 并添加到路由中 */
-export function generateAndAddRouters (routers: LoaclRouter[]) {
+/** 生成添加 动态路由 */
+export function generateRouterAndAddRouters (routers: LoaclRouter[]) {
     newTabLayOut.length = 0
     addRouter(routers)
 }
 
-
-/** 添加路由 */
-export function addRouter(routers: LoaclRouter[]) {
-    const newRouters = deepClone(routers)
-    setDnamicRouterComponents(newRouters)
-    newRouters.forEach((_r) => router.addRoute(_r as any))
+/** 动态添加路由 */
+function addRouter(routers: LoaclRouter[]) {
+    const newRoiters = deepClone(routers)
+    setDnamicRouterComponents(newRoiters)
+    newRoiters.forEach((_r) => router.addRoute(_r as any))
     newTabLayOut.forEach(_r => router.addRoute(_r))
     addErrorPages()
 }
 
-
 /** 动态添加404 页面 */
-function addErrorPages () {
+function addErrorPages() {
     router.addRoute(
         {
             path: '/:path(.*)*',
@@ -47,22 +42,24 @@ function addErrorPages () {
     )
 }
 
-
 function setDnamicRouterComponents(routers: LoaclRouter[]) {
     routers.forEach((item, index) => {
         const { children } = item
         if (isTrue(children)) setDnamicRouterComponents(children!)
         item.component = loadLayout(item) as any
-        generateNewTabLayOutRoute(routers, item, index)
+        setNewTabRouter(item, routers, index)
     })
 }
-
 
 const loadLayout = (router: LoaclRouter) => {
     switch (router.layoutType) {
         case 'MainLayout':
             return MainLayout
-        case 'Components' || 'NewTabLayOut' || 'ViewModel':
+        case 'Components':
+            return loadComponent(router)
+        case 'NewTabLayOut':
+            return loadComponent(router)
+        case 'ViewModel':
             return loadComponent(router)
         case 'OutLink':
             return ''
@@ -71,12 +68,11 @@ const loadLayout = (router: LoaclRouter) => {
     }
 }
 
-
 const loadComponent = ({ component }: LoaclRouter) => routeAllPathToCompMap[`/src/pages/${component}/index.vue`]
 
 
-function generateNewTabLayOutRoute (routers: LoaclRouter[], item: LoaclRouter, index: number) {
-    if ( item.layoutType == 'NewTabLayOut'  ) {
+function setNewTabRouter(item: LoaclRouter, routers: LoaclRouter[], index: number) {
+    if (item.layoutType == 'NewTabLayOut') {
         newTabLayOut.push(item as any)
         routers.splice(index, 1)
     }
@@ -84,11 +80,15 @@ function generateNewTabLayOutRoute (routers: LoaclRouter[], item: LoaclRouter, i
 
 
 
+
 /** 业务路由处理 */
 export function businessProcess(to: RouteLocationNormalized, form: RouteLocationNormalized, next: NavigationGuardNext) {
 
-    const { userInfo } = useUser()
+    const { userInfo, getRoles} = useUser()
     const { currentRelease } = useAppData()
+
+    // 登录过的在去登录页无意义
+    if (to.path === Common.LOGIN_PAGE && arrayIsNotEmpty(getRoles)) return next(Common.ROOT_PAGE)
 
 
     // 首次登录校验
