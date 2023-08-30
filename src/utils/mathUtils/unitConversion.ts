@@ -19,7 +19,7 @@ export function edgeCaseToFixed(raw: any) {
 }
 
 export const unitConversion = (limit: number, size: number) => {
-    var index = 0;
+    let index = 0;
     while (size >= limit) {
         size = size / limit;
         index++;
