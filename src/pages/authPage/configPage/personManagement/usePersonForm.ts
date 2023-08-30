@@ -3,7 +3,7 @@ import { useDicts } from '@/store'
 import { useReactiveHttp } from '@/hooks'
 import type { FormInstance } from 'element-plus'
 import { getUserDeptTree, getUserDetail, getAddUserProfileInitPwd } from '@/API'
-import { deepCloe, arrayIsEmpty, isTrue } from '@/utils';
+import { deepClone, arrayIsEmpty, isTrue } from '@/utils';
 
 
 export function usePersonForm(props: any) {
@@ -34,7 +34,7 @@ export function usePersonForm(props: any) {
         remark: ''
     } as UserListData
 
-    const personForm = ref<UserListData>(deepCloe(baseForm))
+    const personForm = ref<UserListData>(deepClone(baseForm))
 
     const ruleForm = {
         userName: [{ required: true, message: 'Please input Activity name', trigger: 'blur' },],
@@ -74,7 +74,7 @@ export function usePersonForm(props: any) {
 
     watch(() => props.personId, () => {
         if (isTrue(props.personId)) return getResult()
-        personForm.value = deepCloe(baseForm)
+        personForm.value = deepClone(baseForm)
         personForm.value.password = initPassword.value
     })
 

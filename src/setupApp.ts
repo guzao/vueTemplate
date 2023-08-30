@@ -9,7 +9,7 @@ import '@/assets/styles/index.scss'
 /**
  * 启动应用
 */
-export function setupApp () {
+export async function setupApp () {
 
     useAsset()
 
@@ -24,8 +24,9 @@ export function setupApp () {
     usePinan(appInstance)
 
     useElementPlus(appInstance)
-    
-    useRouter(appInstance)
+
+    // 等待路由挂载完成
+    await useRouter(appInstance).isReady()
 
     appInstance.config.errorHandler = appErrorHandle
 

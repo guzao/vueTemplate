@@ -6,7 +6,9 @@ export function useTable () {
 
     const groupUnitContext = inject(GroupUnitContextKey)!
 
-    console.log(groupUnitContext);
+    const expandChange = (row: any) => {
+        console.log(row);
+    }
 
     const editGroup = () => {
         console.log('editGroup');
@@ -27,7 +29,7 @@ export function useTable () {
         groupUnitContext.unitDrawerOpen()
     }
 
-    const deltUint = () => {}
+const deltUint = () => {}
 
     return {
         editGroup,
@@ -35,7 +37,8 @@ export function useTable () {
         deletGroup,
         editUint,
         addUint,
-        deltUint
+        deltUint,
+        expandChange
     }
 
 }

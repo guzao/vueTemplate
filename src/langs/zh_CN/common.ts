@@ -82,6 +82,8 @@ export const common = {
 
     edit: '编辑',
 
-    list: '列表'
+    list: '列表',
+
+    deviceDetailTitle: '设备详情页'
 
 }

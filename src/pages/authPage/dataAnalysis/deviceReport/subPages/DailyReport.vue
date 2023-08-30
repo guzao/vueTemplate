@@ -21,7 +21,7 @@ const { result, getResult, loading } = useReactiveHttp({
     request: () => getDailyReport({ date: paserTime(form.date, 'YYYY-MM-DD'), stationSerial: appData.currentParkSerial }),
     requestCallback: ({ data }) => {
         nextTick(() => rendererBard(renderChart, data.data))
-        return processDailyData(data)
+        return data
     }
 })
 
@@ -47,6 +47,7 @@ watch(() => form.date, getResult)
 
         <div ref="chartRef" class="h-[280px] mb-[32px]"></div>
 
+        
         <el-table 
             :data="result.data" stripe border 
             :span-method="(data: any) => objectSpanMethod(getArrayLength(result.data), data)"

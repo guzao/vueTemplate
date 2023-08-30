@@ -1,5 +1,5 @@
-import { isTrue, getArrayLength, arrayGroupByMap, getFirstElement } from '@/utils'
 import { EChartsOption, EChartsType } from 'echarts'
+import { isTrue, getArrayLength, arrayGroupByMap, getFirstElement } from '@/utils'
 
 
 /** 处理电站设备当日数据 */

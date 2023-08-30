@@ -29,7 +29,6 @@ export function useServer(model: string): ServerOptions {
         changeOrigin: true,
         rewrite: (path: string) => {
           path = VITE_APP_BASE_URL == '/dev-api' ? path.replace(VITE_APP_BASE_URL, '') : path
-          console.log(path);
           return path
         },
       },

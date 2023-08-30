@@ -1,10 +1,10 @@
-import { State } from '@/enum'
+import { loaclRouter } from '../index'
 import { routerWhiteLsit } from '@/config'
 import { useUser, useAppData } from '@/store'
+import { arrayIsEmpty, useToken } from '@/utils'
 import nProgress from '@/plugins/steupNprogress'
-import { arrayIsEmpty, arrayIsNotEmpty, useToken } from '@/utils'
+import { businessProcess, generateRouterAndAddRouters } from './helper'
 import type { Router, NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
-import { ElNotification } from 'element-plus'
 
 const { getToken } = useToken()
 
@@ -16,7 +16,7 @@ export function useGuard(router: Router) {
 
   router.beforeEach(beforeEach)
 
-  router.afterEach((to, form, next) =>  nProgress.done())
+  router.afterEach((to, form, next) => nProgress.done())
 
 }
 
@@ -28,48 +28,21 @@ const beforeEach = async (to: RouteLocationNormalized, form: RouteLocationNormal
   // 1看 token
   if (getToken()) {
 
-    const { getRoles, getUserInfo, getRouter, userInfo } = useUser()
-    const { getParkAuthList, getParkAuthLastTime, getParkSerial, currentRelease, getStationRuningState } = useAppData()
-
-    // 登录过的在去登录页无意义
-    if (to.path === '/login' && arrayIsNotEmpty(getRoles)) return next('/')
+    const { getRoles } = useUser()
+    
+    const { getParkSerial } = useAppData()
 
     // 运行时不存在用户的角色数据 获取用户信息
     if (arrayIsEmpty(getRoles)) {
 
-      try {
-        await getUserInfo()
-        getStationRuningState()
-        const routers = await getRouter()
-        await getParkAuthList()
-        await getParkAuthLastTime()
-        // 地址栏记录当前选中的电站编号
-        return next({ ...to, replace: true, query: { ...to.query, stationCode: getParkSerial() } })
+      await getInitBaseInfo().catch(err => console.log('===='))
 
-      } catch (error) {
-        console.log('====== error =======')
-      }
-
-      return next()
+      // 地址栏记录当前选中的电站编号
+      return next({ ...to, replace: true, query: { ...to.query, stationCode: getParkSerial() } })
 
     }
 
-
-    if (to.path !== '/config/personCenter/editPassword') {
-      if (userInfo.user.firstLoginFlag == State.FIRST_LOGIN) {
-        ElNotification({ title: '提示', message: '首次登录请修改密码', type: 'warning' })
-        return next(to.fullPath)
-      }
-    }
-
-    if (to.path !== '/index') {
-      if (currentRelease == State.DE_BUGGER && to.path.includes('/dataAnalysis')) {
-        ElNotification({ title: '提示', message: '电站不是发布状态,数据分析无法使用', type: 'warning' })
-        return next('/index')
-      }
-    }
-
-    return next()
+    return businessProcess(to, form, next)
 
   }
 
@@ -82,3 +55,20 @@ const beforeEach = async (to: RouteLocationNormalized, form: RouteLocationNormal
   next(`/login?redirect=${to.fullPath}`) // 否则全部重定向到登录页
 }
 
+
+
+/** 获取用户信息、菜单、电站列表、电站发布状态、电站运行状态、最新数据时间、添加动态路由 */
+const getInitBaseInfo = async () => {
+
+  const { getUserInfo, getRouter } = useUser()
+  const { getParkAuthList, getParkAuthLastTime, getStationRuningState } = useAppData()
+
+  await getUserInfo()
+  await getRouter()
+  generateRouterAndAddRouters(loaclRouter)
+
+  await getParkAuthList()
+  getStationRuningState()
+  getParkAuthLastTime()
+
+}

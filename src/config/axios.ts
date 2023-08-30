@@ -1,5 +1,5 @@
-import { CreateAxiosDefaults } from "axios"
 import { login } from '@/ApiMap'
+import { CreateAxiosDefaults } from "axios"
 
 const config = import.meta.env
 export const axiosConfig: CreateAxiosDefaults = {

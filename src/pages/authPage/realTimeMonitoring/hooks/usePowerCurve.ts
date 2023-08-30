@@ -3,7 +3,7 @@ import { nextTick, ref, watch, inject, computed } from 'vue'
 import { geStationPowerAll, geStationPowerByUnit } from '@/API'
 import { deviceDetailContextKey } from '../deviceDetail/useDevice'
 import { useEcharts, useInterval, useReactiveHttp } from '@/hooks'
-import { allDayNumber, fillTodayDate, isTrue, paserTime, writeDefaultDate } from '@/utils'
+import { allDayNumber, fillTodayDate, isFalse, isTrue, paserTime, writeDefaultDate } from '@/utils'
 
 
 type usePowerCurveConfig = {
@@ -23,8 +23,6 @@ export function usePowerCurve(config: usePowerCurveConfig) {
     const nextDisabled = computed(() => paserTime(Date.now(), 'YYYY-MM-DD') == paserTime(currentTime.value, 'YYYY-MM-DD'))
 
     const deviceDetailContext = inject(deviceDetailContextKey, {} as any)
-    
-
 
     const { renderChart, chartRef, echarts } = useEcharts(config.height)
 
@@ -171,11 +169,14 @@ export function usePowerCurve(config: usePowerCurveConfig) {
 
     const { _resetInterval } = useInterval(1000 * 60 * 5, getResult)
 
-    watch(() => config.device == 'park' ? appData.currentParkSerial : deviceDetailContext?.unitId, () => {
+    watch(() => config.device == 'park' ? appData.currentParkSerial : deviceDetailContext?.unitId, (value) => {
+        if (isFalse(value) &&  isTrue(config.device == 'park')) return
         currentTime.value = writeDefaultDate(appData.currentLastTime)
         _resetInterval()
         getResult()
     })
+
+
 
     return {
         currentTime,
@@ -183,7 +184,9 @@ export function usePowerCurve(config: usePowerCurveConfig) {
         nextDisabled,
         nextTime,
         chartRef,
-        loading
+        loading,
+        appData,
+        getResult
     }
 
 }

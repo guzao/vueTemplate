@@ -6,7 +6,24 @@ type DateType = 'D' | 'W' | 'M' | 'Y'
 type CommandType = 'personCenter' | 'logout' | 'systemConfig'
 
 /** 组件类型 */
-type LayoutType = 'MainLayou' | 'SubLayout' | 'Components'
+type LayoutType = 'MainLayout' | 'SubLayout' | 'Components' | 'OutLink' | 'NewTabLayOut' | 'ViewModel'
+
+
+type LoaclRouter = {
+    path: string;
+    redirect?: string;
+    component?: string;
+    hidden: boolean;
+    meta: {
+        hidden?: boolean;
+        title: string;
+        icon?: string;
+    };
+    layoutType: LayoutType;
+    children?: LoaclRouter[]
+}
+
+
 
 /** 应用报错信息 */
 type AppErrorPool = {

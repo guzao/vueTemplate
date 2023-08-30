@@ -3,8 +3,7 @@ import { useLang } from "../userUtils"
 import { getLastElement, } from "../dataUtils"
 
 const { getLang } = useLang()
-const getLangKey = () => getLang() as 'zh_CN' | 'en_US'
-
+export const getLangKey = () => getLang() as 'zh_CN' | 'en_US'
 
 
 

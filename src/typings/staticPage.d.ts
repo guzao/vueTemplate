@@ -46,7 +46,7 @@ type UserRouter = {
     /** 子集 */
     children: UserRouter[];
     /** 组件路径 | 组件类型 */
-    component: string;
+    component: LayoutType;
     /** 菜单上是否不显示此路由s */
     hidden: boolean;
     meta: UserRouterMata;

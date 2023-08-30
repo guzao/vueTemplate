@@ -1,6 +1,5 @@
 import { ref } from 'vue'
 
-
 export function useBoolean (initState: boolean) {
 
     const state = ref(initState)

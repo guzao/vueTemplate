@@ -62,9 +62,9 @@ export const common = {
 
     dataChart: 'Data Chart',
 
-    placeholder: 'Placeholder',
+    placeholder: 'please input',
 
-    placeSelect: 'placeSelect',
+    placeSelect: 'please Select',
 
     realTime: 'Real-time charge-discharge power curve',
 
@@ -82,6 +82,8 @@ export const common = {
 
     edit: 'Edit',
 
-    list: 'List'
+    list: 'List',
+
+    deviceDetailTitle: 'Device Detail'
 
 }

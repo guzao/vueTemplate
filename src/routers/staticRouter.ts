@@ -14,13 +14,10 @@ export const staticRouter: RouteRecordRaw[] = [
         component: () => import('@/pages/staticPage/register/index.vue'),
     },
 
-    
     {
         path: '/apperrorlog',
         component: () => import('@/pages/staticPage/errorPages/apperrorlog.vue'),
     },
-
-
 
     {
         path: '/401',
@@ -31,14 +28,6 @@ export const staticRouter: RouteRecordRaw[] = [
         },
     },
 
-    {
-        path: '/:path(.*)*',
-        component: () => import('@/pages/staticPage/errorPages/401.vue'),
-        name: '404',
-        meta: {
-            title: '页面丢了',
-        },
-    },
 
     {
         path: '/',

@@ -1,5 +1,5 @@
 import { isArray } from "./dataTypeTools"
-import { deepCloe } from "./objectTools"
+import { deepClone } from "./objectTools"
 
 export const getArrayLength = <T>(data: T[]) => data.length
 
@@ -43,7 +43,7 @@ export function arrayGroupBy<T>(raw: T[], key: keyof T) {
  * 数组分块
 */
 export function arrayChunk<T>(data: T[] = [], groupNmber: number) {
-    const cloneData = deepCloe(data)
+    const cloneData = deepClone(data)
     if (!isArray(cloneData)) throw new Error()
     const result: T[][] = []
     let initData = cloneData.splice(0, groupNmber)

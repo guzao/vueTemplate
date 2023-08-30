@@ -7,4 +7,5 @@ import { router, useGuard } from '@/routers'
 export function useRouter (app: App<Element>) {
     app.use(router)
     useGuard(router)
+    return router
 }
