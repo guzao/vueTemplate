@@ -4,7 +4,7 @@ import { getDailyReport } from '@/API'
 import { reactive, watch, nextTick } from 'vue'
 import { useReactiveHttp, useEcharts } from '@/hooks'
 import { processDailyData, objectSpanMethod, rendererBard } from './tools'
-import { paserTime, conversionUnitKWh, getEfficiency, getArrayLength } from '@/utils';
+import { paserTime, conversionUnitKWh, getEfficiency, getArrayLength, arrayGroupByMap, getFirstElement } from '@/utils';
 
 
 import TitleBox from '@/components/common/TitleBox.vue'
@@ -21,9 +21,14 @@ const { result, getResult, loading } = useReactiveHttp({
     request: () => getDailyReport({ date: paserTime(form.date, 'YYYY-MM-DD'), stationSerial: appData.currentParkSerial }),
     requestCallback: ({ data }) => {
         nextTick(() => rendererBard(renderChart, data.data))
+        arrayGroupByMap(data.data, 'subName').forEach((value, key) => {
+            const firstElement = getFirstElement(value) as any
+            firstElement.limit = value.length
+        })
         return data
     }
 })
+
 
 watch(() => appData.currentParkSerial, getResult)
 
