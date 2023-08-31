@@ -7,7 +7,7 @@ import { messages } from '@/langs'
 const { getLang }  = useLang()
 
 /** 获取当前的语言数据对象 */
-export const getLocalLanMessage = () => messages[getLangKey()]
+export const getLocalLangMessage = () => messages[getLangKey()]
 
 function gteLangInfo () {
     const lang = getLang() || 'zh_CN'

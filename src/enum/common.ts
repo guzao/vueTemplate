@@ -1,5 +1,6 @@
 
 export const enum Common {
+    
 
     YYYY = 'YYYY',
 
@@ -12,6 +13,9 @@ export const enum Common {
     YYYY_MM_DD_HH_MM = 'YYYY-MM-DD HH:mm',
 
     YYYY_MM_DD_HH_MM_SS = 'YYYY-MM-DD HH:mm:ss',
+
+    /** 所有权限 */
+    ALL_PERMISSION = "*:*:*",
 
     /** 根页面 */
     ROOT_PAGE = '/',

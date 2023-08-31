@@ -1,33 +1,20 @@
 <script setup lang="ts">
-import { useI18nStore, useAppData } from "@/store"
-import { useInterval, useDocumentTitle } from '@/hooks'
+import { useApp } from './useApp'
 import SystemConfig from './components/common/SystemConfig.vue'
 
-
-useDocumentTitle()
-const appData = useAppData()
-const I18nStore = useI18nStore()
-
-/** 定时获取电站最新数据 */
-useInterval(1000 * 60 * 5, () => {
-  appData.loopGetParkAuthLastTime()
-  appData.loopGetStationRuningState()
-})
+const { I18nStore } = useApp()
 
 </script>
 
 <template>
-  
+
+  <!-- 系统主视图 -->
   <el-config-provider :locale="I18nStore.local">
     <router-view></router-view>
   </el-config-provider>
 
+  <!-- 系统全局配置 -->
   <SystemConfig />
-  
+
 </template>
 
-<style scoped lang="scss">
-#app {
-  height: 100vh;
-}
-</style>

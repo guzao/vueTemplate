@@ -1,4 +1,5 @@
 import DayJs from 'dayjs'
+import {  } from 'vue'
 import { Common } from '@/enum'
 import { isDate } from '../dataUtils'
 import { isFalse } from '../dataUtils'
@@ -65,7 +66,7 @@ export function getDateCycles (type: string, baseDate: Date) {
 
 
 /**
- * 获取本周的第一天
+ * 根据传入的时间 获取本周的第一天
 */
 export function getWeekFirstDay (origin: Date | number) {
 
@@ -73,7 +74,11 @@ export function getWeekFirstDay (origin: Date | number) {
 
     const day = baseDate.getDay() - 1
 
-    baseDate = new Date(+baseDate - (day * allDayNumber))
+    if (day == -1) {
+        baseDate = new Date(+baseDate - (day * 6))
+    } else {
+        baseDate = new Date(+baseDate - (day * allDayNumber))
+    }
 
     const { Y, M, D, } = getYearMonthDayHms(baseDate)
 

@@ -25,29 +25,31 @@ const beforeEach = async (to: RouteLocationNormalized, form: RouteLocationNormal
 
   nProgress.start()
 
-  // 1看 token
+  // 1 是否有 token
   if (getToken()) {
 
     const { getRoles } = useUser()
     
-    const { getParkSerial } = useAppData()
 
     // 运行时不存在用户的角色数据 获取用户信息
     if (arrayIsEmpty(getRoles)) {
 
       await getInitBaseInfo().catch(err => console.log('===='))
 
+      const { getParkSerial } = useAppData()
+
       // 地址栏记录当前选中的电站编号
       return next({ ...to, replace: true, query: { ...to.query, stationCode: getParkSerial() } })
 
     }
 
+    // 业务路由处理 某些路由需要特殊处理
     return businessProcess(to, form, next)
 
   }
 
 
-  // 2看 是否是白名单路径
+  // 2 是否是白名单路径
   if (routerWhiteLsit.indexOf(to.path) > -1) return next()
 
 
@@ -63,11 +65,12 @@ const getInitBaseInfo = async () => {
   const { getUserInfo, getRouter } = useUser()
   const { getParkAuthList, getParkAuthLastTime, getStationRuningState } = useAppData()
 
-  await getUserInfo()
-  await getRouter()
+  await getUserInfo() // 等待用户信息数据
+  await getRouter()   // 等待用户路由数据
   generateRouterAndAddRouters(loaclRouter)
 
-  await getParkAuthList()
+  await getParkAuthList() // 等待用户电站列表
+  
   getStationRuningState()
   getParkAuthLastTime()
 

@@ -26,3 +26,9 @@ export const isDate = (data: any) => getToStrigResult(data) == DataType.Date
 
 /** 数值是否是字符串类型的null */
 export const isStringNull = (data: any) => data === 'null'
+
+/** 数值是否是字符串类型的 undefined */
+export const isStringUndefind = (data: any) => data === 'undefined'
+
+/** 数值是否是字符串类型的 ' */
+export const isEmptyString = (data: any) => data === ''

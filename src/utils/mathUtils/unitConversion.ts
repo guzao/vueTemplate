@@ -59,7 +59,6 @@ const conversionUnit = (raw: number, units: string[], fractionDigits = 2, limit 
     } catch (error) {
         size = '--' as any
     }
-
     return {
         size,
         unit: units[index]
@@ -105,3 +104,5 @@ export const getKWHZoomRatioAndUnit = (numbers: number[]) => getZoomRato(numbers
 export const getKWZoomRatioAndUnit = (numbers: number[]) => getZoomRato(numbers, KWUnits, 1000)
 
 export const getKVARZoomRatioAndUnit = (numbers: number[]) => getZoomRato(numbers, KVARUnits, 1000)
+
+export const getPriceZoomRationAndUnit =  (numbers: number[]) => getZoomRato(numbers, PriceUnits, 10000)

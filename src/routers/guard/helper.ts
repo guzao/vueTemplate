@@ -3,33 +3,43 @@ import { State, Common } from '@/enum'
 import { useUser, useAppData } from '@/store'
 import { ElNotification } from 'element-plus'
 import MainLayout from '@/layout/MainLayout/index.vue'
-import { getLocalLanMessage, isTrue, deepClone, arrayIsNotEmpty } from '@/utils'
+import { getLocalLangMessage, isTrue, deepClone, arrayIsNotEmpty } from '@/utils'
 import { NavigationGuardNext, RouteLocationNormalized, RouteRecordRaw } from 'vue-router'
 
-const { tipsInfo } = getLocalLanMessage()
+const { tipsInfo } = getLocalLangMessage()
 
+/** 获取页面组件的资源 */
 const routeAllPathToCompMap = import.meta.glob(`@/pages/**/*.vue`);
 
-let newTabLayOut: RouteRecordRaw[] = []
+/** 需要新开页面的路由 */
+let newTabLayOut: RouteRecordRaw [] = []
 
 /** 生成添加 动态路由 */
-export function generateRouterAndAddRouters (routers: LoaclRouter[]) {
+export function generateRouterAndAddRouters(routers: LoaclRouter[]) {
     newTabLayOut.length = 0
-    addRouter(routers)
+    addRouters(routers)
 }
 
 /** 动态添加路由 */
-function addRouter(routers: LoaclRouter[]) {
-    const newRoiters = deepClone(routers)
-    setDnamicRouterComponents(newRoiters)
-    newRoiters.forEach((_r) => router.addRoute(_r as any))
-    newTabLayOut.forEach(_r => router.addRoute(_r))
+function addRouters(routers: LoaclRouter[]) {
+
+    const newRouters = deepClone(routers)
+
+    setDnamicRouterComponents(newRouters)
+
+    addRouter(newTabLayOut)
+
+    addRouter(newRouters as RouteRecordRaw[])
+
     addErrorPages()
+
 }
+
+const addRouter = (routers: RouteRecordRaw[]) => routers.forEach((_r) => router.addRoute(_r))
 
 /** 动态添加404 页面 */
 function addErrorPages() {
-    router.addRoute(
+    addRouter([
         {
             path: '/:path(.*)*',
             // @ts-ignore
@@ -38,8 +48,8 @@ function addErrorPages() {
             meta: {
                 title: '页面丢了',
             },
-        },
-    )
+        }
+    ])
 }
 
 function setDnamicRouterComponents(routers: LoaclRouter[]) {
@@ -84,7 +94,7 @@ function setNewTabRouter(item: LoaclRouter, routers: LoaclRouter[], index: numbe
 /** 业务路由处理 */
 export function businessProcess(to: RouteLocationNormalized, form: RouteLocationNormalized, next: NavigationGuardNext) {
 
-    const { userInfo, getRoles} = useUser()
+    const { userInfo, getRoles } = useUser()
     const { currentRelease } = useAppData()
 
     // 登录过的在去登录页无意义

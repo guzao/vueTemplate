@@ -1,11 +1,14 @@
 import { staticRouter } from './staticRouter'
+import { authRouter } from './authRouter'
 import { createRouter, createWebHistory } from 'vue-router'
-
 
 export const router = createRouter({
     history: createWebHistory('/'),
+    // routes: [ ...staticRouter, ...authRouter ],
     routes: [ ...staticRouter ],
 }) 
+
+
 
 type LoaclRouter = {
     name?: string,
@@ -112,7 +115,6 @@ export const loaclRouter: LoaclRouter[] = [
             },
         ]
     },
-
 
     {
         path: '/parkReport',
