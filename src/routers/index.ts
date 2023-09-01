@@ -1,12 +1,13 @@
-import { staticRouter } from './staticRouter'
+import { isTrue } from '@/utils'
 import { authRouter } from './authRouter'
-import { createRouter, createWebHistory } from 'vue-router'
+import { staticRouter } from './staticRouter'
+import { useDnamicRouter, routerType } from '@/config'
+import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 
 export const router = createRouter({
-    history: createWebHistory('/'),
-    // routes: [ ...staticRouter, ...authRouter ],
-    routes: [ ...staticRouter ],
-}) 
+    history: isTrue(routerType == 'WebHistory') ? createWebHistory('/') : createWebHashHistory('/'),
+    routes: isTrue(useDnamicRouter) ? [...staticRouter] : [...staticRouter, ...authRouter],
+})
 
 
 

@@ -25,10 +25,10 @@ export const ownKeys = (target: object) => Reflect.ownKeys(target)
 export const objectSize = (target: object) => ownKeys(target).length
 
 /** 对象为空 */
-export const objectIsEmpty = (target = {}) => !ownKeys(target).length
+export const objectIsEmpty = (target = {}) => !objectSize(target)
 
 /** 对象不为空 */
-export const objectNotEmpty = (target = {}) => !!ownKeys(target).length
+export const objectNotEmpty = (target = {}) => !!objectSize(target)
 
 /** 对象转数组 */
 export function objectToArray<T extends object>(data: T) {

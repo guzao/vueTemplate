@@ -1,9 +1,9 @@
 import { loaclRouter } from '../index'
-import { routerWhiteLsit } from '@/config'
 import { useUser, useAppData } from '@/store'
-import { arrayIsEmpty, useToken } from '@/utils'
 import nProgress from '@/plugins/steupNprogress'
-import { businessProcess, generateRouterAndAddRouters } from './helper'
+import { arrayIsEmpty, isFalse, isTrue, useToken } from '@/utils'
+import { routerWhiteLsit, useDnamicRouter } from '@/config'
+import { businessProcess, generateRouterAndAddRouters, addErrorPages } from './helper'
 import type { Router, NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
 
 const { getToken } = useToken()
@@ -29,14 +29,16 @@ const beforeEach = async (to: RouteLocationNormalized, form: RouteLocationNormal
   if (getToken()) {
 
     const { getRoles } = useUser()
-    
+
 
     // 运行时不存在用户的角色数据 获取用户信息
     if (arrayIsEmpty(getRoles)) {
 
-      await getInitBaseInfo().catch(err => console.log('===='))
+      await getInitBaseInfo().catch(err => console.log('== err ==', err))
 
       const { getParkSerial } = useAppData()
+      
+      isFalse(useDnamicRouter) && addErrorPages()
 
       // 地址栏记录当前选中的电站编号
       return next({ ...to, replace: true, query: { ...to.query, stationCode: getParkSerial() } })
@@ -67,10 +69,12 @@ const getInitBaseInfo = async () => {
 
   await getUserInfo() // 等待用户信息数据
   await getRouter()   // 等待用户路由数据
-  generateRouterAndAddRouters(loaclRouter)
+
+  // 生成动态路由
+  isTrue(useDnamicRouter) && generateRouterAndAddRouters(loaclRouter)
 
   await getParkAuthList() // 等待用户电站列表
-  
+
   getStationRuningState()
   getParkAuthLastTime()
 

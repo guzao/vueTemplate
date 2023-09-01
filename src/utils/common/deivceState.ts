@@ -3,7 +3,7 @@ import { useLang } from "../userUtils"
 import { getLastElement, } from "../dataUtils"
 
 const { getLang } = useLang()
-export const getLangKey = () => getLang() as 'zh_CN' | 'en_US'
+export const getLangKey = () => (getLang() || 'zh_CN') as 'zh_CN' | 'en_US'
 
 
 const runingIcons = ['', 'icon_runing_chager', 'icon_runing_dischager', 'icon_runing_standy', 'icon_runing_alarm', 'icon_runing_weihu', 'icon_runing_offline']

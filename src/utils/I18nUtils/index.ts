@@ -1,7 +1,7 @@
 import { langs } from "@/store"
+import { messages } from '@/langs'
 import { useLang, } from "../userUtils"
 import { getLangKey } from "../common/deivceState"
-import { messages } from '@/langs'
 
 
 const { getLang }  = useLang()

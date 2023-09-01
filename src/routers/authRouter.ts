@@ -14,6 +14,10 @@ export const authRouter: RouteRecordRaw[] = [
         },
         children: [
             {
+                path: '/index',
+                component: () => import('@/pages/staticPage/index/index.vue'),
+            },
+            {
                 path: '/monitor/parkOverview',
                 component: () => import('@/pages/authPage/realTimeMonitoring/parkOverview/index.vue'),
             },

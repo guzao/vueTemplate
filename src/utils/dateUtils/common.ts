@@ -1,7 +1,7 @@
 import DayJs from 'dayjs'
 import {  } from 'vue'
 import { Common } from '@/enum'
-import { isDate } from '../dataUtils'
+import { isDate, isTrue } from '../dataUtils'
 import { isFalse } from '../dataUtils'
 
 export const allDayNumber = 24 * 60 * 60 * 1000
@@ -74,11 +74,7 @@ export function getWeekFirstDay (origin: Date | number) {
 
     const day = baseDate.getDay() - 1
 
-    if (day == -1) {
-        baseDate = new Date(+baseDate - (day * 6))
-    } else {
-        baseDate = new Date(+baseDate - (day * allDayNumber))
-    }
+    baseDate = isTrue(day == -1) ? new Date(+baseDate - (6 * allDayNumber)) : new Date(+baseDate - (day * allDayNumber))
 
     const { Y, M, D, } = getYearMonthDayHms(baseDate)
 
