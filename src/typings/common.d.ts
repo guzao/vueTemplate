@@ -1,4 +1,7 @@
 
+/** 路由模式 */
+type RouterType = 'WebHistory' | 'WebHashHistory'
+
 /** z周期 类型 */
 type DateType = 'D' | 'W' | 'M' | 'Y'
 
@@ -152,7 +155,7 @@ type ParkAuth = {
 /** 字典数据接口url字段 */
 type DictType = 'eos_park_type' | 'station_release_status' | 'sys_user_sex' | 'eos_status' | 'eos_park_use_type'
     | 'eos_park_run_status' | 'eos_park_use_type' | 'eos_industry_type' | 'eos_grid_status' | 'sys_normal_disable'
-    | 'sys_common_status' | 'sys_oper_type' | 'eos_level' | 'eos_device_type' 
+    | 'sys_common_status' | 'sys_oper_type' | 'eos_level' | 'eos_device_type'
 
 
 /** 字典数据类型 */
@@ -219,15 +222,15 @@ type UnitListData = {
 
 /** 单元组 */
 type GroupList = {
-	createBy?: any;
-	createTime: string;
-	updateBy?: any;
-	updateTime: string;
-	remark?: any;
-	id: number;
-	stationSerial: string;
-	name: string;
-	sort: number;
-	delFlag: number;
-	eosUnitList: UnitListData [];
+    createBy?: any;
+    createTime: string;
+    updateBy?: any;
+    updateTime: string;
+    remark?: any;
+    id: number;
+    stationSerial: string;
+    name: string;
+    sort: number;
+    delFlag: number;
+    eosUnitList: UnitListData[];
 }

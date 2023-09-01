@@ -1,11 +1,15 @@
+import { isTrue } from '@/utils'
+import { authRouter } from './authRouter'
 import { staticRouter } from './staticRouter'
-import { createRouter, createWebHistory } from 'vue-router'
-
+import { useDnamicRouter, routerType } from '@/config'
+import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 
 export const router = createRouter({
-    history: createWebHistory('/'),
-    routes: [ ...staticRouter ],
-}) 
+    history: isTrue(routerType == 'WebHistory') ? createWebHistory('/') : createWebHashHistory('/'),
+    routes: isTrue(useDnamicRouter) ? [...staticRouter] : [...staticRouter, ...authRouter],
+})
+
+
 
 type LoaclRouter = {
     name?: string,
@@ -112,7 +116,6 @@ export const loaclRouter: LoaclRouter[] = [
             },
         ]
     },
-
 
     {
         path: '/parkReport',

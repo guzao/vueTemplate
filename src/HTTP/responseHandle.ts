@@ -3,11 +3,11 @@ import { HTTPSTATE } from '@/enum'
 import { AxiosResponse, AxiosError } from 'axios'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { networkErrorHandle } from '@/systemRuntimeInfoTrack'
-import { isFalse, isTrue, getLocalLanMessage } from '@/utils'
+import { isFalse, isTrue, getLocalLangMessage } from '@/utils'
 
 let userLogout: () => Promise<void>
 
-const { tipsInfo, common } = getLocalLanMessage()
+const { tipsInfo, common } = getLocalLangMessage()
 
 // 是否显示重新登录
 export let isRelogin = { show: false };

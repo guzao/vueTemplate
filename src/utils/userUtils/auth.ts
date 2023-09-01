@@ -15,11 +15,11 @@ const removetToken = () => Cookies.remove(USER.TOKEN)
 export function useToken() {
 
     return {
-        /** 获取 */
+        /** 获取 token */
         getToken,
-        /** 修改 */
+        /** 修改 token */
         setToken,
-        /** 删除 */
+        /** 删除 token */
         removetToken
     }
 
@@ -39,11 +39,11 @@ const removeHasShowI18nSelect = () => Cookies.remove(USER.HAS_SHOW_I18NSCLECT)
 /** 用户语言切换按钮 */
 export function useI18nSelectState() {
     return {
-        /** 获取 */
+        /** 获取 语言选择按钮展示状态的 */
         getHasShowI18nSelect,
-        /** 修改 */
+        /** 修改 语言选择按钮展示状态的 */
         setHasShowI18nSelect,
-        /** 删除 */
+        /** 删除 语言选择按钮展示状态的 */
         removeHasShowI18nSelect
     }
 }
@@ -61,11 +61,11 @@ const removeLang = () => Cookies.remove(USER.LANG)
 /** 语言的 添加 获取 删除  存在localStorage中 */
 export function useLang() {
     return {
-        /** 获取 */
+        /** 获取 语言 */
         getLang,
-        /** 修改 */
+        /** 修改 语言 */
         setLang,
-        /** 删除 */
+        /** 删除 语言 */
         removeLang
     }
 }
@@ -82,11 +82,11 @@ const removeIsCollapse = () => Cookies.remove(USER.IS_COLLAPSE)
 /** 侧边栏的 添加 获取 删除 状态  Cookies */
 export function useIsCollapse() {
     return {
-        /** 获取 */
+        /** 获取 侧边栏的状态 */
         getIsCollapse,
-        /** 修改 */
+        /** 修改 侧边栏的状态 */
         setIsCollapse,
-        /** 删除 */
+        /** 删除 侧边栏的状态 */
         removeIsCollapse
     }
 }
@@ -104,11 +104,11 @@ const removeIslocalization = () => Cookies.remove(USER.IS_LOCALIZATION)
 /** 是否本地化部署 添加 获取 删除 状态  Cookies */
 export function useIslocalization() {
     return {
-        /** 获取 */
+        /** 获取  是否本地化部署 */
         getIslocalization,
-        /** 修改 */
+        /** 修改 是否本地化部署 */
         setIslocalization,
-        /** 删除 */
+        /** 删除 是否本地化部署 */
         removeIslocalization
     }
 }

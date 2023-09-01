@@ -1,8 +1,17 @@
 import { describe, test, expect } from 'vitest'
-import { unitConversion, edgeCaseToFixed, isNegative, conversionUnitKWh, conversionUnitKW, conversionUnitKVar, conversionUnitPrice, getKWHZoomRatioAndUnit } from '@/utils/mathUtils/unitConversion'
+import { 
+    unitConversion, edgeCaseToFixed, isNegative, conversionUnitKWh, conversionUnitKW, conversionUnitKVar, conversionUnitPrice, 
+    getKWHZoomRatioAndUnit, getKVARZoomRatioAndUnit, getKWZoomRatioAndUnit, getPriceZoomRationAndUnit, toFixed
+} from '@/utils/mathUtils/unitConversion'
 
 describe('unitConversion', () => {
 
+    test('toFixed', () => {
+        expect(toFixed(0)).toBe(0)
+        expect(toFixed(123.123)).toBe('123.1')
+        expect(toFixed(123.123, 2)).toBe('123.12')
+        expect(toFixed(123.123, 3)).toBe('123.123')
+    })
 
     test('unitConversion', () => {
         expect(unitConversion(1000, 1000)).toEqual({ index: 1, size: 1 })
@@ -13,6 +22,7 @@ describe('unitConversion', () => {
 
     test('edgeCaseToFixed', () => {
         expect(edgeCaseToFixed(null)).toBe(0)
+        expect(edgeCaseToFixed(0)).toBe(0)
         expect(edgeCaseToFixed(undefined)).toBe(0)
         expect(edgeCaseToFixed('--')).toBe(0)
         expect(edgeCaseToFixed('')).toBe(0)
@@ -73,6 +83,9 @@ describe('unitConversion', () => {
 
     test('conversionUnitPrice', () => {
 
+        expect(conversionUnitPrice('--' as any)).toEqual({ size: '--', unit: '元' })
+        expect(conversionUnitPrice('' as any)).toEqual({ size: '--', unit: '元' })
+
         expect(conversionUnitPrice(-1)).toEqual({ size: '-1.00', unit: '元' })
         expect(conversionUnitPrice(-1000)).toEqual({ size: '-1000.00', unit: '元' })
         expect(conversionUnitPrice(-10000)).toEqual({ size: '-1.00', unit: '万' })
@@ -99,6 +112,32 @@ describe('unitConversion', () => {
         expect(getKWHZoomRatioAndUnit([100, 10, 20, 1000])).toEqual({ unit: 'MWh', zoomLimit: 1000 })
 
     })
+
+    test('getKVARZoomRatioAndUnit', () => {
+
+        expect(getKVARZoomRatioAndUnit([100, 10, 20, 100])).toEqual({ unit: 'kVar', zoomLimit: 1 })
+        expect(getKVARZoomRatioAndUnit([100, 10, 20, 10000])).toEqual({ unit: 'MVar', zoomLimit: 1000 })
+        expect(getKVARZoomRatioAndUnit([100, 10, 20, 1000])).toEqual({ unit: 'MVar', zoomLimit: 1000 })
+
+    })
+
+    test('getKWZoomRatioAndUnit', () => {
+
+        expect(getKWZoomRatioAndUnit([100, 10, 20, 100])).toEqual({ unit: 'kW', zoomLimit: 1 })
+        expect(getKWZoomRatioAndUnit([100, 10, 20, 10000])).toEqual({ unit: 'MW', zoomLimit: 1000 })
+        expect(getKWZoomRatioAndUnit([100, 10, 20, 1000])).toEqual({ unit: 'MW', zoomLimit: 1000 })
+
+    })
+
+    test('getPriceZoomRationAndUnit', () => {
+
+        expect(getPriceZoomRationAndUnit([100, 10, 20, 100])).toEqual({ unit: '元', zoomLimit: 1 })
+        expect(getPriceZoomRationAndUnit([100, 10, 20, 1000])).toEqual({ unit: '元', zoomLimit: 1 })
+        expect(getPriceZoomRationAndUnit([100, 10, 20, 10000])).toEqual({ unit: '万', zoomLimit: 10000 })
+        expect(getPriceZoomRationAndUnit([100, 10, 20, 100000000])).toEqual({ unit: '亿', zoomLimit: 100000000 })
+
+    })
+    
     
 
 })

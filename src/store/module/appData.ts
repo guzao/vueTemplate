@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { getUserParkListAll, getUserParkLastTime, getStationList } from '@/API'
-import { getFirstElement, hasEror, isFalse, useIsCollapse, urlQueryToObject, replaceUrlQuery, sleep, arrayIsEmpty } from '@/utils'
+import { getFirstElement, hasEror, isFalse, useIsCollapse, urlQueryToObject, replaceUrlQuery, sleep, arrayIsEmpty, isStringNull, isStringUndefind, isEmptyString } from '@/utils'
 
 
 const { getIsCollapse, setIsCollapse } = useIsCollapse()
@@ -87,8 +87,14 @@ export const useAppData = defineStore('useAppData', {
                 this.parkAuthList = rows
                 this.parkReleaseStatus = createParkReleaseStatusMap(rows)
                 this.parkTypes = createParkTypesMap(rows)
+
+                const { stationCode = '' } = urlQueryToObject()
+
                 // 默认取地址栏的场站编码 
-                this.parkSerial = urlQueryToObject().stationCode || getFirstElement(this.parkAuthList)?.serial
+                const defaultParkSerial = parkSerialEdgeProcess(stationCode) ? getFirstElement(this.parkAuthList)?.serial : stationCode
+
+                this.parkSerial = defaultParkSerial
+                
             })
         },
 
@@ -159,4 +165,12 @@ function createParkRuningStateMap(rows: ParkMonitorInfo[]) {
         if (isFalse(acc[code])) acc[code] = A_M2
         return acc
     }, {} as Record<string, number>)
+}
+
+/** 处理地址栏数据为异常值得情况 */
+function parkSerialEdgeProcess (raw: any) {
+    if ( isStringNull(raw) ) return true
+    if ( isStringUndefind(raw) ) return true
+    if ( isEmptyString(raw) ) return true
+    return false
 }

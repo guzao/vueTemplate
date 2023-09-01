@@ -3,33 +3,46 @@ import { State, Common } from '@/enum'
 import { useUser, useAppData } from '@/store'
 import { ElNotification } from 'element-plus'
 import MainLayout from '@/layout/MainLayout/index.vue'
-import { getLocalLanMessage, isTrue, deepClone, arrayIsNotEmpty } from '@/utils'
+import { getLocalLangMessage, isTrue, deepClone, arrayIsNotEmpty } from '@/utils'
 import { NavigationGuardNext, RouteLocationNormalized, RouteRecordRaw } from 'vue-router'
 
-const { tipsInfo } = getLocalLanMessage()
+const { tipsInfo } = getLocalLangMessage()
 
+/** 获取页面组件的资源 */
 const routeAllPathToCompMap = import.meta.glob(`@/pages/**/*.vue`);
 
-let newTabLayOut: RouteRecordRaw[] = []
+/** 需要新开页面的路由 */
+let newTabLayOut: RouteRecordRaw [] = []
 
 /** 生成添加 动态路由 */
-export function generateRouterAndAddRouters (routers: LoaclRouter[]) {
+export function generateRouterAndAddRouters(routers: LoaclRouter[]) {
     newTabLayOut.length = 0
-    addRouter(routers)
+    addRouters(routers)
 }
 
 /** 动态添加路由 */
-function addRouter(routers: LoaclRouter[]) {
-    const newRoiters = deepClone(routers)
-    setDnamicRouterComponents(newRoiters)
-    newRoiters.forEach((_r) => router.addRoute(_r as any))
-    newTabLayOut.forEach(_r => router.addRoute(_r))
+function addRouters(routers: LoaclRouter[]) {
+
+    const newRouters = deepClone(routers)
+
+    setDnamicRouterComponents(newRouters)
+
+    addRouter(newTabLayOut)
+
+    addRouter(newRouters as RouteRecordRaw[])
+
+    /**
+     * 因为初始化路由时 部分路由还没有加入到router中, 由于404 页面的匹配权限最大 会被首先展示出来，所以需要最后在动态路由添加完成过后 在将 404 加入路由中
+    */
     addErrorPages()
+
 }
 
+const addRouter = (routers: RouteRecordRaw[]) => routers.forEach((_r) => router.addRoute(_r))
+
 /** 动态添加404 页面 */
-function addErrorPages() {
-    router.addRoute(
+export function addErrorPages() {
+    addRouter([
         {
             path: '/:path(.*)*',
             // @ts-ignore
@@ -38,8 +51,8 @@ function addErrorPages() {
             meta: {
                 title: '页面丢了',
             },
-        },
-    )
+        }
+    ])
 }
 
 function setDnamicRouterComponents(routers: LoaclRouter[]) {
@@ -84,8 +97,9 @@ function setNewTabRouter(item: LoaclRouter, routers: LoaclRouter[], index: numbe
 /** 业务路由处理 */
 export function businessProcess(to: RouteLocationNormalized, form: RouteLocationNormalized, next: NavigationGuardNext) {
 
-    const { userInfo, getRoles} = useUser()
     const { currentRelease } = useAppData()
+
+    const { userInfo, getRoles } = useUser()
 
     // 登录过的在去登录页无意义
     if (to.path === Common.LOGIN_PAGE && arrayIsNotEmpty(getRoles)) return next(Common.ROOT_PAGE)
@@ -95,7 +109,7 @@ export function businessProcess(to: RouteLocationNormalized, form: RouteLocation
     if (to.path !== Common.EDIT_PASSWORD_PAGE) {
         if (userInfo.user.firstLoginFlag == State.FIRST_LOGIN) {
             ElNotification({ title: tipsInfo.tips, message: tipsInfo.firstLogin, type: 'warning' })
-            return next(to.fullPath)
+            return  next(to.fullPath)
         }
     }
 

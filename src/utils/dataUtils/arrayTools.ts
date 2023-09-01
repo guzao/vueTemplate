@@ -13,13 +13,15 @@ export const getLastElement = <T>(data: T[]) => data[ getArrayLength(data) - 1 ]
 
 export function arrayGroupByMap<T>(raw: T[], key: keyof T) {
     if (!isArray(raw)) throw new Error()
-    const groupMap: Map<any, T[]> = new Map()
-    raw.forEach(item => {
-        const groupKey = item[key]
-        groupMap.has(groupKey) ? groupMap.get(groupKey)?.push(item) : groupMap.set(groupKey, [item])
-    })
-    return groupMap
+    return raw.reduce((acc, cur) => {
+        const groupKey = cur[key]
+        acc.has(groupKey) ? acc.get(groupKey)?.push(cur) : acc.set(groupKey, [cur])
+        return acc
+    }, new Map() as  Map<any, T[]>)
 }
+
+
+
 
 export function arrayGroupBy<T>(raw: T[], key: keyof T) {
     if (!isArray(raw)) throw new Error()

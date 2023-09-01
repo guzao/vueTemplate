@@ -1,5 +1,4 @@
 import { RouteRecordRaw } from "vue-router";
-
 import MainLayout from '@/layout/MainLayout/index.vue'
 
 export const staticRouter: RouteRecordRaw[] = [
@@ -28,16 +27,11 @@ export const staticRouter: RouteRecordRaw[] = [
         },
     },
 
-
     {
         path: '/',
         component: MainLayout,
         redirect: '/index',
         children: [
-            {
-                path: '/index',
-                component: () => import('@/pages/staticPage/index/index.vue'),
-            },
             {
                 meta: {
                     title: '编辑个人信息'
@@ -61,4 +55,5 @@ export const staticRouter: RouteRecordRaw[] = [
             },
         ]
     },
+
 ]

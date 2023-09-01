@@ -2,9 +2,7 @@
 import { useDicts } from '@/store'
 import { getOperlogList } from '@/API'
 import { useReactiveHttp, usePagination } from '@/hooks'
-
-
-import SubTitle from '@/components/common/SubTitle.vue';
+import SubTitle from '@/components/common/SubTitle.vue'
 
 const dicts = useDicts()
 

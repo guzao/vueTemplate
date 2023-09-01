@@ -1,8 +1,13 @@
 import { describe, test, expect } from 'vitest'
-import { objectForEach, deepClone, has, ownKeys, objectIsEmpty, objectNotEmpty, objectToArray, objectSize } from '@/utils/dataUtils/objectTools'
+import { objectForEach, deepClone, has, ownKeys, objectIsEmpty, objectNotEmpty, objectToArray, objectSize, shallowClone } from '@/utils/dataUtils/objectTools'
 
 describe('objectTools', () => {
 
+
+    test('shallowClone', () => {
+        let acc = { a: 1, b: 2, c: 3 }
+        expect(shallowClone(acc, [ 'c' ])).toEqual({  a: 1, b: 2 })
+    })
 
     test('objectForEach', () => {
 
