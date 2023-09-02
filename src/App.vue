@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useApp } from './useApp'
-import SystemConfig from './components/common/SystemConfig.vue'
+import SystemConfig from '@/components/common/SystemConfig.vue'
 
 const { I18nStore } = useApp()
 

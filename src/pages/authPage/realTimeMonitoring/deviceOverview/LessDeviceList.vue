@@ -6,8 +6,8 @@ import { useDeviceDetail } from '../hooks/useDeviceDetail'
 
 import Icon from '@/components/common/Icon.vue';
 import StationBaseInfoCard from '@/components/common/StationBaseInfoCard.vue';
-import CNXDevice from './components/CNXDevice.vue';
-import CNGDevice from './components/CNGDevice.vue';
+import CNXDevice from '../components/CNXDevice.vue';
+import CNGDevice from '../components/CNGDevice.vue';
 
 const { checkDeviceDetail } = useDeviceDetail()
 

@@ -7,7 +7,7 @@ import { getLangKey } from "../common/deivceState"
 const { getLang }  = useLang()
 
 /** 获取当前的语言数据对象 */
-export const getLocalLangMessage = () => messages[getLangKey()]
+export const getLocalLangMessage = () => messages[getLangKey() || 'zh_CN']
 
 function gteLangInfo () {
     const lang = getLang() || 'zh_CN'

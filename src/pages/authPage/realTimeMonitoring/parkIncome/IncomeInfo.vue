@@ -17,7 +17,7 @@ const appData = useAppData()
     <div class="flex justify-between px-[60px] runing_info">
 
 
-        <div class="w-[390px] mt-[4%]">
+        <div class="w-[430px] mt-[4%]">
 
             <TitleBox>
                 {{ t('parkIncome.income') }}
@@ -119,7 +119,7 @@ const appData = useAppData()
 
         </div>
 
-        <div class="w-[380px] mt-[4%]">
+        <div class="w-[430px] mt-[4%]">
 
             <TitleBox> {{ t('parkIncome.totalIncome') }} </TitleBox>
 
@@ -127,7 +127,7 @@ const appData = useAppData()
 
             <div class="flex justify-end">
 
-                <ul class="grid grid-cols-2 gap-[20px] w-[350px]">
+                <ul class="grid grid-cols-2 gap-[20px] w-[390px]">
 
                     <li>
                         <div class="text-[14px] text-[var(--theme-gray107)]"> {{ t('parkIncome.weekIncome') }}</div>
