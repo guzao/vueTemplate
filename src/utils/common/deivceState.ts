@@ -1,6 +1,7 @@
-import { messages,  } from '@/langs'
+import { messages } from '@/langs'
 import { useLang } from "../userUtils"
 import { getLastElement, } from "../dataUtils"
+
 
 const { getLang } = useLang()
 export const getLangKey = () => (getLang() || 'zh_CN') as 'zh_CN' | 'en_US'
@@ -41,7 +42,7 @@ export const getParkRuningBgc = (state: number) => parkRuningBgcColor[state] || 
 export function getCellZoom(value: any) {
     if (isNaN(+value)) return 0
     if (!value) return 0
-    if (value == 0) return 0
+    if (value <= 0) return 0
     if (+value < 10) return 1
     if (+value > 100) return 10
     return ~~(+value / 10)
