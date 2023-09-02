@@ -1,3 +1,4 @@
+import { IntervalTime } from '@/enum'
 import { useAppData } from '@/store'
 import { nextTick, ref, watch, inject, computed } from 'vue'
 import { geStationPowerAll, geStationPowerByUnit } from '@/API'
@@ -167,7 +168,7 @@ export function usePowerCurve(config: usePowerCurveConfig) {
         getResult()
     }
 
-    const { _resetInterval } = useInterval(1000 * 60 * 5, getResult)
+    const { _resetInterval } = useInterval(IntervalTime.FIVE_MILLI_SECOND, getResult)
 
     watch(() => config.device == 'park' ? appData.currentParkSerial : deviceDetailContext?.unitId, (value) => {
         if (isFalse(value) &&  isTrue(config.device == 'park')) return

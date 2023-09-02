@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { t } from '@/langs'
+import { IntervalTime } from '@/enum'
 import { useInterval } from '@/hooks'
 import { getArrayLength } from '@/utils'
 import { useStationList, initData } from './useStationList'
@@ -11,7 +12,7 @@ const { loading, stationList, getResult } = useStationList()
 
 initData()
 
-useInterval(1000 * 60 * 5, getResult)
+useInterval(IntervalTime.FIVE_MILLI_SECOND, getResult)
 
 </script>
 

@@ -1,3 +1,6 @@
+/**
+ * 工单状态
+*/
 export const enum WorkOrdeState {
 
     CREATED = 0,

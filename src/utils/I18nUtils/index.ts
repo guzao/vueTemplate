@@ -1,3 +1,4 @@
+import { Common } from '@/enum'
 import { langs } from "@/store"
 import { messages } from '@/langs'
 import { useLang, } from "../userUtils"
@@ -7,10 +8,10 @@ import { getLangKey } from "../common/deivceState"
 const { getLang }  = useLang()
 
 /** 获取当前的语言数据对象 */
-export const getLocalLangMessage = () => messages[getLangKey() || 'zh_CN']
+export const getLocalLangMessage = () => messages[getLangKey() || Common.DEFAULT_LANG_KEY]
 
 function gteLangInfo () {
-    const lang = getLang() || 'zh_CN'
+    const lang = getLang() || Common.DEFAULT_LANG_KEY
     return langs.find(item => item.code == lang)!
 }
 
