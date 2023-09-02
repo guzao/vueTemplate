@@ -3,7 +3,11 @@
 */
 export const enum IntervalTime {
 
-    
+    /** 一秒 */
+    ONE_SECOND = 1000,
+
+    /** 30秒 */
+    THIRTY_SECOND = 1000 * 30,
 
     /** 一分钟 */
     ONE_MINIUTE = 1000 * 60,

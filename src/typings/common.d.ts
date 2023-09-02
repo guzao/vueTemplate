@@ -5,10 +5,18 @@ type RouterType = 'WebHistory' | 'WebHashHistory'
 /** z周期 类型 */
 type DateType = 'D' | 'W' | 'M' | 'Y'
 
-/** 用户下来框 选项卡 类型 */
+/** 用户下拉框选项卡类型 */
 type CommandType = 'personCenter' | 'logout' | 'systemConfig'
 
-/** 组件类型 */
+/** 
+ * 组件类型
+ * * MainLayout 主容器
+ * * SubLayout  --
+ * * Components 路由组件路径
+ * * OutLink 外部链接
+ * * NewTabLayOut 需要新开tab的路由
+ * * ViewModel 视图模式组件
+*/
 type LayoutType = 'MainLayout' | 'SubLayout' | 'Components' | 'OutLink' | 'NewTabLayOut' | 'ViewModel'
 
 
@@ -17,6 +25,7 @@ type LoaclRouter = {
     redirect?: string;
     component?: string;
     hidden: boolean;
+    name?: string;
     meta: {
         hidden?: boolean;
         title: string;

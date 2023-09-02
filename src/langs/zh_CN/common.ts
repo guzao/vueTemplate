@@ -42,9 +42,9 @@ export const common = {
 
     yaerDischarge: '年放',
 
-    totalCharge: '年充',
+    totalCharge: '累充',
 
-    totalDischarge: '年放',
+    totalDischarge: '累放',
 
     activePower: '有功功率',
 

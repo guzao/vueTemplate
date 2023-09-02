@@ -10,23 +10,6 @@ export const router = createRouter({
 })
 
 
-
-type LoaclRouter = {
-    name?: string,
-    deviceDetail?: string,
-    path: string;
-    redirect?: string;
-    component?: string;
-    hidden: boolean;
-    meta: {
-        hidden?: boolean;
-        title: string;
-        icon?: string;
-    };
-    layoutType: LayoutType;
-    children?: LoaclRouter[]
-}
-
 export const loaclRouter: LoaclRouter[] = [
 
     {

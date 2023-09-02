@@ -10,7 +10,7 @@ export function getEfficiency ( charge: number, diacharge: number, fractionDigit
     if (charge == 0) charge = 1
     const efficiency = diacharge / charge
     if (isNaN(+efficiency)) return 0
-    return +toFixed(efficiency * 100, 3) 
+    return +toFixed(efficiency * 100, fractionDigits) 
 }
 
 /** 

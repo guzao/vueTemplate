@@ -3,7 +3,7 @@ import { t } from '@/langs'
 import { PropType } from 'vue'
 import { useAppData, useDicts } from '@/store'
 import Icon from '@/components/common/Icon.vue'
-import { conversionUnitKWh, toFixed, conversionUnitKW, conversionUnitKVar, paserTime, getRuningStateInfo } from '@/utils'
+import { conversionUnitKWh, toFixed, conversionUnitKW, conversionUnitKVar, paserTime, getRuningStateInfo, getEfficiency } from '@/utils'
 
 const appData = useAppData()
 const dicts = useDicts()
@@ -39,16 +39,25 @@ defineProps({
 
         <div class="w-[296px]" v-if="showSubIno">
             <ul class="w-full" :style="`margin-top: ${subInfoTop}px;`">
+
+                <li class="flex items-center mb-2">
+                    <div class="h-[7px] w-[7px] bg-[var(--theme-green-bg)] rounded-full mr-[6px]"></div>
+                    <div class="text-[var(--theme-gray107)] mr-[6px]"> 运行效率 </div>
+                    <div class="text-[var(--theme-black51)] mr-[4px]"> {{  getEfficiency(data?.A_M5, data?.A_M6) }} % </div>
+                </li>
+
                 <li class="flex items-center mb-2">
                     <div class="h-[7px] w-[7px] bg-[var(--theme-green-bg)] rounded-full mr-[6px]"></div>
                     <div class="text-[var(--theme-gray107)] mr-[6px]"> {{ t('common.parkType') }}  </div>
                     <div class="text-[var(--theme-black51)] mr-[4px]"> {{  dicts.parkTypeDict.dictLabel[ data.type ] }} </div>
                 </li>
+           
                 <li class="flex items-center mb-2">
                     <div class="h-[7px] w-[7px] bg-[var(--theme-green-bg)] rounded-full mr-[6px]"></div>
                     <div class="text-[var(--theme-gray107)] mr-[6px]"> {{ t('common.dataLastTime') }} </div>
                     <div class="text-[var(--theme-gray107)] mr-[4px] font-medium f-dinb"> {{ paserTime(appData.parkLastTimes[ data?.code ], 'YYYY-MM-DD HH:mm:ss') }} </div>
                 </li>
+
             </ul>
         </div>
 
