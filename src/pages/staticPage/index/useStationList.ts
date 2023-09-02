@@ -46,6 +46,8 @@ function stationListAddProps(stationList: ParkMonitorInfo[]) {
     stationList.forEach(park => {
         park.A_M2 = park.cardList.A_M2
         park.A_M3 = park.cardList.A_M3
+        park.A_M5 = park.detailList.A_M5
+        park.A_M6 = park.detailList.A_M6
         park.A_M7 = park.detailList.A_M7
         park.A_M8 = park.detailList.A_M8
         park.A_M15 = park.cardList.A_M15

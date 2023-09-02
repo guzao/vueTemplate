@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import { isTrue } from '@/utils'
-import { useAppData, useDicts } from '@/store'
 import { useReactiveHttp } from '@/hooks'
+import { useAppData, useDicts } from '@/store'
 import { getDevicGroupList, getStationInfo } from '@/API'
 
 
@@ -10,8 +10,10 @@ import { getDevicGroupList, getStationInfo } from '@/API'
 export function useDeviceOverview(markFn?: (group: DeviceGroup) => void) {
     
 
-    const appData = useAppData()
     const dicts = useDicts()
+
+    const appData = useAppData()
+
 
     /** 子站列表 */
     const { result: deivceGroupList, getResult: getDevicGroupListData } = useReactiveHttp({
@@ -63,7 +65,6 @@ export function useDeviceOverview(markFn?: (group: DeviceGroup) => void) {
     }
 
     getSubParkInfo()
-
 
     return {
         getSubParkInfo,
