@@ -1,3 +1,4 @@
+import { Common } from '@/enum'
 import { ZH_CN } from './zh_CN'
 import { EN_US } from './en_US'
 import { useLang } from '@/utils'
@@ -13,7 +14,7 @@ export const messages = {
 export const i18n = createI18n({
     messages,
     locale: getLang(), 
-    fallbackLocale: 'zh_CN', 
+    fallbackLocale: Common.DEFAULT_LANG_KEY, 
     globalInjection: true
 })
 

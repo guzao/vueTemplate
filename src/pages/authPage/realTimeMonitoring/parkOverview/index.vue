@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { IntervalTime } from '@/enum'
 import { useInterval } from '@/hooks'
 import { useAppData, useDicts } from '@/store'
 import { useParkOverview } from './useParkOverview'
@@ -12,7 +13,7 @@ const dicts = useDicts()
 
 const { getParkOverview, loading, parkOverview } = useParkOverview()
 
-const { _resetInterval } = useInterval(1000 * 60 * 3, getParkOverview)
+const { _resetInterval } = useInterval(IntervalTime.THREE_MINIUTE, getParkOverview)
 
 const getParkInfo = () => {
     _resetInterval()
@@ -23,15 +24,16 @@ const getParkInfo = () => {
 </script>
 
 <template>
+    <div class="park_overview flex flex-col flex-1 w-full overflow-hidden"
+        v-watermark="{ markSatate: appData.currentRelease, text: dicts.parkReleaseStatusDict.dictLabel[appData.currentRelease] }"
+        v-loading="loading">
 
-    <div class="park_overview flex flex-col flex-1 w-full overflow-hidden" v-watermark="{ markSatate: appData.currentRelease, text: dicts.parkReleaseStatusDict.dictLabel[ appData.currentRelease ] }" v-loading="loading">
 
+        <div class="top_bg flex-1 min-h-[580px]  box-border">
 
-        <div class="top_bg flex-1 min-h-[580px]  box-border" >
+            <SubNavBar height="46" class="mb-[16px] bg-transparent" @park-change="getParkInfo"></SubNavBar>
 
-            <SubNavBar height="46" class="mb-[16px] bg-transparent"  @park-change="getParkInfo"></SubNavBar>
-
-            <RuningInfo :park-overview="parkOverview"  />
+            <RuningInfo :park-overview="parkOverview" />
 
         </div>
 
@@ -40,7 +42,6 @@ const getParkInfo = () => {
         </div>
 
     </div>
-    
 </template>
 
 <style lang="scss" scoped>

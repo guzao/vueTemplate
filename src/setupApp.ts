@@ -4,8 +4,6 @@ import { appErrorHandle } from '@/systemRuntimeInfoTrack'
 import { useAsset, useRouter, useDirective, useNprogress, useElementPlus, usePinan, setupI18n } from '@/plugins'
 
 
-import '@/assets/styles/index.scss'
-
 /**
  * 启动应用
 */

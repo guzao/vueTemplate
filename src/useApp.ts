@@ -1,3 +1,4 @@
+import { IntervalTime } from '@/enum'
 import { useI18nStore, useAppData } from "@/store"
 import { useInterval, useDocumentTitle } from '@/hooks'
 
@@ -10,7 +11,7 @@ export function useApp () {
     const I18nStore = useI18nStore()
     
     /** 定时获取电站最新数据 */
-    useInterval(1000 * 60 * 5, () => {
+    useInterval(IntervalTime.FIVE_MILLI_SECOND, () => {
       loopGetParkAuthLastTime()
       loopGetStationRuningState()
     })

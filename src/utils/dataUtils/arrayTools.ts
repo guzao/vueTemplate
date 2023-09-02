@@ -45,13 +45,11 @@ export function arrayGroupBy<T>(raw: T[], key: keyof T) {
  * 数组分块
 */
 export function arrayChunk<T>(data: T[] = [], groupNmber: number) {
+    if (!isArray(data)) throw new Error()
     const cloneData = deepClone(data)
-    if (!isArray(cloneData)) throw new Error()
     const result: T[][] = []
-    let initData = cloneData.splice(0, groupNmber)
-    while (arrayIsNotEmpty(initData)) {
-        result.push(initData)
-        initData = cloneData.splice(0, groupNmber)
+    while (arrayIsNotEmpty(cloneData)) {
+        result.push( cloneData.splice(0, groupNmber) )
     }
     return result
 }

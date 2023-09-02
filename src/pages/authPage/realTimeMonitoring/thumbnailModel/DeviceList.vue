@@ -5,9 +5,9 @@ import { useDeviceDetail } from '../hooks/useDeviceDetail'
 import { getDeviceStateInfo, toFixed } from '@/utils'
 
 import Icon from '@/components/common/Icon.vue';
+import CNXDevice from '../components/CNXDevice.vue';
+import CNGDevice from '../components/CNGDevice.vue';
 import SubParkTitle from '../components/SubParkTitle.vue'
-import CNXDevice from '../deviceOverview/components/CNXDevice.vue';
-import CNGDevice from '../deviceOverview/components/CNGDevice.vue';
 
 const { checkDeviceDetail } = useDeviceDetail()
 

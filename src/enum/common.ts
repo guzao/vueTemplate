@@ -1,6 +1,6 @@
 
 export const enum Common {
-    
+
 
     YYYY = 'YYYY',
 
@@ -32,6 +32,11 @@ export const enum Common {
     /** 修改密码页 */
     EDIT_PASSWORD_PAGE = '/config/personCenter/editPassword',
 
+    /** 默认语言 */
+    DEFAULT_LANG_KEY = 'zh_CN',
+
+
+    
 
 }
 

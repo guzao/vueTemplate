@@ -10,7 +10,7 @@ export const layoutConfig = {
     headerHeight,
 
     /** 是否固定全局 Heder */
-    dynamicHeader: !false,
+    dynamicHeader: true,
 
     /** 滚动条距离顶部多少时隐藏 Heder的阈值  最小值 = headerHeight + gapLimit  */
     offset: headerHeight + gapLimit,

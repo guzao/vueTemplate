@@ -7,7 +7,6 @@ import { PropType, computed, ref } from 'vue';
 import { paserTime, getRuningStateInfo, toFixed, conversionUnitKWh, conversionUnitKVar, conversionUnitKW } from '@/utils';
 
 import { InfoFilled } from "@element-plus/icons-vue"
-
 import IconVue from '@/components/common/Icon.vue';
 import TitleBox from '@/components/common/TitleBox.vue';
 import LastTime from '@/components/common/LastTime.vue';
