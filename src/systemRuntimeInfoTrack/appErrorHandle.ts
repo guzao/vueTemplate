@@ -28,6 +28,7 @@ export function appErrorHandle (err: any, instance: ComponentPublicInstance | nu
     }
 
     commonConfig.trackLog && appErrorPool.value.push({
+        pageName: currentRoute.meta.title as any,
         date: Date.now(),
         tag: instance?.$el?.type,
         errorInfo: error.message,

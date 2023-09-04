@@ -39,6 +39,7 @@ type LoaclRouter = {
 
 /** 应用报错信息 */
 type AppErrorPool = {
+    pageName: string;
     /** 错误时间 */
     date: number,
     /** 错误元素 */
