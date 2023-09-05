@@ -1,7 +1,7 @@
 # Vue 3 + TypeScript + Vite
    1. pnpm i
    2. pnpm run dev 
-   3. pnpm run build
+pnpm run build
 
 ### ops WEB
 ```ts

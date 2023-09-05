@@ -1,8 +1,8 @@
 import { loaclRouter } from '../index'
 import { useUser, useAppData } from '@/store'
 import nProgress from '@/plugins/steupNprogress'
-import { arrayIsEmpty, isFalse, isTrue, useToken } from '@/utils'
 import { routerWhiteLsit, useDnamicRouter } from '@/config'
+import { arrayIsEmpty, isFalse, isTrue, useToken } from '@/utils'
 import { businessProcess, generateRouterAndAddRouters, addErrorPages } from './helper'
 import type { Router, NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
 

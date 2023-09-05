@@ -11,8 +11,10 @@ const { tipsInfo = {} as any  } = getLocalLangMessage()
 /** 获取页面组件的资源 */
 const routeAllPathToCompMap = import.meta.glob(`@/pages/**/*.vue`);
 
+
 /** 需要新开页面的路由 */
 let newTabLayOut: RouteRecordRaw [] = []
+
 
 /** 生成添加 动态路由 */
 export function generateRouterAndAddRouters(routers: LoaclRouter[]) {

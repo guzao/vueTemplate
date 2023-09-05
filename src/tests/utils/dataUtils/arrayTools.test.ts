@@ -1,6 +1,7 @@
 import { describe, test, expect } from 'vitest'
 import { 
-    arrayIsEmpty, arrayIsNotEmpty, getArrayLength, getFirstElement, getLastElement, arrayChunk, arrayGroupBy, arrayGroupByMap, getDataRange, getMaxElement 
+    arrayIsEmpty, arrayIsNotEmpty, getArrayLength, getFirstElement, getLastElement, arrayChunk, arrayGroupBy, arrayGroupByMap, getDataRange, getMaxElement,
+    sorted
 } from '@/utils/dataUtils/arrayTools'
 
 describe('arrayTools', () => {
@@ -46,8 +47,11 @@ describe('arrayTools', () => {
     })
     
     test('arrayGroupByMap', () => {
-        const res = new Map()
+        const res: Map<any, any []> = new Map()
         res.set('c', [ { type: 'c', name: 'test' } ])
+
+        let test = res.get('c')
+
         expect(arrayGroupByMap([{ type: 'c', name: 'test' }], 'type')).toEqual(res)
     })
 
@@ -59,6 +63,13 @@ describe('arrayTools', () => {
     test('getMaxElement', () => {
         const res = [1, 2, 3]
         expect(getMaxElement(res, item => item > 1)).toBe(1)
+    })
+
+    test('sorted', () => {
+        const res = [1, 2, 3]
+        expect(sorted(res, (a, b) => a- b)).toEqual(res)
+        expect(sorted(res, (a, b) => b - a)).not.toBe(res)
+        expect(sorted(res, (a, b) => b - a)).toEqual([3, 2, 1])
     })
     
     

@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url(./icons.scss);
 @import url(./rotVariable.scss);
 @import url(./deviceBattery.scss);
-@import url(./icons.scss);
 
 * {
     font-size: 14px;
@@ -18,7 +18,7 @@
 
 // 进度条颜色
 #nprogress .bar {
-    background: var(--charge);
+    background: var(--charge) !important;
 }
 
 html {

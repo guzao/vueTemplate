@@ -1,7 +1,7 @@
 import App from '@/App.vue'
 import { createApp } from 'vue'
 import { appErrorHandle } from '@/systemRuntimeInfoTrack'
-import { useAsset, useRouter, useDirective, useNprogress, useElementPlus, usePinan, setupI18n } from '@/plugins'
+import { useAsset, useRouter, useDirective, useNprogress, useElementPlus, usePinan, setupI18n,  useSmartOpsBroadcastChannel } from '@/plugins'
 
 
 /**
@@ -14,6 +14,8 @@ export async function setupApp () {
     useNprogress()
 
     const appInstance = createApp(App)
+
+    useSmartOpsBroadcastChannel(appInstance)
 
     setupI18n(appInstance)
 
@@ -29,5 +31,6 @@ export async function setupApp () {
     appInstance.config.errorHandler = appErrorHandle
 
     appInstance.mount("#app")
+
 
 }
