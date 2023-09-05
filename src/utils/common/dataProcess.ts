@@ -93,3 +93,4 @@ function generateTableHeader <T> (tableData: any, params: GenerateDnamicTableDat
 
     return headerData
 }
+

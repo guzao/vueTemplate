@@ -38,7 +38,7 @@ export const enum State {
   PRICE_TEMPLATE_STOP = 0,
 
   /** 电价模板启用 */
-  PRICE_TEMPLATE_OPEN = 0,
+  PRICE_TEMPLATE_OPEN = 1,
 
 }
 

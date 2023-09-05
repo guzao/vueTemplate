@@ -1,12 +1,19 @@
 <script lang="ts" setup>
+import { useSmartOpsBroadcastChannel } from '@/hooks'
 import { useI18nStore, langs, useSystemConfig } from '@/store'
+
 const i18nStore = useI18nStore()
 const systemConfig = useSystemConfig()
+const smartOpsBroadcastChannel = useSmartOpsBroadcastChannel()
+const setLang = (lang: string) => {
+    smartOpsBroadcastChannel.onPostMessage('I18n', { lang: lang })
+    i18nStore.setLang(lang)
+}
 
 </script>
 
 <template>
-    <el-dropdown trigger="click" @command="i18nStore.setLang" v-if="systemConfig.baseConfig.internationalization">
+    <el-dropdown trigger="click" @command="setLang" v-if="systemConfig.baseConfig.internationalization">
         <el-button text>
             {{ i18nStore.langLable }}
         </el-button>

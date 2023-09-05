@@ -1,4 +1,10 @@
 export const common = {
+    
+    systemConfig: '系统配置',
+
+    globalConfig: '全局配置',
+
+    efficiency: '运行效率',
 
     overview: '全场概览',
 

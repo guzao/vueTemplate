@@ -39,6 +39,7 @@ type LoaclRouter = {
 
 /** 应用报错信息 */
 type AppErrorPool = {
+    pageName: string;
     /** 错误时间 */
     date: number,
     /** 错误元素 */
@@ -102,7 +103,7 @@ type ParkMonitorInfo = {
     type: string | number;
     /** 电站类型名称 */
     typeLabel: string;
-
+    
     A_M2: number;
     A_M3: number;
     A_M5: number;

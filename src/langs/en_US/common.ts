@@ -1,5 +1,11 @@
 export const common = {
 
+    systemConfig: 'SystemConfig',
+
+    globalConfig: 'GlobalConfig',
+
+    efficiency: 'Efficiency',
+
     overview: 'Overview',
 
     day: 'Day',

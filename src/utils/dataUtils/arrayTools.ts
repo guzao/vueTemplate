@@ -20,7 +20,14 @@ export function arrayGroupByMap<T>(raw: T[], key: keyof T) {
     }, new Map() as  Map<any, T[]>)
 }
 
-
+export function arrayGroupByMap_<T>(raw: T[], key: keyof T) {
+    if (!isArray(raw)) throw new Error()
+    return raw.reduce((acc, cur) => {
+        const groupKey = cur[key]
+        acc.has(groupKey) ? acc.get(groupKey)?.push(cur) : acc.set(groupKey, [cur])
+        return acc
+    }, new Map() as  Map<any, T[]>)
+}
 
 
 export function arrayGroupBy<T>(raw: T[], key: keyof T) {
@@ -59,6 +66,14 @@ export function arrayChunk<T>(data: T[] = [], groupNmber: number) {
  * 查找数组中的最大元素
 */
 export const getMaxElement = <T> (data: T[], callback: MaxElementCallback<T>) => data.reduce((maxEl, cur) => callback(maxEl, cur) ? cur : maxEl, data[0])
+
+
+/**
+ * 数据排序 不影响原数据
+ * * @param data 数据
+ * * @param callback 处理函数 
+*/
+export const sorted = <T> (data: T[], callback: (a: T, b: T) => number ) => deepClone(data).sort((a, b) => callback(a, b))
 
 
 /**
