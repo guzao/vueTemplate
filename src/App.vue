@@ -14,7 +14,7 @@ const { I18nStore } = useApp()
   </el-config-provider>
 
   <!-- 系统全局配置 -->
-  <SystemConfig />
+  <SystemConfig  />
 
 </template>
 

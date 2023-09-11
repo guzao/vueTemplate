@@ -98,3 +98,27 @@ export function getCNGBatteryCellBg(value: number, state: number) {
 
     return initCell
 }
+
+
+
+// ************************************ ------------ ************************************ //
+// ************************************              ************************************ //
+// ************************************   设备状态    ************************************ //
+// ************************************              ************************************ //
+// ************************************ ------------ ************************************ //
+
+const deviceState = messages[getLangKey()].deviceState
+
+const writeDefaultState = (states: string[], index: number) => states[index] || '--'
+
+export const getARState = (index: number) => writeDefaultState(deviceState.arState, index)
+
+export const getIOState = (index: number) => writeDefaultState(deviceState.ioState, index)
+
+export const getPCSState = (index: number) => writeDefaultState(deviceState.pcsState, index)
+
+export const getBMSkState = (index: number) => writeDefaultState(deviceState.bmsState, index)
+
+export const getUnitState = (index: number) => writeDefaultState(deviceState.unitState, index)
+
+export const getStackState = (index: number) => writeDefaultState(deviceState.statckState, index)

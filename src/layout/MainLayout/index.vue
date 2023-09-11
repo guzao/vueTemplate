@@ -5,9 +5,9 @@ import { ElScrollbar } from 'element-plus'
 import { useLayout, useAppData } from '@/store'
 import { Top } from '@element-plus/icons-vue'
 
-import Sider from './components/Sider.vue';
-import Header from "./components/Header.vue";
-import Footer from './components/Footer.vue';
+import Sider from './components/Sider.vue'
+import Header from "./components/Header.vue"
+import Footer from './components/Footer.vue'
 
 const layout = useLayout()
 const appData = useAppData()
@@ -50,6 +50,7 @@ onMounted(() => layout.setScrollbarRefInstance(scrollbarRef.value))
                     <Footer />
 
                 </div>
+
             </el-scrollbar>
 
         </el-container>

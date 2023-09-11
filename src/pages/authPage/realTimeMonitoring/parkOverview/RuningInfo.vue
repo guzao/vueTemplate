@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {  t } from '@/langs'
-import { State, Type } from '@/enum'
 import { useAppData } from '@/store'
+import { State, Type, Common } from '@/enum'
 import { onClickOutside } from '@vueuse/core'
 import { PropType, computed, ref } from 'vue';
 import { paserTime, getRuningStateInfo, toFixed, conversionUnitKWh, conversionUnitKVar, conversionUnitKW } from '@/utils';
@@ -30,6 +30,7 @@ const props = defineProps({
 
 const parkStateBg = computed(() => {
     const { A_M2 } = props.parkOverview
+    if (A_M2 == State.OUT_LINE || '') return '' 
     if (A_M2 == State.STANDBY) return ''
     return A_M2 == State.CHARGE ? 'charge' : 'discharge'
 })

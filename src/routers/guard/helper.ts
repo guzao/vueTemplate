@@ -99,7 +99,7 @@ function setNewTabRouter(item: LoaclRouter, routers: LoaclRouter[], index: numbe
 /** 业务路由处理 */
 export function businessProcess(to: RouteLocationNormalized, form: RouteLocationNormalized, next: NavigationGuardNext) {
 
-    const { currentRelease } = useAppData()
+    const { currentRelease, currentParkType } = useAppData()
 
     const { userInfo, getRoles } = useUser()
 
@@ -122,6 +122,8 @@ export function businessProcess(to: RouteLocationNormalized, form: RouteLocation
             return next(Common.HOME_PAGE)
         }
     }
+
+    // 工商业才显示收益
 
     return next()
 

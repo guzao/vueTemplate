@@ -28,7 +28,9 @@ const { chartRef, currentTime, prevTime, nextTime, loading, nextDisabled } = use
 <template>
     <div class="flex mb-[16px] base_info">
 
-        <div class="h-[516px] w-[700px] bg-[var(--theme-white-bg)] mr-[16px]"></div>
+        <div class="h-[516px] w-[700px] bg-[var(--theme-white-bg)] mr-[16px]">
+            <img class="h-[516px] w-[700px]" src="../../../../../assets/image/overview/cnx_model.png" alt="" srcset="">
+        </div>
 
         <div class="flex-1">
 

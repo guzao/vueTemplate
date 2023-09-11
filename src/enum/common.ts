@@ -1,7 +1,6 @@
 
 export const enum Common {
 
-
     YYYY = 'YYYY',
 
     YYYY_MM = 'YYYY-MM',
