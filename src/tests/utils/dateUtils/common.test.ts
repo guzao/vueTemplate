@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { getFormatter, getWeekFirstDay, paserTime, getRunningDay, getPrevMonth, writeDefaultDate  } from '@/utils/dateUtils/common'
+import { getFormatter, getWeekFirstDay, paserTime, getRunningDay, getPrevMonth, writeDefaultDate, fillTodayDate  } from '@/utils/dateUtils/common'
 
 describe('common', () => {
 
@@ -32,6 +32,11 @@ describe('common', () => {
     
     test('getRunningDay', () => {
         expect(getRunningDay(+new Date(2023,7, 1))).not.toBe(32)
+    })
+    
+    test('fillTodayDate', () => {
+        const exec = fillTodayDate(+new Date())
+        expect(fillTodayDate(+new Date())).toEqual(exec)
     })
 
     test('getPrevMonth', () => {

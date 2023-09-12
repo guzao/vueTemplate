@@ -3,13 +3,13 @@ import { deepClone } from "./objectTools"
 
 export const getArrayLength = <T>(data: T[]) => data.length
 
-export const arrayIsEmpty = <T>(data: T[]) => data.length == 0
+export const arrayIsEmpty = <T>(data: T[]) => getArrayLength(data) == 0
 
-export const arrayIsNotEmpty = <T>(data: T[]) => data.length > 0
+export const arrayIsNotEmpty = <T>(data: T[]) => getArrayLength(data) > 0
 
 export const getFirstElement = <T>(data: T[]) => data[0]
 
-export const getLastElement = <T>(data: T[]) => data[ getArrayLength(data) - 1 ]
+export const getLastElement = <T>(data: T[]) => data[getArrayLength(data) - 1]
 
 export function arrayGroupByMap<T>(raw: T[], key: keyof T) {
     if (!isArray(raw)) throw new Error()
@@ -17,7 +17,7 @@ export function arrayGroupByMap<T>(raw: T[], key: keyof T) {
         const groupKey = cur[key]
         acc.has(groupKey) ? acc.get(groupKey)?.push(cur) : acc.set(groupKey, [cur])
         return acc
-    }, new Map() as  Map<any, T[]>)
+    }, new Map() as Map<any, T[]>)
 }
 
 export function arrayGroupByMap_<T>(raw: T[], key: keyof T) {
@@ -26,7 +26,7 @@ export function arrayGroupByMap_<T>(raw: T[], key: keyof T) {
         const groupKey = cur[key]
         acc.has(groupKey) ? acc.get(groupKey)?.push(cur) : acc.set(groupKey, [cur])
         return acc
-    }, new Map() as  Map<any, T[]>)
+    }, new Map() as Map<any, T[]>)
 }
 
 
@@ -56,7 +56,7 @@ export function arrayChunk<T>(data: T[] = [], groupNmber: number) {
     const cloneData = deepClone(data)
     const result: T[][] = []
     while (arrayIsNotEmpty(cloneData)) {
-        result.push( cloneData.splice(0, groupNmber) )
+        result.push(cloneData.splice(0, groupNmber))
     }
     return result
 }
@@ -65,7 +65,7 @@ export function arrayChunk<T>(data: T[] = [], groupNmber: number) {
 /**
  * 查找数组中的最大元素
 */
-export const getMaxElement = <T> (data: T[], callback: MaxElementCallback<T>) => data.reduce((maxEl, cur) => callback(maxEl, cur) ? cur : maxEl, data[0])
+export const getMaxElement = <T>(data: T[], callback: MaxElementCallback<T>) => data.reduce((maxEl, cur) => callback(maxEl, cur) ? cur : maxEl, data[0])
 
 
 /**
@@ -73,15 +73,15 @@ export const getMaxElement = <T> (data: T[], callback: MaxElementCallback<T>) =>
  * * @param data 数据
  * * @param callback 处理函数 
 */
-export const sorted = <T> (data: T[], callback: (a: T, b: T) => number ) => deepClone(data).sort((a, b) => callback(a, b))
+export const sorted = <T>(data: T[], callback: (a: T, b: T) => number) => deepClone(data).sort((a, b) => callback(a, b))
 
 
 /**
  * 统计数组内的元素的区间 [1, 2, 3, 4, 5, 6, 1, 2,3 ] == > [ {}, {} ]
 */
-export function getDataRange <T> (originData: T [], processCallback: (item: T) => boolean) {
+export function getDataRange<T>(originData: T[], processCallback: (item: T) => boolean) {
 
-    const result: DataRangeResult<T> [] = []
+    const result: DataRangeResult<T>[] = []
 
     const cachePool: CachePoolData<T>[] = []
 
@@ -92,14 +92,14 @@ export function getDataRange <T> (originData: T [], processCallback: (item: T) =
         arrayIsNotEmpty(cachePool) && setDataRangeResult(cachePool, result)
 
     })
-    
+
     setDataRangeResult(cachePool, result)
 
     return result
 
 }
 
-function setDataRangeResult <T> (cachePool: CachePoolData<T>[], result: DataRangeResult<T> []) {
+function setDataRangeResult<T>(cachePool: CachePoolData<T>[], result: DataRangeResult<T>[]) {
     const startEl = getFirstElement(cachePool)
     const endEl = getLastElement(cachePool)
     result.push({

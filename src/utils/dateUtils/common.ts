@@ -7,7 +7,7 @@ import { isFalse } from '../dataUtils'
 export const allDayNumber = 24 * 60 * 60 * 1000
 
 
-export type PaserTimeFormat = 'YYYY-MM-DD HH:mm:ss' | 'YYYY-MM-DD HH:mm' | 'YYYY-MM-DD HH' | 'YYYY-MM-DD' | 'YYYY-MM' | 'YYYY'
+export type PaserTimeFormat = 'YYYY-MM-DD HH:mm:ss' | 'YYYY-MM-DD HH:mm' | 'YYYY-MM-DD HH' | 'YYYY-MM-DD' | 'YYYY-MM' | 'YYYY' | 'HH:mm'
 /** 格式化时间 */
 export const paserTime = (time: Date | number, format: PaserTimeFormat) => isFalse(time) ? '--' : DayJs(time).format(format)
 
@@ -29,11 +29,8 @@ export function getRunningDay(starTime: number) {
 /** 填充一天的数据点 */
 export const fillTodayDate = (date: number) => {
     let startTime = +new Date(paserTime(date, 'YYYY-MM-DD') + ' 00:00:00')
-    return Array.from({ length: (12 * 24) + 2 }).map((item, index) => {
-        if (index == 0) {
-            return [startTime, 0]
-        }
-        startTime += (1000 * 60) * 5
+    return Array.from({ length: (12 * 24) + 2 }).map((_, index) => {
+        if (index !== 0) startTime += (1000 * 60) * 5
         return [paserTime(startTime, 'YYYY-MM-DD HH:mm:ss'), 0]
     })
 }
@@ -48,6 +45,14 @@ export function getPrevMonth (baseDate: Date, gapMonth: number) {
     return nextMonth.toDate()
 }
 
+export const getCurrentMonthFirstDate =  (baseDate: Date) => DayJs(baseDate).startOf('month').toDate()
+
+export const getCurrentYearFirstDate =  (baseDate: Date) => DayJs(baseDate).startOf('year').toDate()
+
+/**
+ * 根据传入的时间 获取本周的第一天
+*/
+export const getWeekFirstDay_ =  (baseDate: Date) => DayJs(baseDate).startOf('week').toDate()
 
 /**
  * 根据 type 得出时间区间

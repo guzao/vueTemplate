@@ -1,19 +1,23 @@
-import { watch, ref } from 'vue'
-import { useReactiveHttp } from '@/hooks'
-import { useAppData, useDicts } from '@/store'
+import { watch } from 'vue'
+import { useAppData } from '@/store'
+import { getParkIncome } from '@/API'
+import { useReactiveHttp_ } from '@/hooks'
 
 export function useParkIncome () {
 
-    const dicts = useDicts()
     const appData = useAppData()
 
-    watch(() => appData.currentParkSerial, () => {
-        console.log('======');
+    const [ parkIncome, getParkIncomeData, loading ] = useReactiveHttp_({
+        initData: {} as ParkIncomeData,
+        request: () => getParkIncome(appData.currentParkSerial),
     })
 
+    watch(() => appData.currentParkSerial,  getParkIncomeData)
+
     return {
+        loading,
         appData,
-        dicts
+        parkIncome,
     }
 
 }

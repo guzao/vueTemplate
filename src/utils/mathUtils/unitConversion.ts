@@ -83,7 +83,7 @@ export const KVARUnits = ['kVar', 'MVar', 'GVar', 'TVar']
 export const conversionUnitKVar = (raw: number, fractionDigits?: number) => conversionUnit(raw, KVARUnits, fractionDigits, 1000)
 
 export const PriceUnits = ['元', '万', '亿', '兆']
-export const conversionUnitPrice = (raw: number, fractionDigits?: number) => conversionUnit(raw, PriceUnits, fractionDigits, 10000)
+export const conversionUnitPrice = (raw: number, fractionDigits = 4) => conversionUnit(raw, PriceUnits, fractionDigits, 10000)
 
 
 
@@ -110,9 +110,10 @@ export function getZoomRato(numbers: number[], units: string[], limit: number = 
 
 }
 
-export const getKWHZoomRatioAndUnit = (numbers: number[]) => getZoomRato(numbers, KWHUnits, 1000)
 
 export const getKWZoomRatioAndUnit = (numbers: number[]) => getZoomRato(numbers, KWUnits, 1000)
+
+export const getKWHZoomRatioAndUnit = (numbers: number[]) => getZoomRato(numbers, KWHUnits, 1000)
 
 export const getKVARZoomRatioAndUnit = (numbers: number[]) => getZoomRato(numbers, KVARUnits, 1000)
 

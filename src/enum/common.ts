@@ -34,7 +34,7 @@ export const enum Common {
     /** 默认语言 */
     DEFAULT_LANG_KEY = 'zh_CN',
 
-
+    
     
 
 }

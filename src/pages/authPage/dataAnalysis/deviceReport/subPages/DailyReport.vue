@@ -3,7 +3,7 @@ import { useAppData } from '@/store';
 import { getDailyReport } from '@/API'
 import { reactive, watch, nextTick } from 'vue'
 import { useReactiveHttp, useEcharts } from '@/hooks'
-import { processDailyData, objectSpanMethod, rendererBard } from './tools'
+import { objectSpanMethod, rendererBard } from './tools'
 import { paserTime, conversionUnitKWh, getEfficiency, getArrayLength, arrayGroupByMap, getFirstElement } from '@/utils';
 
 

@@ -1,11 +1,12 @@
 <script lang="ts" setup>
-import { useParkIncome } from './useParkIncome'
-
-const { appData, dicts } = useParkIncome()
+import { useAppData, useDicts } from '@/store'
 
 import IncomeInfo from './IncomeInfo.vue'
 import IncomeChart from './IncomeChart.vue'
-import SubNavBar from '@/components/common/SubNavBar.vue';
+import SubNavBar from '@/components/common/SubNavBar.vue'
+
+const dicts = useDicts()
+const appData = useAppData()
 </script>
 
 <template>

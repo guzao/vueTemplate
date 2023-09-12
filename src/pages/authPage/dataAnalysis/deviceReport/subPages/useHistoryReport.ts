@@ -10,6 +10,7 @@ export function useHistoryReport() {
 
     const appdate = useAppData()
 
+
     const { result: unitList, getResult: _getUnitList, loading: unitListLoading } = useReactiveHttp(
         { initData: [] as UnitListData[], request: () => getUnitList({ stationSerial: appdate.currentParkSerial, pageSize: 1000 }), requestCallback: (res) => res.rows }
     )
