@@ -98,7 +98,7 @@ function setNewTabRouter(item: LoaclRouter, routers: LoaclRouter[], index: numbe
 /** 业务路由处理 */
 export function businessProcess(to: RouteLocationNormalized, form: RouteLocationNormalized, next: NavigationGuardNext) {
 
-    const { currentRelease, currentParkType } = useAppData()
+    const { currentRelease } = useAppData()
 
     const { userInfo, getRoles } = useUser()
 

@@ -94,6 +94,9 @@ export const common = {
 
     deviceDetailTitle: 'Device Detail',
 
-    income: 'Income'
+    income: 'Income',
 
+    count: '',
+
+    total: 'Total'
 }

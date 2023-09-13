@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { t } from '@/langs'
 import { onMounted } from 'vue'
 import { getArrayLength } from '@/utils'
 import { useStationList } from '../useStationList'
@@ -28,7 +29,9 @@ onMounted(() => {
             
         </div>
 
-        <DeviceStateCountDescVue :states="deviceStateCount" :open-state-click="true" v-model:model-value="state" :total="getArrayLength(stationList)"/>
+        <DeviceStateCountDescVue :states="deviceStateCount" :open-state-click="true" v-model:model-value="state" :total="getArrayLength(stationList)">
+            {{ t('common.park') }}{{ t('common.total') }}
+        </DeviceStateCountDescVue>
 
     </div>
 </template>

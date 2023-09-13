@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { t } from '@/langs'
-import { conversionUnitKWh, toFixed } from '@/utils'
+import { conversionUnitKWh, toFixed, getArrayLength } from '@/utils'
+
 import TitleBox from '@/components/common/TitleBox.vue';
 import LabelValueUnit from '@/components/common/LabelValueUnit.vue';
 import DeviceStateCountDesc from '@/components/common/DeviceStateCountDesc.vue';
@@ -83,7 +84,7 @@ defineProps({
         </template>
 
         <template #right>
-            <DeviceStateCountDesc :states="deviceStateCount" />
+            <DeviceStateCountDesc :states="deviceStateCount" :total="getArrayLength(data.list)"> {{ t('common.device')  }}{{ t('common.total') }} </DeviceStateCountDesc>
         </template>
 
     </TitleBox>

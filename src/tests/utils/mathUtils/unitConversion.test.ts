@@ -22,6 +22,8 @@ describe('unitConversion', () => {
 
     test('edgeCaseToFixed', () => {
         expect(edgeCaseToFixed(null)).toBe(0)
+        expect(edgeCaseToFixed('null')).toBe(0)
+        expect(edgeCaseToFixed(NaN)).toBe(0)
         expect(edgeCaseToFixed(0)).toBe(0)
         expect(edgeCaseToFixed(undefined)).toBe(0)
         expect(edgeCaseToFixed('--')).toBe(0)
@@ -86,22 +88,22 @@ describe('unitConversion', () => {
         expect(conversionUnitPrice('--' as any)).toEqual({ size: '--', unit: '元' })
         expect(conversionUnitPrice('' as any)).toEqual({ size: '--', unit: '元' })
 
-        expect(conversionUnitPrice(-1)).toEqual({ size: '-1.00', unit: '元' })
-        expect(conversionUnitPrice(-1000)).toEqual({ size: '-1000.00', unit: '元' })
-        expect(conversionUnitPrice(-10000)).toEqual({ size: '-1.00', unit: '万' })
-        expect(conversionUnitPrice(-10000 * 10)).toEqual({ size: '-10.00', unit: '万' })
-        expect(conversionUnitPrice(-10000 * 100)).toEqual({ size: '-100.00', unit: '万' })
-        expect(conversionUnitPrice(-10000 * 10000)).toEqual({ size: '-1.00', unit: '亿' })
-        expect(conversionUnitPrice(-10000 * 10000 * 10)).toEqual({ size: '-10.00', unit: '亿' })
+        expect(conversionUnitPrice(-1)).toEqual({ size: '-1.0000', unit: '元' })
+        expect(conversionUnitPrice(-1000)).toEqual({ size: '-1000.0000', unit: '元' })
+        expect(conversionUnitPrice(-10000)).toEqual({ size: '-1.0000', unit: '万' })
+        expect(conversionUnitPrice(-10000 * 10)).toEqual({ size: '-10.0000', unit: '万' })
+        expect(conversionUnitPrice(-10000 * 100)).toEqual({ size: '-100.0000', unit: '万' })
+        expect(conversionUnitPrice(-10000 * 10000)).toEqual({ size: '-1.0000', unit: '亿' })
+        expect(conversionUnitPrice(-10000 * 10000 * 10)).toEqual({ size: '-10.0000', unit: '亿' })
 
         
-        expect(conversionUnitPrice(1)).toEqual({ size: '1.00', unit: '元' })
-        expect(conversionUnitPrice(1000)).toEqual({ size: '1000.00', unit: '元' })
-        expect(conversionUnitPrice(10000)).toEqual({ size: '1.00', unit: '万' })
-        expect(conversionUnitPrice(10000 * 10)).toEqual({ size: '10.00', unit: '万' })
-        expect(conversionUnitPrice(10000 * 100)).toEqual({ size: '100.00', unit: '万' })
-        expect(conversionUnitPrice(10000 * 10000)).toEqual({ size: '1.00', unit: '亿' })
-        expect(conversionUnitPrice(10000 * 10000 * 10)).toEqual({ size: '10.00', unit: '亿' })
+        expect(conversionUnitPrice(1)).toEqual({ size: '1.0000', unit: '元' })
+        expect(conversionUnitPrice(1000)).toEqual({ size: '1000.0000', unit: '元' })
+        expect(conversionUnitPrice(10000)).toEqual({ size: '1.0000', unit: '万' })
+        expect(conversionUnitPrice(10000 * 10)).toEqual({ size: '10.0000', unit: '万' })
+        expect(conversionUnitPrice(10000 * 100)).toEqual({ size: '100.0000', unit: '万' })
+        expect(conversionUnitPrice(10000 * 10000)).toEqual({ size: '1.0000', unit: '亿' })
+        expect(conversionUnitPrice(10000 * 10000 * 10)).toEqual({ size: '10.0000', unit: '亿' })
 
     })
 

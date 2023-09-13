@@ -7,7 +7,7 @@ import { getDevicGroupList, getStationInfo } from '@/API'
 
 
 /** 设备列表数据 */
-export function useDeviceOverview(markFn?: (group: DeviceGroup) => void) {
+export function useDeviceOverview(markFunction?: (group: DeviceGroup) => void) {
     
 
     const dicts = useDicts()
@@ -31,7 +31,7 @@ export function useDeviceOverview(markFn?: (group: DeviceGroup) => void) {
     function parkTypeStatistics (deivceGroupList: DeviceGroup []) {
         deivceGroupList.forEach(group => {
             group.stateCount = {}
-            markFn && markFn(group)
+            markFunction && markFunction(group)
             group.list.forEach(device => {
                 const { M2 = 'null' } = device.deviceData
                 isTrue(group.stateCount[ M2 ]) ? group.stateCount[ M2 ]++ : ( group.stateCount[ M2 ] = 1)

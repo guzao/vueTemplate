@@ -4,9 +4,9 @@ import { useAppData } from '@/store'
 import { layoutConfig } from '@/config'
 import { getDeviceStateInfo } from '@/utils'
 import { useRoute, useRouter } from 'vue-router'
-import DeviceStateDesc from './DeviceStateDesc.vue';
+import DeviceStateDesc from './DeviceStateDesc.vue'
 
-import Icon from './Icon.vue';
+import Icon from './Icon.vue'
 
 const appData = useAppData()
 const emits = defineEmits<{

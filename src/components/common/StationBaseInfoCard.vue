@@ -15,7 +15,7 @@ defineProps({
         default: () => { },
         require: true,
     },
-    /** 左侧点的电站信息marin-top 属性 */
+    /** 左侧点的电站信息margin-top 属性 */
     subInfoTop: {
         type: Number,
         default: () => 15,

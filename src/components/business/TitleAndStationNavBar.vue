@@ -18,4 +18,5 @@ const appdate = useAppData()
             <LastTime> {{ paserTime(appdate.currentLastTime, 'YYYY-MM-DD HH:mm:ss') }} </LastTime>
         </div>
     </NavBar>
+    
 </template>

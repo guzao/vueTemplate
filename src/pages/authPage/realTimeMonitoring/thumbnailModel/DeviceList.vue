@@ -28,7 +28,7 @@ defineProps({
 
             <SubParkTitle :data="item" :device-state-count="item.stateCount" />
 
-            <ul class="grid gap-[4px] " style=" grid-template-columns: repeat(18, minmax(0, 1fr));">
+            <ul class="grid gap-[4px] " style="grid-template-columns: repeat(18, minmax(0, 1fr));">
 
                 <li class="h-[96px] pt-1 pb-1 bg-[var(--theme-gray251-bg)] cursor-pointer" @click="checkDeviceDetail(deivce)"
                     v-for="deivce in item.list" :key="item.id">

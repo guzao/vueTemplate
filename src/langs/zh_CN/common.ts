@@ -94,6 +94,10 @@ export const common = {
 
     deviceDetailTitle: '设备详情页',
 
-    income: '收益'
+    income: '收益',
+
+    count: '个',
+
+    total: '总数'
 
 }
