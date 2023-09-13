@@ -51,7 +51,6 @@ export function useI18nSelectState() {
 
 
 
-
 const getLang = () => Cookies.get(USER.LANG)
 
 const setLang = (lang: string) => Cookies.set(USER.LANG, lang)

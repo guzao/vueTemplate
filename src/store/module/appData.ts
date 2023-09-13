@@ -70,7 +70,7 @@ export const useAppData = defineStore('useAppData', {
         },
 
         /** 侧边栏状态 */
-        chnageIsCollapse() {
+        changeIsCollapse() {
             this.isCollapse = !this.isCollapse
             setIsCollapse(this.isCollapse)
         },
@@ -167,7 +167,7 @@ function createParkRuningStateMap(rows: ParkMonitorInfo[]) {
     }, {} as Record<string, number>)
 }
 
-/** 处理地址栏数据为异常值得情况 */
+/** 处理地址栏电站编号为异常值情况 */
 function parkSerialEdgeProcess (raw: any) {
     if ( isStringNull(raw) ) return true
     if ( isStringUndefind(raw) ) return true

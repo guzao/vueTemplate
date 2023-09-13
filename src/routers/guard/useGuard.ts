@@ -67,15 +67,17 @@ const getInitBaseInfo = async () => {
   const { getUserInfo, getRouter } = useUser()
   const { getParkAuthList, getParkAuthLastTime, getStationRuningState } = useAppData()
 
+  getStationRuningState()
+  
+  getParkAuthLastTime()
+
   await getUserInfo() // 等待用户信息数据
+  
   await getRouter()   // 等待用户路由数据
 
   // 生成动态路由
   isTrue(useDnamicRouter) && generateRouterAndAddRouters(loaclRouter)
 
   await getParkAuthList() // 等待用户电站列表
-
-  getStationRuningState()
-  getParkAuthLastTime()
 
 }
