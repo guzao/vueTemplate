@@ -45,9 +45,16 @@ export function getPrevMonth (baseDate: Date, gapMonth: number) {
     return nextMonth.toDate()
 }
 
-export const getCurrentMonthFirstDate =  (baseDate: Date) => DayJs(baseDate).startOf('month').toDate()
+export const getCurrentMonthFirstDay =  (baseDate: Date) => DayJs(baseDate).startOf('month').toDate()
 
-export const getCurrentYearFirstDate =  (baseDate: Date) => DayJs(baseDate).startOf('year').toDate()
+export const getCurrentYearFirstDay =  (baseDate: Date) => DayJs(baseDate).startOf('year').toDate()
+
+export function getCurrentMonthLastDay (baseDate: Date | number) {
+    const date = isDate(baseDate) ? baseDate : new Date(baseDate) as Date
+    const prevMonth = DayJs(date).startOf('month').add(1, 'month')
+    return  DayJs(prevMonth).subtract(1, 'day').toDate()
+}
+
 
 /**
  * 根据传入的时间 获取本周的第一天

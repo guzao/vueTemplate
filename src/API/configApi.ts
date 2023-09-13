@@ -69,3 +69,11 @@ export function getDeptList () {
         url: configApiMap.deptList,
     })
 }
+
+/** 设备单元组  */
+export function getUnitGroup (params: any) {
+    return useGet({
+        url: configApiMap.unitGroupList,
+        params
+    })
+}

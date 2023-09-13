@@ -152,7 +152,7 @@ const parkStateBg = computed(() => {
                             </el-icon>
                         </span>
                         <el-collapse-transition class="absolute top-[20px] right-0 bg-[var(--theme-white-bg)]">
-                            <div ref="target" v-show="show" class="w-[360px] px-[10px] py-[20px]">
+                            <div ref="target" v-show="show" class="w-[380px] px-[10px] py-[20px]">
 
                                 <LabelValueUnit>
                                     {{ t('parkOverview.addres') }} <template #value> {{ appData.currentPark.address }} </template>

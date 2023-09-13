@@ -7,7 +7,6 @@ import { getLastElement, } from "../dataUtils"
 const { getLang } = useLang()
 export const getLangKey = () => (getLang() || Common.DEFAULT_LANG_KEY) as 'zh_CN' | 'en_US'
 
-
 const runingIcons = ['', 'icon_runing_chager', 'icon_runing_dischager', 'icon_runing_standy', 'icon_runing_alarm', 'icon_runing_weihu', 'icon_runing_offline']
 const runingTextColor = ['', 'charge_color', 'discharge_color', 'standby_color', 'alarm_color', 'weihu_color', 'offline_color']
 
@@ -107,7 +106,7 @@ export function getCNGBatteryCellBg(value: number, state: number) {
 // ************************************              ************************************ //
 // ************************************ ------------ ************************************ //
 
-const deviceState = messages[getLangKey()].deviceState
+const deviceState = messages[ getLangKey() ].deviceState
 
 const writeDefaultState = (states: string[], index: number) => states[index] || '--'
 
