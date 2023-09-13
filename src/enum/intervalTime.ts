@@ -24,4 +24,7 @@ export const enum IntervalTime {
     /** 五分钟 */
     FIVE_MILLI_SECOND = 1000 * 5 * 60,
 
+    /** 一小时 */
+    ON_EHOURS = 1000 * 60 * 60
+
 }

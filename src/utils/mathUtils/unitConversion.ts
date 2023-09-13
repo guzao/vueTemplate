@@ -1,6 +1,14 @@
 import { isEmptyString, isNull, isString, isStringNull, isUndefined, stringSplit, } from "../dataUtils";
 
+/**
+ * 数值是否是负数
+*/
 export const isNegative = (raw: number) => raw < 0
+
+/**
+ * 数值是否是正无穷或负无穷
+*/
+export const isInfinity = (raw: any) => raw == Infinity || raw == -Infinity
 
 export const toFixed = (raw: number, fractionDigits = 1) => {
     if (raw == 0) return 0
@@ -19,29 +27,38 @@ export function edgeCaseToFixed(raw: any) {
 }
 
 export const unitConversion = (limit: number, size: number) => {
-    var index = 0;
+
+    var index = 0
+
     while (size >= limit) {
-        size = size / limit;
-        index++;
+        size = size / limit
+        index++
     }
+
     return {
         index: index,
         size
-    };
+    }
+
 }
 
 export function unitConversionEdgeProcess(raw: number, limit = 1000) {
 
+    if (isInfinity(raw)) raw = 0
+
     let symbolTag
+
     if (isNegative(raw)) {
         symbolTag = '-'
         raw = +stringSplit(`${raw}`, '-', 1)
     }
+
     const { size, index } = unitConversion(limit, raw)
     return {
         size: symbolTag ? +`${symbolTag}${size}` : size,
         index
     }
+
 }
 
 const writeDefault = (size: string, unit: string) => ( { size, unit } )
@@ -95,7 +112,6 @@ export const conversionUnitPrice = (raw: number, fractionDigits = 4) => conversi
 
 /** 找出最大值 并以此为基础求出行缩放倍率 */
 export function getZoomRato(numbers: number[], units: string[], limit: number = 1000) {
-
     const max = Math.max(...numbers)
     const { index } = unitConversionEdgeProcess(max, limit)
     /** 缩放比 */

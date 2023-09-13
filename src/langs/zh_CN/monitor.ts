@@ -46,5 +46,9 @@ export const parkIncome = {
 
     latYearIncome: '上年收益',
 
-    incomeChart: '收益趋势图'
+    incomeChart: '收益趋势图',
+
+    totalChargeIncome: '总充电金额',
+
+    totaDischargeIncome: '总放电金额',
 }

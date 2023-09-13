@@ -1,10 +1,13 @@
 import DayJs from 'dayjs'
+import { t } from '@/langs'
+import type {  Ref} from 'vue'
 import { useAppData } from '@/store'
 import { getParkIncomeProfile } from '@/API'
+import { computed, ref, watch, nextTick } from 'vue'
+import { useEcharts, useReactiveHttp, useInterval } from '@/hooks'
 import { EChartsOption, EChartsType, graphic } from 'echarts'
-import { useEcharts, useReactiveHttp } from '@/hooks'
-import { computed, Ref, ref, watch, nextTick } from 'vue'
-import { isFalse, paserTime, getFormatter, getWeekFirstDay, getArrayLength, getPriceZoomRationAndUnit } from '@/utils'
+import { isFalse, paserTime, getFormatter, getWeekFirstDay, getArrayLength, getPriceZoomRationAndUnit, toFixed } from '@/utils'
+import { IntervalTime } from '@/enum'
 
 type ActionType = 'prev' | 'next'
 
@@ -39,6 +42,8 @@ export function useIncomeChart() {
         }
     })
 
+    const { _resetInterval } = useInterval(IntervalTime.ON_EHOURS, getResult)
+
     const disabled = computed(() => paserTime(currentTime.value, formatType.value) >= paserTime(appData.currentLastTime, formatType.value))
 
     const prevTime = () => {
@@ -67,9 +72,12 @@ export function useIncomeChart() {
     })
 
     watch(() => appData.currentParkSerial, () => {
+        type.value = 'D'
         currentTime.value = appData.currentLastTime
+        _resetInterval()
         getResult()
     })
+    
 
     return {
         type,
@@ -106,11 +114,15 @@ function renderIncomeChart(renderChart: (oprions: EChartsOption) => EChartsType,
 
     const yData = data.map((item) => item.disChargeCash - item.chargeCash)
 
+    const { unit, zoomLimit } = getPriceZoomRationAndUnit(yData)
+    
     if (getArrayLength(data) >= 24) yData.push(0)
+
+    yData.forEach((item, index) => yData[ index ] = toFixed(item / zoomLimit, 3) as number)
 
     renderChart({
         title: {
-            text: '元',
+            text: unit,
             left: '1%',
             textStyle: {
                 color: 'rgba(153, 153, 153, 1)',
@@ -169,7 +181,7 @@ function renderIncomeChart(renderChart: (oprions: EChartsOption) => EChartsType,
         },
         series: [
             {
-                name: '收益',
+                name: t('common.income'),
                 symbol: 'none',
                 triggerLineEvent: false,
                 type: 'line',

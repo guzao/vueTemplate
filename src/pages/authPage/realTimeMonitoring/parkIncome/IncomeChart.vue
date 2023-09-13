@@ -19,10 +19,10 @@ const { chartRef, type, currentTime, nextTime, prevTime, disabled, formatType, l
                 <div class="flex flex-1">
 
                     <el-select v-model="type" class="w-[80px]  mr-[30px]" size="small">
-                        <el-option label="日" value="D" />
-                        <el-option label="周" value="W" />
-                        <el-option label="月" value="M" />
-                        <el-option label="年" value="Y" />
+                        <el-option :label="t('common.day')" value="D" />
+                        <el-option :label="t('common.week')" value="W" />
+                        <el-option :label="t('common.month')" value="M" />
+                        <el-option :label="t('common.yaer')" value="Y" />
                     </el-select>
 
                     <div class="flex">

@@ -97,19 +97,19 @@ const { appData, parkIncome, loading } = useParkIncome()
 
             <div>
                 <div class="text-center  font-semibold text-[24px] f-dinb text-[var(--charge)]"> {{ conversionUnitPrice(parkIncome.accumulateIncome).size }} </div>
-                <div class="text-center  text-[var(--theme-gray107)]"> 累计收益({{ conversionUnitPrice(parkIncome.accumulateIncome).unit }}) </div>
+                <div class="text-center  text-[var(--theme-gray107)]"> {{  t('parkIncome.totalIncome') }}({{ conversionUnitPrice(parkIncome.accumulateIncome).unit }}) </div>
             </div>
 
             <ul class="flex mt-[20px]">
 
                 <li class="mx-[20px]">
                     <div class="text-center font-semibold text-[24px] f-dinb text-[var(--charge)]"> {{ conversionUnitPrice(parkIncome.accumulateCharge).size }} </div>
-                    <div class="text-center text-[var(--theme-gray107)]"> 充电收益金额({{ conversionUnitPrice(parkIncome.accumulateCharge).unit }}) </div>
+                    <div class="text-center text-[var(--theme-gray107)]"> {{ t('parkIncome.totalChargeIncome') }}({{ conversionUnitPrice(parkIncome.accumulateCharge).unit }}) </div>
                 </li>
 
                 <li class="mx-[20px]">
                     <div class="text-center font-semibold text-[24px] f-dinb text-[var(--discharge)]"> {{ conversionUnitPrice(parkIncome.accumulateDischarge).size }} </div>
-                    <div class="text-center text-[var(--theme-gray107)]"> 放电收益金额({{ conversionUnitPrice(parkIncome.accumulateDischarge).unit }}) </div>
+                    <div class="text-center text-[var(--theme-gray107)]"> {{ t('parkIncome.totaDischargeIncome') }}({{ conversionUnitPrice(parkIncome.accumulateDischarge).unit }}) </div>
                 </li>
 
             </ul>

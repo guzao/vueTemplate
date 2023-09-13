@@ -50,6 +50,10 @@ export const parkIncome = {
 
     latYearIncome: 'LatYear Income',
 
-    incomeChart: 'Income Chart'
+    incomeChart: 'Income Chart',
+
+    totalChargeIncome: 'Total Charge',
+
+    totaDischargeIncome: 'Tota Discharge',
 
 }
