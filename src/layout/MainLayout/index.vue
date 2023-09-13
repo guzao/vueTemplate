@@ -2,8 +2,8 @@
 import { ref, onMounted } from "vue";
 import { layoutConfig } from '@/config'
 import { ElScrollbar } from 'element-plus'
-import { useLayout, useAppData } from '@/store'
 import { Top } from '@element-plus/icons-vue'
+import { useLayout, useAppData } from '@/store'
 
 import Sider from './components/Sider.vue'
 import Header from "./components/Header.vue"
