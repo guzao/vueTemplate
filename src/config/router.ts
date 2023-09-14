@@ -2,7 +2,7 @@ import { login } from '@/ApiMap'
 
 
 /** 使用动态路由 */
-export const useDnamicRouter = false
+export const useDnamicRouter = true
 
 
 

@@ -96,20 +96,20 @@ const { appData, parkIncome, loading } = useParkIncome()
         <div class="h-[392px] mt-[3%] flex justify-center  flex-col items-center bg-contain bg-no-repeat">
 
             <div>
-                <div class="text-center  font-semibold text-[24px] f-dinb text-[var(--charge)]"> {{ conversionUnitPrice(parkIncome.accumulateIncome).size }} </div>
-                <div class="text-center  text-[var(--theme-gray107)]"> {{  t('parkIncome.totalIncome') }}({{ conversionUnitPrice(parkIncome.accumulateIncome).unit }}) </div>
+                <div class="text-center  font-semibold text-[30px] f-dinb text-[var(--charge)]"> {{ conversionUnitPrice(parkIncome.accumulateIncome).size }} </div>
+                <div class="text-center  text-[var(--theme-gray153)]"> {{  t('parkIncome.totalIncome') }}({{ conversionUnitPrice(parkIncome.accumulateIncome).unit }}) </div>
             </div>
 
             <ul class="flex mt-[20px]">
 
                 <li class="mx-[20px]">
                     <div class="text-center font-semibold text-[24px] f-dinb text-[var(--charge)]"> {{ conversionUnitPrice(parkIncome.accumulateCharge).size }} </div>
-                    <div class="text-center text-[var(--theme-gray107)]"> {{ t('parkIncome.totalChargeIncome') }}({{ conversionUnitPrice(parkIncome.accumulateCharge).unit }}) </div>
+                    <div class="text-center text-[var(--theme-gray153)]"> {{ t('parkIncome.totalChargeIncome') }}({{ conversionUnitPrice(parkIncome.accumulateCharge).unit }}) </div>
                 </li>
 
                 <li class="mx-[20px]">
                     <div class="text-center font-semibold text-[24px] f-dinb text-[var(--discharge)]"> {{ conversionUnitPrice(parkIncome.accumulateDischarge).size }} </div>
-                    <div class="text-center text-[var(--theme-gray107)]"> {{ t('parkIncome.totaDischargeIncome') }}({{ conversionUnitPrice(parkIncome.accumulateDischarge).unit }}) </div>
+                    <div class="text-center text-[var(--theme-gray153)]"> {{ t('parkIncome.totaDischargeIncome') }}({{ conversionUnitPrice(parkIncome.accumulateDischarge).unit }}) </div>
                 </li>
 
             </ul>

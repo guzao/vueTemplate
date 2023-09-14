@@ -42,14 +42,14 @@ function addRouters(routers: LoaclRouter[]) {
 
 const addRouter = (routers: RouteRecordRaw[]) => routers.forEach((_r) => router.addRoute(_r))
 
-/** 动态添加404 页面 */
+/** 动态添加 401 页面 */
 export function addErrorPages() {
     addRouter([
         {
             path: '/:path(.*)*',
             // @ts-ignore
             component: () => import('@/pages/staticPage/errorPages/401.vue'),
-            name: '404',
+            name: '401',
             meta: {
                 title: '页面丢了',
             },

@@ -36,8 +36,8 @@ const { chartRef, type, currentTime, nextTime, prevTime, disabled, formatType, l
                             {{ t('common.currentTime') }}：{{ paserTime(currentTime, formatType) }}
                         </div>
                         <div @click="nextTime"
-                            :class="[ disabled ? 'cursor-not-allowed' : ' ' ]"
-                            class="bg-[var(--theme-white-bg)] w-[20px] flex justify-center items-center  rounded-[4px] cursor-pointer ">
+                            :class="[ disabled ? 'cursor-not-allowed' : 'cursor-pointer' ]"
+                            class="bg-[var(--theme-white-bg)] w-[20px] flex justify-center items-center  rounded-[4px]  ">
                             <el-icon>
                                 <ArrowRight />
                             </el-icon>

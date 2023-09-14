@@ -4,8 +4,8 @@ import type {  Ref} from 'vue'
 import { useAppData } from '@/store'
 import { getParkIncomeProfile } from '@/API'
 import { computed, ref, watch, nextTick } from 'vue'
-import { useEcharts, useReactiveHttp, useInterval } from '@/hooks'
 import { EChartsOption, EChartsType, graphic } from 'echarts'
+import { useEcharts, useReactiveHttp, useInterval } from '@/hooks'
 import { isFalse, paserTime, getFormatter, getWeekFirstDay, getArrayLength, getPriceZoomRationAndUnit, toFixed } from '@/utils'
 import { IntervalTime } from '@/enum'
 
@@ -44,7 +44,10 @@ export function useIncomeChart() {
 
     const { _resetInterval } = useInterval(IntervalTime.ON_EHOURS, getResult)
 
-    const disabled = computed(() => paserTime(currentTime.value, formatType.value) >= paserTime(appData.currentLastTime, formatType.value))
+    const disabled = computed(() => {
+        
+        return paserTime(currentTime.value, formatType.value) >= paserTime(appData.currentLastTime, formatType.value)
+    })
 
     const prevTime = () => {
         setTime('prev')
