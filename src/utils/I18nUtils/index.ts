@@ -10,9 +10,10 @@ const { getLang }  = useLang()
 /** 获取当前的语言数据对象 */
 export const getLocalLangMessage = () => {
     try {
-       return  messages[ getLangKey() || Common.DEFAULT_LANG_KEY]
+       return messages[ getLangKey() || Common.DEFAULT_LANG_KEY ]
     } catch (error) {
         console.log('error');
+        alert('=====')
         return  messages[ Common.DEFAULT_LANG_KEY ]
     }
 }

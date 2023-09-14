@@ -1,7 +1,8 @@
 import { watch } from 'vue'
 import { useAppData } from '@/store'
+import { IntervalTime } from '@/enum'
 import { getParkIncome } from '@/API'
-import { useReactiveHttp_ } from '@/hooks'
+import { useReactiveHttp_, useInterval } from '@/hooks'
 
 export function useParkIncome () {
 
@@ -12,7 +13,12 @@ export function useParkIncome () {
         request: () => getParkIncome(appData.currentParkSerial),
     })
 
-    watch(() => appData.currentParkSerial,  getParkIncomeData)
+    const { _resetInterval } = useInterval(IntervalTime.ONE_HOURS, getParkIncomeData)
+
+    watch(() => appData.currentParkSerial,  () => {
+        _resetInterval()
+        getParkIncomeData()
+    })
 
     return {
         loading,

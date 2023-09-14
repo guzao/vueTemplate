@@ -4,6 +4,9 @@ const gapLimit = 12
 /** Heder 高度 */
 const headerHeight = 58
 
+/**
+ * 布局配置
+*/
 export const layoutConfig = {
 
     /** Heder 高度 */
@@ -11,6 +14,9 @@ export const layoutConfig = {
 
     /** 是否固定全局 Heder */
     dynamicHeader: true,
+
+    /** 是否固定高度 */ 
+    fixHeight: false,
 
     /** 滚动条距离顶部多少时隐藏 Heder的阈值  最小值 = headerHeight + gapLimit  */
     offset: headerHeight + gapLimit,
@@ -34,7 +40,7 @@ export const layoutConfig = {
     useLocalRouter: true,
 
     /** 软件版本 */
-    version: ' 1.1.1',
+    version: ' 0.2.1',
 
     /** 视图模式 */ 
     viewModel: [

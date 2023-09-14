@@ -42,7 +42,7 @@ export function useIncomeChart() {
         }
     })
 
-    const { _resetInterval } = useInterval(IntervalTime.ON_EHOURS, getResult)
+    const { _resetInterval } = useInterval(IntervalTime.ONE_HOURS, getResult)
 
     const disabled = computed(() => {
         
