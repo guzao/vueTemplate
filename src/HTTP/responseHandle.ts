@@ -9,12 +9,14 @@ let userLogout: () => Promise<void>
 
 const { tipsInfo, common } = getLocalLangMessage()
 
-// 是否显示重新登录
+/**
+ * 标记是否是需要重新登陆
+*/
 export let isRelogin = { show: false };
 
 export async function responseHandle(response: AxiosResponse) {
 
-  const {  data: { code, msg }, status  } = response
+  const {  data: { code, msg }, request } = response
 
   if (code === HTTPSTATE.UNAUTHORIZED) {
     handleUnauthorized()
@@ -26,9 +28,16 @@ export async function responseHandle(response: AxiosResponse) {
     return Promise.reject(new Error(msg))
   }
   
+  if (request.responseType == 'blob' || request.responseType == 'arraybuffer' ) {
+    response.data.disposition = response.headers['content-disposition']
+  }
+
   return response.data
 }
 
+/**
+ * 用户权限问题处理
+*/
 async function handleUnauthorized () {
 
   if (isTrue(isRelogin.show)) return 
