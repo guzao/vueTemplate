@@ -291,7 +291,7 @@ export const loaclRouter: LoaclRouter[] = [
                 path: '/logs/operlog',
                 hidden: false,
                 layoutType: 'Components',
-                component: 'authPage/logs/logininfor'
+                component: 'authPage/logs/operlog'
             },
         ]
     }

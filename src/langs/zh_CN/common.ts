@@ -44,7 +44,7 @@ export const common = {
 
     monthCharge: '月充',
 
-    moonthDischarge: '月放',
+    monthDischarge: '月放',
 
     yearCharge: '年充',
 

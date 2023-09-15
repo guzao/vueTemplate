@@ -202,7 +202,7 @@ const parkStateBg = computed(() => {
                         </div>
                     </li>
                     <li>
-                        <div class="text-[14px] text-[var(--theme-gray107)]">{{ t('common.moonthDischarge') }}</div>
+                        <div class="text-[14px] text-[var(--theme-gray107)]">{{ t('common.monthDischarge') }}</div>
                         <div class="h-[12px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
                         <div
                             class="h-[32px] text-[18xp] f-dinb text-[var-(--theme-black51)] text_bg_img pl-[8px] box-border leading-[32px]">
