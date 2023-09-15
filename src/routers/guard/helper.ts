@@ -6,7 +6,7 @@ import MainLayout from '@/layout/MainLayout/index.vue'
 import { getLocalLangMessage, isTrue, deepClone, arrayIsNotEmpty } from '@/utils'
 import { NavigationGuardNext, RouteLocationNormalized, RouteRecordRaw } from 'vue-router'
 
-const { tipsInfo = {} as any  } = getLocalLangMessage()
+const { tipsInfo  } = getLocalLangMessage()
 
 /** 获取页面组件的资源 */
 const routeAllPathToCompMap = import.meta.glob(`@/pages/**/*.vue`);

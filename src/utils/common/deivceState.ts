@@ -84,7 +84,7 @@ export const getDeviceCNGBatteryMarkInfo = (state: number) => deviceCNGBatteryMa
 
 const getDeviceCNGBatteryCellInfo = (state: number) => deviceCNGBatteryCells[state] || getLastElement(deviceCNGBatteryCells)
 
-/** 获取储能箱电池小节的背景图 */
+/** 获取储能柜电池小节的背景图 */
 export function getCNGBatteryCellBg(value: number, state: number) {
 
     let initCell = Array.from({ length: 10 }).map(_ => 'base_cell_cng')

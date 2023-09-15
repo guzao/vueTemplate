@@ -1,4 +1,4 @@
-import { arrayGroupByMap, objectSize, getMaxElement, objectForEach } from "../dataUtils"
+import { arrayGroupByMap, objectSize, getMaxElement, objectForEach, arrayIsEmpty } from "../dataUtils"
 
 type GenerateDnamicTableDataParams <T> = {
     /** 以某个字段分组 */
@@ -78,9 +78,11 @@ function generateTableData  <T> (raw: T [], params: GenerateDnamicTableDataParam
 
 function generateTableHeader <T> (tableData: any, params: GenerateDnamicTableDataParams<T>) {
 
-    const {  splitSymbol = "$" } = params
-
     const headerData: DnamicTableDataHeaderData [] = [] 
+
+    if (arrayIsEmpty(tableData)) return headerData
+
+    const {  splitSymbol = "$" } = params
 
     /**
      * 取到行数据中字段最多的数据 以此为表头

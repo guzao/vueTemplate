@@ -63,10 +63,10 @@ export function arrayChunk<T>(data: T[] = [], groupNmber: number) {
 
 
 /**
- * 查找数组中的最大元素
+ * * 查找数组中的最大元素
+ * * 使用时注意数据源内的元素不能为空！！！
 */
 export const getMaxElement = <T>(data: T[], callback: MaxElementCallback<T>) => data.reduce((maxEl, cur) => callback(maxEl, cur) ? cur : maxEl, data[0])
-
 
 /**
  * 数据排序 不影响原数据

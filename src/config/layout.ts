@@ -40,7 +40,7 @@ export const layoutConfig = {
     useLocalRouter: true,
 
     /** 软件版本 */
-    version: ' 0.2.1',
+    version: ' 2.0.1',
 
     /** 视图模式 */ 
     viewModel: [
