@@ -1,10 +1,11 @@
 <script lang="ts" setup>
+import { t } from '@/langs'
 import { useAppData } from '@/store'
 import { getParkRunReport } from '@/API'
 import { ref, reactive, computed, watch, nextTick } from 'vue'
 import { useEcharts, useReactiveHttp, useLocalPagnation } from '@/hooks'
+import { TableData, processData, render, dateFormatterType } from '../tools'
 import { paserTime, getArrayLength, getPrevMonth, getDateCycles } from '@/utils'
-import { TableData, processData, render, dateFormatterType } from './tools'
 
 import TitleBox from '@/components/common/TitleBox.vue';
 import LabelValueUnit from '@/components/common/LabelValueUnit.vue'
@@ -76,9 +77,9 @@ watch(() => form.type, (type) =>  {
 
             <el-form-item label="数据周期" prop="type">
                 <el-radio-group v-model="form.type">
-                    <el-radio-button label="D"> 日趋势 </el-radio-button>
-                    <el-radio-button label="M"> 月趋势 </el-radio-button>
-                    <el-radio-button label="Y"> 年趋势 </el-radio-button>
+                    <el-radio-button label="D"> {{  t('common.day') }} </el-radio-button>
+                    <el-radio-button label="M"> {{ t('common.month') }} </el-radio-button>
+                    <el-radio-button label="Y"> {{ t('common.yaer') }} </el-radio-button>
                 </el-radio-group>
             </el-form-item>
 

@@ -1,5 +1,5 @@
 import { router } from '@/routers'
-import { State, Common } from '@/enum'
+import { State, Common, Type } from '@/enum'
 import { useUser, useAppData } from '@/store'
 import { ElNotification } from 'element-plus'
 import MainLayout from '@/layout/MainLayout/index.vue'
@@ -98,7 +98,7 @@ function setNewTabRouter(item: LoaclRouter, routers: LoaclRouter[], index: numbe
 /** 业务路由处理 */
 export function businessProcess(to: RouteLocationNormalized, form: RouteLocationNormalized, next: NavigationGuardNext) {
 
-    const { currentRelease } = useAppData()
+    const { currentRelease, currentParkType } = useAppData()
 
     const { userInfo, getRoles } = useUser()
 
@@ -121,6 +121,17 @@ export function businessProcess(to: RouteLocationNormalized, form: RouteLocation
             return next(Common.HOME_PAGE)
         }
     }
+
+    // 如果电站不是工商业 收益界面不用展示
+    // if (to.path !== Common.HOME_PAGE) {
+    //     console.log(to.path, currentParkType);
+    //     if (currentParkType == `${Type.NUMBER_CONTAINER}` && to.path.includes('/incomeAnalysis')) {
+    //         // ElNotification({ title: tipsInfo.tips, message: tipsInfo.parkNotRelease, type: 'warning' })
+    //         ElNotification({ title: tipsInfo.tips, message: '仅工商业储能有收益数据', type: 'warning' })
+    //         return next(Common.HOME_PAGE)
+    //     }
+    // }
+
 
     // 工商业才显示收益
 

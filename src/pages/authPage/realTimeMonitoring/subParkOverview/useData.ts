@@ -23,7 +23,7 @@ export function useData() {
     /** 电站运行概览 */
     const { result: parkRuningInfo, getResult, } = useReactiveHttp({
         initData: {} as ParkRuningInfo,
-        request: () => getStationInfo(appData.parkSerial),
+        request: () => getStationInfo({ stationSerial: appData.parkSerial, type: 'DC' }),
         requestCallback(res) {
             res.data.code = appData.currentParkSerial
             return res.data

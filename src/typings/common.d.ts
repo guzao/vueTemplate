@@ -1,3 +1,10 @@
+/**
+ * * 采集点类型
+ * * @param DC 直流
+ * * @param AC 交流
+*/
+type ElectricPowerType = 'DC' | 'AC'
+
 
 /** 路由模式 */
 type RouterType = 'WebHistory' | 'WebHashHistory'
