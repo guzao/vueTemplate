@@ -111,12 +111,12 @@ export function rendererBard(renderChart: (oprions: EChartsOption) => EChartsTyp
 /** 合并单元格 */
 export function objectSpanMethod(limit: number, { row, column, rowIndex, columnIndex }: any) {
     // 处理子站  处理合计
-    if (isTrue(columnIndex === 0) || isTrue(columnIndex === 5)) {
+    if (isTrue(columnIndex === 0) || isTrue(columnIndex === 5) ||  isTrue(columnIndex === 10) ) {
         const limit = row.limit
         return limit && isTrue(rowIndex % limit === 0) ? [limit, 1] : [0, 0]
     }
     // 处理总计
-    if (isTrue(columnIndex === 6)) {
+    if (isTrue(columnIndex === 6) || isTrue(columnIndex === 11)) {
         return isTrue(rowIndex % limit === 0) ? [limit, 1] : [0, 0]
     }
 

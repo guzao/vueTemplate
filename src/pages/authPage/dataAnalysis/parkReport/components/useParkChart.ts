@@ -2,18 +2,25 @@ import { useAppData } from '@/store'
 import { getParkRunReport } from '@/API'
 import { ref, reactive, computed, watch, nextTick } from 'vue'
 import { paserTime, getPrevMonth, getDateCycles, sorted } from '@/utils'
-import { useEcharts, useReactiveHttp, useLocalPagnation } from '@/hooks'
 import { TableData, processData, render, dateFormatterType } from '../tools'
+import { useEcharts, useReactiveHttp, useLocalPagnation, useSelectAll, useDict } from '@/hooks'
 
 export function useParkChart() {
 
     const appdate = useAppData()
 
+    const { result: dictValue  } = useDict('charge_discharge_type', true)
+
+    const { checkAll, checkedIds, handleCheckAllChange, handleCheckedIdsChange, resetSelectAll, isIndeterminate } = useSelectAll(dictValue, 'dictValue')
+
+    handleCheckedIdsChange([ 'dc' ]as any)
+
     const form = reactive({
         type: 'D',
         startTime: new Date(),
         endTime: new Date(),
-        date: [getPrevMonth(new Date(), 1), new Date()]
+        date: [getPrevMonth(new Date(), 1), new Date()],
+        types: checkedIds
     })
 
     const timeType = computed(() => {
@@ -64,6 +71,7 @@ export function useParkChart() {
     })
 
     return {
+        dictValue,
         getResult,
         pageParams,
         tableData,
@@ -72,7 +80,13 @@ export function useParkChart() {
         currentPageData,
         loading,
         chartRef,
-        form
+        form,
+        checkAll, 
+        checkedIds, 
+        isIndeterminate,
+        handleCheckAllChange, 
+        handleCheckedIdsChange, 
+        resetSelectAll 
     }
 
 }

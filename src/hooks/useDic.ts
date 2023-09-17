@@ -7,15 +7,15 @@ const { getLang } = useLang()
 
 
 /** 字典表 */
-export function useDict (type: DictType) {
+export function useDict (type: DictType, Immediately = false) {
 
     /** 数值标识 映射数值名称 */
     const dictLabel = ref<Record<string, string>>({})
 
-    const { result, getResult } =  useReactiveHttp({
+    const { result, getResult, loading } =  useReactiveHttp({
         initData: [] as DictTypeData [],
         request: () => getDictType(type),
-        Immediately: false,
+        Immediately: Immediately,
         requestCallback: ({ data }) => {
             data.forEach((item: DictTypeData) => {
                 const { dictLabel, dictLabelEn } = item
@@ -29,7 +29,8 @@ export function useDict (type: DictType) {
     return {
         getResult,
         result,
-        dictLabel
+        dictLabel,
+        loading
     }
 
 }

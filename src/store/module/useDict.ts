@@ -41,6 +41,9 @@ const { getResult: getDeviceType, dictLabel: deviceTypeictLabel, result: deviceT
 /** 告警等级 */
 const { getResult: getWarningLevel, dictLabel: warningLevelLabel, result: warningLevel } = useDictAction('eos_level')
 
+/** 充放电类型 */
+const { getResult: getChargeDisChargeType, dictLabel: chargeDisChargeLabel, result: chargeDisCharge } = useDictAction('charge_discharge_type')
+
 
 
 /**
@@ -140,7 +143,14 @@ export const useDicts = defineStore('useDict', {
                 dictValue: [] as DictTypeData[],
                 /** 数据是否已经被缓存 */
                 loaded: false
-            }
+            },
+
+            chargeDisChargeType: {
+                dictLabel: {} as Record<string, string>,
+                dictValue: [] as DictTypeData[],
+                /** 数据是否已经被缓存 */
+                loaded: false
+            },
 
         }
     },
@@ -301,6 +311,18 @@ export const useDicts = defineStore('useDict', {
                 })
             }
             return state.warningLevel
+        },
+
+        /** 充放电采集点类型 */
+        chargeDisChargeDict(state) {
+            if (isFalse(state.chargeDisChargeType.loaded)) {
+                getChargeDisChargeType().then(res => {
+                    state.chargeDisChargeType.dictLabel = chargeDisChargeLabel.value
+                    state.chargeDisChargeType.dictValue = chargeDisCharge.value
+                    state.chargeDisChargeType.loaded = true
+                })
+            }
+            return state.chargeDisChargeType
         },
 
     },

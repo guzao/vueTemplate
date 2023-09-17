@@ -46,7 +46,7 @@ type DailyReportDataData = {
     subName: string;
     discharge: string;
     efficiency: number;
-    limit: number
+    limit: number;
 }
 
 /** 电站设备充放电数据 */
@@ -54,7 +54,9 @@ type DailyReportData = {
     charge: number,
     discharge: number,
     data: DailyReportDataData[],
-    subNum: number[]
+    subNum: number[],
+    pcsCharge : number
+    pcsDischarge : number
 }
 
 /** 设备历史充放电数据接口参数 */

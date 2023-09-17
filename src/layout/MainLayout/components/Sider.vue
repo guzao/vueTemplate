@@ -33,8 +33,6 @@ const routerPush = (data: UserRouter) => {
 
 <template>
 
-  <!-- :collapse="appData.isCollapse"  -->
-
   <el-menu :default-active="defaultActive" class="el-menu-vertical-demo" unique-opened
     :active-text-color="sliderConfig.activeTextColor" :background-color="sliderConfig.backgroundColor"
     style="border-right: none;">
@@ -46,7 +44,6 @@ const routerPush = (data: UserRouter) => {
   </el-menu>
   
 </template>
-
   
 <style>
 .el-menu-vertical-demo:not(.el-menu--collapse) {

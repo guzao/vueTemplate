@@ -5,7 +5,11 @@ import { useParkChart } from './useParkChart'
 import TitleBox from '@/components/common/TitleBox.vue'
 import LabelValueUnit from '@/components/common/LabelValueUnit.vue'
 
-const { form, loading, getResult, timeType, currentPageData, currentChange, pageParams, tableData, chartRef } = useParkChart()
+const { 
+    form, loading, getResult, timeType, currentPageData, currentChange, pageParams, 
+    tableData, chartRef, checkAll, handleCheckAllChange, handleCheckedIdsChange, 
+    isIndeterminate, dictValue
+} = useParkChart()
 
 </script>
 
@@ -28,6 +32,21 @@ const { form, loading, getResult, timeType, currentPageData, currentChange, page
             <el-form-item label="数据时间" prop="date" style="width: 450px;">
                 <el-date-picker @change="getResult" v-model="form.date" :type="timeType" range-separator="-"
                     start-placeholder="Start date" :clearable="false" end-placeholder="End date" />
+            </el-form-item>
+
+
+            <el-form-item label="设备单元" prop="type">
+
+                <el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" @change="handleCheckAllChange"
+                    class="pr-4">全选</el-checkbox>
+
+                <el-checkbox-group v-model="form.types" @change="handleCheckedIdsChange">
+
+                    <el-checkbox v-for="item in dictValue" :label="item.dictValue" :key="item.dictValue"> {{ item.dictLabel
+                    }}</el-checkbox>
+
+                </el-checkbox-group>
+
             </el-form-item>
 
         </el-form>
@@ -128,8 +147,8 @@ const { form, loading, getResult, timeType, currentPageData, currentChange, page
         </el-table>
 
         <div class="flex justify-end mt-[26px]">
-            <el-pagination background layout="prev, pager, next, total" :page-sizes="[100, 200, 300, 400]" @currentChange="currentChange"
-                :pageSize="pageParams.pageSize" :total="getArrayLength(tableData)" />
+            <el-pagination background layout="prev, pager, next, total" :page-sizes="[100, 200, 300, 400]"
+                @currentChange="currentChange" :pageSize="pageParams.pageSize" :total="getArrayLength(tableData)" />
         </div>
 
     </div>
