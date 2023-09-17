@@ -1,38 +1,10 @@
 <script lang="ts" setup>
-import { watch } from 'vue'
-import { useAppData } from '@/store'
-import { getStationInfo } from '@/API'
-import { useReactiveHttp, useReactiveHttp_ } from '@/hooks'
+import { useStatical } from './useStatical'
 
 import InfoItem from './InfoItem.vue'
-
 import TitleBox from '@/components/common/TitleBox.vue'
 
-const appData = useAppData()
-
-const { result: parkOverview, getResult: getParkOverview, loading } = useReactiveHttp({
-    initData: {} as ParkRuningInfo,
-    request: () => getStationInfo({ stationSerial: appData.parkSerial, type: 'DC' }),
-    requestCallback: (res) => {
-        parkOverview.value = res.data
-        return res.data
-    },
-})
-
-const [PCSData, getPcsData, PCSLoading] = useReactiveHttp_({
-    initData: {} as ParkRuningInfo,
-    request: () => getStationInfo({ stationSerial: appData.parkSerial, type: 'AC' }),
-    requestCallback: (res) => {
-        parkOverview.value = res.data
-        return res.data
-    },
-})
-
-watch(() => appData.currentParkSerial, () => {
-    getPcsData()
-    getParkOverview()
-    console.log(PCSData);
-})
+const { parkOverview, loading, PCSData, PCSLoading } = useStatical()
 
 </script>
 

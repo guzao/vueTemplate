@@ -28,14 +28,15 @@ export const enum Common {
     /** 设备详情页 */
     DEVICE_DETAIL_PAGE = '/monitor/deviceDetail',
 
+    /** 电站收益视图 */
+    PARK_INCOME = '/monitor/parkIncome',
+
     /** 修改密码页 */
     EDIT_PASSWORD_PAGE = '/config/personCenter/editPassword',
 
     /** 默认语言 */
     DEFAULT_LANG_KEY = 'zh_CN',
 
-    
-    
 
 }
 

@@ -14,28 +14,44 @@ export type TableData = {
 }
 
 export const processData = ({ expressions, timestamps, values }: ParkRunReportData) => {
-    const chargeIndex = expressions.indexOf('charge')
-    const dischargeIndex = expressions.indexOf('disCharge')
-    const charge = values[chargeIndex]
-    const discharge = values[dischargeIndex]
+
+    const { chargeIndex, dischargeIndex, PCSchargeIndex, PCSdischargeIndex } = getIndex(expressions)
+
+    const { charge, discharge, PCScharge = [], PCSdischarge = [] } = getChargeAndDiasCharge(values, chargeIndex, dischargeIndex, PCSchargeIndex, PCSdischargeIndex)
+
     return timestamps.map((time, index) => {
-        const raw_charge = charge[index]
+
+        const raw_charge = charge[index] as number
         const raw_discharge = discharge[index]
-        const { size: chargeSzie, unit: chargeUnit } = conversionUnitKWh(charge[index])
-        const { size: dischargeSzie, unit: dischargeUnit } = conversionUnitKWh(discharge[index])
+        const PCSraw_charge = PCScharge[PCSchargeIndex]
+        const PCSraw_discharge = PCSdischarge[PCSdischargeIndex]
+
+        const { size: chargeSize, unit: chargeUnit } = conversionUnitKWh(charge[index])
+        const { size: dischargeSize, unit: dischargeUnit } = conversionUnitKWh(discharge[index])
+
+        const { size: PCSchargeSize, unit: PCSchargeUnit } = conversionUnitKWh(PCScharge[index])
+        const { size: PCSdischargeSize, unit: PCSdischargeUnit } = conversionUnitKWh(PCSdischarge[index])
+
         const efficiency = getEfficiency(raw_charge, raw_discharge)
+        const PCSefficiency = getEfficiency(PCSraw_charge, PCSraw_discharge)
         return {
             date: time,
             time: paserTime(time, 'YYYY-MM-DD'),
-            charge: chargeSzie,
+            charge: chargeSize,
             chargeUnit,
-            discharge: dischargeSzie,
+            discharge: dischargeSize,
             dischargeUnit,
             raw_charge,
             raw_discharge,
-            efficiency
+            efficiency,
+            PCSefficiency,
+            PCSchargeSize,
+            PCSchargeUnit,
+            PCSdischargeSize,
+            PCSdischargeUnit
         }
     })
+
 }
 
 const createChartData = (data: TableData[]) => {
@@ -108,14 +124,18 @@ export const dateFormatterType: Record<string, string> = {
 // 历史数据
 export const processTableRowData = (item: any, splitSymbol: any) => {
     const tableDataItem = {} as Record<string, string>
-    const { id, charge, time, name, disCharge } = item as any
+    const { id, charge, time, name, disCharge, pcsCharge, pcsDisCharge } = item as any
     const chargeKey = `charge_${id}`
     const disChargeKey = `discharge_${id}`
+    const PCSchargeKey = `PCScharge_${id}`
+    const PCSdisChargeKey = `PCSdisCharge_${id}`
     const nameKey = `${name}${splitSymbol}${id}`
     const idKey = `${id}`
     tableDataItem.time = time
     tableDataItem[chargeKey] = charge
     tableDataItem[disChargeKey] = disCharge
+    tableDataItem[PCSchargeKey] = pcsCharge
+    tableDataItem[PCSdisChargeKey] = pcsDisCharge
     tableDataItem[nameKey] = name
     tableDataItem[idKey] = idKey
     return tableDataItem
@@ -204,4 +224,25 @@ export const renderLine = (data: HistoryReportData[], renderChart: (oprions: ECh
         legend: {},
         series: series
     })
+}
+
+function getChargeAndDiasCharge(values: number[][], chargeIndex: number, dischargeIndex: number, PCSchargeIndex: number, PCSdischargeIndex: number) {
+    const charge = values[chargeIndex]
+    const discharge = values[dischargeIndex]
+    const PCScharge = values[PCSchargeIndex]
+    const PCSdischarge = values[PCSdischargeIndex]
+    return { charge, discharge, PCScharge, PCSdischarge }
+}
+
+function getIndex(expressions: string[]) {
+
+    const chargeIndex = expressions.indexOf('charge')
+
+    const dischargeIndex = expressions.indexOf('disCharge')
+
+    const PCSchargeIndex = expressions.indexOf('pcsCharge')
+
+    const PCSdischargeIndex = expressions.indexOf('pcsDisCharge')
+
+    return { chargeIndex, dischargeIndex, PCSchargeIndex, PCSdischargeIndex }
 }

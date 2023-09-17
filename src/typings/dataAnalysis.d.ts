@@ -74,6 +74,8 @@ type HistoryReportData = {
     time: string
     disCharge: string
     [key: string]: any
+    pcsCharge: number
+    pcsDisCharge: number
 }
 
 /** 设备告警数据 */
