@@ -68,10 +68,7 @@ export function deepClone <T> (object: T): T {
     let result: any;
     if (isArray(object)) result = []
     if (isObject(object)) result = {}
-    if (isDate(object)) {
-        result = new Date(+object)
-        return result
-    }
+    if (isDate(object)) return new Date(+object) as any
 
     for (const key in object) {
         if (Object.prototype.hasOwnProperty.call(object, key)) {

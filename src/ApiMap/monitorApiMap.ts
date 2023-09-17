@@ -1,5 +1,10 @@
 export const monitor = {
 
+    /** 获取电站收益信息 */
+    parkIncome: '/ess/income/incomeAll?stationSerial=',
+
+    incomeProfile: '/ess/income/incomeProfile',
+
     /** 电站列表 */
     stationList: '/ess/station/list',
 

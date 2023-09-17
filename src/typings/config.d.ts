@@ -179,3 +179,19 @@ type Post = {
     status: string
     flag: boolean
 }
+
+/**
+ *  模型单元组
+*/
+type UnitGroupData = {
+    createBy: any,
+    createTime: string,
+    updateBy: null,
+    updateTime: string,
+    remark: null,
+    id: number,
+    stationSerial: string,
+    name: string,
+    sort: number,
+    delFlag: number
+}

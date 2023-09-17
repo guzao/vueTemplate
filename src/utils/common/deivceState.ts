@@ -7,7 +7,6 @@ import { getLastElement, } from "../dataUtils"
 const { getLang } = useLang()
 export const getLangKey = () => (getLang() || Common.DEFAULT_LANG_KEY) as 'zh_CN' | 'en_US'
 
-
 const runingIcons = ['', 'icon_runing_chager', 'icon_runing_dischager', 'icon_runing_standy', 'icon_runing_alarm', 'icon_runing_weihu', 'icon_runing_offline']
 const runingTextColor = ['', 'charge_color', 'discharge_color', 'standby_color', 'alarm_color', 'weihu_color', 'offline_color']
 
@@ -85,7 +84,7 @@ export const getDeviceCNGBatteryMarkInfo = (state: number) => deviceCNGBatteryMa
 
 const getDeviceCNGBatteryCellInfo = (state: number) => deviceCNGBatteryCells[state] || getLastElement(deviceCNGBatteryCells)
 
-/** 获取储能箱电池小节的背景图 */
+/** 获取储能柜电池小节的背景图 */
 export function getCNGBatteryCellBg(value: number, state: number) {
 
     let initCell = Array.from({ length: 10 }).map(_ => 'base_cell_cng')
@@ -98,3 +97,27 @@ export function getCNGBatteryCellBg(value: number, state: number) {
 
     return initCell
 }
+
+
+
+// ************************************ ------------ ************************************ //
+// ************************************              ************************************ //
+// ************************************   设备状态    ************************************ //
+// ************************************              ************************************ //
+// ************************************ ------------ ************************************ //
+
+const deviceState = messages[ getLangKey() ].deviceState
+
+const writeDefaultState = (states: string[], index: number) => states[index] || '--'
+
+export const getARState = (index: number) => writeDefaultState(deviceState.arState, index)
+
+export const getIOState = (index: number) => writeDefaultState(deviceState.ioState, index)
+
+export const getPCSState = (index: number) => writeDefaultState(deviceState.pcsState, index)
+
+export const getBMSkState = (index: number) => writeDefaultState(deviceState.bmsState, index)
+
+export const getUnitState = (index: number) => writeDefaultState(deviceState.unitState, index)
+
+export const getStackState = (index: number) => writeDefaultState(deviceState.statckState, index)

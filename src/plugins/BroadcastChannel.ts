@@ -24,6 +24,7 @@ class SmartOpsBroadcastChannel {
 
     install() {
         this.onMessage()
+        this.close()
     }
 
     onMessage() {
@@ -51,7 +52,9 @@ class SmartOpsBroadcastChannel {
     }
 
     close() {
-        this.channel.close()
+        window.addEventListener('beforeunload', e => {
+            this.channel.close()
+        })
     }
 
     onPostMessage(type: PostMeaageType, params: Record<string, any>) {

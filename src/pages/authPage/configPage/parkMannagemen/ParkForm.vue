@@ -56,7 +56,7 @@ defineExpose({
 
             <el-col :span="12">
                 <el-form-item label="行业类型" prop="industryType">
-                    <el-select v-model="parkForm.industryType" placeholder="Activity zone" style="width: 100%;">
+                    <el-select v-model="parkForm.industryType" placeholder="请输入" style="width: 100%;">
                         <el-option v-for="item in dicts.industryTypeDict.dictValue" :label="item.dictLabel"
                             :value="item.dictValue" />
                     </el-select>
@@ -69,7 +69,7 @@ defineExpose({
 
             <el-col :span="12">
                 <el-form-item label="电站类型" prop="type">
-                    <el-select v-model="parkForm.type" placeholder="Activity zone" style="width: 100%;">
+                    <el-select v-model="parkForm.type" placeholder="请输入" style="width: 100%;">
                         <el-option v-for="item in dicts.parkTypeDict.dictValue" :label="item.dictLabel"
                             :value="item.dictValue" />
                     </el-select>
@@ -78,7 +78,7 @@ defineExpose({
 
             <el-col :span="12">
                 <el-form-item label="用途类型" prop="useType">
-                    <el-select v-model="parkForm.useType" placeholder="Activity zone" style="width: 100%;">
+                    <el-select v-model="parkForm.useType" placeholder="请输入" style="width: 100%;">
                         <el-option v-for="item in dicts.parkUseTypeDict.dictValue" :label="item.dictLabel"
                             :value="item.dictValue" />
                     </el-select>

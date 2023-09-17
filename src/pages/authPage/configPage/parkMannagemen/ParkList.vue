@@ -76,7 +76,7 @@ defineProps({
 
                 <LabelValueUnit class="my-[5px]" :font-size="15">
                     场站类型 <div class="inline-block w-[30px]"></div>
-                    <template #value> {{ dicts.parkTypeDict.dictLabel[item.status] }} </template>
+                    <template #value> {{ dicts.parkTypeDict.dictLabel[item.type] }} </template>
                 </LabelValueUnit>
 
                 <LabelValueUnit class="my-[5px]" :font-size="15">

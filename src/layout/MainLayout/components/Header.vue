@@ -16,7 +16,7 @@ const appData = useAppData()
 
         <div class="flex justify-between  items-center h-full">
 
-            <el-button text :icon=" appData.isCollapse ?  Expand : Fold " @click="appData.chnageIsCollapse" class="ml-[10px]"> </el-button>
+            <el-button text :icon=" appData.isCollapse ?  Expand : Fold " @click="appData.changeIsCollapse" class="ml-[10px]"> </el-button>
 
             <!-- 侧边栏展示到header  -->
             <HeaderSlider :style="`opacity:${ !appData.isCollapse ? 1 : 0 };${ appData.isCollapse ? 'pointer-events: none;' : '' }`"  />

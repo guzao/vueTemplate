@@ -1,7 +1,7 @@
-import { arrayGroupByMap, objectSize, getMaxElement, objectForEach } from "../dataUtils"
+import { arrayGroupByMap, objectSize, getMaxElement, objectForEach, arrayIsEmpty } from "../dataUtils"
 
 type GenerateDnamicTableDataParams <T> = {
-    /** 以某个字段为类别 */
+    /** 以某个字段分组 */
     key: keyof T, 
 
     /** 拼接参数 */
@@ -78,11 +78,16 @@ function generateTableData  <T> (raw: T [], params: GenerateDnamicTableDataParam
 
 function generateTableHeader <T> (tableData: any, params: GenerateDnamicTableDataParams<T>) {
 
-    const {  splitSymbol = "$" } = params
-
     const headerData: DnamicTableDataHeaderData [] = [] 
 
-    const firstElement = getMaxElement(tableData, (maxEl, item) => objectSize(item) > objectSize(maxEl)) as any
+    if (arrayIsEmpty(tableData)) return headerData
+
+    const {  splitSymbol = "$" } = params
+
+    /**
+     * 取到行数据中字段最多的数据 以此为表头
+    */
+    const firstElement = getMaxElement(tableData, (maxEl, item) => objectSize(item) > objectSize(maxEl)) as Record<string, any>
 
     objectForEach(firstElement, (_, key) => {
         if ( key.includes(splitSymbol) ) {
@@ -93,4 +98,3 @@ function generateTableHeader <T> (tableData: any, params: GenerateDnamicTableDat
 
     return headerData
 }
-

@@ -4,7 +4,7 @@ import { layoutConfig } from '@/config'
 
 <template>
     <div class="flex h-[30px] items-center justify-center text-[12px] text-[var(--theme-gray153)]">
-        {{ layoutConfig.footerText }}  version<strong>{{ layoutConfig.version }}</strong> 
+        {{ layoutConfig.footerText }} V{{ layoutConfig.version }}
     </div>
 </template>
 

@@ -14,6 +14,8 @@ export const common = {
 
     yaer: 'Year',
 
+    week: 'Week',
+
     empty: 'Empty',
 
     notEmpty: 'notEmpty',
@@ -90,6 +92,11 @@ export const common = {
 
     list: 'List',
 
-    deviceDetailTitle: 'Device Detail'
+    deviceDetailTitle: 'Device Detail',
 
+    income: 'Income',
+
+    count: '',
+
+    total: 'Total'
 }

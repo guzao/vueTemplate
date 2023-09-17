@@ -1,6 +1,6 @@
 import { USER } from '@/enum'
 import Cookies from "js-cookie";
-import { convertBoolean } from '../dataUtils';
+import { convertBoolean, isFalse, isTrue, isUndefined } from '../dataUtils';
 
 /** 获取 */
 const getToken = () => Cookies.get(USER.TOKEN)
@@ -32,7 +32,7 @@ export function useToken() {
 /** 语言选择按钮展示状态的 添加 获取 删除 */
 const getHasShowI18nSelect = () => convertBoolean(Cookies.get(USER.HAS_SHOW_I18NSCLECT))
 
-const setHasShowI18nSelect = (hasShow: boolean) => Cookies.set(USER.HAS_SHOW_I18NSCLECT, `${hasShow}`)
+const setHasShowI18nSelect = (hasShow: boolean) => isFalse(isUndefined(hasShow)) && Cookies.set(USER.HAS_SHOW_I18NSCLECT, `${hasShow}`)
 
 const removeHasShowI18nSelect = () => Cookies.remove(USER.HAS_SHOW_I18NSCLECT)
 
@@ -51,10 +51,9 @@ export function useI18nSelectState() {
 
 
 
-
 const getLang = () => Cookies.get(USER.LANG)
 
-const setLang = (lang: string) => Cookies.set(USER.LANG, lang)
+const setLang = (lang: string) => isTrue(lang) && Cookies.set(USER.LANG, lang)
 
 const removeLang = () => Cookies.remove(USER.LANG)
 
@@ -75,7 +74,7 @@ export function useLang() {
 
 const getIsCollapse = () => JSON.parse(Cookies.get(USER.IS_COLLAPSE) || 'false')
 
-const setIsCollapse = (isCollapse: boolean) => Cookies.set(USER.IS_COLLAPSE, `${isCollapse}`)
+const setIsCollapse = (isCollapse: boolean) => isFalse(isUndefined(isCollapse)) && Cookies.set(USER.IS_COLLAPSE, `${isCollapse}`)
 
 const removeIsCollapse = () => Cookies.remove(USER.IS_COLLAPSE)
 
@@ -94,7 +93,7 @@ export function useIsCollapse() {
 
 
 
-const setIslocalization = (state: boolean) => Cookies.set(USER.IS_LOCALIZATION, `${state}`)
+const setIslocalization = (state: boolean) => isFalse(isUndefined(state)) &&  Cookies.set(USER.IS_LOCALIZATION, `${state}`)
 
 const getIslocalization = () => JSON.parse(Cookies.get(USER.IS_LOCALIZATION) || 'false')
 

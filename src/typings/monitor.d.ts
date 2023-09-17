@@ -1,4 +1,42 @@
+/** 电站收益信息 */
+type ParkIncomeData = {
+    accumulateCharge: number,
+    lastYearDischarge: number,
+    lastYearCharge: number,
+    dayIncome: number,
+    dayDischarge: number,
+    lastWeekIncome: number,
+    lastMonthIncome: number,
+    lastMonthCharge: number,
+    lastDayIncome: number,
+    weekDischarge: number,
+    lastWeekCharge: number,
+    accumulateDischarge: number,
+    yearIncome: number,
+    yearCharge: number,
+    lastDayCharge: number,
+    lastMonthDischarge: number,
+    yearDischarge: number,
+    dayCharge: number,
+    lastWeekDischarge: number,
+    accumulateIncome: number,
+    lastYearIncome: number,
+    lastDayDischarge: number,
+    monthDischarge: number,
+    monthIncome: number,
+    weekCharge: number,
+    monthCharge: number,
+    weekIncome: number
+}
 
+
+type IncomeProfile = {
+    times: number,
+    charge: number,
+    chargeCash: number,
+    disCharge: number,
+    disChargeCash: number
+}
 
 /** 电站设备详情 新窗口地址栏参数 */
 type DeviceDetailNewTapUrlParam = {

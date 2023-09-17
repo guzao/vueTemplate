@@ -52,3 +52,18 @@ export function getOperlogList (params: any) {
         params
     })
 }
+
+/** 获取电站收益信息 */
+export function getParkIncome (stationSerial: string) {
+    return useGet({
+        url: monitor.parkIncome + stationSerial,
+    })
+}
+
+/** 获取电站收益曲线 */
+export function getParkIncomeProfile (params: any) {
+    return useGet({
+        url: monitor.incomeProfile,
+        params: params
+    })
+}

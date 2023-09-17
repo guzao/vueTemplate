@@ -15,9 +15,9 @@ export async function setupApp () {
 
     const appInstance = createApp(App)
 
-    useSmartOpsBroadcastChannel(appInstance)
-
     setupI18n(appInstance)
+
+    useSmartOpsBroadcastChannel(appInstance)
 
     useDirective(appInstance)
 

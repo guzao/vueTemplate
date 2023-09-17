@@ -1,5 +1,5 @@
-import { IntervalTime } from '@/enum'
 import { useAppData } from '@/store'
+import { IntervalTime } from '@/enum'
 import { nextTick, ref, watch, inject, computed } from 'vue'
 import { geStationPowerAll, geStationPowerByUnit } from '@/API'
 import { deviceDetailContextKey } from '../deviceDetail/useDevice'

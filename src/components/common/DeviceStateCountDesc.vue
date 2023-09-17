@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { t } from '@/langs'
 import { PropType, ref } from 'vue';
 
 import Icon from '@/components/common/Icon.vue'
@@ -48,10 +49,10 @@ const stateClick = (state: number) => {
     <ul class="flex h-[24px]">
 
         <LabelValueUnitVue>
-            总电站数
+             <slot />
             <template #value> {{ total }} </template>
 
-            <template #unit> 个</template>
+            <template #unit> {{ t('common.count') }} </template>
         </LabelValueUnitVue>
 
         <li class="flex items-center ml-[18px] cursor-pointer box-border"

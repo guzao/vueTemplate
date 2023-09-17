@@ -13,7 +13,6 @@ import az from 'element-plus/dist/locale/az.mjs'
 export const langs = [
     { label: '简体中文', code: 'zh_CN', local: zh_CN,  },
     { label: 'English', code: 'en_US', local: en_US },
-    { label: '阿塞拜疆语', code: 'az', local: az },
 ]
 
 

@@ -5,12 +5,12 @@ import { useIncomeChart } from './useIncomeChart'
 import TitleBox from '@/components/common/TitleBox.vue';
 import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
 
-const { chartRef, type, currentTime, nextTime, prevTime, disabled, formatType } = useIncomeChart()
+const { chartRef, type, currentTime, nextTime, prevTime, disabled, formatType, loading } = useIncomeChart()
 
 </script>
 
 <template>
-    <div class="bottom_bg income_chart h-[27vh] px-[21px] min-h-[250px] ">
+    <div class="bottom_bg income_chart h-[27vh] px-[21px] min-h-[250px] " v-loading="loading">
 
         <TitleBox class="my-[10px]">
             {{ t('parkIncome.incomeChart') }}
@@ -19,10 +19,10 @@ const { chartRef, type, currentTime, nextTime, prevTime, disabled, formatType } 
                 <div class="flex flex-1">
 
                     <el-select v-model="type" class="w-[80px]  mr-[30px]" size="small">
-                        <el-option label="日" value="D" />
-                        <el-option label="周" value="W" />
-                        <el-option label="月" value="M" />
-                        <el-option label="年" value="Y" />
+                        <el-option :label="t('common.day')" value="D" />
+                        <el-option :label="t('common.week')" value="W" />
+                        <el-option :label="t('common.month')" value="M" />
+                        <el-option :label="t('common.yaer')" value="Y" />
                     </el-select>
 
                     <div class="flex">
@@ -36,8 +36,8 @@ const { chartRef, type, currentTime, nextTime, prevTime, disabled, formatType } 
                             {{ t('common.currentTime') }}：{{ paserTime(currentTime, formatType) }}
                         </div>
                         <div @click="nextTime"
-                            :class="[ disabled ? 'cursor-not-allowed' : ' ' ]"
-                            class="bg-[var(--theme-white-bg)] w-[20px] flex justify-center items-center  rounded-[4px] cursor-pointer ">
+                            :class="[ disabled ? 'cursor-not-allowed' : 'cursor-pointer' ]"
+                            class="bg-[var(--theme-white-bg)] w-[20px] flex justify-center items-center  rounded-[4px]  ">
                             <el-icon>
                                 <ArrowRight />
                             </el-icon>

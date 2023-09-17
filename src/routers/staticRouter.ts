@@ -1,4 +1,4 @@
-import { RouteRecordRaw } from "vue-router";
+import { RouteRecordRaw } from "vue-router"
 import MainLayout from '@/layout/MainLayout/index.vue'
 
 export const staticRouter: RouteRecordRaw[] = [
@@ -11,11 +11,6 @@ export const staticRouter: RouteRecordRaw[] = [
     {
         path: '/register',
         component: () => import('@/pages/staticPage/register/index.vue'),
-    },
-
-    {
-        path: '/apperrorlog',
-        component: () => import('@/pages/staticPage/errorPages/apperrorlog.vue'),
     },
 
     {
@@ -52,7 +47,7 @@ export const staticRouter: RouteRecordRaw[] = [
                 },
                 path: '/config/enterprise/editEnterprise',
                 component: () => import('@/pages/constance/editEnterprise/index.vue'),
-            },
+            }
         ]
     },
 

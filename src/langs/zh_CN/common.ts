@@ -14,6 +14,8 @@ export const common = {
 
     yaer: '年',
 
+    week: '周',
+
     empty: '暂无数据',
 
     notEmpty: '不能为空',
@@ -90,6 +92,12 @@ export const common = {
 
     list: '列表',
 
-    deviceDetailTitle: '设备详情页'
+    deviceDetailTitle: '设备详情页',
+
+    income: '收益',
+
+    count: '个',
+
+    total: '总数'
 
 }

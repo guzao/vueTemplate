@@ -2,12 +2,12 @@
 import { ref, onMounted } from "vue";
 import { layoutConfig } from '@/config'
 import { ElScrollbar } from 'element-plus'
-import { useLayout, useAppData } from '@/store'
 import { Top } from '@element-plus/icons-vue'
+import { useLayout, useAppData } from '@/store'
 
-import Sider from './components/Sider.vue';
-import Header from "./components/Header.vue";
-import Footer from './components/Footer.vue';
+import Sider from './components/Sider.vue'
+import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 
 const layout = useLayout()
 const appData = useAppData()
@@ -43,6 +43,7 @@ onMounted(() => layout.setScrollbarRefInstance(scrollbarRef.value))
 
                 <div class="px-[10px] box-border flex flex-col flex-1"
                     :style="`margin-top: ${layoutConfig.headerHeight + 12}px;min-height:calc(100vh - ${layoutConfig.headerHeight + 12}px);`">
+                    
                     <div class="flex-1 flex flex-col flex-wrap">
                         <router-view></router-view>
                     </div>
@@ -50,6 +51,7 @@ onMounted(() => layout.setScrollbarRefInstance(scrollbarRef.value))
                     <Footer />
 
                 </div>
+
             </el-scrollbar>
 
         </el-container>

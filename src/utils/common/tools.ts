@@ -28,7 +28,7 @@ export function objectToUrlQuery(params: Record<string, string>) {
 }
 
 /**
- * 添加修改浏览器地址栏参数 不刷新页面 BUG
+ * 添加修改浏览器地址栏参数 不刷新页面
  * @params newParams 新的地址栏参数
  * @BUG BUG 会导致获取不到 路由的 query参数
 */

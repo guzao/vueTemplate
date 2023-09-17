@@ -15,12 +15,14 @@ export function useSelectAll<T>(raw: MaybeRef<T[]>, key: keyof T) {
     const handleCheckAllChange = (val: boolean) => {
         checkedIds.value = val ? unref(raw).map(item => item[key]) : [] as any
         isIndeterminate.value = false
+        checkAll.value = val
     }
 
     const handleCheckedIdsChange = (value: SelectIdKey[]) => {
         const checkedCount = value.length
         checkAll.value = checkedCount === unref(raw).length
         isIndeterminate.value = checkedCount > 0 && checkedCount < unref(raw).length
+        checkedIds.value = value as any
     }
 
     const resetSelectAll = () => {

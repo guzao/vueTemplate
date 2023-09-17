@@ -6,7 +6,7 @@ import MainLayout from '@/layout/MainLayout/index.vue'
 import { getLocalLangMessage, isTrue, deepClone, arrayIsNotEmpty } from '@/utils'
 import { NavigationGuardNext, RouteLocationNormalized, RouteRecordRaw } from 'vue-router'
 
-const { tipsInfo = {} as any  } = getLocalLangMessage()
+const { tipsInfo  } = getLocalLangMessage()
 
 /** 获取页面组件的资源 */
 const routeAllPathToCompMap = import.meta.glob(`@/pages/**/*.vue`);
@@ -42,14 +42,14 @@ function addRouters(routers: LoaclRouter[]) {
 
 const addRouter = (routers: RouteRecordRaw[]) => routers.forEach((_r) => router.addRoute(_r))
 
-/** 动态添加404 页面 */
+/** 动态添加 401 页面 */
 export function addErrorPages() {
     addRouter([
         {
             path: '/:path(.*)*',
             // @ts-ignore
             component: () => import('@/pages/staticPage/errorPages/401.vue'),
-            name: '404',
+            name: '401',
             meta: {
                 title: '页面丢了',
             },
@@ -84,7 +84,6 @@ const loadLayout = (router: LoaclRouter) => {
 }
 
 const loadComponent = ({ component }: LoaclRouter) => routeAllPathToCompMap[`/src/pages/${component}/index.vue`]
-
 
 function setNewTabRouter(item: LoaclRouter, routers: LoaclRouter[], index: number) {
     if (item.layoutType == 'NewTabLayOut') {
@@ -122,6 +121,8 @@ export function businessProcess(to: RouteLocationNormalized, form: RouteLocation
             return next(Common.HOME_PAGE)
         }
     }
+
+    // 工商业才显示收益
 
     return next()
 

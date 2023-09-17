@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import { t } from '@/langs'
+import { Type } from '@/enum'
 import { useRouter } from 'vue-router'
 import { useAppData, useDicts } from '@/store'
 import { useStationList } from '../useStationList'
 import { getRunningDay, conversionUnitKW, conversionUnitKWh } from '@/utils'
-import { Type } from '@/enum'
-
-
 
 import TitleBox from '@/components/common/TitleBox.vue';
-import StationBaseInfoCard from '@/components/common/StationBaseInfoCard.vue';
 import LabelValueUnit from '@/components/common/LabelValueUnit.vue';
+import StationBaseInfoCard from '@/components/common/StationBaseInfoCard.vue';
 
 const { filteredList } = useStationList()
 

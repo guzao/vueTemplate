@@ -28,10 +28,8 @@ export function useServer(model: string): ServerOptions {
       [ VITE_APP_BASE_URL ]: {
         target: VITE_APP_SERVER_URL,
         changeOrigin: true,
-        rewrite: (path: string) => {
-          path = VITE_APP_BASE_URL == '/dev-api' ? path.replace(VITE_APP_BASE_URL, '') : path
-          return path
-        },
+        // rewrite: (path: string) => model == 'development' ? path.replace(VITE_APP_BASE_URL, '') : path,
+        rewrite: (path: string) =>  path,
       },
     },
   }
