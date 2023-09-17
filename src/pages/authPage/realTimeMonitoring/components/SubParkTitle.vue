@@ -60,7 +60,7 @@ defineProps({
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[6px]"></div>
 
                 <LabelValueUnit class="pl-[8px]" :font-size="16">
-                    {{ t('common.moonthDischarge') }}
+                    {{ t('common.monthDischarge') }}
                     <template #value> {{ conversionUnitKWh(data.M18).size }} </template>
                     <template #unit> {{ conversionUnitKWh(data.M18).unit }} </template>
                 </LabelValueUnit>

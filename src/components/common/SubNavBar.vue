@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useAppData } from '@/store'
+import { Type, Common } from '@/enum'
 import { layoutConfig } from '@/config'
 import { getDeviceStateInfo } from '@/utils'
 import { useRoute, useRouter } from 'vue-router'
@@ -31,6 +32,11 @@ defineProps({
 const route = useRoute()
 const router = useRouter()
 const viewModelPath = ref(route.path)
+
+const viewModel = computed(() => {
+    const viewModel =  layoutConfig.viewModel
+    return appData.currentParkType == `${Type.NUMBER_CABINET}` ? viewModel : viewModel.filter(view => view.url !== Common.PARK_INCOME )
+})
 
 
 const parkChange = (code: string) => {
@@ -75,7 +81,8 @@ const viewModelChange = (path: string) => router.push({ query: { stationCode: ap
                 <Icon icon="icon_viewmodel" />
             </template>
 
-            <el-option v-for="item in layoutConfig.viewModel" :key="item.code" :label="item.label" :value="item.url" />
+            <el-option v-for="item in viewModel" :key="item.code" :label="item.label" :value="item.url" />
+
         </el-select>
 
         <div v-if="$slots.default" class="flex-1">

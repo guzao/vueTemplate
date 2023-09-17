@@ -6,7 +6,7 @@ import SubTitle from '@/components/common/SubTitle.vue'
 
 const dicts = useDicts()
 
-const { pageParams } = usePagination({ callback: () => getResult(), pageSize: 20 })
+const { pageParams } = usePagination({ callback: () => getResult(), pageSize: 10 })
 
 const currentChange = (page: number) => pageParams.pageNum = page
 

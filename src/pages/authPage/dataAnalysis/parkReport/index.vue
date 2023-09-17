@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import ParkChart from './ParkChart.vue'
-import Statistical from './Statistical.vue'
-import TitleAndStationNavBar from '@/components/business/TitleAndStationNavBar.vue';
+import ParkChart from './components/ParkChart.vue'
+import Statistical from './components/Statistical.vue'
+import TitleAndStationNavBar from '@/components/business/TitleAndStationNavBar.vue'
 
 </script>
 

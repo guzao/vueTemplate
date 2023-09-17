@@ -54,7 +54,8 @@ const {
 
             <el-form-item label="设备单元" prop="type" v-loading="unitListLoading">
 
-                <el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" @change="allChange" class="pr-4">全选</el-checkbox>
+                <el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" @change="allChange"
+                    class="pr-4">全选</el-checkbox>
 
                 <el-checkbox-group v-model="form.assetSerials" @change="assetSerialsChange">
 
@@ -73,14 +74,58 @@ const {
 
         <TitleBox class="mb-[16px]"> 趋势图表 </TitleBox>
 
-        <div ref="chartRef" v-show="arrayIsNotEmpty(result)" class="h-[300px] mb-[32px]" ></div>
-        <el-empty v-if="arrayIsEmpty(result)"  />
+        <div ref="chartRef" v-show="arrayIsNotEmpty(result)" class="h-[300px] mb-[32px]"></div>
+        <el-empty v-if="arrayIsEmpty(result)" />
 
         <el-table :data="currentPageData" stripe style="width: 100%" v-loading="loading">
 
-            <el-table-column prop="time" label="日期" />
+            <el-table-column prop="time" fixed  label="日期" :width="`${getArrayLength(tableHeader) > 2 ? '120' : '' }`" />
 
-            <el-table-column v-for="item in tableHeader" :key="item.id" prop="time" :label="item.name">
+            <el-table-column  align="center" v-for="item in tableHeader" :key="item.id" prop="time" :label="item.name">
+
+                <el-table-column label="直流侧"  align="center" >
+                    <el-table-column prop="state" label="充" :width="`${getArrayLength(tableHeader) > 2 ? '180' : '' }`">
+                        <template #default="{ row }">
+                            {{ conversionUnitKWh(row[`charge_${item.id}`]).size }}
+                            {{ conversionUnitKWh(row[`charge_${item.id}`]).unit }}
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="city" label="放" :width="`${getArrayLength(tableHeader) > 2 ? '180' : '' }`" >
+                        <template #default="{ row }">
+                            {{ conversionUnitKWh(row[`discharge_${item.id}`]).size }}
+                            {{ conversionUnitKWh(row[`discharge_${item.id}`]).unit }}
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="address" label="效率" :width="`${getArrayLength(tableHeader) > 2 ? '180' : '' }`" >
+                        <template #default="{ row }">
+                            {{ getEfficiency(row[`charge_${item.id}`], row[`discharge_${item.id}`]) }}%
+                        </template>
+                    </el-table-column>
+                </el-table-column>
+
+                <el-table-column label="交流侧" align="center"  >
+                    <el-table-column prop="state" label="充" :width="`${getArrayLength(tableHeader) > 2 ? '180' : '' }`">
+                        <template #default="{ row }">
+                            {{ conversionUnitKWh(row[`PCScharge_${item.id}`]).size }}
+                            {{ conversionUnitKWh(row[`PCScharge_${item.id}`]).unit }}
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="city" label="放" :width="`${getArrayLength(tableHeader) > 2 ? '180' : '' }`" >
+                        <template #default="{ row }">
+                            {{ conversionUnitKWh(row[`PCSdisCharge_${item.id}`]).size }}
+                            {{ conversionUnitKWh(row[`PCSdisCharge_${item.id}`]).unit }}
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="address" label="效率" :width="`${getArrayLength(tableHeader) > 2 ? '180' : '' }`" >
+                        <template #default="{ row }">
+                            {{ getEfficiency(row[`PCScharge_${item.id}`], row[`PCSdisCharge_${item.id}`]) }}%
+                        </template>
+                    </el-table-column>
+                </el-table-column>
+
+            </el-table-column>
+
+            <el-table-column v-if="0" v-for="item in tableHeader" :key="item.id" prop="time" :label="item.name">
                 <template #default="{ row }">
                     <LabelValueUnit :font-size="16">
                         充
@@ -104,10 +149,8 @@ const {
         </el-table>
 
         <div class="flex justify-end mt-[26px]">
-            <el-pagination background layout="prev, pager, next"
-                 v-model:current-page="pageParams.page"
-                 @currentChange="currentChange"
-                :pageSize="pageParams.pageSize" :total="getArrayLength(result)" />
+            <el-pagination background layout="prev, pager, next" v-model:current-page="pageParams.page"
+                @currentChange="currentChange" :pageSize="pageParams.pageSize" :total="getArrayLength(result)" />
         </div>
 
     </div>

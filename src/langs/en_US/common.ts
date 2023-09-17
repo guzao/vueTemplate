@@ -44,7 +44,7 @@ export const common = {
 
     monthCharge: 'M CHGR',
 
-    moonthDischarge: 'M DSCH',
+    monthDischarge: 'M DSCH',
 
     yearCharge: 'Y CHGR',
 
