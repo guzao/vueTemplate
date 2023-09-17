@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { t } from '@/langs'
+import { Type } from '@/enum'
 import { useParkIncome } from './useParkIncome'
 import { paserTime, conversionUnitPrice } from '@/utils'
 
@@ -93,7 +94,9 @@ const { appData, parkIncome, loading } = useParkIncome()
 
         </div>
 
-        <div class="h-[392px] mt-[3%] flex justify-center  flex-col items-center bg-contain bg-no-repeat">
+        <div class="h-[392px] mt-[3%] flex justify-center  flex-col items-center bg-contain bg-no-repeat relative">
+
+            <div class="text-[var(--theme-gray153)] absolute top-[40px]" v-show="appData.currentParkType !== `${Type.NUMBER_CABINET}`"> 仅工商业有收益数据 </div>
 
             <div>
                 <div class="text-center  font-semibold text-[30px] f-dinb text-[var(--charge)]"> {{ conversionUnitPrice(parkIncome.accumulateIncome).size }} </div>

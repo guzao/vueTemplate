@@ -11,7 +11,7 @@ export function useParkOverview() {
 
     const { result: parkOverview, getResult: getParkOverview, loading } = useReactiveHttp({
         initData: {} as ParkRuningInfo,
-        request: () => getStationInfo({ stationSerial: appData.parkSerial, type: 'DC' }),
+        request: () => getStationInfo({ stationSerial: appData.parkSerial, type: 'dc' }),
         requestCallback: (res) => {
             parkOverview.value = res.data
             return res.data

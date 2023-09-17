@@ -43,7 +43,7 @@ export function useDeviceOverview(markFunction?: (group: DeviceGroup) => void) {
     /** 电站运行概览 */
     const { result: parkRuningInfo, getResult } = useReactiveHttp({
         initData: {} as ParkRuningInfo,
-        request: () => getStationInfo({ stationSerial: appData.parkSerial, type: 'DC' }),
+        request: () => getStationInfo({ stationSerial: appData.parkSerial, type: 'dc' }),
         requestCallback(res) {
             res.data.code = appData.currentParkSerial
             return res.data

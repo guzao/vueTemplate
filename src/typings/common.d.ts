@@ -3,7 +3,7 @@
  * * @param DC 直流
  * * @param AC 交流
 */
-type ElectricPowerType = 'DC' | 'AC'
+type ElectricPowerType = 'dc' | 'ac'
 
 
 /** 路由模式 */

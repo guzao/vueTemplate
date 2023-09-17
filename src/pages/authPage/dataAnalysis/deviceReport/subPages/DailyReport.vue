@@ -55,7 +55,7 @@ const { form, loading, result, chartRef } = useDailyReport()
                         </template>
                     </el-table-column>
 
-                    <el-table-column prop="charge" label="效率">
+                    <el-table-column prop="charge" label="效率" width="100">
                         <template #default="{ row }">
                             <LabelValueUnit :font-size="16">
                                 <template #value>{{ getEfficiency(row.charge, row.discharge) }}</template>
@@ -134,7 +134,7 @@ const { form, loading, result, chartRef } = useDailyReport()
                         </template>
                     </el-table-column>
 
-                    <el-table-column prop="charge" label="效率">
+                    <el-table-column prop="charge" label="效率" width="100">
                         <template #default="{ row }">
                             <LabelValueUnit :font-size="16">
                                 <template #value>{{ getEfficiency(row.pcsCharge, row.pcsDischarge) }}</template>
