@@ -21,7 +21,6 @@ export const debounce:Directive = {
     mounted (el: DebounceEl, { value }: any) {
         el.delayTime = value
         el.addEventListener('click', handleFn)
-        console.log(value)
     },
 
     beforeUnmount (el: DebounceEl) {

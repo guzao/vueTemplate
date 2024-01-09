@@ -1,23 +1,22 @@
 import { axiosInstance } from './index'
+import type { AxiosRequestConfig } from 'axios'
 
 
 /**
  * POST
 */
-export function usePost <T = any> (config: { url: string, data?: any }) {
-    const { url,  data = {} } =  config
-    return axiosInstance.post(url, data) as Promise<ResponseData<T>>
+export function usePost<T = any>(config: AxiosRequestConfig) {
+    const { url, data = {}, ...res } = config
+    return axiosInstance.post(url!, data, { ...res }) as Promise<ResponseData<T>>
 }
-
-
 
 
 /**
  * GET
 */
-export function useGet <T = any> (config: { url: string, params?: any }) {
-    const { url,  params = {} } =  config
-    return axiosInstance.get(url, { params: params }) as Promise<ResponseData<T>>
+export function useGet<T = any>(config: AxiosRequestConfig) {
+    const { url, params = {}, ...res } = config
+    return axiosInstance.get(url!, { params: params, ...res }) as Promise<ResponseData<T>>
 }
 
 
@@ -25,8 +24,17 @@ export function useGet <T = any> (config: { url: string, params?: any }) {
 /**
  * PUT
 */
-export function usePut <T = any> (config: { url: string, data?: any, params?: any,  }) {
-    const { url,  data = {}, params = {} } =  config
-    return axiosInstance.put(url, data, { params: params },) as Promise<ResponseData<T>>
+export function usePut<T = any>(config: AxiosRequestConfig) {
+    const { url, data = {},  params = {}, ...res } = config
+    return axiosInstance.put(url!, data, { params: params, ...res },) as Promise<ResponseData<T>>
 }
 
+
+
+/**
+ * DELETE
+*/
+export function useDelet<T = any>(config: AxiosRequestConfig) {
+    const { url, data = {},  params = {}, ...res } = config
+    return axiosInstance.delete(url!, { params, ...res }) as Promise<ResponseData<T>>
+}

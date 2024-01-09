@@ -4,7 +4,7 @@ import { useDeviceOverview } from '../hooks/useDeviceOverview'
 
 export function useTableModel() {
 
-    const { appData, getSubParkInfo, parkRuningInfo, deivceGroupList, loading, dicts } = useDeviceOverview(markDevice)
+    const { appData, getSubParkInfo, parkRuningInfo, deivceGroupList, loading } = useDeviceOverview(markDevice)
 
     const deviceMarkInfo = (list: DeviceItem[], key: keyof DeviceItem['deviceData']) => getMaxElement(list, (maxEl, cur) => maxEl.deviceData[key] < cur.deviceData[key])
 
@@ -24,7 +24,6 @@ export function useTableModel() {
         parkRuningInfo, 
         deivceGroupList, 
         loading, 
-        dicts
     }
 
 }

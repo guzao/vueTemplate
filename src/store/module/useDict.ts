@@ -1,331 +1,253 @@
+import { defineStore } from "pinia"
+import { isFalse, parserTime } from '@/utils'
 import { useDict as useDictAction } from '@/hooks'
-import { isFalse } from '@/utils';
-import { defineStore } from "pinia";
 
-/** 电站类型 */
-const { getResult: getParkType, result: parkType, dictLabel: dictParkLabel } = useDictAction('eos_park_type')
-
-/** 发布状态 */
-const { getResult: getReleaseStatus, dictLabel: releaseStatusDictLabel, result: releaseStatus } = useDictAction('station_release_status')
-
-/** 用户性别 */
-const { getResult: getUserSexType, dictLabel: userSexTypeDictLabel, result: userSexType } = useDictAction('sys_user_sex')
-
-/** 电站运行状态 */
-const { getResult: getParkRunStatus, dictLabel: parkRunStatusDictLabel, result: parkRunStatus } = useDictAction('eos_park_run_status')
-
-/** 电站状态 */
-const { getResult: getParkStatus, dictLabel: parkStatusDictLabel, result: parkStatus } = useDictAction('eos_status')
-
-/** 电站使用类型 */
-const { getResult: getParkUseType, dictLabel: parkUseTypeDictLabel, result: parkUseType } = useDictAction('eos_park_use_type')
-
-/** 行业类型 */
-const { getResult: getIndustryType, dictLabel: industryTypeDictLabel, result: industryType } = useDictAction('eos_industry_type')
-
-/** 建设状态 */
-const { getResult: getGridStatus, dictLabel: gridStatusDictLabel, result: gridStatus } = useDictAction('eos_grid_status')
-
-/** 用户的状态 */
-const { getResult: getNormalDisable, dictLabel: normalDisableDictLabel, result: normalDisable } = useDictAction('sys_normal_disable')
-
-/** 用户登录状态 */
-const { getResult: getCommonStatus, dictLabel: commonStatusDictLabel, result: commonStatusDisable } = useDictAction('sys_common_status')
-
-/** 操作状态 */
-const { getResult: getOperType, dictLabel: operTypeDictLabel, result: operTypeDisable } = useDictAction('sys_oper_type')
-
-/** 设备类型 */
-const { getResult: getDeviceType, dictLabel: deviceTypeictLabel, result: deviceType } = useDictAction('eos_device_type')
-
-/** 告警等级 */
-const { getResult: getWarningLevel, dictLabel: warningLevelLabel, result: warningLevel } = useDictAction('eos_level')
-
-/** 充放电类型 */
-const { getResult: getChargeDisChargeType, dictLabel: chargeDisChargeLabel, result: chargeDisCharge } = useDictAction('charge_discharge_type')
-
+/**
+ * 字典加载信息
+*/
+const loadedDictsInfo: Record<any, any> = {
+    /** 缓存的字典数量 */
+    length: 0,
+}
 
 
 /**
- * 使用getter 中的数据获取对应的字典内部触发缓存
+ * 使用 getter 中的数据获取对应的字典内部触发缓存
 */
 export const useDicts = defineStore('useDict', {
 
     state() {
         return {
 
-            parkType: {
-                dictLabel: {} as Record<string, string>,
-                dictValue: [] as DictTypeData[],
-                /** 数据是否已经被缓存 */
-                loaded: false
-            },
+            parkType: createState(),
 
-            parkReleaseStatus: {
-                dictLabel: {} as Record<string, string>,
-                dictValue: [] as DictTypeData[],
-                /** 数据是否已经被缓存 */
-                loaded: false
-            },
+            parkReleaseStatus: createState(),
 
-            userSexType: {
-                dictLabel: {} as Record<string, string>,
-                dictValue: [] as DictTypeData[],
-                /** 数据是否已经被缓存 */
-                loaded: false
-            },
+            userSexType: createState(),
 
-            parkRunStatusType: {
-                dictLabel: {} as Record<string, string>,
-                dictValue: [] as DictTypeData[],
-                /** 数据是否已经被缓存 */
-                loaded: false
-            },
+            parkRunStatusType: createState(),
 
-            parkStatusType: {
-                dictLabel: {} as Record<string, string>,
-                dictValue: [] as DictTypeData[],
-                /** 数据是否已经被缓存 */
-                loaded: false
-            },
+            parkStatusType: createState(),
 
-            parkUseType: {
-                dictLabel: {} as Record<string, string>,
-                dictValue: [] as DictTypeData[],
-                /** 数据是否已经被缓存 */
-                loaded: false
-            },
+            parkUseType: createState(),
 
-            industryType: {
-                dictLabel: {} as Record<string, string>,
-                dictValue: [] as DictTypeData[],
-                /** 数据是否已经被缓存 */
-                loaded: false
-            },
+            industryType: createState(),
 
-            gridStatus: {
-                dictLabel: {} as Record<string, string>,
-                dictValue: [] as DictTypeData[],
-                /** 数据是否已经被缓存 */
-                loaded: false
-            },
+            gridStatus: createState(),
 
-            normalDisable: {
-                dictLabel: {} as Record<string, string>,
-                dictValue: [] as DictTypeData[],
-                /** 数据是否已经被缓存 */
-                loaded: false
-            },
+            normalDisable: createState(),
 
-            commonStatus: {
-                dictLabel: {} as Record<string, string>,
-                dictValue: [] as DictTypeData[],
-                /** 数据是否已经被缓存 */
-                loaded: false
-            },
+            commonStatus: createState(),
 
-            operType: {
-                dictLabel: {} as Record<string, string>,
-                dictValue: [] as DictTypeData[],
-                /** 数据是否已经被缓存 */
-                loaded: false
-            },
+            operType: createState(),
 
-            deviceType: {
-                dictLabel: {} as Record<string, string>,
-                dictValue: [] as DictTypeData[],
-                /** 数据是否已经被缓存 */
-                loaded: false
-            },
+            deviceType: createState(),
 
-            warningLevel: {
-                dictLabel: {} as Record<string, string>,
-                dictValue: [] as DictTypeData[],
-                /** 数据是否已经被缓存 */
-                loaded: false
-            },
+            warningLevel: createState(),
 
-            chargeDisChargeType: {
-                dictLabel: {} as Record<string, string>,
-                dictValue: [] as DictTypeData[],
-                /** 数据是否已经被缓存 */
-                loaded: false
-            },
+            chargeDisChargeType: createState(),
+
+            categoryType: createState(),
+
+            metricGroupTags: createState(),
+
+            signalType: createState(),
+
+            eventType: createState(),
+
+            eosType: createState(),
+
+            dataType: createState(),
+
+            levelType: createState(),
+
+            deviceOrderState: createState(),
+
+            workFaultLevel: createState(),
+
+            eosUnitype: createState(),
 
         }
     },
 
     getters: {
 
+        /** 字典加载信息 */
+        loadedDictsInfo() {
+            return loadedDictsInfo
+        },
+
         /** 电站类型字典 */
         parkTypeDict(state) {
-            if (isFalse(state.parkType.loaded)) {
-                getParkType().then(res => {
-                    state.parkType.dictLabel = dictParkLabel.value
-                    state.parkType.dictValue = parkType.value
-                    state.parkType.loaded = true
-                })
-            }
-            return state.parkType
+            return createGetter(state, 'parkType', 'eos_park_type')()
         },
 
         /** 电站发布状态字典 */
         parkReleaseStatusDict(state) {
-            if (isFalse(state.parkReleaseStatus.loaded)) {
-                getReleaseStatus().then(res => {
-                    state.parkReleaseStatus.dictLabel = releaseStatusDictLabel.value
-                    state.parkReleaseStatus.dictValue = releaseStatus.value
-                    state.parkReleaseStatus.loaded = true
-                })
-            }
-            return state.parkReleaseStatus
+            return createGetter(state, 'parkReleaseStatus', 'station_release_status')()
         },
 
         /** 用户性别字典 */
         userSexTyeDict(state) {
-            if (isFalse(state.userSexType.loaded)) {
-                getUserSexType().then(res => {
-                    state.userSexType.dictLabel = userSexTypeDictLabel.value
-                    state.userSexType.dictValue = userSexType.value
-                    state.userSexType.loaded = true
-                })
-            }
-            return state.userSexType
+            return createGetter(state, 'userSexType', 'sys_user_sex')()
         },
 
         /** 电站运行状态字典 */
         parkRunStatusDict(state) {
-            if (isFalse(state.parkRunStatusType.loaded)) {
-                getParkRunStatus().then(res => {
-                    state.parkRunStatusType.dictLabel = parkRunStatusDictLabel.value
-                    state.parkRunStatusType.dictValue = parkRunStatus.value
-                    state.parkRunStatusType.loaded = true
-                })
-            }
-            return state.parkRunStatusType
+            return createGetter(state, 'parkRunStatusType', 'eos_park_run_status')()
         },
 
         /** 电站状态字典 */
         parkStatusDict(state) {
-            if (isFalse(state.parkStatusType.loaded)) {
-                getParkStatus().then(res => {
-                    state.parkStatusType.dictLabel = parkStatusDictLabel.value
-                    state.parkStatusType.dictValue = parkStatus.value
-                    state.parkStatusType.loaded = true
-                })
-            }
-            return state.parkStatusType
+            return createGetter(state, 'parkStatusType', 'eos_status')()
         },
 
         /** 电站使用类型字典 */
         parkUseTypeDict(state) {
-            if (isFalse(state.parkUseType.loaded)) {
-                getParkUseType().then(res => {
-                    state.parkUseType.dictLabel = parkUseTypeDictLabel.value
-                    state.parkUseType.dictValue = parkUseType.value
-                    state.parkUseType.loaded = true
-                })
-            }
-            return state.parkUseType
+            return createGetter(state, 'parkUseType', 'eos_park_use_type')()
         },
 
-        /** 电站行业类型字典 */
+        /** 行业标签字典 */
         industryTypeDict(state) {
-            if (isFalse(state.industryType.loaded)) {
-                getIndustryType().then(res => {
-                    state.industryType.dictLabel = industryTypeDictLabel.value
-                    state.industryType.dictValue = industryType.value
-                    state.industryType.loaded = true
-                })
-            }
-            return state.industryType
+            return createGetter(state, 'industryType', 'eos_industry_type')()
         },
 
         /** 建设状态 */
         gridStatusDict(state) {
-            if (isFalse(state.gridStatus.loaded)) {
-                getGridStatus().then(res => {
-                    state.gridStatus.dictLabel = gridStatusDictLabel.value
-                    state.gridStatus.dictValue = gridStatus.value
-                    state.gridStatus.loaded = true
-                })
-            }
-            return state.gridStatus
+            return createGetter(state, 'gridStatus', 'eos_grid_status')()
         },
 
         /** 用户禁用状态 */
         normalDisableDict(state) {
-            if (isFalse(state.normalDisable.loaded)) {
-                getNormalDisable().then(res => {
-                    state.normalDisable.dictLabel = normalDisableDictLabel.value
-                    state.normalDisable.dictValue = normalDisable.value
-                    state.normalDisable.loaded = true
-                })
-            }
-            return state.normalDisable
+            return createGetter(state, 'normalDisable', 'sys_normal_disable')()
         },
 
         /** 用户登录状态 */
         commonStatusDict(state) {
-            if (isFalse(state.commonStatus.loaded)) {
-                getCommonStatus().then(res => {
-                    state.commonStatus.dictLabel = commonStatusDictLabel.value
-                    state.commonStatus.dictValue = commonStatusDisable.value
-                    state.commonStatus.loaded = true
-                })
-            }
-            return state.commonStatus
+            return createGetter(state, 'commonStatus', 'sys_common_status')()
         },
 
         /** 操作类型字典 */
         operTypeDict(state) {
-            if (isFalse(state.operType.loaded)) {
-                getOperType().then(res => {
-                    state.operType.dictLabel = operTypeDictLabel.value
-                    state.operType.dictValue = operTypeDisable.value
-                    state.operType.loaded = true
-                })
-            }
-            return state.operType
+            return createGetter(state, 'operType', 'sys_oper_type')()
         },
 
         /** 设备类型 */
         deviceTypeDict(state) {
-            if (isFalse(state.deviceType.loaded)) {
-                getDeviceType().then(res => {
-                    state.deviceType.dictLabel = deviceTypeictLabel.value
-                    state.deviceType.dictValue = deviceType.value
-                    state.deviceType.loaded = true
-                })
-            }
-            return state.deviceType
+            return createGetter(state, 'deviceType', 'eos_device_type')()
         },
 
         /** 设备类型 */
         warningLevelDict(state) {
-            if (isFalse(state.warningLevel.loaded)) {
-                getWarningLevel().then(res => {
-                    state.warningLevel.dictLabel = warningLevelLabel.value
-                    state.warningLevel.dictValue = warningLevel.value
-                    state.warningLevel.loaded = true
-                })
-            }
-            return state.warningLevel
+            return createGetter(state, 'warningLevel', 'eos_level')()
         },
 
         /** 充放电采集点类型 */
         chargeDisChargeDict(state) {
-            if (isFalse(state.chargeDisChargeType.loaded)) {
-                getChargeDisChargeType().then(res => {
-                    state.chargeDisChargeType.dictLabel = chargeDisChargeLabel.value
-                    state.chargeDisChargeType.dictValue = chargeDisCharge.value
-                    state.chargeDisChargeType.loaded = true
-                })
-            }
-            return state.chargeDisChargeType
+            return createGetter(state, 'chargeDisChargeType', 'charge_discharge_type')()
         },
 
-    },
+        /** 行业类别 */
+        categoryTypeDict(state) {
+            return createGetter(state, 'categoryType', 'eos_category_type')()
+        },
+
+        /** 测点组别标签 */
+        metricGroupTagsDict(state) {
+            return createGetter(state, 'metricGroupTags', 'eos_metric_group_tags')()
+        },
+
+        /** 信号 */
+        signalTypeDict(state) {
+            return createGetter(state, 'signalType', 'eos_signal_type')()
+        },
+
+        /** 事件类型 */
+        eventTypeDict(state) {
+            return createGetter(state, 'eventType', 'eos_event_type')()
+        },
+
+        /** 测点类型 */
+        eosTypeDict(state) {
+            return createGetter(state, 'eosType', 'eos_type')()
+        },
+
+        /** 数据类型 */
+        dataTypeDict(state) {
+            return createGetter(state, 'dataType', 'eos_data_type')()
+        },
+
+        /** 故障类型 */
+        levelTypeDict(state) {
+            return createGetter(state, 'levelType', 'eos_level')()
+        },
+
+        /** 设备工单状态 */
+        deviceOrderStateDict(state) {
+            return createGetter(state, 'deviceOrderState', 'sys_work_status')()
+        },
+
+        /** 工单故障等级 */
+        workFaultLevelDict(state) {
+            return createGetter(state, 'workFaultLevel', 'sys_work_fault_level')()
+        },
+
+        /** 储能单元类型 */
+        eosUnitypeDict(state) {
+            return createGetter(state, 'eosUnitype', 'eos_unit_type')()
+        },
+
+
+    }
 
 })
 
+
+/** 创建字典数据 */
+function createState() {
+    return {
+        dictLabel: {} as Record<string, string>,
+        dictValue: [] as DictTypeData[],
+        /** 数据是否已经被缓存 */
+        loaded: false
+    }
+}
+
+
+
+/**
+ * 创建store getter数据
+ * @param state 数据
+ * @param stateKey 字典key
+ * @param dictType 字典类型
+*/
+function createGetter(state: any, key: any, dictType: DictType) {
+
+    let { getResult, dictLabel, result } = useDictAction(dictType)
+
+    return () => {
+        if (isFalse(state[key].loaded)) {
+            getResult().then((_: any) => {
+                state[key].dictLabel = dictLabel.value
+                state[key].dictValue = result.value
+                state[key].loaded = true
+            }).then(_ => {
+                ++loadedDictsInfo.length
+                loadedDictsInfo[dictType] = parserTime(Date.now(), 'YYYY-MM-DD HH:mm:ss:SSS')
+                // 清除闭包内的缓存
+                getResult = null as any
+                dictLabel = null as any
+                result = null as any
+            })
+        }
+        return state[key] as {
+            /** 字典map类型 */
+            dictLabel: Record<string, string>;
+            /** 字典元数据 */
+            dictValue: DictTypeData[];
+            /** 字典是否已经加载 */
+            loaded: boolean;
+        }
+    }
+
+}

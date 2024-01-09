@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import { sliderConfig } from '@/config'
+import { useSystemConfig } from '@/store'
 import { useUnitGroup } from './hooks/useUnitList'
+
+const systemConfig  = useSystemConfig()
 
 const { groupUnitList, loading, deviceDetail, groupClick } = useUnitGroup()
 
@@ -8,7 +11,7 @@ const { groupUnitList, loading, deviceDetail, groupClick } = useUnitGroup()
 
 <template>
     <el-menu :default-active="deviceDetail?.unitId" class="el-menu-vertical-demo" unique-opened v-loading="loading"
-        :active-text-color="sliderConfig.activeTextColor" :background-color="sliderConfig.backgroundColor"
+        :active-text-color="systemConfig.themeColor" :background-color="sliderConfig.backgroundColor"
         style="border-right: none;">
 
         <el-sub-menu :index="group.id + ''" v-for="group in groupUnitList" :key="group.id">

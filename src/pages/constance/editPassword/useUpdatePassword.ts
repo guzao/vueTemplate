@@ -1,10 +1,10 @@
-import { reactive, ref } from 'vue'
 import { useUser } from '@/store'
+import { reactive, ref } from 'vue'
 import { updateUserPwd } from '@/API'
 import { useReactiveHttp } from '@/hooks'
 import { useRouter, useRoute } from 'vue-router'
 import type { FormInstance } from 'element-plus'
-import { successMessage } from '@/utils'
+import { successMessage, passwordRep } from '@/utils'
 
 
 export function useUpdatePassword() {
@@ -46,8 +46,7 @@ export function useUpdatePassword() {
     }
 
     const formatterValid = (rule: any, value: any, callback: any) => {
-        let rep = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$/;
-        if (!rep.test(value)) {
+        if (!passwordRep.test(value)) {
             return callback(new Error('密码格式错误'));
         } else {
             callback();
@@ -75,7 +74,9 @@ export function useUpdatePassword() {
             const { oldPassword, newPassword } = form
             return updateUserPwd({ oldPassword, newPassword })
         },
-        requestCallback: (res) => successMessage(res.msg),
+        requestCallback: (res) => {
+            successMessage(res.msg)
+        },
         Immediately: false
     })
 
@@ -83,7 +84,7 @@ export function useUpdatePassword() {
         try {
             await fromInstance.value?.validate()
             await setUserPwd()
-            router.go(-1)
+            router.push({ path: '/config/personCenter', query: route.query })
         } catch (error) {
             console.log(error)
         }

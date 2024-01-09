@@ -49,10 +49,10 @@ export function updateUserProfile (params: any) {
 }
 
 /** 更新用户密码 */
-export function updateUserPwd (params: any) {
+export function updateUserPwd (data: any) {
     return usePut({
         url: configApiMap.userProfileUpdatePwd,
-        params: params
+        data: data
     })
 }
 
@@ -74,6 +74,14 @@ export function getDeptList () {
 export function getUnitGroup (params: any) {
     return useGet({
         url: configApiMap.unitGroupList,
+        params
+    })
+}
+
+/** 设备单元  */
+export function getGroupUnitList (params: any) {
+    return useGet({
+        url: configApiMap.unitList,
         params
     })
 }

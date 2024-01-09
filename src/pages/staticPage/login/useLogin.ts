@@ -1,14 +1,14 @@
 import { ref } from 'vue'
 import { t } from '@/langs'
 import { Common } from '@/enum'
+import { useRouter } from 'vue-router'
+import { urlQueryToObject } from '@/utils'
 import { getCodeImg as getcode } from '@/API'
-import { useRouter, useRoute } from 'vue-router'
 import type { FormInstance } from 'element-plus'
-import { useUser, useSystemConfig } from '@/store'
+import { useUser, useSystemConfig, useAppData } from '@/store'
 
 
 export function useLogin() {
-
 
     const { userLogin } = useUser()
 
@@ -48,7 +48,7 @@ export function useLogin() {
         })
     }
 
-    /** 设置配置相 */
+    /** 设置配置 */
     const setServeConfigData = (data: CaptchaImageData) => {
 
         const { internationalization, localization, register, language, resetPassword, captchaEnabled } = data
@@ -57,21 +57,28 @@ export function useLogin() {
 
     }
 
-    const { query: { redirect = Common.HOME_PAGE } } = useRoute()
     const router = useRouter()
 
     const handleLogin = async () => {
         try {
-            loading.value = true
             await fromInstance.value?.validate()
+            loading.value = true
             await userLogin(form.value)
-            router.push(`${redirect}`)
+            entrySystem()
         } catch (error) {
             form.value.code = ''
-            getCodeImg()
             loading.value = false
+            getCodeImg()
         }
         loading.value = false
+    }
+
+    /** 进入系统 */
+    const entrySystem = () => {
+        const { redirect: redirectPath = Common.HOME_PAGE as any } = urlQueryToObject()
+        const query = getRedirectUrlStationCode()
+        useAppData().parkSerial = query.stationCode || Common.IS_EMPTY_STRIING
+        router.push({ path: redirectPath, query: query })
     }
 
     getCodeImg()
@@ -87,4 +94,14 @@ export function useLogin() {
         systemConfig
     }
 
+}
+
+
+function getRedirectUrlStationCode() {
+    let result: Record<string, any> = {}
+    const { search } = location
+    if (search.includes('stationCode')) {
+        return urlQueryToObject(search.split('?')[2])
+    }
+    return result
 }

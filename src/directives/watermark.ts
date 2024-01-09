@@ -1,5 +1,6 @@
-import { isFalse } from "@/utils"
 import { Directive } from "vue"
+import { Common } from "@/enum"
+import { isFalse } from "@/utils"
 
 /**
  * 创建水印元素
@@ -23,7 +24,7 @@ function createElement (value: Watermark) {
 /**
  * 创建水印背景图
 */
-function createWatermarkBgc ({ text, width, height, color, fontSize }: Watermark) {
+function createWatermarkBgc ({ text = Common.DEFAULT_SYMBOL, width, height, color, fontSize }: Watermark) {
 
     var canvas = document.createElement("canvas")
     canvas.width = width|| 300
@@ -43,7 +44,7 @@ function createWatermarkBgc ({ text, width, height, color, fontSize }: Watermark
 /**
  * 添加角标
 */
-function addSubscriptElement(el: Element, { text, markSatate }: Watermark) {
+function addSubscriptElement(el: Element, { text = Common.DEFAULT_SYMBOL, markSatate }: Watermark) {
     let subscript = el.querySelector('.subscript') as any
     if (isFalse(subscript)) {
         subscript = document.createElement('div')
@@ -58,6 +59,7 @@ function addSubscriptElement(el: Element, { text, markSatate }: Watermark) {
         subscript.style.transform = 'rotate(-45deg)'
         subscript.style.textAlign = 'center'
         subscript.style.fontSize = '18px'
+        subscript.style.zIndex = '9999'
         el.appendChild(subscript)
     }
     subscript.innerText = text
@@ -101,4 +103,3 @@ export const watermark: Directive = {
     },
 
 }
-

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-
+import { t } from '@/langs'
 import Icon from '@/components/common/Icon.vue';
 import TitleBox from '@/components/common/TitleBox.vue'
 import { PropType } from 'vue';
@@ -16,13 +16,13 @@ defineProps({
 <template>
     <div class="bg-[var(--theme-white-bg)] mb-[16px] p-[20px] state_card">
 
-        <TitleBox> 状态 </TitleBox>
+        <TitleBox>  {{ t('common.unit') }}{{ t('common.state') }} </TitleBox>
 
         <ul class="grid grid-cols-9 gap-[16px] mt-[16px]">
             <li class="h-[88px] relative" v-for="item in 9" :key="item">
 
-                <div class="text-[12px] text-[var(--theme-gray107)] mt-[10px] ml-[10px]"> 储能单元状态 </div>
-
+                <div class="text-[12px] text-[var(--theme-gray107)] mt-[10px] ml-[10px]"> {{ t('common.state') }} </div>
+ 
                 <div class="state_card_split absolute  top-[23px] left-[10px] h-[12px] right-0 "></div>
 
                 <div class="flex items-center h-[50px]">

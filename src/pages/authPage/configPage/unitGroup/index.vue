@@ -7,7 +7,7 @@ import { ArrowLeft } from '@element-plus/icons-vue'
 import TitleBox from '@/components/common/TitleBox.vue'
 import Table from './components/Table.vue'
 
-const { route, router, groupDrawerOpen, groupInstance, unitDrawerOpen, unitInstance, tableData } = useUnitGroup()
+const { route, router, groupDrawerOpen, groupInstance, unitDrawerOpen, unitInstance, unitGroupList, loading } = useUnitGroup()
 </script>
 
 <template>
@@ -20,7 +20,7 @@ const { route, router, groupDrawerOpen, groupInstance, unitDrawerOpen, unitInsta
 
         <el-button type="primary" class="mr-[20px] mb-[26px]" size="default" @click="groupDrawerOpen"> 新增组 </el-button>
 
-        <Table :table-data="tableData" />
+        <Table :table-data="unitGroupList" v-loading="loading" />
         
     </div>
 

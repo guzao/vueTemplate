@@ -1,5 +1,5 @@
 import { Ref, ref, UnwrapRef } from 'vue'
-import { hasEror } from '@/utils'
+import { hasError } from '@/utils'
 
 interface UseReactiveGetParams<T> {
     /**  初始化参数*/
@@ -10,13 +10,15 @@ interface UseReactiveGetParams<T> {
     Immediately?: boolean,
     /** 响应接口手动处理 */
     requestCallback?: (res: ResponseData) => any,
+    /** 响应接异常口手动处理 */
+    errorHandle?: (error: any) => any,
 }
 
 const defaultRequestCallback = (res: ResponseData) => res.data
 
 export function useReactiveHttp<T> (params: UseReactiveGetParams<T>) {
 
-    const { initData, request, Immediately = true, requestCallback = defaultRequestCallback } = params
+    const { initData, request, Immediately = true, requestCallback = defaultRequestCallback, errorHandle = () =>{} } = params
 
     const result = ref<T>(initData)
 
@@ -26,10 +28,12 @@ export function useReactiveHttp<T> (params: UseReactiveGetParams<T>) {
         loading.value = true
         return request().then(res => {
             loading.value = false
-            if (hasEror(res)) return
+            if (hasError(res)) return
             result.value = requestCallback(res) || res
         }).catch(err => {
-            console.warn(err)
+            loading.value = false
+            console.warn('useReactiveHttp:', err)
+            errorHandle && errorHandle(err)
         })
     }
 
@@ -56,6 +60,10 @@ type UseReactiveHttpReturnTye<T> = [
     Ref<boolean>,
 ]
 
+
+/**
+ * 以数组的方式返回数据
+*/
 export function useReactiveHttp_ <T>(params: UseReactiveGetParams<T>): UseReactiveHttpReturnTye<T> {
 
     const { initData, request, Immediately = true, requestCallback = defaultRequestCallback } = params
@@ -68,7 +76,7 @@ export function useReactiveHttp_ <T>(params: UseReactiveGetParams<T>): UseReacti
         loading.value = true
         return request().then(res => {
             loading.value = false
-            if (hasEror(res)) return
+            if (hasError(res)) return
             result.value = requestCallback(res) || res
         }).catch(err => {
             console.warn(err)

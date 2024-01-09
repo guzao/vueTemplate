@@ -1,10 +1,9 @@
-import { getPrevMonth } from '@/utils'
+import { dateFormatterType, getPrevMonth, sleep } from '@/utils'
 import { getWarningByLevel } from '@/API'
 import { useAppData, useDicts } from '@/store'
 import { renderLine, renderPie } from './tools'
 import { ref, reactive, watch, nextTick } from 'vue'
-import { dateFormatterType } from '../../parkReport/tools'
-import { paserTime, generateDnamicTableData } from '@/utils'
+import { parserTime, generateDnamicTableData } from '@/utils'
 import { useSelectAll, useEcharts, useReactiveHttp, useLocalPagnation, useFormInstance } from '@/hooks'
 
 
@@ -16,9 +15,9 @@ export function useWarningLevel() {
 
     const { formInstance, validate } = useFormInstance()
 
-    const { chartRef, renderChart } = useEcharts()
+    const { chartRef, renderChart, chartResize } = useEcharts()
 
-    const { chartRef: pieChartRef, renderChart: renderPieChart } = useEcharts()
+    const { chartRef: pieChartRef, renderChart: renderPieChart, chartResize: pieChartResize } = useEcharts()
 
     const { isIndeterminate, handleCheckAllChange, handleCheckedIdsChange, checkAll, checkedIds } = useSelectAll(dicts.warningLevelDict.dictValue, 'dictValue')
 
@@ -38,8 +37,8 @@ export function useWarningLevel() {
         const [startTime, endTime] = date
         let formatterTag = dateFormatterType[dataCycle as any] || 'YYYY-MM-DD'
         return {
-            startTime: paserTime(startTime, formatterTag as any),
-            endTime: paserTime(endTime, formatterTag as any),
+            startTime: parserTime(startTime, formatterTag as any),
+            endTime: parserTime(endTime, formatterTag as any),
             stationSerial: appdata.currentParkSerial,
             dataCycle: dataCycle as any,
             warnStatus,
@@ -57,9 +56,12 @@ export function useWarningLevel() {
             markData(data)
             const { tableData, headerData } = processData(data)
             tableHeader.value = headerData
-            nextTick(() => {
+            nextTick(async () => {
                 renderLine(renderChart, data, 'subLevel')
                 renderPie(renderPieChart, data, 'subLevel')
+                await sleep(200)
+                chartResize()
+                pieChartResize()
             })
             return tableData
         },

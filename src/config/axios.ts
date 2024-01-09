@@ -1,4 +1,4 @@
-import { login } from '@/ApiMap'
+import { login, common } from '@/ApiMap'
 import { CreateAxiosDefaults } from "axios"
 
 const config = import.meta.env
@@ -11,4 +11,9 @@ export const axiosConfig: CreateAxiosDefaults = {
 }
 
 /** 接口调用白名单 */
-export const whiteList = [ login.login, login.captchaImage ]
+export const whiteList = [login.login, login.captchaImage, login.noticeDetail, login.noticeList]
+
+
+/** 接口调用忽略报错白名单 */
+export const ignoreErrorUrls = [ common.parkLastTime ]
+

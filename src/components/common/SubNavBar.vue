@@ -1,14 +1,16 @@
 <script lang="ts" setup>
+import { t } from '@/langs'
 import { ref, computed } from 'vue'
-import { useAppData } from '@/store'
 import { Type, Common } from '@/enum'
 import { layoutConfig } from '@/config'
-import { getDeviceStateInfo } from '@/utils'
+import { getDeviceStateInfo, writeDefault } from '@/utils'
+import { useAppData, useUser } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 import DeviceStateDesc from './DeviceStateDesc.vue'
 
 import Icon from './Icon.vue'
 
+const user = useUser()
 const appData = useAppData()
 const emits = defineEmits<{
     /** 电站变化事件 */
@@ -34,10 +36,10 @@ const router = useRouter()
 const viewModelPath = ref(route.path)
 
 const viewModel = computed(() => {
-    const viewModel =  layoutConfig.viewModel
-    return appData.currentParkType == `${Type.NUMBER_CABINET}` ? viewModel : viewModel.filter(view => view.url !== Common.PARK_INCOME )
+    const viewModel = user.viewModel
+    // const viewModel = layoutConfig.viewModel
+    return appData.currentParkType == `${Type.NUMBER_CABINET}` ? viewModel : viewModel.filter(view => view.url !== Common.PARK_INCOME)
 })
-
 
 const parkChange = (code: string) => {
     appData.parkCodeChnage(code)
@@ -52,7 +54,7 @@ const viewModelChange = (path: string) => router.push({ query: { stationCode: ap
     <div class="flex justify-between items-center h-[62px]  bg-[var(--theme-white-bg)] px-[10px]"
         :style="`height: ${$attrs.height || 62}px;`">
 
-        <el-select v-model="appData.parkSerial" class="m-2" placeholder="Select" style="width: 260px;" filterable
+        <el-select v-model="appData.parkSerial" class="m-2" placeholder="Select" style="width: 300px;" filterable
             @change="parkChange">
 
             <template #prefix>
@@ -62,8 +64,11 @@ const viewModelChange = (path: string) => router.push({ query: { stationCode: ap
             <el-option v-for="item in appData.parkAuthList" :key="item.id" :label="item.name" :value="item.serial">
 
                 <div class="flex justify-between items-center">
-                    <span>{{ item.name }}</span>
-                    <Icon :size="16" :icon="getDeviceStateInfo(appData.parkRuningState[item.serial]).icon" />
+                    <div class="flex items-center">
+                        <Icon :size="20" :icon="item.type == Type.NUMBER_CABINET ? 'icon_cng' : 'icon_cnx'" class="mr-1" />
+                        <span>{{ item.name }}</span>
+                    </div>
+                    <Icon :size="14" :icon="getDeviceStateInfo(appData.parkRuningState[item.serial]).icon" />
                 </div>
 
             </el-option>
@@ -81,7 +86,8 @@ const viewModelChange = (path: string) => router.push({ query: { stationCode: ap
                 <Icon icon="icon_viewmodel" />
             </template>
 
-            <el-option v-for="item in viewModel" :key="item.code" :label="item.label" :value="item.url" />
+            <el-option v-for="item in viewModel" :key="item.code"
+                :label="item.i18nKey ? t('sliderMenu.' + item.i18nKey) : item.label" :value="item.url" />
 
         </el-select>
 

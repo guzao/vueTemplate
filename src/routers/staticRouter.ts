@@ -14,11 +14,29 @@ export const staticRouter: RouteRecordRaw[] = [
     },
 
     {
-        path: '/401',
+        path: '/networkError',
         component: () => import('@/pages/staticPage/errorPages/404.vue'),
-        name: '401',
+        name: 'networkError',
         meta: {
             title: '页面丢了',
+        },
+    },
+
+    // 
+    {
+        path: '/noticeList',
+        component: () => import('@/pages/staticPage/system/noticeList/index.vue'),
+        name: 'noticeList',
+        meta: {
+            title: '公告列表',
+        },
+    },
+    {
+        path: '/noticeDetail',
+        component: () => import('@/pages/staticPage/system/noticeDetail/index.vue'),
+        name: 'noticeDetail',
+        meta: {
+            title: '公告详情',
         },
     },
 

@@ -161,20 +161,6 @@ export const authRouter: RouteRecordRaw[] = [
             },
             {
                 meta: {
-                    title: '测点配置'
-                },
-                path: '/config/metric',
-                component: () => import('@/pages/authPage/configPage/metric/index.vue'),
-            },
-            {
-                meta: {
-                    title: '模型管理'
-                },
-                path: '/config/modelTemplate',
-                component: () => import('@/pages/authPage/configPage/modelTemplate/index.vue'),
-            },
-            {
-                meta: {
                     title: '单元组管理'
                 },
                 path: '/config/unitGroup',

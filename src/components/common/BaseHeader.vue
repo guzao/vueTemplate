@@ -1,11 +1,20 @@
 <script lang="ts" setup>
+import { computed } from 'vue'
 import { layoutConfig } from '@/config'
+import { useLayout, useUser } from '@/store'
+import LogoIMg from '@/assets/image/login/img_logo.png'
+
+const userData = useUser()
+const logoSrc = computed(() => userData.userInfo.user.logo || LogoIMg)
+
+const layout = useLayout()
+const hasShadow = computed(() => layout.scrollNumber > layoutConfig.offset ? 'shadow' : ' ')
 </script>
 
 <template>
-    <div class="flex pl-[16px] pr-[26px]  bg-[var(--theme-white-bg)]" :style="`height: ${layoutConfig.headerHeight}px`">
-        <div class="flex items-center">
-            <img src="../../assets/image/login/img_logo.png" alt="" srcset="" class="w-[262px] h-[36px]">
+    <div class="flex px-[16px]  bg-[var(--theme-white-bg)]" :style="`height: ${layoutConfig.headerHeight}px`">
+        <div class="flex items-center min-w-[180px]">
+            <img :src="logoSrc" alt="" srcset="" class="min-w-[180px] w-[262px] h-[36px]">
         </div>
         <div class="flex-1">
             <slot />

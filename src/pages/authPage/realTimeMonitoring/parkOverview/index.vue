@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import { useAppData } from '@/store'
 import { IntervalTime } from '@/enum'
 import { useInterval } from '@/hooks'
-import { useAppData, useDicts } from '@/store'
 import { useParkOverview } from './useParkOverview'
 
 import Bottom from './Bottom.vue'
@@ -9,7 +9,6 @@ import RuningInfo from './RuningInfo.vue'
 import SubNavBar from '@/components/common/SubNavBar.vue';
 
 const appData = useAppData()
-const dicts = useDicts()
 
 const { getParkOverview, loading, parkOverview } = useParkOverview()
 
@@ -25,19 +24,17 @@ const getParkInfo = () => {
 
 <template>
     <div class="park_overview flex flex-col flex-1 w-full overflow-hidden"
-        v-watermark="{ markSatate: appData.currentRelease, text: dicts.parkReleaseStatusDict.dictLabel[appData.currentRelease] }"
-        v-loading="loading">
+        v-watermark="appData.currentParkWatermarkOptions(parkOverview.A_M2)">
 
+        <div class="top_bg flex min-h-[580px]  box-border flex-col flex-1" >
 
-        <div class="top_bg flex-1 min-h-[580px]  box-border">
+            <SubNavBar height="46" class="bg-transparent" @park-change="getParkInfo"></SubNavBar>
 
-            <SubNavBar height="46" class="mb-[16px] bg-transparent" @park-change="getParkInfo"></SubNavBar>
-
-            <RuningInfo :park-overview="parkOverview" />
+            <RuningInfo v-loading="loading" :park-overview="parkOverview" />
 
         </div>
 
-        <div class="bottom_bg h-[27vh] px-[21px] min-h-[250px] ">
+        <div v-loading="loading" class="bottom_bg h-[27vh] px-[21px] min-h-[250px] ">
             <Bottom />
         </div>
 
@@ -57,7 +54,6 @@ const getParkInfo = () => {
         background-size: 100% 100%;
         background-repeat: no-repeat;
     }
-
 
 }
 </style>

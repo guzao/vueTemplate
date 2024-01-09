@@ -1,4 +1,16 @@
 export const common = {
+    
+    save: 'Save',
+
+    search: 'Search',
+
+    clearable: 'Clearable',
+
+    refresh: 'Refresh',
+
+    all: 'All',
+
+    selected: 'Selected',
 
     systemConfig: 'SystemConfig',
 
@@ -7,6 +19,18 @@ export const common = {
     efficiency: 'Efficiency',
 
     overview: 'Overview',
+
+    date: 'Date',
+
+    dateRange: 'Date Range',
+
+    dataTime: 'Data Time',
+
+    dataType: 'Data Type',
+
+    dataCycle: 'Data Cycle',
+
+    deviceUnit: 'Device Unit',
 
     day: 'Day',
 
@@ -30,9 +54,29 @@ export const common = {
 
     device: 'Device',
 
+    batteryStack: 'Battery Stack',
+
+    voltage: 'Voltage',
+    
+    current: 'Current',
+
+    temp: 'Temp',
+
+    cocurrent: 'AC',
+
+    exchange: 'DC',
+
     state: 'State',
 
     enter: 'Enter',
+
+    charge: 'charge',
+
+    C: 'charge',
+
+    discharge: 'discharge',
+
+    D: 'discharge',
 
     operationState: 'Operation State',
 
@@ -42,6 +86,10 @@ export const common = {
 
     dayDischarge: 'D DSCH',
 
+    weekCharge: 'W CHGR',
+
+    weekDischarge: 'W DSCH',
+
     monthCharge: 'M CHGR',
 
     monthDischarge: 'M DSCH',
@@ -50,9 +98,13 @@ export const common = {
 
     yaerDischarge: 'Y DSCH',
     
-    totalCharge: 'Y CHGR',
+    totalCharge: 'Toatl CHGR',
 
-    totalDischarge: 'Y DSCH',
+    totalDischarge: 'Toatl DSCH',
+
+    CandD: 'CHGRAndDSCH',
+
+    power: 'Power',
 
     activePower: 'Active Power',
 
@@ -69,6 +121,10 @@ export const common = {
     dataList: 'Data List',
 
     dataChart: 'Data Chart',
+
+    trendChart: 'Trend Chart',
+
+    runningTrend: 'Running Trend',
 
     placeholder: 'please input',
 
@@ -98,5 +154,20 @@ export const common = {
 
     count: '',
 
-    total: 'Total'
+    total: 'Total',
+
+    footerText: '©Shanghai Electric Gotion New Energy Technology Co.,Ltd. ',
+
+    subPark: 'SubPark',
+    
+    unit: 'Unti',
+
+    stack: 'Stack',
+
+    cluster: 'Cluster',
+
+    pack: 'Pack',
+
+    cell: 'Cell',
+
 }

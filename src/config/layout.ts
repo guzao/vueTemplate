@@ -1,5 +1,5 @@
 
-const gapLimit = 12
+export const gapLimit = 12
 
 /** Heder 高度 */
 const headerHeight = 58
@@ -12,8 +12,11 @@ export const layoutConfig = {
     /** Heder 高度 */
     headerHeight,
 
-    /** 是否固定全局 Heder */
+    /** 是否动态展示全局 Heder */
     dynamicHeader: true,
+
+    /** 全局二级标题 */
+    showSuntitle: true,
 
     /** 是否固定高度 */ 
     fixHeight: false,
@@ -23,9 +26,6 @@ export const layoutConfig = {
 
     /** 返回顶部 */
     showGoTop: true,
-
-    /** footer 文本 */
-    footerText: '©上海电气国轩新能源科技有限公司',
 
     /** 侧边栏布局状态 */
     showSlider: false,
@@ -40,7 +40,10 @@ export const layoutConfig = {
     useLocalRouter: true,
 
     /** 软件版本 */
-    version: ' 2.0.1',
+    version: ' 2.1.0',
+
+    /** 最小屏幕宽度 */
+    minScreenWidth: 1500,
 
     /** 视图模式 */ 
     viewModel: [

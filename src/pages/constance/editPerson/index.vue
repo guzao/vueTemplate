@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { t } from '@/langs'
 import { useEditPerson } from './useEditPerson'
 import { ArrowLeft } from '@element-plus/icons-vue'
 
@@ -18,7 +19,8 @@ const { confirm, loading, rules, dicts, form, router } = useEditPerson()
 
         <div class="flex justify-between items-center mb-[36px]">
             <TitleBox> 基本信息 </TitleBox>
-            <el-button text size="small" type="success" @click="router.go(-1)" :icon="ArrowLeft"> 返回 </el-button>
+            <el-button text size="small" type="success" @click="router.go(-1)" :icon="ArrowLeft"> {{ t('common.back') }}
+            </el-button>
         </div>
 
         <el-form :model="form" :rules="rules" ref="fromInstance" label-width="100px" label-position="left">
@@ -44,7 +46,8 @@ const { confirm, loading, rules, dicts, form, router } = useEditPerson()
 
         </el-form>
 
-        <el-button class="flex-1" type="primary" size="default" :loading="loading" @click="confirm">提交</el-button>
+        <el-button class="flex-1" type="primary" size="default" :loading="loading" @click="confirm">{{ t('common.confirm')
+        }}</el-button>
 
     </div>
 </template>

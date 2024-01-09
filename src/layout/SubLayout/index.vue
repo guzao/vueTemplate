@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { useLayout } from '@/store'
+import { ref, onMounted } from "vue"
 import { layoutConfig } from '@/config'
-import { ref, onMounted } from "vue";
 import { ElScrollbar } from 'element-plus'
+import Header from "./components/Header.vue"
 import { Top } from '@element-plus/icons-vue'
-import Header from "./components/Header.vue";
-import Footer from './components/Footer.vue';
+import Footer from '@/components/common/Footer.vue'
 
 const layout = useLayout()
 const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>()
@@ -24,7 +24,7 @@ onMounted(() => layout.setScrollbarRefInstance(scrollbarRef.value))
         <el-container>
 
 
-            <el-aside style="width: auto;" class="h-[100vh]">
+            <el-aside style="width: auto;" v-if="$slots.default" class="h-[100vh]">
                 <div :style="layout.getLayoutMargingTop">
 
                     <el-scrollbar :style="`height:calc(100vh - ${ layoutConfig.offset }px);`">
@@ -54,7 +54,7 @@ onMounted(() => layout.setScrollbarRefInstance(scrollbarRef.value))
         </el-container>
 
         <div class="fixed right-[40px] bottom-20 z-50">
-            <el-button @click="layout.scrollTop" v-if="!layout.hasShowHeader" :icon="Top" circle />
+            <el-button @click="layout.scrollTop" v-if="!layout.showGoTop" :icon="Top" circle />
         </div>
 
 

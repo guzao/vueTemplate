@@ -1,15 +1,19 @@
 import App from '@/App.vue'
 import { createApp } from 'vue'
+import { initAppThemeColor } from '@/store'
 import { appErrorHandle } from '@/systemRuntimeInfoTrack'
-import { useAsset, useRouter, useDirective, useNprogress, useElementPlus, usePinan, setupI18n,  useSmartOpsBroadcastChannel } from '@/plugins'
+import { useAsset, useRouter, useDirective, useNprogress, setupComponent, usePinan, setupI18n, useSmartOpsBroadcastChannel } from '@/plugins'
+
 
 
 /**
  * 启动应用
 */
-export async function setupApp () {
+export async function setupApp() {
 
     useAsset()
+
+    initAppThemeColor()
 
     useNprogress()
 
@@ -23,7 +27,7 @@ export async function setupApp () {
 
     usePinan(appInstance)
 
-    useElementPlus(appInstance)
+    setupComponent(appInstance)
 
     // 等待路由挂载完成
     await useRouter(appInstance).isReady()
@@ -31,6 +35,10 @@ export async function setupApp () {
     appInstance.config.errorHandler = appErrorHandle
 
     appInstance.mount("#app")
+
+
+
+
 
 
 }

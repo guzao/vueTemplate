@@ -3,17 +3,17 @@ import { useLogininfor } from './useLogininfor'
 import SubTitle from '@/components/common/SubTitle.vue';
 
 
-const { dicts, pageParams, currentChange, result, loading, getResult, searchForm } = useLogininfor()
+const { dicts, pageParams, currentChange, result, loading, searchForm, pageSizes } = useLogininfor()
 
 </script>
 
 
 <template>
-    <div class="w-full overflow-hidden">
+    <div class="w-full overflow-hidden flex-1 flex-col flex">
 
         <SubTitle />
 
-        <div class="p-[24px] box-border bg-[var(--theme-white-bg)]">
+        <div class="p-[24px] box-border bg-[var(--theme-white-bg)] flex-1 flex-col flex">
 
             <el-form v-if="0" :inline="true" :model="searchForm" class="demo-form-inline mb-[10px]" >
 
@@ -35,7 +35,7 @@ const { dicts, pageParams, currentChange, result, loading, getResult, searchForm
 
             </el-form>
 
-            <el-table :data="result" stripe style="width: 100%" v-loading="loading">
+            <el-table :data="result" stripe style="width: 100%" class="flex-1" v-loading="loading">
 
                 <el-table-column prop="userName" label="名称" />
 
@@ -62,8 +62,10 @@ const { dicts, pageParams, currentChange, result, loading, getResult, searchForm
             </el-table>
 
             <div class="flex justify-end mt-[26px]">
-                <el-pagination background layout="total, prev, pager, next " :pageSize="pageParams.pageSize"
-                    :total="pageParams.total" @currentChange="currentChange" />
+                <el-pagination v-model:current-page="pageParams.pageNum" v-model:page-size="pageParams.pageSize"
+                    :page-sizes="pageSizes" background layout="total, sizes, prev, pager, next, jumper"
+                    :total="pageParams.total" />
+
             </div>
 
 

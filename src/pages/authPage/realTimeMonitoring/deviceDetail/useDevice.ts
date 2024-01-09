@@ -1,10 +1,8 @@
 import { useAppData } from '@/store'
 import { getDeviceInfo } from '@/API'
-import { reactive, provide } from 'vue'
-import { InjectionKey, watch } from 'vue'
-import { useReactiveHttp } from '@/hooks'
+import { reactive, provide, ref, computed, InjectionKey, watch } from 'vue'
+import { useReactiveHttp, useTitle } from '@/hooks'
 import { getFirstElement, urlQueryToObject } from '@/utils'
-
 
 /** 注入key */
 export const deviceDetailContextKey: InjectionKey<{
@@ -52,15 +50,21 @@ export function useDeviceDetialContext() {
     const updateAssetSerial = (assetSerial: string) => deviceDetialContext.assetSerial = assetSerial
 
     const updateDeviceName = (name: string) => deviceDetialContext.deviceName = name
-    
+
     const updateStorageUnitId = (storageUnitId: string) => deviceDetialContext.storageUnitId = storageUnitId
 
     const deviceDetialContext = reactive({
+        /** 设备状态 */
         deviceState: urlQueryToObject()?.state as any,
+        /** 设备id */
         unitId: urlQueryToObject()?.unitId,
+        /** 设备资产id */
         assetSerial: '',
+        /** 当前查看的设备名 */
         deviceName: '',
+        /** 当前查看的设备下的储能单元id */
         storageUnitId: '',
+        
         updateUnitId,
         updateDeviceState,
         updateAssetSerial,
@@ -68,6 +72,9 @@ export function useDeviceDetialContext() {
         updateStorageUnitId
     })
 
+    const documentTitle = computed(() => `${import.meta.env.VITE_APP_TITLE}-${deviceDetialContext.deviceName}`)
+
+    useTitle(documentTitle)
 
     const appData = useAppData()
 
@@ -77,11 +84,12 @@ export function useDeviceDetialContext() {
         requestCallback: (res) => {
             updateDeviceState(res.data.deviceMap.M2)
 
-            const storageUnitId = getFirstElement(res.data.E as StoreageUnit []).id as any
+            const storageUnitId = getFirstElement(res.data.E as StoreageUnit[]).id as any
             updateStorageUnitId(storageUnitId)
             return res.data
         }
     })
+
 
     watch(() => deviceDetialContext.unitId, () => getDeviceBaseInfo())
 
@@ -91,7 +99,8 @@ export function useDeviceDetialContext() {
         deviceDetialContext,
         deviceBaseInfo,
         getDeviceBaseInfo,
-        loading
+        loading,
+        appData
     }
 
 }

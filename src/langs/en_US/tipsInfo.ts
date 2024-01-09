@@ -17,6 +17,24 @@ export const tipsInfo = {
 
     firstLogin: 'first login please edit your password',
 
-    parkNotRelease: '电站不是发布状态,数据分析无法使用'
+    parkNotRelease: 'park is not Release, cannot use dataAnalysis',
+
+
+    // 404
+    $404Erroe: '404 Error',
+
+    sorryInfo: 'sorry, the page you are looking for does not exist. Try checking the URL for errors, then press the refresh button on your browser or try to find something else in our application.',
+
+    gobackHome: 'go Back Home',
+
+    NotFound: 'Not Found Page!',
+
+    passeringError: 'Please check the parameters for parsing errors',
+
+    downloadFile: 'Download',
+    
+    downloading: 'Downloading...',
+
+    downloadSuccess: 'Download Success'
 
 } 

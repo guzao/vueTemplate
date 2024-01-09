@@ -1,7 +1,7 @@
 import { createPinia } from 'pinia'
 import { App } from 'vue';
 
-const Pinan = createPinia()
+export const Pinan = createPinia()
 
 /**
  * 注册全局数据

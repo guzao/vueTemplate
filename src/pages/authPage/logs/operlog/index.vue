@@ -6,9 +6,7 @@ import SubTitle from '@/components/common/SubTitle.vue'
 
 const dicts = useDicts()
 
-const { pageParams } = usePagination({ callback: () => getResult(), pageSize: 10 })
-
-const currentChange = (page: number) => pageParams.pageNum = page
+const { pageParams, pageSizes } = usePagination({ callback: () => getResult(), pageSize: 10 })
 
 const { result, loading, getResult } = useReactiveHttp({
     initData: [] as Operlog[],
@@ -23,14 +21,14 @@ const { result, loading, getResult } = useReactiveHttp({
 
 
 <template>
-    <div class="w-full overflow-hidden">
+    <div class="w-full overflow-hidden flex-1 flex-col flex">
 
         <SubTitle />
 
 
-        <div class="p-[24px] box-border bg-[var(--theme-white-bg)]">
+        <div class="p-[24px] box-border bg-[var(--theme-white-bg)]  flex-1 flex-col flex">
 
-            <el-table :data="result" stripe style="width: 100%" v-loading="loading">
+            <el-table class="flex-1" :data="result" stripe style="width: 100%" v-loading="loading">
 
                 <el-table-column prop="title" label="名称" />
 
@@ -43,7 +41,7 @@ const { result, loading, getResult } = useReactiveHttp({
                 </el-table-column>
 
                 <el-table-column prop="requestMethod" label="操作方式" />
-             
+
                 <el-table-column prop="operIp" label="操作IP" />
 
                 <el-table-column prop="operLocation" label="操作地点" />
@@ -61,10 +59,10 @@ const { result, loading, getResult } = useReactiveHttp({
             </el-table>
 
             <div class="flex justify-end mt-[26px]">
-                <el-pagination background 
-                    layout="total, prev, pager, next " 
-                    :pageSize="pageParams.pageSize"
-                    :total="pageParams.total" @currentChange="currentChange" />
+                <el-pagination v-model:current-page="pageParams.pageNum" v-model:page-size="pageParams.pageSize"
+                    :page-sizes="pageSizes" background layout="total, sizes, prev, pager, next, jumper"
+                    :total="pageParams.total" />
+
             </div>
 
         </div>

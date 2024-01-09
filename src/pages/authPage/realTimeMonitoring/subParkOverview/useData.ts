@@ -9,7 +9,6 @@ import { getDevicGroupList, getStationInfo } from '@/API'
 export function useData() {
 
     const appData = useAppData()
-    const dicts = useDicts()
 
 
     /** 子站列表 */
@@ -49,7 +48,6 @@ export function useData() {
         deivceGroupList,
         parkRuningInfo,
         loading,
-        appData,
-        dicts
+        appData
     }
 }

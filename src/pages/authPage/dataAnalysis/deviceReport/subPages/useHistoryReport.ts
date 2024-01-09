@@ -1,48 +1,24 @@
 import { useAppData } from '@/store'
-import { getUnitList, getHistoryReport } from '@/API'
-import { ref, reactive, computed, watch, nextTick } from 'vue'
-import { dateFormatterType, processTableRowData, renderLine } from '../../parkReport/tools'
-import { useEcharts, useReactiveHttp, useLocalPagnation, useHasShowMoreData, useSelectAll } from '@/hooks'
-import { getPrevMonth, getDateCycles, paserTime, generateDnamicTableData, arrayIsEmpty, isFalse, sleep } from '@/utils'
+import { ref, reactive, computed, watch, nextTick, Ref } from 'vue'
+import { processTableRowData, renderLine } from '../../parkReport/tools'
+import { getUnitList, getHistoryReport, exportHistoryReport } from '@/API'
+import { useEcharts, useReactiveHttp, useLocalPagnation, useHasShowMoreData, useSelectAll, useDownload } from '@/hooks'
+import { getPrevMonth, getDateCycles, parserTime, generateDnamicTableData, arrayIsEmpty, isFalse, sleep, dateFormatterType } from '@/utils'
 
 
 export function useHistoryReport() {
 
-    const appdate = useAppData()
+    const {
+        appdate, unitList, _getUnitList, unitListLoading, checkAll, handleCheckAllChange, handleCheckedIdsChange,
+        checkedIds, isIndeterminate, resetSelectAll, toggleShowMore, showMore, limitDataList
+    } = useUnitData()
 
 
-    const { result: unitList, getResult: _getUnitList, loading: unitListLoading } = useReactiveHttp(
-        { initData: [] as UnitListData[], request: () => getUnitList({ stationSerial: appdate.currentParkSerial, pageSize: 1000 }), requestCallback: (res) => res.rows }
-    )
 
-    const { checkAll, handleCheckAllChange, handleCheckedIdsChange, checkedIds, isIndeterminate, resetSelectAll } = useSelectAll(unitList, 'assetSerial')
+    const { createParams, form, timeType } = useFormData(checkedIds)
 
-    const { toggleShowMore, showMore, limitDataList } = useHasShowMoreData(unitList, 8)
 
-    const form = reactive({
-        dataCycle: 'D',
-        date: [getPrevMonth(new Date(), 1), new Date()],
-        assetSerials: checkedIds,
-    })
-
-    const createParams = () => {
-        const { date, dataCycle, assetSerials } = form
-        const [startTime, endTime] = date
-        let formatterTag = dateFormatterType[dataCycle as any] || 'YYYY-MM-DD'
-        return {
-            startTime: paserTime(startTime, formatterTag as any),
-            endTime: paserTime(endTime, formatterTag as any),
-            stationSerial: appdate.currentParkSerial,
-            dataCycle: dataCycle as any,
-            assetSerials
-        }
-    }
-
-    const timeType = computed(() => {
-        if (form.dataCycle == 'D') return 'daterange'
-        if (form.dataCycle == 'M') return 'monthrange'
-        if (form.dataCycle == 'D') return 'year'
-    })
+    const { fileLoading, downloadFile } = useDownload({ downloadFn: () => exportHistoryReport({ ...createParams(), model: 'dc,ac' }) })
 
     const { chartRef, renderChart } = useEcharts()
 
@@ -74,8 +50,8 @@ export function useHistoryReport() {
         }
         getResult()
     }
-    
-    const assetSerialsChange = (value: any []) => {
+
+    const assetSerialsChange = (value: any[]) => {
         handleCheckedIdsChange(value)
         if (arrayIsEmpty(value)) {
             result.value = []
@@ -121,10 +97,77 @@ export function useHistoryReport() {
         unitList,
         loading,
         chartRef,
-        checkAll, 
+        checkAll,
         allChange,
         assetSerialsChange,
-        checkedIds, 
-        isIndeterminate
+        checkedIds,
+        isIndeterminate,
+        fileLoading,
+        downloadFile
+    }
+}
+
+function useUnitData() {
+
+    const appdate = useAppData()
+
+    const { result: unitList, getResult: _getUnitList, loading: unitListLoading } = useReactiveHttp(
+        { initData: [] as UnitListData[], request: () => getUnitList({ stationSerial: appdate.currentParkSerial, pageSize: 1000 }), requestCallback: (res) => res.rows }
+    )
+
+    const { checkAll, handleCheckAllChange, handleCheckedIdsChange, checkedIds, isIndeterminate, resetSelectAll } = useSelectAll(unitList, 'assetSerial')
+
+    const { toggleShowMore, showMore, limitDataList } = useHasShowMoreData(unitList, 8)
+
+    return {
+        unitList,
+        _getUnitList,
+        unitListLoading,
+        checkAll,
+        handleCheckAllChange,
+        handleCheckedIdsChange,
+        checkedIds,
+        isIndeterminate,
+        resetSelectAll,
+        toggleShowMore,
+        showMore,
+        limitDataList,
+        appdate
+    }
+}
+
+function useFormData(checkedIds: Ref<any[]>) {
+
+    const appdate = useAppData()
+
+    const form = reactive({
+        dataCycle: 'D',
+        date: [getPrevMonth(new Date(), 1), new Date()],
+        assetSerials: checkedIds,
+    })
+
+    const createParams = () => {
+        const { date, dataCycle, assetSerials } = form
+        const [startTime, endTime] = date
+        let formatterTag = dateFormatterType[dataCycle as any] || 'YYYY-MM-DD'
+        return {
+            startTime: parserTime(startTime, formatterTag as any),
+            endTime: parserTime(endTime, formatterTag as any),
+            stationSerial: appdate.currentParkSerial,
+            dataCycle: dataCycle as any,
+            assetSerials
+        }
+    }
+
+    const timeType = computed(() => {
+        if (form.dataCycle == 'D') return 'daterange'
+        if (form.dataCycle == 'M') return 'monthrange'
+        if (form.dataCycle == 'D') return 'year'
+    })
+
+    return {
+        form,
+        createParams,
+        timeType
     }
 }

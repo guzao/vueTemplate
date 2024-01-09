@@ -1,81 +1,15 @@
-import {  getPrevMonth } from '@/utils'
 import { useAppData, useDicts } from '@/store'
 import { getWarningBydeviceType } from '@/API'
 import { renderLine, renderPie } from './tools'
 import { ref, reactive, watch, nextTick } from 'vue'
-import { dateFormatterType } from '../../parkReport/tools'
-import { paserTime, generateDnamicTableData } from '@/utils'
+import { parserTime, generateDnamicTableData, dateFormatterType, getPrevMonth, sleep } from '@/utils'
 import { useSelectAll, useEcharts, useReactiveHttp, useLocalPagnation, useFormInstance } from '@/hooks'
 
 export function useDeviceType() {
 
-    const dicts = useDicts()
-    
-    const appdata = useAppData()
+    const { dicts, formInstance, isIndeterminate, handleCheckAllChange, handleCheckedIdsChange, checkAll, checkedIds, validate, createParams, rules, appdata, form } = useFormData()
 
-    const { formInstance, validate } = useFormInstance()
-
-    const { chartRef, renderChart } = useEcharts()
-
-    const { chartRef: pieChartRef, renderChart: renderPieChart } = useEcharts()
-
-    const { isIndeterminate, handleCheckAllChange, handleCheckedIdsChange, checkAll, checkedIds } = useSelectAll(dicts.deviceTypeDict.dictValue, 'dictValue')
-
-    const form = reactive({
-        warnStatus: '1',
-        dataCycle: 'D',
-        deviceTypes: checkedIds,
-        date: [getPrevMonth(new Date(), 1), new Date()],
-    })
-
-    const rules = reactive({
-        deviceTypes: [ { required: true, message: 'Please input Activity name', trigger: 'blur' }],
-    })
-
-    const createParams = () => {
-        const { date, dataCycle, deviceTypes, warnStatus } = form
-        const [startTime, endTime] = date
-        let formatterTag = dateFormatterType[dataCycle as any] || 'YYYY-MM-DD'
-        return {
-            startTime: paserTime(startTime, formatterTag as any),
-            endTime: paserTime(endTime, formatterTag as any),
-            stationSerial: appdata.currentParkSerial,
-            dataCycle: dataCycle as any,
-            warnStatus,
-            deviceTypes
-        }
-    }
-
-    const tableHeader = ref<DnamicTableDataHeaderData[]>([])
-
-    const { result: warning, getResult: getWarning, loading } = useReactiveHttp({
-        initData: [] as WarningData[],
-        request: () => getWarningBydeviceType(createParams()),
-        requestCallback: (res) => {
-            const data = res.data as WarningData[]
-            markData(data)
-            const { tableData, headerData } = processData(data)
-            tableHeader.value = headerData
-            nextTick(() => {
-                renderLine(renderChart, data, 'subName')
-                renderPie(renderPieChart, data, 'subName')
-            })
-            return tableData
-        },
-        Immediately: false
-    })
-
-    const markData = (data: WarningData[]) => {
-        data.forEach((warning) => {
-            warning.subName = dicts.deviceTypeDict.dictLabel[warning.name]
-            warning.subLevel = dicts.warningLevelDict.dictLabel[warning.level]
-        })
-        data.sort((a, b) => +new Date(a.time) - +new Date(b.time))
-    }
-
-    const { currentPageData, pageParams } = useLocalPagnation(warning, { pageSize: 10, page: 1 })
-
-    const currentChange = (page: number) => pageParams.page = page
+    const { chartRef, pieChartRef, tableHeader, warning, getWarning, loading, currentPageData, currentChange, pageParams } = useTableAndChart(createParams)
 
     const validateForm = async () => {
         try {
@@ -111,6 +45,112 @@ export function useDeviceType() {
         formInstance,
         validateForm
     }
+
+}
+
+function useFormData() {
+
+    const dicts = useDicts()
+
+    const appdata = useAppData()
+
+    const { formInstance, validate } = useFormInstance()
+
+    const { isIndeterminate, handleCheckAllChange, handleCheckedIdsChange, checkAll, checkedIds } = useSelectAll(dicts.deviceTypeDict.dictValue, 'dictValue')
+
+    const form = reactive({
+        warnStatus: '1',
+        dataCycle: 'D',
+        deviceTypes: checkedIds,
+        date: [getPrevMonth(new Date(), 1), new Date()],
+    })
+
+    const rules = reactive({
+        deviceTypes: [{ required: true, message: 'Please input Activity name', trigger: 'blur' }],
+    })
+
+    const createParams = () => {
+        const { date, dataCycle, deviceTypes, warnStatus } = form
+        const [startTime, endTime] = date
+        let formatterTag = dateFormatterType[dataCycle as any] || 'YYYY-MM-DD'
+        return {
+            startTime: parserTime(startTime, formatterTag as any),
+            endTime: parserTime(endTime, formatterTag as any),
+            stationSerial: appdata.currentParkSerial,
+            dataCycle: dataCycle as any,
+            warnStatus,
+            deviceTypes
+        }
+    }
+    return {
+        dicts,
+        formInstance,
+        isIndeterminate,
+        handleCheckAllChange,
+        handleCheckedIdsChange,
+        checkAll,
+        checkedIds,
+        validate,
+        createParams,
+        rules,
+        appdata,
+        form
+    }
+}
+
+function useTableAndChart(createParams: any,) {
+
+    const dicts = useDicts()
+
+    const { chartRef, renderChart, chartResize } = useEcharts()
+
+    const { chartRef: pieChartRef, renderChart: renderPieChart, chartResize: pieChartResize } = useEcharts()
+
+    const tableHeader = ref<DnamicTableDataHeaderData[]>([])
+
+    const { result: warning, getResult: getWarning, loading } = useReactiveHttp({
+        initData: [] as WarningData[],
+        request: () => getWarningBydeviceType(createParams()),
+        requestCallback: (res) => {
+            const data = res.data as WarningData[]
+            markData(data)
+            const { tableData, headerData } = processData(data)
+            tableHeader.value = headerData
+            nextTick(async () => {
+                renderLine(renderChart, data, 'subName')
+                renderPie(renderPieChart, data, 'subName')
+                await sleep(200)
+                chartResize()
+                pieChartResize()
+            })
+            return tableData
+        },
+        Immediately: false
+    })
+
+    const markData = (data: WarningData[]) => {
+        data.forEach((warning) => {
+            warning.subName = dicts.deviceTypeDict.dictLabel[warning.name]
+            warning.subLevel = dicts.warningLevelDict.dictLabel[warning.level]
+        })
+        data.sort((a, b) => +new Date(a.time) - +new Date(b.time))
+    }
+
+    const { currentPageData, pageParams } = useLocalPagnation(warning, { pageSize: 10, page: 1 })
+
+    const currentChange = (page: number) => pageParams.page = page
+
+    return {
+        chartRef,
+        pieChartRef,
+        tableHeader,
+        warning,
+        getWarning,
+        loading,
+        currentPageData,
+        currentChange,
+        pageParams
+    }
 }
 
 const processData = (warning: WarningData[]) => {
@@ -119,7 +159,7 @@ const processData = (warning: WarningData[]) => {
         splitSymbol: '$',
         processTableRowData(item, splitSymbol) {
             const tableDataItem = {} as Record<string, any>
-            const {subName, count, time, name } = item
+            const { subName, count, time, name } = item
             const countKey = `count_${name}`
             const nameKey = `${subName}${splitSymbol}${name}`
             tableDataItem[countKey] = count

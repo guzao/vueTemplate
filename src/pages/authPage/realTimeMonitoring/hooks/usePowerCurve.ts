@@ -1,13 +1,13 @@
-import { useAppData } from '@/store'
 import { IntervalTime } from '@/enum'
+import { setRgbaColor, useAppData } from '@/store'
 import { nextTick, ref, watch, inject, computed } from 'vue'
 import { geStationPowerAll, geStationPowerByUnit } from '@/API'
 import { deviceDetailContextKey } from '../deviceDetail/useDevice'
 import { useEcharts, useInterval, useReactiveHttp } from '@/hooks'
-import { allDayNumber, fillTodayDate, isFalse, isTrue, paserTime, writeDefaultDate } from '@/utils'
+import { allDayNumber, fillTodayDate, isFalse, isTrue, parserTime, writeDefaultDate, getLocalLangMessage } from '@/utils'
 
 
-type usePowerCurveConfig = {
+type UsePowerCurveConfig = {
     /** 图表高度 */
     height: number,
     /** 功率曲线的类型 park 电站  device 设备 */
@@ -15,21 +15,24 @@ type usePowerCurveConfig = {
 }
 
 /** 实时功率曲线 */
-export function usePowerCurve(config: usePowerCurveConfig) {
+export function usePowerCurve(config: UsePowerCurveConfig) {
 
     const appData = useAppData()
 
     const currentTime = ref(writeDefaultDate(appData.currentLastTime))
 
-    const nextDisabled = computed(() => paserTime(Date.now(), 'YYYY-MM-DD') == paserTime(currentTime.value, 'YYYY-MM-DD'))
+    const nextDisabled = computed(() => parserTime(Date.now(), 'YYYY-MM-DD') == parserTime(currentTime.value, 'YYYY-MM-DD'))
 
     const deviceDetailContext = inject(deviceDetailContextKey, {} as any)
 
-    const { renderChart, chartRef, echarts } = useEcharts(config.height)
+    const { renderChart, chartRef, echarts, systemConfig } = useEcharts(config.height)
 
     const gridRight = config.device == 'park' ? '0%' : '1%'
 
     const render = async (data: ParkPowerLine[]) => {
+
+        const lineData = (data as ParkPowerLine[]).map(({ createTime, M7 }) => [+new Date(createTime), M7])
+        const { power } = getLocalLangMessage()['common']
         await nextTick()
         renderChart({
             animation: false,
@@ -93,12 +96,12 @@ export function usePowerCurve(config: usePowerCurveConfig) {
             },
             series: [
                 {
-                    data: (data as ParkPowerLine[]).map(({ createTime, power }) => [+new Date(createTime), power]),
+                    data: lineData,
                     type: 'line',
                     symbol: 'none',
                     smooth: true,
-                    color: 'rgb(14, 169, 68)',
-                    name: '实时功率',
+                    name: power,
+                    color: systemConfig.themeColor,
                     triggerLineEvent: false,
                     showSymbol: false,
                     showAllSymbol: false,
@@ -107,11 +110,11 @@ export function usePowerCurve(config: usePowerCurveConfig) {
                         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                             {
                                 offset: 1,
-                                color: 'rgb(199, 255, 218)'
+                                color: systemConfig.themeColor
                             },
                             {
                                 offset: 0,
-                                color: 'rgb(37, 211, 98)'
+                                color: setRgbaColor(systemConfig.themeColor, 0.5)
                             }
                         ])
                     },
@@ -141,9 +144,9 @@ export function usePowerCurve(config: usePowerCurveConfig) {
     }
 
     const getMetholds = () => {
-        return config.device == 'park' 
-                                    ? geStationPowerAll({ stationSerial: appData.currentParkSerial, date: paserTime(currentTime.value, 'YYYY-MM-DD') }) 
-                                    : geStationPowerByUnit({ stationSerial: appData.currentParkSerial, date: paserTime(writeDefaultDate(currentTime.value), 'YYYY-MM-DD'), unitId: deviceDetailContext?.unitId })
+        return config.device == 'park'
+            ? geStationPowerAll({ stationSerial: appData.currentParkSerial, date: parserTime(currentTime.value, 'YYYY-MM-DD') })
+            : geStationPowerByUnit({ stationSerial: appData.currentParkSerial, date: parserTime(writeDefaultDate(currentTime.value), 'YYYY-MM-DD'), unitId: deviceDetailContext?.unitId })
     }
 
     const { getResult, loading } = useReactiveHttp({
@@ -168,10 +171,10 @@ export function usePowerCurve(config: usePowerCurveConfig) {
         getResult()
     }
 
-    const { _resetInterval } = useInterval(IntervalTime.FIVE_MILLI_SECOND, getResult)
+    const { _resetInterval } = useInterval(IntervalTime.FIVE_MINIUTE, getResult)
 
     watch(() => config.device == 'park' ? appData.currentParkSerial : deviceDetailContext?.unitId, (value) => {
-        if (isFalse(value) &&  isTrue(config.device == 'park')) return
+        if (isFalse(value) && isTrue(config.device == 'park')) return
         currentTime.value = writeDefaultDate(appData.currentLastTime)
         _resetInterval()
         getResult()
@@ -191,4 +194,5 @@ export function usePowerCurve(config: usePowerCurveConfig) {
     }
 
 }
+
 

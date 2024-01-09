@@ -34,8 +34,32 @@ export const enum Common {
     /** 修改密码页 */
     EDIT_PASSWORD_PAGE = '/config/personCenter/editPassword',
 
+    /** 系统公告列表页 */
+    NOTICE_LIST_PAGE = '/noticeList',
+
+    /** 系统公告详情页 */
+    NOTICE_DETAIL_PAGE = '/noticeDetail',
+
+    /** 网络异常页面 */
+    NETWORK_ERROR_PAGE = '/networkError',
+
     /** 默认语言 */
     DEFAULT_LANG_KEY = 'zh_CN',
+
+    /** 数据为空时的占位符 */
+    DEFAULT_SYMBOL = '--',
+
+    /** 空字符串 */
+    IS_EMPTY_STRIING = '',
+
+    /** 一千 */
+    THOUSAND = 1000,
+
+    /** 一万 */
+    MYRIAD = 10000,
+
+    /** 字节单位缩放因子 */
+    BATE_NUMBER = 1024  
 
 
 }

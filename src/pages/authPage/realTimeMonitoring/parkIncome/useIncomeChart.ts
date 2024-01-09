@@ -1,12 +1,12 @@
 import DayJs from 'dayjs'
 import { t } from '@/langs'
-import type {  Ref} from 'vue'
-import { useAppData } from '@/store'
+import type { Ref } from 'vue'
 import { getParkIncomeProfile } from '@/API'
+import { useAppData, setRgbaColor } from '@/store'
 import { computed, ref, watch, nextTick } from 'vue'
 import { EChartsOption, EChartsType, graphic } from 'echarts'
 import { useEcharts, useReactiveHttp, useInterval } from '@/hooks'
-import { isFalse, paserTime, getFormatter, getWeekFirstDay, getArrayLength, getPriceZoomRationAndUnit, toFixed } from '@/utils'
+import { isFalse, parserTime, getFormatter, getWeekFirstDay, getArrayLength, getPriceZoomRationAndUnit, toFixed } from '@/utils'
 import { IntervalTime } from '@/enum'
 
 type ActionType = 'prev' | 'next'
@@ -16,9 +16,9 @@ export function useIncomeChart() {
 
     const appData = useAppData()
 
-    const type = ref<DateType>('D')
+    const type = ref<dataType>('D')
 
-    const { chartRef, renderChart } = useEcharts(200)
+    const { chartRef, renderChart, systemConfig } = useEcharts(200)
 
     const currentTime = ref(appData.currentLastTime)
 
@@ -27,7 +27,7 @@ export function useIncomeChart() {
     const createParams = () => {
         return {
             stationSerial: appData.currentParkSerial,
-            times: paserTime(currentTime.value, formatType.value),
+            times: parserTime(currentTime.value, formatType.value),
             type: type.value,
         }
     }
@@ -37,7 +37,7 @@ export function useIncomeChart() {
         request: () => getParkIncomeProfile(createParams()),
         requestCallback: async ({ data }) => {
             await nextTick()
-            renderIncomeChart(renderChart, data)
+            renderIncomeChart(renderChart, data, systemConfig.themeColor)
             return data
         }
     })
@@ -45,8 +45,8 @@ export function useIncomeChart() {
     const { _resetInterval } = useInterval(IntervalTime.ONE_HOURS, getResult)
 
     const disabled = computed(() => {
-        
-        return paserTime(currentTime.value, formatType.value) >= paserTime(appData.currentLastTime, formatType.value)
+
+        return parserTime(currentTime.value, formatType.value) >= parserTime(appData.currentLastTime, formatType.value)
     })
 
     const prevTime = () => {
@@ -80,7 +80,7 @@ export function useIncomeChart() {
         _resetInterval()
         getResult()
     })
-    
+
 
     return {
         type,
@@ -96,7 +96,7 @@ export function useIncomeChart() {
 }
 
 
-const getActionType = (type: DateType) => {
+const getActionType = (type: dataType) => {
     switch (type) {
         case 'D':
             return 'd'
@@ -111,17 +111,17 @@ const getActionType = (type: DateType) => {
 }
 
 
-function renderIncomeChart(renderChart: (oprions: EChartsOption) => EChartsType, data: IncomeProfile[]) {
+function renderIncomeChart(renderChart: (oprions: EChartsOption) => Promise<EChartsType>, data: IncomeProfile[], themeColor: string) {
 
     data.sort((a, b) => a.times - b.times)
 
     const yData = data.map((item) => item.disChargeCash - item.chargeCash)
 
     const { unit, zoomLimit } = getPriceZoomRationAndUnit(yData)
-    
+
     if (getArrayLength(data) >= 24) yData.push(0)
 
-    yData.forEach((item, index) => yData[ index ] = toFixed(item / zoomLimit, 3) as number)
+    yData.forEach((item, index) => yData[index] = toFixed(item / zoomLimit, 3) as number)
 
     renderChart({
         title: {
@@ -133,7 +133,7 @@ function renderIncomeChart(renderChart: (oprions: EChartsOption) => EChartsType,
             }
         },
         animation: false,
-        color: ['#14AB49', '#006DB8', '#fac858'],
+        color: themeColor,
         grid: {
             left: '4%',
             right: '1%',
@@ -194,11 +194,13 @@ function renderIncomeChart(renderChart: (oprions: EChartsOption) => EChartsType,
                     color: new graphic.LinearGradient(0, 0, 0, 1, [
                         {
                             offset: 1,
-                            color: 'rgb(199, 255, 218)'
+                            // color: 'rgb(199, 255, 218)' setRgbaColor(systemConfig.th)
+                            color: themeColor
                         },
                         {
                             offset: 0,
-                            color: 'rgb(37, 211, 98)'
+                            // color: 'rgb(37, 211, 98)'
+                            color: setRgbaColor(themeColor, 0.5)
                         }
                     ]),
                 },
@@ -218,7 +220,7 @@ function renderIncomeChart(renderChart: (oprions: EChartsOption) => EChartsType,
 }
 
 
-function setDate(type: Ref<DateType>, currentTime: Ref<number>) {
+function setDate(type: Ref<dataType>, currentTime: Ref<number>) {
     return (actionType: ActionType) => {
 
         let unit = getActionType(type.value) as any

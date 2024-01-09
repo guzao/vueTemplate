@@ -1,5 +1,5 @@
 import {  describe, test, expect} from 'vitest'
-import { paserTime } from '@/utils/dateUtils/common'
+import { parserTime } from '@/utils/dateUtils/common'
 import { addDate, addMonth, addYear, subtractDate, subtractMonth, subtractYear } from '@/utils/dateUtils/setDate'
 
 describe('setdate', () => {
@@ -11,11 +11,11 @@ describe('setdate', () => {
 
         testDate = addDate(testDate, 2)
         
-        expect(paserTime(testDate, 'YYYY-MM-DD')).toBe('2023-08-28')
+        expect(parserTime(testDate, 'YYYY-MM-DD')).toBe('2023-08-28')
         
         testDate = addDate(testDate, 1)
 
-        expect(paserTime(testDate, 'YYYY-MM-DD')).toBe('2023-08-29')
+        expect(parserTime(testDate, 'YYYY-MM-DD')).toBe('2023-08-29')
 
 
     })
@@ -26,11 +26,11 @@ describe('setdate', () => {
 
         testDate = addMonth(testDate, 2)
         
-        expect(paserTime(testDate, 'YYYY-MM')).toBe('2023-10')
+        expect(parserTime(testDate, 'YYYY-MM')).toBe('2023-10')
         
         testDate = addMonth(testDate, 1)
 
-        expect(paserTime(testDate, 'YYYY-MM')).toBe('2023-11')
+        expect(parserTime(testDate, 'YYYY-MM')).toBe('2023-11')
 
 
     })
@@ -41,11 +41,11 @@ describe('setdate', () => {
 
         testDate = addYear(testDate, 2)
         
-        expect(paserTime(testDate, 'YYYY')).toBe('2024')
+        expect(parserTime(testDate, 'YYYY')).toBe('2024')
         
         testDate = addYear(testDate, 1)
 
-        expect(paserTime(testDate, 'YYYY')).toBe('2025')
+        expect(parserTime(testDate, 'YYYY')).toBe('2025')
 
 
     })
@@ -56,11 +56,11 @@ describe('setdate', () => {
 
         testDate = subtractDate(testDate, 2)
         
-        expect(paserTime(testDate, 'YYYY-MM-DD')).toBe('2023-08-24')
+        expect(parserTime(testDate, 'YYYY-MM-DD')).toBe('2023-08-24')
         
         testDate = subtractDate(testDate, 1)
 
-        expect(paserTime(testDate, 'YYYY-MM-DD')).toBe('2023-08-23')
+        expect(parserTime(testDate, 'YYYY-MM-DD')).toBe('2023-08-23')
 
 
     })
@@ -71,11 +71,11 @@ describe('setdate', () => {
 
         testDate = subtractMonth(testDate, 2)
         
-        expect(paserTime(testDate, 'YYYY-MM')).toBe('2023-06')
+        expect(parserTime(testDate, 'YYYY-MM')).toBe('2023-06')
         
         testDate = subtractMonth(testDate, 1)
 
-        expect(paserTime(testDate, 'YYYY-MM')).toBe('2023-05')
+        expect(parserTime(testDate, 'YYYY-MM')).toBe('2023-05')
 
 
     })
@@ -87,11 +87,11 @@ describe('setdate', () => {
 
         testDate = subtractYear(testDate, 2)
         
-        expect(paserTime(testDate, 'YYYY')).toBe('1968')
+        expect(parserTime(testDate, 'YYYY')).toBe('1968')
         
         testDate = subtractYear(testDate, 1)
 
-        expect(paserTime(testDate, 'YYYY')).toBe('1967')
+        expect(parserTime(testDate, 'YYYY')).toBe('1967')
 
 
     })

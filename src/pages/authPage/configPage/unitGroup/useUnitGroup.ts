@@ -8,7 +8,7 @@ import UnitForm from './components//UnitForm.vue'
 import GroupForm from './components/GroupForm.vue'
 
 
-export const GroupUnitContextKey:InjectionKey<{
+export const GroupUnitContextKey: InjectionKey<{
     groupDrawerOpen: () => boolean | undefined,
     unitDrawerOpen: () => boolean | undefined,
 }> = Symbol('GroupUnitContextKey')
@@ -31,236 +31,14 @@ export function useUnitGroup() {
     })
 
     const { result: unitGroupList, getResult, loading } = useReactiveHttp({
-        initData: [] as UnitGroupData [],
+        initData: [] as UnitGroupData[],
         request: () => getUnitGroup({
             pageNum: 1,
             pageSize: 1000,
-            stationSerial: appData.currentParkSerial
+            stationSerial: route.query.eidtCode
         }),
-        requestCallback: ( res ) =>  res.rows
+        requestCallback: ({ rows }) => rows
     })
-
-    console.log(unitGroupList);
-
-    const tableData = [
-        {
-            date: '2016-05-03',
-            name: 'Tom',
-            state: 'California',
-            city: 'San Francisco',
-            address: '3650 21st St, San Francisco',
-            zip: 'CA 94114',
-            family: [
-                {
-                    name: 'Jerry',
-                    state: 'California',
-                    city: 'San Francisco',
-                    address: '3650 21st St, San Francisco',
-                    zip: 'CA 94114',
-                },
-                {
-                    name: 'Spike',
-                    state: 'California',
-                    city: 'San Francisco',
-                    address: '3650 21st St, San Francisco',
-                    zip: 'CA 94114',
-                },
-                {
-                    name: 'Tyke',
-                    state: 'California',
-                    city: 'San Francisco',
-                    address: '3650 21st St, San Francisco',
-                    zip: 'CA 94114',
-                },
-            ],
-        },
-        {
-            date: '2016-05-02',
-            name: 'Tom',
-            state: 'California',
-            city: 'San Francisco',
-            address: '3650 21st St, San Francisco',
-            zip: 'CA 94114',
-            family: [
-                {
-                    name: 'Jerry',
-                    state: 'California',
-                    city: 'San Francisco',
-                    address: '3650 21st St, San Francisco',
-                    zip: 'CA 94114',
-                },
-                {
-                    name: 'Spike',
-                    state: 'California',
-                    city: 'San Francisco',
-                    address: '3650 21st St, San Francisco',
-                    zip: 'CA 94114',
-                },
-                {
-                    name: 'Tyke',
-                    state: 'California',
-                    city: 'San Francisco',
-                    address: '3650 21st St, San Francisco',
-                    zip: 'CA 94114',
-                },
-            ],
-        },
-        {
-            date: '2016-05-04',
-            name: 'Tom',
-            state: 'California',
-            city: 'San Francisco',
-            address: '3650 21st St, San Francisco',
-            zip: 'CA 94114',
-            family: [
-                {
-                    name: 'Jerry',
-                    state: 'California',
-                    city: 'San Francisco',
-                    address: '3650 21st St, San Francisco',
-                    zip: 'CA 94114',
-                },
-                {
-                    name: 'Spike',
-                    state: 'California',
-                    city: 'San Francisco',
-                    address: '3650 21st St, San Francisco',
-                    zip: 'CA 94114',
-                },
-                {
-                    name: 'Tyke',
-                    state: 'California',
-                    city: 'San Francisco',
-                    address: '3650 21st St, San Francisco',
-                    zip: 'CA 94114',
-                },
-            ],
-        },
-        {
-            date: '2016-05-01',
-            name: 'Tom',
-            state: 'California',
-            city: 'San Francisco',
-            address: '3650 21st St, San Francisco',
-            zip: 'CA 94114',
-            family: [
-                {
-                    name: 'Jerry',
-                    state: 'California',
-                    city: 'San Francisco',
-                    address: '3650 21st St, San Francisco',
-                    zip: 'CA 94114',
-                },
-                {
-                    name: 'Spike',
-                    state: 'California',
-                    city: 'San Francisco',
-                    address: '3650 21st St, San Francisco',
-                    zip: 'CA 94114',
-                },
-                {
-                    name: 'Tyke',
-                    state: 'California',
-                    city: 'San Francisco',
-                    address: '3650 21st St, San Francisco',
-                    zip: 'CA 94114',
-                },
-            ],
-        },
-        {
-            date: '2016-05-08',
-            name: 'Tom',
-            state: 'California',
-            city: 'San Francisco',
-            address: '3650 21st St, San Francisco',
-            zip: 'CA 94114',
-            family: [
-                {
-                    name: 'Jerry',
-                    state: 'California',
-                    city: 'San Francisco',
-                    address: '3650 21st St, San Francisco',
-                    zip: 'CA 94114',
-                },
-                {
-                    name: 'Spike',
-                    state: 'California',
-                    city: 'San Francisco',
-                    address: '3650 21st St, San Francisco',
-                    zip: 'CA 94114',
-                },
-                {
-                    name: 'Tyke',
-                    state: 'California',
-                    city: 'San Francisco',
-                    address: '3650 21st St, San Francisco',
-                    zip: 'CA 94114',
-                },
-            ],
-        },
-        {
-            date: '2016-05-06',
-            name: 'Tom',
-            state: 'California',
-            city: 'San Francisco',
-            address: '3650 21st St, San Francisco',
-            zip: 'CA 94114',
-            family: [
-                {
-                    name: 'Jerry',
-                    state: 'California',
-                    city: 'San Francisco',
-                    address: '3650 21st St, San Francisco',
-                    zip: 'CA 94114',
-                },
-                {
-                    name: 'Spike',
-                    state: 'California',
-                    city: 'San Francisco',
-                    address: '3650 21st St, San Francisco',
-                    zip: 'CA 94114',
-                },
-                {
-                    name: 'Tyke',
-                    state: 'California',
-                    city: 'San Francisco',
-                    address: '3650 21st St, San Francisco',
-                    zip: 'CA 94114',
-                },
-            ],
-        },
-        {
-            date: '2016-05-07',
-            name: 'Tom',
-            state: 'California',
-            city: 'San Francisco',
-            address: '3650 21st St, San Francisco',
-            zip: 'CA 94114',
-            family: [
-                {
-                    name: 'Jerry',
-                    state: 'California',
-                    city: 'San Francisco',
-                    address: '3650 21st St, San Francisco',
-                    zip: 'CA 94114',
-                },
-                {
-                    name: 'Spike',
-                    state: 'California',
-                    city: 'San Francisco',
-                    address: '3650 21st St, San Francisco',
-                    zip: 'CA 94114',
-                },
-                {
-                    name: 'Tyke',
-                    state: 'California',
-                    city: 'San Francisco',
-                    address: '3650 21st St, San Francisco',
-                    zip: 'CA 94114',
-                },
-            ],
-        },
-    ]
 
     return {
         route,
@@ -269,7 +47,9 @@ export function useUnitGroup() {
         groupDrawerOpen,
         unitInstance,
         unitDrawerOpen,
-        tableData
+        unitGroupList,
+        loading,
+        appData,
     }
 
 }

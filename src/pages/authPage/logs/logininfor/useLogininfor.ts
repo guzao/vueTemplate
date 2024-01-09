@@ -15,7 +15,7 @@ export function useLogininfor () {
 
     const dicts = useDicts()
 
-    const { pageParams } = usePagination({ callback: () => getResult(), pageSize: 10 })
+    const { pageParams, pageSizes } = usePagination({ callback: () => getResult(), pageSize: 10 })
     
     const currentChange = (page: number) => pageParams.pageNum = page
     
@@ -35,7 +35,8 @@ export function useLogininfor () {
         result,
         loading,
         getResult,
-        searchForm
+        searchForm,
+        pageSizes
     }
 
 }

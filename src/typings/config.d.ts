@@ -193,5 +193,37 @@ type UnitGroupData = {
     stationSerial: string,
     name: string,
     sort: number,
+    delFlag: number,
+}
+
+
+/**
+ *  组模型单元
+*/
+type GroupUnitData = {
+    createBy: any,
+    createTime: string,
+    updateBy: any,
+    updateTime: string,
+    remark: string,
+    id: number,
+    ugroupId: number,
+    stationSerial: string,
+    name: string,
+    serial: string,
+    assetSerial: string,
+    unitType: string,
+    sort: number,
+    capacity: number,
+    longitude: number,
+    latitude: number,
+    altitude: number,
+    installTime: number,
+    acceptTime: number,
+    gridTime: number,
+    goinTime: nunumberl,
+    expireTime: number,
+    templatePowercurvesSerial: number,
     delFlag: number
 }
+

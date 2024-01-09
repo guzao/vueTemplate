@@ -14,13 +14,13 @@ const { parkOverview, loading, PCSData, PCSLoading } = useStatical()
 
         <TitleBox :size="20"> 电站运行指标统计 </TitleBox>
 
-        <InfoItem :data="parkOverview" v-loading="loading"> 直流侧 </InfoItem>
+        <InfoItem :data="parkOverview" v-loading="loading"> 直流侧(BMS) </InfoItem>
 
         <div class="flex justify-end">
             <div class="mt-[36px] border-b border-[#ebf2f0] border-solid w-[92%]"></div>
         </div>
         
-        <InfoItem :data="PCSData" v-loading="PCSLoading"> 交流侧 </InfoItem>
+        <InfoItem :data="PCSData" v-loading="PCSLoading"> 交流侧(PCS) </InfoItem>
         
     </div>
 </template>

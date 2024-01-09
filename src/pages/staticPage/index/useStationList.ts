@@ -1,11 +1,14 @@
-import { computed, ref, unref, } from 'vue'
+import { useDicts } from '@/store'
 import { getStationList } from '@/API'
-import { useReactiveHttp, useDict, } from '@/hooks'
-import { getArrayLength } from '@/utils'
+import { getArrayLength, isFalse } from '@/utils'
+import { computed, ref, unref, } from 'vue'
+import { useReactiveHttp, useDict} from '@/hooks'
 
 export const searchCode = ref('')
 
 export const type = ref('')
+
+const dicts = useDicts()
 
 const state = ref(-1)
 
@@ -59,17 +62,15 @@ function stationListAddProps(stationList: ParkMonitorInfo[]) {
 
 const { getResult: getParkType, dictLabel, result: parkType } = useDict('eos_park_type')
 
-const { getResult: getReleaseStatus, dictLabel: releaseStatusDictLabel, result: releaseStatus } = useDict('station_release_status')
-
 const deviceStateCount = ref<Record<string, number>>({})
 
 /** 加载电站数据 */
 export async function initData() {
 
     loading.value = true
-    await getParkType()
 
-    await getReleaseStatus()
+    // 如果数据字典未被缓存,获取远端数据 被缓存直接从字典中获取
+    isFalse(dicts.parkTypeDict.loaded) ? await getParkType() : (parkType.value = dicts.parkTypeDict.dictValue)
 
     await getResult()
 
@@ -111,7 +112,6 @@ export function useStationList() {
         stationList,
         deviceStateCount,
         parkType,
-        releaseStatusDictLabel,
         state
     }
 

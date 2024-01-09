@@ -7,15 +7,15 @@ import SubNavBar from '@/components/common/SubNavBar.vue'
 
 const dicts = useDicts()
 const appData = useAppData()
+
 </script>
 
 <template>
     <div class="w-full overflow-hidden park_income  flex flex-col flex-1"
-        v-watermark="{ markSatate: appData.currentRelease, text: dicts.parkReleaseStatusDict.dictLabel[appData.currentRelease] }">
-
+        v-watermark="appData.currentParkWatermarkOptions(appData.currentRelease)">
         <div class="top_bg flex-1 min-h-[580px] box-border flex flex-col ">
 
-            <SubNavBar height="46" class="mb-[16px] bg-transparent" :showDeviceStateDesc="false" />
+            <SubNavBar height="46" class=" bg-transparent" :showDeviceStateDesc="false" />
 
             <IncomeInfo />
 

@@ -1,6 +1,6 @@
 const baseState = ['Normal', 'Fail']
 
-const openState = ['Close', 'OPen']
+const openState = ['Close', 'Open']
 
 const breakerState = ['OFF', 'Close']
 

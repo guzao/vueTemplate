@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import Header from "../components/Header.vue"
 import Form from './Form.vue'
-import Footer from "../components/Footer.vue"
+import Notice from './Notice.vue'
+import Header from "../components/Header.vue"
+import Footer from '@/components/common/Footer.vue'
 
 </script>
 
@@ -19,10 +20,7 @@ import Footer from "../components/Footer.vue"
             <!-- info desc -->
             <div class="w-[1200px] mx-auto">
 
-                <!--  -->
-                <div class="h-[64px]  bg-[var(--theme-white-bg)] my-[26px]">
-
-                </div>
+                <Notice />
 
                 <!--  -->
                 <div class="text-[var(--theme-black51)]"> 账户分类 </div>

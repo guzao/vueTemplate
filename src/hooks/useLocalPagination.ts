@@ -38,6 +38,8 @@ export function useLocalPagnation<T>(raw: Ref<T[]>, config: LocalPagnationConfig
         chunks = arrayChunk(raw.value, pageParams.pageSize)
     }
 
+    const currentChange = (page: number) => pageParams.page = page
+
     // 数据变化立即初始分组
     watch(() => raw.value, initArrayChunk)
 
@@ -47,7 +49,9 @@ export function useLocalPagnation<T>(raw: Ref<T[]>, config: LocalPagnationConfig
         /** 分页参数 */
         pageParams,
         /** 初始化分页 */
-        initArrayChunk
+        initArrayChunk,
+        
+        currentChange
     }
 
 }

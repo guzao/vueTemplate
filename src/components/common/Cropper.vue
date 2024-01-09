@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-
 import { VueCropper } from 'vue-cropper'
 import { Files, RefreshRight, RefreshLeft } from '@element-plus/icons-vue'
-
 
 const cropper = ref()
 

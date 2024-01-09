@@ -4,7 +4,7 @@ import type { MaybeRef } from "vue";
 
 export function useSelectAll<T>(raw: MaybeRef<T[]>, key: keyof T) {
 
-    type SelectIdKey = typeof key
+    type SelectIdKey = T[typeof key]
 
     const checkAll = ref(false)
 

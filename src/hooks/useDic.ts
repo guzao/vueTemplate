@@ -1,9 +1,11 @@
 import { ref } from 'vue'
-import { useReactiveHttp } from "./useReactiveHttp";
-import { getDictType } from '@/API'
-import { isFalse } from '@/utils';
+import { isFalse } from '@/utils'
 import { useLang } from '@/utils'
+import { getDictType } from '@/API'
+import { useReactiveHttp } from "./useReactiveHttp"
+
 const { getLang } = useLang()
+
 
 
 /** 字典表 */
@@ -19,6 +21,7 @@ export function useDict (type: DictType, Immediately = false) {
         requestCallback: ({ data }) => {
             data.forEach((item: DictTypeData) => {
                 const { dictLabel, dictLabelEn } = item
+                // 根据语言类型展示不通过的格式
                 item.dictLabel = getLang() == 'zh_CN' ? dictLabel : dictLabelEn;
             });
             dictLabel.value = createDictLabel(data)
@@ -34,6 +37,7 @@ export function useDict (type: DictType, Immediately = false) {
     }
 
 }
+
 
 function createDictLabel (rows: DictTypeData []) {
     return rows.reduce((acc, cur) => {

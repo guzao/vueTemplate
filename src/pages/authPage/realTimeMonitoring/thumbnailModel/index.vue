@@ -6,13 +6,13 @@ import Skeleton from '@/components/common/Skeleton.vue'
 import SubNavBar from '@/components/common/SubNavBar.vue';
 import ParkOverviewNavBar from '../components/ParkOverviewNavBar.vue';
 
-const { appData, getSubParkInfo, parkRuningInfo, deivceGroupList, loading, dicts } = useDeviceOverview()
+const { appData, getSubParkInfo, parkRuningInfo, deivceGroupList, loading } = useDeviceOverview()
 
 </script>
 
 <template>
 
-    <div v-watermark="{ markSatate: appData.currentRelease, text: dicts.parkReleaseStatusDict.dictLabel[ appData.currentRelease ] }" class="sub_park_overview" >
+    <div v-watermark="appData.currentParkWatermarkOptions(parkRuningInfo.A_M2)" class="sub_park_overview" >
 
         <SubNavBar class="mb-[16px]" @park-change="getSubParkInfo" />
 

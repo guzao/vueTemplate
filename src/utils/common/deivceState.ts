@@ -1,18 +1,19 @@
 import { Common } from '@/enum'
 import { messages } from '@/langs'
 import { useLang } from "../userUtils"
-import { getLastElement, } from "../dataUtils"
+import { getLastElement } from "../dataUtils"
 
 
 const { getLang } = useLang()
 export const getLangKey = () => (getLang() || Common.DEFAULT_LANG_KEY) as 'zh_CN' | 'en_US'
+const getDeviceStateText = () => messages[getLangKey() || Common.DEFAULT_LANG_KEY].deviceState
 
 const runingIcons = ['', 'icon_runing_chager', 'icon_runing_dischager', 'icon_runing_standy', 'icon_runing_alarm', 'icon_runing_weihu', 'icon_runing_offline']
 const runingTextColor = ['', 'charge_color', 'discharge_color', 'standby_color', 'alarm_color', 'weihu_color', 'offline_color']
 
 /** 设备运行状态样式信息 */
 export function getRuningStateInfo(state: number) {
-    const stateText = messages[getLangKey()].deviceState.deviceState
+    const stateText = getDeviceStateText().deviceState
     return {
         icon: runingIcons[state] || getLastElement(runingIcons),
         color: runingTextColor[state] || getLastElement(runingTextColor),
@@ -25,7 +26,7 @@ const deviceIcons = ['', 'icon_state_charge', 'icon_state_discharge', 'icon_stat
 
 /** 设备状态样式信息 */
 export function getDeviceStateInfo(state: number) {
-    const stateText = messages[getLangKey()].deviceState.deviceState
+    const stateText = getDeviceStateText().deviceState
     return {
         icon: deviceIcons[state] || getLastElement(deviceIcons),
         color: runingTextColor[state] || getLastElement(runingTextColor),
@@ -49,6 +50,13 @@ export function getCellZoom(value: any) {
 }
 
 
+function initCellElement(initCell: string[], cellBG: string, value: number) {
+    for (let index = 0; index < getCellZoom(value); index++) {
+        initCell[index] = cellBG
+    }
+    return initCell
+}
+
 
 const deviceCNXBatteryMarks = ['', 'charge_mark_cnx', 'discharge_mark_cnx', 'standby_mark_cnx', 'alarm_mark_cnx', 'alarm_mark_cnx', 'standby_mark_cnx']
 const deviceCNXBatteryCells = ['', 'charge_cell_cnx', 'discharge_cell_cnx', 'standby_cell_cnx', 'alarm_cell_cnx', 'weihu_cell_cnx', 'offline_cell_cnx']
@@ -65,15 +73,8 @@ export function getCNXBatteryCellBg(value: number, state: number) {
 
     let cellBG = getDeviceCNXBatteryCellInfo(state)
 
-    for (let index = 0; index < getCellZoom(value); index++) {
-        initCell[index] = cellBG
-    }
-
-    return initCell
+    return initCellElement(initCell, cellBG, value)
 }
-
-
-
 
 
 const deviceCNGBatteryMarks = ['', 'charge_mark_cng', 'discharge_mark_cng', 'standby_mark_cng', 'standby_mark_cng', 'standby_mark_cng', 'standby_mark_cng']
@@ -91,11 +92,7 @@ export function getCNGBatteryCellBg(value: number, state: number) {
 
     let cellBG = getDeviceCNGBatteryCellInfo(state)
 
-    for (let index = 0; index < getCellZoom(value); index++) {
-        initCell[index] = cellBG
-    }
-
-    return initCell
+    return initCellElement(initCell, cellBG, value)
 }
 
 
@@ -106,18 +103,26 @@ export function getCNGBatteryCellBg(value: number, state: number) {
 // ************************************              ************************************ //
 // ************************************ ------------ ************************************ //
 
-const deviceState = messages[ getLangKey() ].deviceState
 
 const writeDefaultState = (states: string[], index: number) => states[index] || '--'
 
-export const getARState = (index: number) => writeDefaultState(deviceState.arState, index)
+/** 空调状态 */
+export const getARState = (index: number) => writeDefaultState(getDeviceStateText().arState, index)
 
-export const getIOState = (index: number) => writeDefaultState(deviceState.ioState, index)
+/** IO状态 */
+export const getIOState = (index: number) => writeDefaultState(getDeviceStateText().ioState, index)
 
-export const getPCSState = (index: number) => writeDefaultState(deviceState.pcsState, index)
+/** PCS状态 */
+export const getPCSState = (index: number) => writeDefaultState(getDeviceStateText().pcsState, index)
 
-export const getBMSkState = (index: number) => writeDefaultState(deviceState.bmsState, index)
+/** BMS状态 */
+export const getBMSkState = (index: number) => writeDefaultState(getDeviceStateText().bmsState, index)
 
-export const getUnitState = (index: number) => writeDefaultState(deviceState.unitState, index)
+/** 单元状态 */
+export const getUnitState = (index: number) => writeDefaultState(getDeviceStateText().unitState, index)
 
-export const getStackState = (index: number) => writeDefaultState(deviceState.statckState, index)
+/** 电池堆状态 */
+export const getStackState = (index: number) => writeDefaultState(getDeviceStateText().statckState, index)
+
+/** 网络状态 */
+export const getNeetworkState = (index: number) => writeDefaultState(getDeviceStateText().neetworkState, index)

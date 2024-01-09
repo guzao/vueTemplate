@@ -15,12 +15,12 @@ defineProps({
 </script>
 
 <template>
-    <ul>
+    <ul class="flex flex-col flex-1">
 
-        <li class="px-[16px] py-[20px] mb-[8px] sub_park_overview_item last:mb-0" v-for="item in deivceGroupList"
-            :key="item.id">
+        <li class="px-[16px] flex flex-col flex-1 py-[20px] mb-[8px] sub_park_overview_item last:mb-0"
+            v-for="item in deivceGroupList" :key="item.id">
 
-            <div class="sub_park_overview_item_bg min-h-[53vh]">
+            <div class="sub_park_overview_item_bg min-h-[54vh] flex-1">
 
                 <TitleBox>
 
@@ -87,7 +87,8 @@ defineProps({
 
                         <li class="h-[166px] bg-[var(--theme-white-bg)]   pl-[12px] pt-[10px] relative">
 
-                            <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> {{ t('common.operationState') }} </div>
+                            <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> {{ t('common.operationState') }}
+                            </div>
 
                             <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
 
@@ -118,7 +119,8 @@ defineProps({
 
                         <li class="h-[166px] bg-[var(--theme-white-bg)]   pl-[12px] pt-[10px] relative">
 
-                            <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> {{ t('common.dayCharge') }}  </div>
+                            <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> {{ t('common.dayCharge') }}
+                            </div>
 
                             <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
 
@@ -135,7 +137,8 @@ defineProps({
 
                         <li class="h-[166px] bg-[var(--theme-white-bg)]   pl-[12px] pt-[10px] relative">
 
-                            <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]">  {{ t('common.dayDischarge') }} </div>
+                            <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> {{ t('common.dayDischarge') }}
+                            </div>
 
                             <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
 
@@ -152,7 +155,8 @@ defineProps({
 
                         <li class="h-[166px] bg-[var(--theme-white-bg)]   pl-[12px] pt-[10px] relative">
 
-                            <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> {{ t('common.activePower') }}</div>
+                            <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> {{ t('common.activePower') }}
+                            </div>
 
                             <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
 
@@ -169,7 +173,8 @@ defineProps({
 
                         <li class="h-[166px] bg-[var(--theme-white-bg)]   pl-[12px] pt-[10px] relative">
 
-                            <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]">  {{ t('common.reactivePower') }} </div>
+                            <div class="text-[var(--theme-gray107)] text-[12px] pl-[16px]"> {{ t('common.reactivePower') }}
+                            </div>
 
                             <div class="absolute top-[23px] left-[19px] h-[12px] right-0 slit_bg"> </div>
 

@@ -36,6 +36,10 @@ type UserInfoDetail = {
     roles: Role[];
     /** 部门信息 */
     dept: DeptInfo;
+    /** 公司名称 */
+    company: string;
+    /** 公司logo */
+    logo: string;
 
 }
 
@@ -53,3 +57,8 @@ type UserInfo = {
 
 
 }
+
+/**
+ * 页面布局模式
+*/
+type SystemRunningConfigLayoutType = 'horizontal' | 'vertical'

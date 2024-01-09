@@ -148,7 +148,11 @@ type DeviceGroup = {
 /** 电站实时功率曲线 */
 type ParkPowerLine = {
     createTime: string
-    power: string
+    power: string,
+    /** 功率 */
+    M7: string,
+    /** SOC */
+    M3: string,
 }
 
 
@@ -213,7 +217,9 @@ type DeviceInfoParams = {
 
 /** 设备基本信息 */
 type DeviceInfoData = {
+    /** 储能单元数据 */
     E: StoreageUnit[]
+    /** 设备信息 */
     deviceMap: DeviceMap
 }
 

@@ -2,9 +2,9 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { useDicts } from '@/store'
-import type { PropType } from 'vue';
-import type { FormInstance } from 'element-plus'
+import type { PropType } from 'vue'
 import { ruleForm } from './useParkList'
+import type { FormInstance } from 'element-plus'
 
 const formInstance = ref<FormInstance>()
 
@@ -159,7 +159,7 @@ defineExpose({
 
         <el-row :gutter="20">
 
-            <el-col :span="12">
+            <el-col :span="13">
                 <el-form-item label="运行状态">
                     <el-radio-group v-model="parkForm.runStatus">
                         <el-radio :label="item.dictValue" v-for="item in dicts.parkRunStatusDict.dictValue"> {{
@@ -170,7 +170,7 @@ defineExpose({
                 </el-form-item>
             </el-col>
 
-            <el-col :span="12">
+            <el-col :span="11">
                 <el-form-item label="投运时间" prop="operateTime">
                     <el-date-picker v-model="parkForm.operateTime" style="width: 100%;" type="date"
                         placeholder="Pick a day" />

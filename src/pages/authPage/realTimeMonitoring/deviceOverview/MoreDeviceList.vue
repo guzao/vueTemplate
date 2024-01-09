@@ -21,7 +21,7 @@ defineProps({
 </script>
 
 <template>
-    <ul class=" grid grid-cols-8  gap-[8px] more_device_list">
+    <ul class="grid grid-cols-8  gap-[8px] more_device_list ">
 
         <li @click="checkDeviceDetail(deivce)"
             class="h-[131px] bg-[var(--theme-gray251-bg)] pl-[12px] box-border cursor-pointer" v-for="deivce in deiveList"

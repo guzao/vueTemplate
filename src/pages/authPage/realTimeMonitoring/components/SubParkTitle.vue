@@ -52,7 +52,7 @@ defineProps({
                 </LabelValueUnit>
                 <div class="h-[14px] w-[2px] bg-[var(--theme-gray235-bg)] mx-[6px]"></div>
 
-                <LabelValueUnit class="pl-[20px]" :font-size="16">
+                <LabelValueUnit class="pl-[8px]" :font-size="16">
                     {{ t('common.monthCharge') }}
                     <template #value> {{ conversionUnitKWh(data.M17).size }} </template>
                     <template #unit> {{ conversionUnitKWh(data.M17).unit }} </template>

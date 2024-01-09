@@ -2,7 +2,7 @@ import type { App } from "vue";
 import { watermark }  from './watermark'
 import { debounce }  from './debounce'
 import { hasPermission, hasRole }  from './hasPermission'
-import { clickOutset }  from './clickOutset'
+import { clickOutset, focus }  from './clickOutset'
 
 
 export default {
@@ -13,5 +13,6 @@ export default {
         Vue.directive('hasRole', hasRole)
         Vue.directive('hasPermission', hasPermission)
         Vue.directive('clickOutset', clickOutset)
+        Vue.directive('focus', focus)
     }
 }

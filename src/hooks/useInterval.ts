@@ -1,3 +1,4 @@
+import { IntervalTime } from '@/enum'
 import { onMounted, onUnmounted } from 'vue'
 
 
@@ -13,10 +14,15 @@ export function useInterval(time: number, callback: () => any) {
     /** 清除定时器 */
     const _clearInterval = () => clearInterval(id)
 
+    /**
+     * @BUG 偶发性出现time 数值丢失问题 使用闭包缓存这个间隔时间
+    */
+    const _time = time
+
     /** 重置定时器 */
     const _resetInterval = () => {
         _clearInterval()
-        id = setInterval(callback, time)
+        id = setInterval(callback, _time || IntervalTime.ONE_MINIUTE)
     }
 
     onMounted(() => id = setInterval(callback, time))

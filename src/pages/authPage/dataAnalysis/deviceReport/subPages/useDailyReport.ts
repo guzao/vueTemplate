@@ -1,9 +1,9 @@
 import { useAppData } from '@/store'
 import { rendererBard } from './tools'
-import { getDailyReport } from '@/API'
 import { reactive, watch, nextTick } from 'vue'
-import { useReactiveHttp, useEcharts } from '@/hooks'
-import { paserTime, arrayGroupByMap, getFirstElement } from '@/utils'
+import { getDailyReport, exportDailyReport } from '@/API'
+import { useReactiveHttp, useEcharts, useDownload } from '@/hooks'
+import { parserTime, arrayGroupByMap, getFirstElement, } from '@/utils'
 
 
 export function useDailyReport() {
@@ -15,8 +15,15 @@ export function useDailyReport() {
     const { chartRef, renderChart, } = useEcharts()
 
     const { result, getResult, loading } = useReactiveHttp({
-        initData: {} as DailyReportData,
-        request: () => getDailyReport({ date: paserTime(form.date, 'YYYY-MM-DD'), stationSerial: appData.currentParkSerial }),
+        initData: {
+            charge: 0,
+            discharge: 0,
+            data: [],
+            subNum: [],
+            pcsCharge: 0,
+            pcsDischarge: 0,
+        } as DailyReportData,
+        request: () => getDailyReport({ date: parserTime(form.date, 'YYYY-MM-DD'), stationSerial: appData.currentParkSerial }),
         requestCallback: ({ data }) => {
             nextTick(() => rendererBard(renderChart, data.data))
             arrayGroupByMap(data.data, 'subName').forEach((value, key) => {
@@ -25,6 +32,17 @@ export function useDailyReport() {
             })
             return data
         }
+    })
+
+    const { downloadFile, fileLoading } = useDownload({
+        downloadFn: () => {
+            const params = {
+                stationSerial: appData.currentParkSerial,
+                date: parserTime(form.date, 'YYYY-MM-DD'),
+                model: 'dc,ac'
+            }
+            return exportDailyReport(params)
+        },
     })
 
 
@@ -37,6 +55,8 @@ export function useDailyReport() {
         chartRef,
         result,
         loading,
+        downloadFile,
+        fileLoading
     }
 
 }

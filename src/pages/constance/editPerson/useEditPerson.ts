@@ -20,9 +20,9 @@ export function useEditPerson() {
     const form = reactive(userInfo)
     const rules = {
         userName: [{ required: true, message: '请输入用户名', trigger: 'blur' },],
-        phonenumber: [{ required: true, message: '请输入用户名', trigger: 'blur' },],
-        email: [{ required: true, message: '请输入用户名', trigger: 'blur' },],
-        sex: [{ required: true, message: '请输入用户名', trigger: 'blur' },],
+        phonenumber: [{ required: true, message: '请输入手机号', trigger: 'blur' },],
+        email: [{ required: true, message: '请输入用户邮箱', trigger: 'blur' },],
+        sex: [{ required: true, message: '请选择性别', trigger: 'blur' },],
     }
 
 

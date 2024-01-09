@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { getFormatter, getWeekFirstDay, paserTime, getRunningDay, getPrevMonth, writeDefaultDate, fillTodayDate  } from '@/utils/dateUtils/common'
+import { getFormatter, getWeekFirstDay, parserTime, getRunningDay, getPrevMonth, writeDefaultDate, fillTodayDate, notExpire } from '@/utils/dateUtils/common'
 
 describe('common', () => {
 
@@ -21,11 +21,11 @@ describe('common', () => {
 
     test('getWeekFirstDay', () => {
 
-        expect(paserTime(getWeekFirstDay(new Date(2023, 7, 26)), 'YYYY-MM-DD')).toBe('2023-08-21')
+        expect(parserTime(getWeekFirstDay(new Date(2023, 7, 26)), 'YYYY-MM-DD')).toBe('2023-08-21')
 
-        expect(paserTime(getWeekFirstDay(new Date(2023, 7, 19)), 'YYYY-MM-DD')).toBe('2023-08-14')
+        expect(parserTime(getWeekFirstDay(new Date(2023, 7, 19)), 'YYYY-MM-DD')).toBe('2023-08-14')
 
-        expect(paserTime(getWeekFirstDay(new Date(2023, 7, 20)), 'YYYY-MM-DD')).toBe('2023-08-14')
+        expect(parserTime(getWeekFirstDay(new Date(2023, 7, 20)), 'YYYY-MM-DD')).toBe('2023-08-14')
 
 
     })
@@ -39,13 +39,28 @@ describe('common', () => {
         expect(fillTodayDate(+new Date())).toEqual(exec)
     })
 
-    test('getPrevMonth', () => {
+    test('notExpire', () => {
 
-        expect(paserTime(getPrevMonth(new Date(2023, 7), 1), 'YYYY-MM')).toBe('2023-07')
-        expect(paserTime(getPrevMonth(new Date(2023, 7), 2), 'YYYY-MM')).toBe('2023-06')
-        expect(paserTime(getPrevMonth(new Date(2023, 7), 3), 'YYYY-MM')).toBe('2023-05')
-        expect(paserTime(getPrevMonth(new Date(2023, 7), 12), 'YYYY-MM')).toBe('2022-08')
-        expect(paserTime(getPrevMonth(new Date(2023, 7), 24), 'YYYY-MM')).toBe('2021-08')
+        expect(notExpire('2023-11-01')).toBe(false)
+        
+        expect(notExpire('2023-11-16')).toBe(false)
 
     })
+
+    test('getPrevMonth', () => {
+
+        expect(parserTime(getPrevMonth(new Date(2023, 7), 1), 'YYYY-MM')).toBe('2023-07')
+        expect(parserTime(getPrevMonth(new Date(2023, 7), 2), 'YYYY-MM')).toBe('2023-06')
+        expect(parserTime(getPrevMonth(new Date(2023, 7), 3), 'YYYY-MM')).toBe('2023-05')
+        expect(parserTime(getPrevMonth(new Date(2023, 7), 12), 'YYYY-MM')).toBe('2022-08')
+        expect(parserTime(getPrevMonth(new Date(2023, 7), 24), 'YYYY-MM')).toBe('2021-08')
+
+    })
+
+
+
+    test('getRelativeTime', () => {
+
+    })
+
 })

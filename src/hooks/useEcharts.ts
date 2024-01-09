@@ -1,9 +1,9 @@
 import * as echarts from 'echarts'
 import { layoutConfig } from '@/config'
-import { useAppData } from '@/store'
 import { isTrue, sleep } from '@/utils'
+import { useAppData, useSystemConfig } from '@/store'
 import type { EChartsOption, ECharts } from 'echarts'
-import { ref, onUnmounted, watch, onMounted } from 'vue'
+import { ref, onBeforeUnmount, watch, onMounted, nextTick, shallowRef } from 'vue'
 
 
 
@@ -13,41 +13,47 @@ import { ref, onUnmounted, watch, onMounted } from 'vue'
  * */
 export function useEcharts(chartHeight?: number) {
 
+    const systemConfig = useSystemConfig()
+
     const appData = useAppData()
 
-    const chartRef = ref<any>()
+    const chartRef = ref<HTMLElement>()
+    
+    let chartInstance = shallowRef<ECharts>()
 
-    let chartInstance: ECharts
-
-    const chartResize = () => chartInstance?.resize()
+    const chartResize = () => chartInstance.value?.resize()
 
     watch(() => appData.isCollapse, async () => {
         await sleep(500)
         chartResize()
     })
 
-    function renderChart(oprions: EChartsOption) {
-        chartInstance = isTrue(chartInstance) ? chartInstance :  echarts.init(chartRef.value)
-        chartInstance.setOption(oprions, true)
+    async function renderChart(oprions: EChartsOption) {
+        await nextTick()
+        chartInstance.value = isTrue(chartInstance.value) ? chartInstance.value : echarts.init(chartRef.value)
+        chartInstance.value!.setOption(oprions, true)
         window.addEventListener('resize', chartResize)
-        return chartInstance
+        chartResize()
+        return chartInstance.value!
     }
 
     onMounted(() => {
-        (chartRef.value as HTMLElement).style.height =  chartHeight ? chartHeight + 'px' : layoutConfig.chartHeight + 'px';
+        (chartRef.value as HTMLElement).style.height = chartHeight ? chartHeight + 'px' : layoutConfig.chartHeight + 'px';
     })
 
-    onUnmounted(() => {
+    onBeforeUnmount(() => {
         window.removeEventListener('resize', chartResize)
-        chartInstance?.dispose()
+        chartInstance?.value?.dispose()
     })
 
 
     return {
+        chartInstance,
         chartRef,
         renderChart,
         chartResize,
-        echarts
+        echarts,
+        systemConfig
     }
 
 }

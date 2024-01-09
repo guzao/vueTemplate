@@ -1,5 +1,6 @@
+import { t } from '@/langs'
 import { EChartsOption } from "echarts"
-import { conversionUnitKWh, getEfficiency, paserTime, arrayGroupByMap, getKWHZoomRatioAndUnit } from "@/utils"
+import { conversionUnitKWh, getEfficiency, parserTime, arrayGroupByMap, getKWHZoomRatioAndUnit, writeDefault  } from "@/utils"
 
 export type TableData = {
     time: string,
@@ -19,12 +20,13 @@ export const processData = ({ expressions, timestamps, values }: ParkRunReportDa
 
     const { charge, discharge, PCScharge = [], PCSdischarge = [] } = getChargeAndDiasCharge(values, chargeIndex, dischargeIndex, PCSchargeIndex, PCSdischargeIndex)
 
+
     return timestamps.map((time, index) => {
 
-        const raw_charge = charge[index] as number
-        const raw_discharge = discharge[index]
-        const PCSraw_charge = PCScharge[PCSchargeIndex]
-        const PCSraw_discharge = PCSdischarge[PCSdischargeIndex]
+        const raw_charge = writeDefault(charge[index], 0)
+        const raw_discharge = writeDefault(discharge[index], 0)
+        const PCSraw_charge = writeDefault(PCScharge[index], 0)
+        const PCSraw_discharge = writeDefault(PCSdischarge[index], 0)
 
         const { size: chargeSize, unit: chargeUnit } = conversionUnitKWh(charge[index])
         const { size: dischargeSize, unit: dischargeUnit } = conversionUnitKWh(discharge[index])
@@ -34,9 +36,10 @@ export const processData = ({ expressions, timestamps, values }: ParkRunReportDa
 
         const efficiency = getEfficiency(raw_charge, raw_discharge)
         const PCSefficiency = getEfficiency(PCSraw_charge, PCSraw_discharge)
+
         return {
             date: time,
-            time: paserTime(time, 'YYYY-MM-DD'),
+            time: parserTime(time, 'YYYY-MM-DD'),
             charge: chargeSize,
             chargeUnit,
             discharge: dischargeSize,
@@ -98,26 +101,20 @@ export const render = (data: TableData[], renderChart: (oprions: EChartsOption) 
             {
                 data: charges,
                 type: 'line',
-                name: '充电',
+                name: t('common.charge'),
             },
             {
                 data: disCharges,
                 type: 'line',
-                name: '放电',
+                name: t('common.discharge'),
             },
             {
                 data: efficiencys,
                 type: 'line',
-                name: '效率',
+                name: t('common.efficiency'),
             }
         ]
     })
-}
-
-export const dateFormatterType: Record<string, string> = {
-    'D': 'YYYY-MM-DD',
-    'M': 'YYYY-MM',
-    'Y': 'YYYY',
 }
 
 
@@ -161,12 +158,12 @@ const createLineData = (data: HistoryReportData[]) => {
 
         series.push({
             data: change,
-            name: key + '充电',
+            name: key + t('common.charge'),
             type: 'line',
         })
         series.push({
             data: dischange,
-            name: key + '放电',
+            name: key + t('common.discharge'),
             type: 'line',
         })
     })

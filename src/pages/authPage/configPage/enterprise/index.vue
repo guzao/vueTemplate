@@ -32,7 +32,7 @@ const { result: detpInfo, loading } = useReactiveHttp({
 
     <SubTitle />
 
-    <div class="bg-[var(--theme-white-bg)] px-[60px] py-[40px] box-border" v-loading="loading">
+    <div class="bg-[var(--theme-white-bg)] px-[60px] py-[40px] box-border flex-1 flex flex-col" v-loading="loading">
 
         <div class="flex justify-between items-center">
             <TitleBox> 企业信息 </TitleBox>
@@ -75,4 +75,5 @@ const { result: detpInfo, loading } = useReactiveHttp({
 
 
     </div>
+    
 </template>

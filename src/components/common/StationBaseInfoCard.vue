@@ -3,7 +3,7 @@ import { t } from '@/langs'
 import { PropType } from 'vue'
 import { useAppData, useDicts } from '@/store'
 import Icon from '@/components/common/Icon.vue'
-import { conversionUnitKWh, toFixed, conversionUnitKW, conversionUnitKVar, paserTime, getRuningStateInfo, getEfficiency } from '@/utils'
+import { conversionUnitKWh, toFixed, conversionUnitKW, conversionUnitKVar, parserTime, getRuningStateInfo, getEfficiency } from '@/utils'
 
 const appData = useAppData()
 const dicts = useDicts()
@@ -57,7 +57,7 @@ defineProps({
                     <div class="h-[7px] w-[7px] bg-[var(--theme-green-bg)] rounded-full mr-[6px]"></div>
                     <div class="text-[var(--theme-gray107)] mr-[6px]"> {{ t('common.dataLastTime') }} </div>
                     <div class="text-[var(--theme-gray107)] mr-[4px] font-medium f-dinb"> {{
-                        paserTime(appData.parkLastTimes[data?.code], 'YYYY-MM-DD HH:mm:ss') }} </div>
+                        parserTime(appData.parkLastTimes[data?.code], 'YYYY-MM-DD HH:mm:ss') }} </div>
                 </li>
 
             </ul>

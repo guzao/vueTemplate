@@ -1,6 +1,8 @@
 <script lang="ts" setup>
-import { getArrayLength, arrayIsEmpty, arrayIsNotEmpty } from '@/utils'
+import { t } from '@/langs'
+import { Common } from '@/enum'
 import { useDeviceType } from '../hooks/useDeviceType'
+import { getArrayLength, arrayIsEmpty, arrayIsNotEmpty } from '@/utils'
 
 import TitleBox from '@/components/common/TitleBox.vue';
 
@@ -33,7 +35,7 @@ const {
 
         <el-form :model="form" :rules="rules" class="demo-ruleForm mt-[36px] mb-[36px]" ref="formInstance" status-icon>
 
-            <el-form-item  label="数据类型">
+            <el-form-item :label="t('common.dataType')">
                 <el-radio-group v-model="form.warnStatus">
                     <el-radio-button label="1"> 未消除 </el-radio-button>
                     <el-radio-button label="2"> 已消除 </el-radio-button>
@@ -41,24 +43,24 @@ const {
                 </el-radio-group>
             </el-form-item>
 
-            <el-form-item label="数据周期" >
+            <el-form-item :label="t('common.dataCycle')">
                 <el-radio-group v-model="form.dataCycle" @input="validateForm">
-                    <el-radio-button label="D"> 日趋势 </el-radio-button>
-                    <el-radio-button label="M"> 月趋势 </el-radio-button>
-                    <el-radio-button label="Y"> 年趋势 </el-radio-button>
+                    <el-radio-button label="D"> {{ t('common.day') }} </el-radio-button>
+                    <el-radio-button label="M"> {{ t('common.month') }} </el-radio-button>
+                    <el-radio-button label="Y"> {{ t('common.yaer') }} </el-radio-button>
                 </el-radio-group>
             </el-form-item>
 
-            <el-form-item label="数据时间"  style="width: 450px;">
+            <el-form-item :label="t('common.dataTime')" style="width: 450px;">
                 <el-date-picker v-model="form.date" type="daterange" range-separator="-" start-placeholder="Start date"
                     :clearable="false" end-placeholder="End date" />
             </el-form-item>
 
 
-            <el-form-item label="设备单元" prop="deviceTypes" >
+            <el-form-item :label="t('common.deviceUnit')" prop="deviceTypes" v-loading="!dicts.deviceTypeDict.loaded">
 
                 <el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" @change="handleCheckAllChange"
-                    class="pr-4">全选</el-checkbox>
+                    class="pr-4">{{ t('common.all') }}</el-checkbox>
 
                 <el-checkbox-group v-model="form.deviceTypes" @change="handleCheckedIdsChange">
                     <el-checkbox v-for="item in dicts.deviceTypeDict.dictValue" :label="item.dictValue"
@@ -70,25 +72,25 @@ const {
             </el-form-item>
         </el-form>
 
-        <TitleBox> 趋势图表 </TitleBox>
+        <TitleBox> {{ t('common.trendChart') }} </TitleBox>
 
         <div ref="chartRef" v-show="arrayIsNotEmpty(warning)" class="mb-[32px]"> </div>
-        <el-empty v-if="arrayIsEmpty(warning)"  />
+        <el-empty v-if="arrayIsEmpty(warning)" />
 
         <TitleBox class="mb-[32px]"> 设备构类型成图 </TitleBox>
-        
-        <div ref="pieChartRef" v-show="arrayIsNotEmpty(warning)"  class="mb-[32px]"> </div>
-        <el-empty v-if="arrayIsEmpty(warning)"  />
 
-        <TitleBox class="mb-[32px]"> 数据列表 </TitleBox>
+        <div ref="pieChartRef" v-show="arrayIsNotEmpty(warning)" class="mb-[32px]"> </div>
+        <el-empty v-if="arrayIsEmpty(warning)" />
+
+        <TitleBox class="mb-[32px]"> {{ t('common.dataList') }}  </TitleBox>
 
         <el-table :data="currentPageData" stripe v-loading="loading">
 
-            <el-table-column prop="time" label="日期" />
+            <el-table-column prop="time" :label="t('common.date')" />
 
             <el-table-column v-for="item in tableHeader" :key="item.id" :label="item.name">
                 <template #default="{ row }">
-                    {{ row[`count_${item.id}`] || 0 }}
+                    {{ row[`count_${item.id}`] || Common.DEFAULT_SYMBOL }}
                 </template>
             </el-table-column>
 

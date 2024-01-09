@@ -1,7 +1,7 @@
 /**
  * * 采集点类型
- * * @param DC 直流
- * * @param AC 交流
+ * * @param dc 直流
+ * * @param ac 交流
 */
 type ElectricPowerType = 'dc' | 'ac'
 
@@ -10,7 +10,7 @@ type ElectricPowerType = 'dc' | 'ac'
 type RouterType = 'WebHistory' | 'WebHashHistory'
 
 /** z周期 类型 */
-type DateType = 'D' | 'W' | 'M' | 'Y'
+type dataType = 'D' | 'W' | 'M' | 'Y'
 
 /** 用户下拉框选项卡类型 */
 type CommandType = 'personCenter' | 'logout' | 'systemConfig'
@@ -33,10 +33,13 @@ type LoaclRouter = {
     component?: string;
     hidden: boolean;
     name?: string;
+    isNew?: boolean;
     meta: {
         hidden?: boolean;
         title: string;
         icon?: string;
+        /** 国际化名称 */
+        i18nKey?: string;
     };
     layoutType: LayoutType;
     children?: LoaclRouter[]
@@ -65,6 +68,7 @@ type AppErrorPool = {
     offsetTop?: any,
     width?: any,
     height?: any,
+    errorName: any;
 }
 
 type NetworkErrorPool = {
@@ -110,7 +114,7 @@ type ParkMonitorInfo = {
     type: string | number;
     /** 电站类型名称 */
     typeLabel: string;
-    
+
     A_M2: number;
     A_M3: number;
     A_M5: number;
@@ -123,6 +127,10 @@ type ParkMonitorInfo = {
     A_M18: number;
     A_M19: number;
     A_M20: number;
+    A_M102: number,
+    A_M111: number,
+    A_M112: number,
+    A_M103: number,
     type: string;
 }
 
@@ -145,7 +153,7 @@ type ParkAuth = {
     /** 行业 */
     industryType: string;
     /** 电站类型 */
-    type: string;
+    type: string | number;
     /** 电站使用类型 */
     useType: string;
     status: string;
@@ -172,8 +180,9 @@ type ParkAuth = {
 /** 字典数据接口url字段 */
 type DictType = 'eos_park_type' | 'station_release_status' | 'sys_user_sex' | 'eos_status' | 'eos_park_use_type'
     | 'eos_park_run_status' | 'eos_park_use_type' | 'eos_industry_type' | 'eos_grid_status' | 'sys_normal_disable'
-    | 'sys_common_status' | 'sys_oper_type' | 'eos_level' | 'eos_device_type' | 'charge_discharge_type'
-
+    | 'sys_common_status' | 'sys_oper_type' | 'eos_level' | 'eos_device_type' | 'charge_discharge_type' | 'sys_notice_status'
+    | 'sys_notice_type' | 'eos_category_type' | 'eos_metric_group_tags' | 'eos_signal_type' | 'eos_event_type' | 'eos_type' 
+    | 'eos_data_type' | 'eos_level'  | 'sys_work_fault_level' | 'sys_work_fault_device' | 'sys_work_status' | 'eos_unit_type'
 
 /** 字典数据类型 */
 type DictTypeData = {
@@ -204,6 +213,31 @@ type DictTypeData = {
 type UnitListPrams = {
     stationSerial: string;
     pageSize: number;
+    [key: string]: any
+}
+
+
+/** 储能箱绑定的单元组 */
+type BindEnergyStorageUnit = {
+    createBy: any
+    createTime: string
+    updateBy: any
+    updateTime: string
+    remark: any
+    id: number
+    wizardId: number
+    stationSerial: string
+    modelName: string
+    name: string
+    serial: string
+    prefix: string
+    sort: number
+    parentId: number
+    ancestors: string
+    groupIds: string
+    groupSerials: string
+    groupNames: string
+    delFlag: number
 }
 
 /** 设备组列表 */
@@ -250,4 +284,25 @@ type GroupList = {
     sort: number;
     delFlag: number;
     eosUnitList: UnitListData[];
+}
+
+/** 实例化的单元组 */
+type InstanceGroupList = {
+    id: number
+    wizardId: number
+    stationSerial: string
+    modelName: string
+    name: string
+    serial: string
+    prefix: string
+    sort: number
+    parentId: number
+    ancestors: string
+    groupIds: string
+    groupSerials: string
+    groupNames: string
+    delFlag: number
+    createTime: number
+    updateTime: number
+    params: Params
 }

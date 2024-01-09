@@ -12,5 +12,9 @@ export const login = {
     register: '/register',
     
     logout: '/logout',
+
+    noticeList: '/system/notice/list',
+
+    noticeDetail: '/system/notice/',
     
 }

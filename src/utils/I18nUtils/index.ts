@@ -5,25 +5,25 @@ import { useLang, } from "../userUtils"
 import { getLangKey } from "../common/deivceState"
 
 
-const { getLang }  = useLang()
+const { getLang } = useLang()
 
 /** 获取当前的语言数据对象 */
 export const getLocalLangMessage = () => {
     try {
-       return messages[ getLangKey() || Common.DEFAULT_LANG_KEY ]
+        return messages[getLangKey() || Common.DEFAULT_LANG_KEY]
     } catch (error) {
-        console.log('error');
-        alert('=====')
-        return  messages[ Common.DEFAULT_LANG_KEY ]
+        return messages[Common.DEFAULT_LANG_KEY]
     }
 }
 
-function gteLangInfo () {
+function gteLangInfo() {
     const lang = getLang() || Common.DEFAULT_LANG_KEY
     return langs.find(item => item.code == lang)!
 }
 
-export const getLocalLang  = ()  =>  gteLangInfo().local
+/** 获取当前的语言标识 */
+export const getLocalLang = () => gteLangInfo().local
 
-export const getLocalLanLabel  = ()  =>  gteLangInfo().label
+/** 获取当前的语言名称 */
+export const getLocalLanLabel = () => gteLangInfo().label
 

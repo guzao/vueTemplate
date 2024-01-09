@@ -9,7 +9,7 @@ import SubNavBar from '@/components/common/SubNavBar.vue';
 import ParkOverviewNavBar from '../components/ParkOverviewNavBar.vue';
 
 
-const { appData, loading, getSubParkInfo, deivceGroupList, parkRuningInfo, dicts } = useData()
+const { appData, loading, getSubParkInfo, deivceGroupList, parkRuningInfo } = useData()
 
 
 getSubParkInfo()
@@ -18,13 +18,13 @@ getSubParkInfo()
 
 <template>
     
-    <div v-watermark="{ markSatate: appData.currentRelease, text: dicts.parkReleaseStatusDict.dictLabel[ appData.currentRelease ] }" class="sub_park_overview" >
+    <div v-watermark="appData.currentParkWatermarkOptions(parkRuningInfo.A_M2)" class="sub_park_overview flex flex-col flex-1" >
 
         <SubNavBar class="mb-[16px]" @park-change="getSubParkInfo" />
 
         <ParkOverviewNavBar :park-runing-info="parkRuningInfo" />
 
-        <Skeleton :rows="4" :loading="loading">
+        <Skeleton :rows="4" :loading="loading" >
 
             <LessSubParkCard v-if="isTrue( getArrayLength(deivceGroupList) == 1 )" :deivce-group-list="deivceGroupList" />
 

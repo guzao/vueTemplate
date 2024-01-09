@@ -28,5 +28,8 @@ export const configApiMap = {
     deptList: '/system/dept/list',
 
     /** 设备单元组  */
-    unitGroupList: '/ess/unit_group/list'
+    unitGroupList: '/ess/unit_group/list',
+
+    /**  设备单元组  */ 
+    unitList: '/ess/unit/list/',
 }

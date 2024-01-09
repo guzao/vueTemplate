@@ -11,18 +11,16 @@ export function useStatical() {
 
     const { result: parkOverview, getResult: getParkOverview, loading } = useReactiveHttp({
         initData: {} as ParkRuningInfo,
-        request: () => getStationInfo({ stationSerial: appData.parkSerial, type: 'DC' }),
+        request: () => getStationInfo({ stationSerial: appData.parkSerial, type: 'dc' }),
         requestCallback: (res) => {
-            parkOverview.value = res.data
             return res.data
         },
     })
 
     const [PCSData, getPcsData, PCSLoading] = useReactiveHttp_({
         initData: {} as ParkRuningInfo,
-        request: () => getStationInfo({ stationSerial: appData.parkSerial, type: 'AC' }),
+        request: () => getStationInfo({ stationSerial: appData.parkSerial, type: 'ac' }),
         requestCallback: (res) => {
-            parkOverview.value = res.data
             return res.data
         },
     })

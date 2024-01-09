@@ -1,7 +1,7 @@
 {
   "name": "smartops",
   "private": true,
-  "version": "0.0.0",
+  "version": "2.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -15,12 +15,15 @@
     "@types/js-cookie": "^3.0.3",
     "@vueuse/core": "^10.2.1",
     "axios": "^1.4.0",
+    "countup.js": "^2.8.0",
     "dayjs": "^1.11.9",
     "echarts": "^5.4.3",
     "element-plus": "^2.3.8",
     "js-cookie": "^3.0.5",
+    "mavon-editor": "^3.0.1",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.4",
+    "three": "^0.158.0",
     "vue": "^3.3.4",
     "vue-cropper": "^1.0.9",
     "vue-i18n": "9",
@@ -29,6 +32,7 @@
   "devDependencies": {
     "@types/node": "^20.4.2",
     "@types/nprogress": "^0.2.0",
+    "@types/three": "^0.158.3",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitest/coverage-v8": "^0.34.1",
     "@vue/test-utils": "2.4.0-alpha.2",
@@ -40,6 +44,8 @@
     "typescript": "^5.0.2",
     "vite": "^4.4.0",
     "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-html": "^3.2.1",
+    "vite-plugin-vue-devtools": "1.0.0-rc.7",
     "vitest": "^0.33.0",
     "vue-tsc": "^1.8.3"
   }

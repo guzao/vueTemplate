@@ -1,5 +1,5 @@
+import { pageSizes }  from '@/utils'
 import { reactive, watch } from 'vue'
-
 
 type UsePaginationParams = {
     total?: number;
@@ -29,10 +29,27 @@ export function usePagination ({ pageNum = 1, pageSize = 10, callback, total}: U
         pageParams.pageNum = pageNum
         pageParams.pageSize = pageSize
     }
+        
+    const currentChange = (page: number) => pageParams.pageNum = page
 
     return {
         pageParams,
-        resteParams
+        resteParams,
+        currentChange,
+        /** 每一页多少条数据 */
+        pageSizes
     }
+    
+}
+
+
+type UsePaginationParams_ = {
+    total?: number;
+    pageNum?: number;
+    pageSize?: number;
+    callback: () => any,
+}
+
+export function usePagination_ (params: UsePaginationParams_) {
     
 }

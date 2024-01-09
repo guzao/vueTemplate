@@ -1,9 +1,7 @@
 <script lang="ts" setup>
-import { useAppData } from '@/store'
-
-import TitleAndStationNavBar from '@/components/business/TitleAndStationNavBar.vue';
-
-const appdate = useAppData()
+import IncomeParkChart from './components/IncomeParkChart.vue'
+import IncomeStatistical from './components/IncomeStatistical.vue'
+import TitleAndStationNavBar from '@/components/business/TitleAndStationNavBar.vue'
 </script>
 
 
@@ -11,6 +9,10 @@ const appdate = useAppData()
     <div class="w-full overflow-hidden ">
 
         <TitleAndStationNavBar />
+
+        <IncomeStatistical />
+
+        <IncomeParkChart />
 
     </div>
 </template>

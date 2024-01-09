@@ -36,17 +36,20 @@ type UserRouterMata = {
     noCache: string;
     title: string;
     titleEn: string;
+    /** 国际化名称 */
+    i18nKey?: string;
 }
 
 /** 用户菜单 */
 type UserRouter = {
-    
+
     /** 是否总是展示 */
     alwaysShow: boolean;
     /** 子集 */
     children: UserRouter[];
     /** 组件路径 | 组件类型 */
     component: LayoutType;
+    layoutType: LayoutType;
     /** 菜单上是否不显示此路由s */
     hidden: boolean;
     meta: UserRouterMata;
@@ -56,4 +59,24 @@ type UserRouter = {
     path: string;
     /** 是否重定向 */
     redirect: string;
+    /** 新增功能 */
+    isNew?: boolean;
+    /** 新增菜单时间 */
+    createTime?: boolean;
+}
+
+/** 系统通知 */
+type NoticeItem = {
+    createBy: string;
+    createTime: string;
+    updateBy: string;
+    updateTime: string;
+    remark: string;
+    noticeId: number;
+    noticeTitle: string;
+    noticeType: string;
+    noticeContent: string;
+    status: string;
+    [key: any]: any;
+    isTop?: boolean
 }

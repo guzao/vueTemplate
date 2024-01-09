@@ -1,3 +1,10 @@
+// icon
+.icon {
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
 // 菜单icon
 .menu_monitor {
     background-image: url(../../assets/icons/common/menu_monitor.svg);
@@ -7,49 +14,43 @@
     background-image: url(../../assets/icons/common/menu_dataAnalysis.svg);
 }
 
+.menu_parkMdle {
+    background-image: url(../../assets/icons/common/parkMdle.svg);
+}
+
 .menu_tem {
     background-image: url(../../assets/icons/common/menu_tmp.svg);
 }
 
 .menu_config {
-    background-size: 18px 18px !important;
-    background-position: center center;
     background-image: url(../../assets/icons/common/menu_config.svg);
 }
 
 .menu_income {
-    background-size: 20px 20px !important;
-    background-position: center center;
     background-image: url(../../assets/icons/common/incomeAnalysis.svg);
+}
+
+.menu_jue_ce {
+    background-image: url(../../assets/icons/common/jue_ce.svg);
 }
 
 
 .icon_parkselect {
-    background-size: contain;
     background-image: url(../../assets/icons/common/parkSlectIcon.svg);
 }
 
 .icon_viewmodel {
-    background-size: contain;
     background-image: url(../../assets/icons/common/vivewModelIcon.svg);
 }
 
 .icon_cnx {
-    background-size: contain;
     background-image: url(../../assets/image/overview/cnx_icon.png);
 }
 
 .icon_cng {
-    background-size: contain;
     background-image: url(../../assets/image/overview/cng_icon.png);
 }
 
-
-// state
-.icon {
-    background-size: contain;
-    background-repeat: no-repeat;
-}
 
 
 

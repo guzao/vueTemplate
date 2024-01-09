@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { t } from '@/langs'
 import { Type } from '@/enum'
+import { useAppData } from '@/store'
 import { useRouter } from 'vue-router'
-import { useAppData, useDicts } from '@/store'
 import { useStationList } from '../useStationList'
 import { getRunningDay, conversionUnitKW, conversionUnitKWh } from '@/utils'
 
@@ -14,23 +14,42 @@ const { filteredList } = useStationList()
 
 const router = useRouter()
 const appData = useAppData()
-const dicts = useDicts()
-const goToOverview = ({ code: stationCode }: ParkMonitorInfo) => {
-    appData.parkCodeChnage(stationCode)
-    router.push({ path: '/monitor/parkOverview', query: { stationCode: appData.parkSerial } })
+const goToOverview = async ({ code: stationCode }: ParkMonitorInfo) => {
+    /**
+     *@BUG 修复  
+     **- 因为用户拥有的电站列表是系统初始化只加载一次的 
+     **- 但是电站列表页面的是每次打开都获取的
+     **- 可能存在不一致的问题, 出现不一致时会导致系统数据出现异常
+     **- 捕获到当前的电站编号不在所拥有的范围内重新获取用户拥有的电站
+     **- 更新后一定是对齐的不用担心出现异常问题
+    */
+    try {
+        const notOwner = !appData.hasOwnProperty(stationCode)
+        if (notOwner) {
+            await appData.getParkAuthList()
+            appData.getStationRuningState()
+        }
+        appData.parkCodeChnage(stationCode)
+        router.push({ path: '/monitor/parkOverview', query: { stationCode: appData.parkSerial } })
+    } catch (error) {
+        // 出现异常 重新加载当前页面
+        location.reload()
+    }
 }
 
 </script>
 
 <template>
-    <div v-for="item in  filteredList "
-        v-watermark="{ markSatate: item.releaseStatus, text: dicts.parkReleaseStatusDict.dictLabel[item.releaseStatus], height: 150, }"
-        :key="item.code" :class="item.type == Type.NUMBER_CONTAINER ? ' ' : 'cng'"
+    <div v-for="item in  filteredList " :id="item.code"
+        v-watermark="{ ...appData.getWatermarkOptions(item.A_M2, item.releaseStatus), height: 150 }" :key="item.code"
+        :class="item.type == Type.NUMBER_CONTAINER ? ' ' : 'cng'"
         class="bg-[var(--theme-white-bg)] mb-[16px] last:mb-0 px-[24px] py-[23px] pt-[20px] station_item ">
 
         <TitleBox>
 
-            {{ item.label }}
+            <span class="cursor-pointer hover:underline" @click="goToOverview(item)">
+                {{ item.label }}
+            </span>
 
             <template #left>
                 <div class="flex w-full items-center">
@@ -60,7 +79,8 @@ const goToOverview = ({ code: stationCode }: ParkMonitorInfo) => {
             </template>
 
             <template #right>
-                <div class="justify-end flex cursor-pointer text-[var(--theme-blue0)]" @click="goToOverview(item)">
+                <div class="justify-end flex cursor-pointer text-[var(--theme-blue0)] hover:underline"
+                    @click="goToOverview(item)">
                     <div>{{ t('common.enter') }} ></div>
                 </div>
             </template>

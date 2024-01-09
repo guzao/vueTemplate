@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import { t } from '@/langs'
 import { PropType, ref } from 'vue';
+import { Type } from '@/enum'
+import { useRoute } from 'vue-router'
 import { usePowerCurve } from '../../hooks/usePowerCurve'
-import { conversionUnitKWh, toFixed, conversionUnitKVar, conversionUnitKW, paserTime, } from '@/utils'
+import { conversionUnitKWh, toFixed, conversionUnitKVar, conversionUnitKW, parserTime, } from '@/utils'
 
 import TitleBoxVue from '@/components/common/TitleBox.vue';
 import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
@@ -21,6 +23,8 @@ defineProps({
 type ActiveName = 'powerLine' | 'alarms'
 const activeName = ref<ActiveName>('powerLine')
 
+const { query: { type = 0 } } = useRoute()
+
 const { chartRef, currentTime, prevTime, nextTime, loading, nextDisabled } = usePowerCurve({ height: 180, device: 'device' })
 
 </script>
@@ -28,8 +32,12 @@ const { chartRef, currentTime, prevTime, nextTime, loading, nextDisabled } = use
 <template>
     <div class="flex mb-[16px] base_info">
 
-        <div class="h-[516px] w-[700px] bg-[var(--theme-white-bg)] mr-[16px]">
+        <div v-if="type == Type.NUMBER_CONTAINER" class="h-[516px] w-[700px] bg-[var(--theme-white-bg)] mr-[16px]">
             <img class="h-[516px] w-[700px]" src="../../../../../assets/image/overview/cnx_model.png" alt="" srcset="">
+        </div>
+
+        <div v-else class="h-[516px] w-[520px] bg-[var(--theme-white-bg)] mr-[16px]">
+            <img class="h-[516px] w-[520px]" src="../../../../../assets/image/overview/cng_model.png" alt="" srcset="">
         </div>
 
         <div class="flex-1">
@@ -43,7 +51,7 @@ const { chartRef, currentTime, prevTime, nextTime, loading, nextDisabled } = use
                     <li class="h-[40px]">
                         <div class="h-[12px] w-[168px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
                         <div class="h-[32px] w-[168px] flex justify-between items-center text_bg_img px-[4px] box-border">
-                            <span class="text-[var(--theme-gray107)]">  {{ t('common.dayCharge') }}</span>
+                            <span class="text-[var(--theme-gray107)]"> {{ t('common.dayCharge') }}</span>
                             <span class="text-[var(--theme-black51)] text-[16px] f-dinb font-medium"> {{
                                 conversionUnitKWh(deviceBaseInfo.M15).size }} {{ conversionUnitKWh(deviceBaseInfo.M15).unit
     }} </span>
@@ -53,7 +61,7 @@ const { chartRef, currentTime, prevTime, nextTime, loading, nextDisabled } = use
                     <li class="h-[40px]">
                         <div class="h-[12px] w-[168px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
                         <div class="h-[32px] w-[168px] flex justify-between items-center text_bg_img px-[4px] box-border">
-                            <span class="text-[var(--theme-gray107)]">  {{ t('common.monthCharge') }} </span>
+                            <span class="text-[var(--theme-gray107)]"> {{ t('common.monthCharge') }} </span>
                             <span class="text-[var(--theme-black51)] text-[16px] f-dinb font-medium"> {{
                                 conversionUnitKWh(deviceBaseInfo.M17).size }} {{ conversionUnitKWh(deviceBaseInfo.M17).unit
     }} </span>
@@ -63,7 +71,7 @@ const { chartRef, currentTime, prevTime, nextTime, loading, nextDisabled } = use
                     <li class="h-[40px]">
                         <div class="h-[12px] w-[168px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
                         <div class="h-[32px] w-[168px] flex justify-between items-center text_bg_img px-[4px] box-border">
-                            <span class="text-[var(--theme-gray107)]"> 年充 </span>
+                            <span class="text-[var(--theme-gray107)]"> {{ t('common.yearCharge') }} </span>
                             <span class="text-[var(--theme-black51)] text-[16px] f-dinb font-medium"> {{
                                 conversionUnitKWh(deviceBaseInfo.M19).size }} {{ conversionUnitKWh(deviceBaseInfo.M19).unit
     }} </span>
@@ -73,7 +81,7 @@ const { chartRef, currentTime, prevTime, nextTime, loading, nextDisabled } = use
                     <li class="h-[40px]">
                         <div class="h-[12px] w-[168px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
                         <div class="h-[32px] w-[168px] flex justify-between items-center text_bg_img px-[4px] box-border">
-                            <span class="text-[var(--theme-gray107)]"> 日充 </span>
+                            <span class="text-[var(--theme-gray107)]"> {{ t('common.dayCharge') }}</span>
                             <span class="text-[var(--theme-black51)] text-[16px] f-dinb font-medium"> {{
                                 conversionUnitKWh(deviceBaseInfo.M16).size }} {{ conversionUnitKWh(deviceBaseInfo.M16).unit
     }} </span>
@@ -83,7 +91,7 @@ const { chartRef, currentTime, prevTime, nextTime, loading, nextDisabled } = use
                     <li class="h-[40px]">
                         <div class="h-[12px] w-[168px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
                         <div class="h-[32px] w-[168px] flex justify-between items-center text_bg_img px-[4px] box-border">
-                            <span class="text-[var(--theme-gray107)]"> 月充 </span>
+                            <span class="text-[var(--theme-gray107)]"> {{ t('common.monthCharge') }} </span>
                             <span class="text-[var(--theme-black51)] text-[16px] f-dinb font-medium"> {{
                                 conversionUnitKWh(deviceBaseInfo.M18).size }} {{ conversionUnitKWh(deviceBaseInfo.M18).unit
     }} </span>
@@ -93,7 +101,7 @@ const { chartRef, currentTime, prevTime, nextTime, loading, nextDisabled } = use
                     <li class="h-[40px]">
                         <div class="h-[12px] w-[168px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
                         <div class="h-[32px] w-[168px] flex justify-between items-center text_bg_img px-[4px] box-border">
-                            <span class="text-[var(--theme-gray107)]"> 年充 </span>
+                            <span class="text-[var(--theme-gray107)]"> {{ t('common.yearCharge') }} </span>
                             <span class="text-[var(--theme-black51)] text-[16px] f-dinb font-medium"> {{
                                 conversionUnitKWh(deviceBaseInfo.M20).size }} {{ conversionUnitKWh(deviceBaseInfo.M20).unit
     }} </span>
@@ -112,7 +120,7 @@ const { chartRef, currentTime, prevTime, nextTime, loading, nextDisabled } = use
                     <li class="h-[40px]">
                         <div class="h-[12px] w-[168px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
                         <div class="h-[32px] w-[168px] flex justify-between items-center text_bg_img px-[4px] box-border">
-                            <span class="text-[var(--theme-gray107)]"> 有功 </span>
+                            <span class="text-[var(--theme-gray107)]"> {{ t('common.activePower') }} </span>
                             <span class="text-[var(--theme-black51)] text-[16px] f-dinb font-medium"> {{
                                 conversionUnitKW(deviceBaseInfo.M7).size }} {{ conversionUnitKW(deviceBaseInfo.M7).unit }}
                             </span>
@@ -122,7 +130,7 @@ const { chartRef, currentTime, prevTime, nextTime, loading, nextDisabled } = use
                     <li class="h-[40px]">
                         <div class="h-[12px] w-[168px] my-[4px] bg-cover bg-no-repeat split_bg"></div>
                         <div class="h-[32px] w-[168px] flex justify-between items-center text_bg_img px-[4px] box-border">
-                            <span class="text-[var(--theme-gray107)]"> 无功 </span>
+                            <span class="text-[var(--theme-gray107)]"> {{ t('common.reactivePower') }} </span>
                             <span class="text-[var(--theme-black51)] text-[16px] f-dinb font-medium"> {{
                                 conversionUnitKVar(deviceBaseInfo.M8).size }}
                                 {{ conversionUnitKVar(deviceBaseInfo.M8).unit }} </span>
@@ -156,7 +164,7 @@ const { chartRef, currentTime, prevTime, nextTime, loading, nextDisabled } = use
                         </el-icon>
                     </div>
                     <div class="tex-[12px] text-[var(--theme-gray153)] mx-[20px] select-none">
-                        {{ t('common.currentTime') }}：{{ paserTime(currentTime, 'YYYY-MM-DD') }}
+                        {{ t('common.currentTime') }}：{{ parserTime(currentTime, 'YYYY-MM-DD') }}
                     </div>
                     <div @click="nextTime"
                         :class="[loading ? 'cursor-wait' : ' ', nextDisabled ? 'cursor-not-allowed' : ' ']"

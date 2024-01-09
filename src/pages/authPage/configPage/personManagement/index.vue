@@ -27,24 +27,25 @@ const {
 </script>
 
 <template>
-    <div class="w-full overflow-hidden">
+    <div class="w-full overflow-hidden flex-1 flex-col flex">
 
         <SubTitle />
 
-        <div class="p-[24px] box-border bg-[var(--theme-white-bg)]">
+        <div class="p-[24px] box-border bg-[var(--theme-white-bg)] flex-1 flex-col flex">
 
             <div class="flex h-[50px] items-center mb-[26px]">
 
-                <el-button type="primary" class="mr-[20px]" size="default" @click="addPerson"> 新增 </el-button>
+                <el-button type="primary" class="mr-[20px]" @click="addPerson"> 新增 </el-button>
 
-                <el-input size="default" clearable style="width: 260px;" v-model="userName" placeholder="请输入用户名"
-                    class="mr-[20px]" @clear="getResult" />
-
-                <el-button size="default" :icon="Search" @click="getResult" circle />
+                <el-input style="width: 260px;" v-model="userName" placeholder="请输入用户名" class="input-with-select">
+                    <template #append>
+                        <el-button :icon="Search" @click="getResult" />
+                    </template>
+                </el-input>
 
             </div>
 
-            <el-table :data="result" stripe style="width: 100%" v-loading="loading">
+            <el-table :data="result" stripe style="width: 100%" v-loading="loading" class="flex-1">
 
                 <el-table-column prop="userName" label="名称" />
 

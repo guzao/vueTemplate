@@ -1,3 +1,4 @@
+import { t } from '@/langs'
 import { EChartsOption, EChartsType } from 'echarts'
 import { isTrue, getArrayLength, arrayGroupByMap, getFirstElement } from '@/utils'
 
@@ -18,7 +19,7 @@ export function processDailyData(dailyReportData: DailyReportData) {
 }
 
 /** 设备日充放 */
-export function rendererBard(renderChart: (oprions: EChartsOption) => EChartsType, data: DailyReportDataData[]) {
+export async function rendererBard(renderChart: (oprions: EChartsOption) =>  Promise<EChartsType>, data: DailyReportDataData[]) {
 
     const length = isTrue(getArrayLength(data) > 5)
     const yAxisData = data.map(({ dev }: DailyReportDataData) => dev)
@@ -84,13 +85,13 @@ export function rendererBard(renderChart: (oprions: EChartsOption) => EChartsTyp
         },
         series: [
             {
-                name: '充电',
+                name: t('common.charge'),
                 data: data.map(({ charge }: DailyReportDataData) => charge),
                 type: 'bar',
                 barMaxWidth: 20
             },
             {
-                name: '放电',
+                name: t('common.discharge'),
                 data: data.map(({ discharge }: DailyReportDataData) => discharge),
                 type: 'bar',
                 barMaxWidth: 20
@@ -100,8 +101,7 @@ export function rendererBard(renderChart: (oprions: EChartsOption) => EChartsTyp
 
     isTrue(length) ? (option as any).xAxis.data = yAxisData : (option as any).yAxis.data = yAxisData
 
-    const instance = renderChart(option)
-
+    const instance = await renderChart(option)
     instance.on('click', e => {
         console.log(e)
     })
@@ -111,7 +111,7 @@ export function rendererBard(renderChart: (oprions: EChartsOption) => EChartsTyp
 /** 合并单元格 */
 export function objectSpanMethod(limit: number, { row, column, rowIndex, columnIndex }: any) {
     // 处理子站  处理合计
-    if (isTrue(columnIndex === 0) || isTrue(columnIndex === 5) ||  isTrue(columnIndex === 10) ) {
+    if (isTrue(columnIndex === 0) || isTrue(columnIndex === 5) || isTrue(columnIndex === 10)) {
         const limit = row.limit
         return limit && isTrue(rowIndex % limit === 0) ? [limit, 1] : [0, 0]
     }

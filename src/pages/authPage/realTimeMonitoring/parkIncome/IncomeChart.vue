@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { t } from '@/langs'
-import { paserTime } from '@/utils'
+import { parserTime } from '@/utils'
 import { useIncomeChart } from './useIncomeChart'
 import TitleBox from '@/components/common/TitleBox.vue';
 import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
@@ -33,7 +33,7 @@ const { chartRef, type, currentTime, nextTime, prevTime, disabled, formatType, l
                             </el-icon>
                         </div>
                         <div class="tex-[12px] text-[var(--theme-gray153)] mx-[20px] select-none"> 
-                            {{ t('common.currentTime') }}：{{ paserTime(currentTime, formatType) }}
+                            {{ t('common.currentTime') }}：{{ parserTime(currentTime, formatType) }}
                         </div>
                         <div @click="nextTime"
                             :class="[ disabled ? 'cursor-not-allowed' : 'cursor-pointer' ]"

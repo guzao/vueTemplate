@@ -12,12 +12,11 @@ const { loading, stationList, getResult } = useStationList()
 
 initData()
 
-useInterval(IntervalTime.FIVE_MILLI_SECOND, getResult)
+useInterval(IntervalTime.FIVE_MINIUTE, getResult)
 
 </script>
 
 <template>
-
     <NavBar />
 
     <Skeleton :rows="5" :loading="loading">
@@ -27,5 +26,4 @@ useInterval(IntervalTime.FIVE_MILLI_SECOND, getResult)
         <el-empty v-else :description="t('common.empty')" />
 
     </Skeleton>
-
 </template>

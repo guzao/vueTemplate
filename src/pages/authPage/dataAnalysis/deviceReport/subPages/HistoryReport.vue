@@ -1,10 +1,11 @@
 <script lang="ts" setup>
+import { t } from '@/langs'
+import { Common } from '@/enum'
 import { useHistoryReport } from './useHistoryReport'
 import { getArrayLength, conversionUnitKWh, getEfficiency, arrayIsNotEmpty, arrayIsEmpty } from '@/utils'
 
 import TitleBox from '@/components/common/TitleBox.vue'
-import LabelValueUnit from '@/components/common/LabelValueUnit.vue'
-
+import TitleBoxAndDwonload from '@/components/business/TitleBoxAndDwonload.vue'
 
 const {
     form,
@@ -26,6 +27,8 @@ const {
     isIndeterminate,
     allChange,
     assetSerialsChange,
+    fileLoading,
+    downloadFile
 } = useHistoryReport()
 
 
@@ -35,27 +38,27 @@ const {
 <template>
     <div class="mt-[8px] w-full overflow-hidden p-[24px] bg-[var(--theme-white-bg)]">
 
-        <TitleBox> 运行趋势 </TitleBox>
+        <TitleBox> {{ t('common.runningTrend') }} </TitleBox>
 
         <el-form :model="form" class="demo-ruleForm mt-[36px] mb-[36px]" status-icon>
 
-            <el-form-item label="数据周期" prop="type">
+            <el-form-item :label="t('common.dataCycle')" prop="type">
                 <el-radio-group v-model="form.dataCycle" @input="getResult">
-                    <el-radio-button label="D"> 日趋势 </el-radio-button>
-                    <el-radio-button label="M"> 月趋势 </el-radio-button>
-                    <el-radio-button label="Y"> 年趋势 </el-radio-button>
+                    <el-radio-button label="D"> {{ t('common.day') }} </el-radio-button>
+                    <el-radio-button label="M"> {{ t('common.month') }} </el-radio-button>
+                    <el-radio-button label="Y"> {{ t('common.yaer') }} </el-radio-button>
                 </el-radio-group>
             </el-form-item>
 
-            <el-form-item label="数据时间" prop="date" style="width: 450px;">
+            <el-form-item :label="t('common.dataTime')" prop="date" style="width: 450px;">
                 <el-date-picker v-model="form.date" @change="getResult" :type="timeType" range-separator="-"
                     start-placeholder="Start date" :clearable="false" end-placeholder="End date" />
             </el-form-item>
 
-            <el-form-item label="设备单元" prop="type" v-loading="unitListLoading">
+            <el-form-item :label="t('common.deviceUnit')" prop="type" v-loading="unitListLoading">
 
-                <el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" @change="allChange"
-                    class="pr-4">全选</el-checkbox>
+                <el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" @change="allChange" class="pr-4">{{
+                    t('common.all') }}</el-checkbox>
 
                 <el-checkbox-group v-model="form.assetSerials" @change="assetSerialsChange">
 
@@ -72,79 +75,73 @@ const {
 
         </el-form>
 
-        <TitleBox class="mb-[16px]"> 趋势图表 </TitleBox>
+        <TitleBox class="mb-[16px]"> {{ t('common.trendChart') }} </TitleBox>
 
-        <div ref="chartRef" v-show="arrayIsNotEmpty(result)" class="h-[300px] mb-[32px]"></div>
+        <div ref="chartRef" v-show="arrayIsNotEmpty(result)" v-loading="loading" class="mb-[32px]"></div>
         <el-empty v-if="arrayIsEmpty(result)" />
+
+        <TitleBoxAndDwonload @download-file="downloadFile" :loading="fileLoading"
+            :disabled-download="arrayIsNotEmpty(currentPageData)" class="mb-[32px]">
+            {{ t('common.dataList') }}
+        </TitleBoxAndDwonload>
 
         <el-table :data="currentPageData" stripe style="width: 100%" v-loading="loading">
 
-            <el-table-column prop="time" fixed  label="日期" :width="`${getArrayLength(tableHeader) > 2 ? '120' : '' }`" />
+            <el-table-column prop="time" fixed :label="t('common.date')"
+                :width="`${getArrayLength(tableHeader) > 1 ? '120' : ''}`" />
 
-            <el-table-column  align="center" v-for="item in tableHeader" :key="item.id" prop="time" :label="item.name">
+            <el-table-column align="center" v-for="item in tableHeader" :key="item.id" prop="time" :label="item.name">
 
-                <el-table-column label="直流侧"  align="center" >
-                    <el-table-column prop="state" label="充" :width="`${getArrayLength(tableHeader) > 2 ? '180' : '' }`">
+                <el-table-column :label="t('common.cocurrent')" align="center">
+                    <el-table-column prop="state" :label="t('common.charge')"
+                        :width="`${getArrayLength(tableHeader) > 1 ? '180' : ''}`">
                         <template #default="{ row }">
                             {{ conversionUnitKWh(row[`charge_${item.id}`]).size }}
                             {{ conversionUnitKWh(row[`charge_${item.id}`]).unit }}
                         </template>
                     </el-table-column>
-                    <el-table-column prop="city" label="放" :width="`${getArrayLength(tableHeader) > 2 ? '180' : '' }`" >
+                    <el-table-column prop="city" :label="t('common.discharge')"
+                        :width="`${getArrayLength(tableHeader) > 1 ? '180' : ''}`">
                         <template #default="{ row }">
                             {{ conversionUnitKWh(row[`discharge_${item.id}`]).size }}
                             {{ conversionUnitKWh(row[`discharge_${item.id}`]).unit }}
                         </template>
                     </el-table-column>
-                    <el-table-column prop="address" label="效率" :width="`${getArrayLength(tableHeader) > 2 ? '180' : '' }`" >
+                    <el-table-column prop="address" :label="t('common.efficiency')"
+                        :width="`${getArrayLength(tableHeader) > 1 ? '180' : ''}`">
                         <template #default="{ row }">
-                            {{ getEfficiency(row[`charge_${item.id}`], row[`discharge_${item.id}`]) }}%
+                            {{ getEfficiency(row[`charge_${item.id}`], row[`discharge_${item.id}`]) || Common.DEFAULT_SYMBOL
+                            }}%
                         </template>
                     </el-table-column>
                 </el-table-column>
 
-                <el-table-column label="交流侧" align="center"  >
-                    <el-table-column prop="state" label="充" :width="`${getArrayLength(tableHeader) > 2 ? '180' : '' }`">
+                <el-table-column v-if="0" :label="t('common.exchange')" align="center">
+                    <el-table-column prop="state" :label="t('common.charge')"
+                        :width="`${getArrayLength(tableHeader) > 1 ? '180' : ''}`">
                         <template #default="{ row }">
                             {{ conversionUnitKWh(row[`PCScharge_${item.id}`]).size }}
                             {{ conversionUnitKWh(row[`PCScharge_${item.id}`]).unit }}
                         </template>
                     </el-table-column>
-                    <el-table-column prop="city" label="放" :width="`${getArrayLength(tableHeader) > 2 ? '180' : '' }`" >
+                    <el-table-column prop="city" :label="t('common.discharge')"
+                        :width="`${getArrayLength(tableHeader) > 1 ? '180' : ''}`">
                         <template #default="{ row }">
                             {{ conversionUnitKWh(row[`PCSdisCharge_${item.id}`]).size }}
                             {{ conversionUnitKWh(row[`PCSdisCharge_${item.id}`]).unit }}
                         </template>
                     </el-table-column>
-                    <el-table-column prop="address" label="效率" :width="`${getArrayLength(tableHeader) > 2 ? '180' : '' }`" >
+                    <el-table-column prop="address" :label="t('common.efficiency')"
+                        :width="`${getArrayLength(tableHeader) > 1 ? '180' : ''}`">
                         <template #default="{ row }">
-                            {{ getEfficiency(row[`PCScharge_${item.id}`], row[`PCSdisCharge_${item.id}`]) }}%
+                            {{ getEfficiency(row[`PCScharge_${item.id}`], row[`PCSdisCharge_${item.id}`]) ||
+                                Common.DEFAULT_SYMBOL }}%
                         </template>
                     </el-table-column>
                 </el-table-column>
 
             </el-table-column>
 
-            <el-table-column v-if="0" v-for="item in tableHeader" :key="item.id" prop="time" :label="item.name">
-                <template #default="{ row }">
-                    <LabelValueUnit :font-size="16">
-                        充
-                        <template #value>{{ conversionUnitKWh(row[`charge_${item.id}`]).size }}</template>
-                        <template #unit>{{ conversionUnitKWh(row[`charge_${item.id}`]).unit }}</template>
-                    </LabelValueUnit>
-                    <LabelValueUnit :font-size="16">
-                        放
-                        <template #value>{{ conversionUnitKWh(row[`discharge_${item.id}`]).size }}</template>
-                        <template #unit>{{ conversionUnitKWh(row[`discharge_${item.id}`]).unit }}</template>
-                    </LabelValueUnit>
-                    <LabelValueUnit :font-size="16">
-                        效率
-                        <template #value>{{ getEfficiency(row[`discharge_${item.id}`], row[`discharge_${item.id}`])
-                        }}</template>
-                        <template #unit>%</template>
-                    </LabelValueUnit>
-                </template>
-            </el-table-column>
 
         </el-table>
 

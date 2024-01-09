@@ -39,3 +39,17 @@ export function getStationList () {
         url: monitor.stationList
     })
 }
+
+export function getNoticeList (params: any) {
+    return useGet({
+        url: login.noticeList,
+        params
+    })
+}
+
+
+export function getNoticeDetail(noticeId: any) {
+    return useGet({
+      url: login.noticeDetail + noticeId,
+    })
+  }

@@ -5,8 +5,12 @@ import { useI18nStore, langs, useSystemConfig } from '@/store'
 const i18nStore = useI18nStore()
 const systemConfig = useSystemConfig()
 const smartOpsBroadcastChannel = useSmartOpsBroadcastChannel()
+
 const setLang = (lang: string) => {
-    smartOpsBroadcastChannel.onPostMessage('I18n', { lang: lang })
+    try {
+        smartOpsBroadcastChannel.onPostMessage('I18n', { lang: lang })
+    } catch (error) {
+    }
     i18nStore.setLang(lang)
 }
 
@@ -26,5 +30,3 @@ const setLang = (lang: string) => {
         </template>
     </el-dropdown>
 </template>
-
-<style lang="scss" scoped></style>

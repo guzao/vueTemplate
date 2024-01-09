@@ -12,3 +12,9 @@ export const clickOutset:Directive = {
 
 }   
 
+
+export const focus :Directive = {
+    mounted (el: HTMLElement) {
+        el.focus()
+    },
+}   

@@ -1,5 +1,5 @@
-import { useGet, usePost } from '@/HTTP'
 import { monitor } from '@/ApiMap'
+import { useGet, usePost } from '@/HTTP'
 
 /** 获取指定电站运行信息 */
 export function getStationInfo (params: { stationSerial: string, type: ElectricPowerType  }) {

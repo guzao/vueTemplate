@@ -1,9 +1,9 @@
 export const parkOverview = {
 
 
-    baseInfo: 'base info',
+    baseInfo: 'Base info',
 
-    detail: 'detail info',
+    detail: 'Detail info',
 
     addres: 'Addres'
 
@@ -45,7 +45,7 @@ export const parkIncome = {
     monthIncome: 'Month Income',
 
     latMonthIncome: 'LatMonth Income',
-    
+
     yearIncome: 'Year Income',
 
     latYearIncome: 'LatYear Income',

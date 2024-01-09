@@ -6,12 +6,12 @@ import Skeleton from '@/components/common/Skeleton.vue'
 import SubNavBar from '@/components/common/SubNavBar.vue';
 import ParkOverviewNavBar from '../components/ParkOverviewNavBar.vue';
 
-const {  appData, getSubParkInfo, parkRuningInfo, deivceGroupList, loading, dicts  } = useTableModel()
+const {  appData, getSubParkInfo, parkRuningInfo, deivceGroupList, loading  } = useTableModel()
 
 </script>
 
 <template>
-    <div v-watermark="{ markSatate: appData.currentRelease, text: dicts.parkReleaseStatusDict.dictLabel[ appData.currentRelease ] }" 
+    <div v-watermark="appData.currentParkWatermarkOptions(parkRuningInfo.A_M2)" 
     class="sub_park_overview w-full overflow-hidden" >
 
         <SubNavBar class="mb-[16px]" @park-change="getSubParkInfo" />

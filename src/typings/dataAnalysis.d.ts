@@ -55,8 +55,8 @@ type DailyReportData = {
     discharge: number,
     data: DailyReportDataData[],
     subNum: number[],
-    pcsCharge : number
-    pcsDischarge : number
+    pcsCharge: number
+    pcsDischarge: number
 }
 
 /** 设备历史充放电数据接口参数 */
@@ -92,3 +92,23 @@ type WarningData = {
 
 /** 设备告警等级 */
 type WarningLevel = WarningData
+
+type IncomeReport = {
+    income: string,
+    times: string,
+    charge: string,
+    disCharge: string,
+    device: string,
+    name?: string
+}
+
+
+/** 离群数据 */
+type ScatteDta = {
+    midIndex: number[];
+    unit: string;
+    min: string;
+    scatterData: any[][];
+    max: string;
+    lastIndex: number[][];
+}

@@ -29,7 +29,7 @@ defineProps({
 
             <div class="flex items-center h-[46px] items-center w-[140px]">
                 <Icon :icon="deivce.unitType == Type.CONTAINER ? 'icon_cnx' : 'icon_cng'" :size="16" class="mr-[4px]" />
-                <span class="text-[var(--theme-black51)]"> {{ deivce.name }} </span>
+                <span class="text-[var(--theme-black51)] hover:underline"> {{ deivce.name }} </span>
             </div>
 
             <StationBaseInfoCard class="flex-1" gapx="8"
@@ -39,19 +39,19 @@ defineProps({
                 A_M2: deivce.deviceData.M2,
                 A_M3: deivce.deviceData.M3,
                 A_M5: deivce.deviceData.M5,
-                A_M6: 1,
-                A_M7: 1,
-                A_M8: 1,
+                A_M6: deivce.deviceData.M6,
+                A_M7: deivce.deviceData.M7,
+                A_M8: deivce.deviceData.M8,
                 A_M15: deivce.deviceData.M15,
                 A_M16: deivce.deviceData.M16,
                 A_M17: deivce.deviceData.M17,
                 A_M18: deivce.deviceData.M18,
-                A_M19: 1,
-                A_M20: 1,
-                type: '1',
+                A_M19: deivce.deviceData.M19,
+                A_M20: deivce.deviceData.M20,
+                type: deivce.unitType,
                 code: '1',
                 typeLabel: '1',
-            }"/>
+            } as any "/>
 
 
             <div class="w-[300px] h-[148px] device_taizi_bg">

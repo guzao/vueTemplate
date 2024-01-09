@@ -3,6 +3,9 @@ export const convertBoolean = (raw: any) => !!raw
 
 export const isTrue = (raw: any) => convertBoolean(raw)
 
+/**
+ * 是否是假值
+*/
 export const isFalse = (raw: any) => !convertBoolean(raw)
 
 /**

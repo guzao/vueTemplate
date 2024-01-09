@@ -3,8 +3,10 @@
 @tailwind utilities;
 
 @import url(./icons.scss);
+@import url(./transition.scss);
 @import url(./rotVariable.scss);
 @import url(./deviceBattery.scss);
+@import url(./styleOverflow.scss);
 
 * {
     font-size: 14px;
@@ -16,15 +18,10 @@
 }
 
 
-// 进度条颜色
-#nprogress .bar {
-    background: var(--charge) !important;
-}
-
 html {
-    background-color: var(--theme-gray-bg);
     min-width: 1460px;
     overflow-x: auto;
+    background-color: var(--theme-gray-bg);
 }
 
 #app {
@@ -97,18 +94,4 @@ html {
 
 .offline_color_bg {
     background-color: var(--offline) !important;
-}
-
-
-
-// 
-.el-table thead th.el-table__cell {
-    background-color: rgba(14, 169, 68, .05) !important;
-    font-weight: normal;
-}
-
-
-// 
-.el-loading-mask {
-    opacity: 0.5 !important;
 }

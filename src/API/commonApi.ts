@@ -1,15 +1,15 @@
-import { useGet, usePost } from '@/HTTP'
 import { common } from '@/ApiMap'
+import { useGet, usePost } from '@/HTTP'
 
 /** 用户受权限控制的电站列表 */
-export function getUserParkListAll () {
+export function getUserParkListAll() {
     return useGet({
-        url: common.parkListAll
+        url: common.parkListAll,
     })
 }
 
 /** 电站数据最新时间 */
-export function getUserParkLastTime () {
+export function getUserParkLastTime() {
     return useGet({
         url: common.parkLastTime,
     })
@@ -17,7 +17,7 @@ export function getUserParkLastTime () {
 
 
 /** 电站字典表 */
-export function getDictType (type: string) {
+export function getDictType(type: string) {
     return useGet({
         url: `${common.dictType}/${type}`
     })
@@ -25,7 +25,7 @@ export function getDictType (type: string) {
 
 
 /** 设备组列表 */
-export function getUnitList (params: UnitListPrams) {
+export function getUnitList(params: UnitListPrams) {
     return useGet({
         url: `${common.unitList}`,
         params
@@ -34,9 +34,38 @@ export function getUnitList (params: UnitListPrams) {
 
 
 /** 设备单元组 */
-export function getUnitGroupList (params: any) {
+export function getUnitGroupList(params: any) {
     return useGet({
         url: common.unitGroupList,
+        params
+    })
+}
+
+
+/** 设备单绑定的组 */
+export function getBindEnergyStorageUnit(params: any) {
+    return useGet({
+        url: common.bindEnergyStorageUnit,
+        params
+    })
+}
+
+
+
+/** 查询实例化的组和测点列表 */
+export function getIntanceGroupAndMetric(params: any) {
+    return useGet({
+        url: common.intanceGroupAndMetric,
+        params
+    })
+}
+
+
+
+/** 查询指定储能下的电池簇数据 */
+export function getGroupCluster(params: any) {
+    return useGet({
+        url: common.groupCluster,
         params
     })
 }

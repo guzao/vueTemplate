@@ -1,9 +1,9 @@
-import { ref } from 'vue';
 import { deepClone } from '@/utils'
 import { getParkInfo } from '@/API'
+import { ref, computed } from 'vue'
 import { useReactiveHttp } from '@/hooks'
-import { useAppData, useDicts } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
+import { useAppData, useDicts, useSystemConfig, setRgbaColor } from '@/store'
 import ParkForm from './ParkForm.vue'
 
 
@@ -14,6 +14,17 @@ export function useParkList(emits: any) {
     const router = useRouter()
 
     const appData = useAppData()
+
+
+    const systemConfig = useSystemConfig()
+
+    const styles = computed(() => {
+        const themeColor = systemConfig.themeColor
+        return {
+            background: `linear-gradient(270deg, ${setRgbaColor(themeColor, 0)} 0%, ${setRgbaColor(themeColor, 0.05)} 100%);`
+        }
+    })
+
 
     const formInstance = ref<InstanceType<typeof ParkForm>>()
 
@@ -77,20 +88,20 @@ export function useParkList(emits: any) {
         drawerState.value = true
     }
 
-    const editPark = async (park: ParkListData) => {
+    const editPark = (park: ParkListData) => {
         title.value = '编辑电站'
         isEdit.value = false
         parkId.value = park.id as any
-        getResult()
         drawerState.value = true
+        getResult()
     }
 
-    const checkPark = async (park: ParkListData) => {
+    const checkPark = (park: ParkListData) => {
         title.value = '查看电站'
         isEdit.value = true
         parkId.value = park.id as any
-        getResult()
         drawerState.value = true
+        getResult()
     }
 
     const editUnitGroup = (park: ParkListData) => router.push({ path: '/config/unitGroup', query: { ...route.query, eidtCode: park.serial, name: encodeURI(park.name) } })
@@ -111,7 +122,7 @@ export function useParkList(emits: any) {
         editUnitGroup,
         formInstance,
         emits,
-        appData
+        styles
     }
 
 }

@@ -1,14 +1,15 @@
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { isTrue } from '@/utils'
-import { useReactiveHttp } from '@/hooks'
 import { useAppData, useDicts } from '@/store'
+import { useReactiveHttp, useInterval } from '@/hooks'
 import { getDevicGroupList, getStationInfo } from '@/API'
+import { IntervalTime } from '@/enum'
 
 
 
 /** 设备列表数据 */
 export function useDeviceOverview(markFunction?: (group: DeviceGroup) => void) {
-    
+
 
     const dicts = useDicts()
 
@@ -28,13 +29,13 @@ export function useDeviceOverview(markFunction?: (group: DeviceGroup) => void) {
     })
 
     /** 统计每个组下的设备的状态 */
-    function parkTypeStatistics (deivceGroupList: DeviceGroup []) {
+    function parkTypeStatistics(deivceGroupList: DeviceGroup[]) {
         deivceGroupList.forEach(group => {
             group.stateCount = {}
             markFunction && markFunction(group)
             group.list.forEach(device => {
                 const { M2 = 'null' } = device.deviceData
-                isTrue(group.stateCount[ M2 ]) ? group.stateCount[ M2 ]++ : ( group.stateCount[ M2 ] = 1)
+                isTrue(group.stateCount[M2]) ? group.stateCount[M2]++ : (group.stateCount[M2] = 1)
             })
         })
     }
@@ -64,6 +65,13 @@ export function useDeviceOverview(markFunction?: (group: DeviceGroup) => void) {
         loading.value = false
     }
 
+    const { _resetInterval } = useInterval(IntervalTime.FIVE_MINIUTE, () => {
+        getResult()
+        getDevicGroupListData()
+    })
+
+    watch(() => appData.currentParkSerial, _resetInterval)
+
     getSubParkInfo()
 
     return {
@@ -72,7 +80,8 @@ export function useDeviceOverview(markFunction?: (group: DeviceGroup) => void) {
         loading,
         deivceGroupList,
         appData,
-        dicts
+        dicts,
+        _resetInterval
     }
 
 }
